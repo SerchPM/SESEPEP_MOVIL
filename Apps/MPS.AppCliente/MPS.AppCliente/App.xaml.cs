@@ -1,6 +1,9 @@
 ﻿using System;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
+using OS = Sysne.Core.OS;
+using MPS.AppCliente.Views.OS;
+using MPS.Core.Lib.OS;
 
 namespace MPS.AppCliente
 {
@@ -10,7 +13,11 @@ namespace MPS.AppCliente
         {
             InitializeComponent();
 
-            MainPage = new MainPage();
+            OS.DependencyService.Register<NavigationService, INavigationService>();
+            OS.DependencyService.Register<SettingsStorage, ISettingsStorage>();
+
+            MainPage = new NavigationPage(new MainPage());
+            (OS.DependencyService.Get<INavigationService>() as NavigationService).Navigation = Current.MainPage.Navigation;
         }
 
         protected override void OnStart()

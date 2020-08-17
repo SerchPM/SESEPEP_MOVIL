@@ -1,4 +1,4 @@
-﻿using Core.Lib.OS;
+﻿using MPS.Core.Lib.OS;
 using Sysne.Core.MVVM;
 using Sysne.Core.OS;
 using System;
