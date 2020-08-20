@@ -4,6 +4,7 @@ using Xamarin.Forms.Xaml;
 using OS = Sysne.Core.OS;
 using MPS.AppCliente.Views.OS;
 using MPS.Core.Lib.OS;
+using MPS.AppCliente.Views.Views;
 
 namespace MPS.AppCliente
 {
@@ -16,7 +17,7 @@ namespace MPS.AppCliente
             OS.DependencyService.Register<NavigationService, INavigationService>();
             OS.DependencyService.Register<SettingsStorage, ISettingsStorage>();
 
-            MainPage = new NavigationPage(new MainPage());
+            MainPage = new NavigationPage(new Login());
             (OS.DependencyService.Get<INavigationService>() as NavigationService).Navigation = Current.MainPage.Navigation;
         }
 

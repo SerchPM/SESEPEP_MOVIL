@@ -140,4 +140,13 @@
       <Name>MPS.AppCliente.Views</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\listonesBase.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\listonesBase%402x.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\listonesBase%403x.png" />
+  </ItemGroup>
 </Project>
