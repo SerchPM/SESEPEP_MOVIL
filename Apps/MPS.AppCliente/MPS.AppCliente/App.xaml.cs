@@ -14,7 +14,7 @@ namespace MPS.AppCliente
         {
             InitializeComponent();
 
-            OS.DependencyService.Register<NavigationService, INavigationService>();
+            OS.DependencyService.Register<NavigationService, INavigationService>(OS.DependencyService.ServiceLifetime.Singleton);
             OS.DependencyService.Register<SettingsStorage, ISettingsStorage>();
 
             MainPage = new NavigationPage(new Login());

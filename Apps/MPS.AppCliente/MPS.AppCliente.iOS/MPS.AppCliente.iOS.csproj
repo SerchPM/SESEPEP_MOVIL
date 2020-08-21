@@ -149,4 +149,13 @@
   <ItemGroup>
     <BundleResource Include="Resources\listonesBase%403x.png" />
   </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\logoMain.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\logoMain%402x.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\logoMain%403x.png" />
+  </ItemGroup>
 </Project>

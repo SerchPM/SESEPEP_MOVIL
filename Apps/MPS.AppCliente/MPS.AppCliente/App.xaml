@@ -20,6 +20,13 @@
             <Style TargetType="ContentPage" ApplyToDerivedTypes="True">
                 <Setter Property="NavigationPage.HasNavigationBar" Value="False"/>
             </Style>
+
+            <Style TargetType="Button">
+                <Setter Property="BackgroundColor" Value="{StaticResource AccentColor}"/>
+                <Setter Property="TextColor" Value="{StaticResource BackgroundColor}"/>
+                <Setter Property="CornerRadius" Value="10"/>
+                <Setter Property="Padding" Value="25"/>
+            </Style>
         </ResourceDictionary>
     </Application.Resources>
 </Application>
