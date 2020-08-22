@@ -158,4 +158,67 @@
   <ItemGroup>
     <BundleResource Include="Resources\logoMain%403x.png" />
   </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\solicitarServicioSel%403x.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\formaDePago.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\formaDePago%402x.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\formaDePago%403x.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\formaDePagoSel.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\formaDePagoSel%402x.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\formaDePagoSel%403x.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\historial.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\historial%402x.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\historial%403x.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\historialSel.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\historialSel%402x.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\historialSel%403x.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\logoHeader.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\logoHeader%402x.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\logoHeader%403x.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\perfil.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\perfil%402x.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\perfil%403x.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\solicitarServicioSel.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\solicitarServicioSel%402x.png" />
+  </ItemGroup>
 </Project>

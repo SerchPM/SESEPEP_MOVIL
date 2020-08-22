@@ -3,14 +3,13 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:d="http://xamarin.com/schemas/2014/forms/design"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:cv="clr-namespace:MPS.AppCliente.Views.CV"
              mc:Ignorable="d"
              x:Class="MPS.AppCliente.MainPage">
 
-    <StackLayout>
-        <!-- Place new controls here -->
-        <Label Text="Welcome to Xamarin.Forms!" 
-           HorizontalOptions="Center"
-           VerticalOptions="CenterAndExpand" />
-    </StackLayout>
+    <Grid RowDefinitions="Auto,*,Auto">
+        <cv:Header/>
+        <cv:StatusBar Grid.Row="1" IsLinksVisible="False"/>
+    </Grid>
 
 </ContentPage>
