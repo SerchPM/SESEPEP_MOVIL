@@ -51,6 +51,11 @@ namespace MPS.AppCliente.Views.OS
                         await Navigation.PushAsync(new Perfil(), true); break;
                 }
             }
+            else
+            {
+                Navigation.RemovePage(ultimaPagina);
+                await Navigation.PushAsync(ultimaPagina, true);
+            }
         }
 
         public async Task NavigateTo(string pageKey, params object[] parameter)
