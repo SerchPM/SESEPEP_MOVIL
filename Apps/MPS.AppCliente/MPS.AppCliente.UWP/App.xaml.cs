@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Sysne.Core.OS;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -30,6 +31,7 @@ namespace MPS.AppCliente.UWP
         {
             this.InitializeComponent();
             this.Suspending += OnSuspending;
+            DependencyService.Register<OS.OS, IOS>();
         }
 
         /// <summary>
