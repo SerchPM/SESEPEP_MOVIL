@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
+using Sysne.Core.OS;
 
 namespace MPS.AppCliente.Views.Views
 {
@@ -15,6 +16,7 @@ namespace MPS.AppCliente.Views.Views
         public Login()
         {
             InitializeComponent();
+            //Sysne.Core.OS.DependencyService.Get<IOS>().SetStatusBarColor(((Color)App.Current.Resources["AlterColor"]).ToHex());
         }
     }
 }

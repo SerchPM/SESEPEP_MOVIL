@@ -6,6 +6,7 @@ using Android.Runtime;
 using Android.Views;
 using Android.Widget;
 using Android.OS;
+using Sysne.Core.OS;
 
 namespace MPS.AppCliente.Droid
 {
@@ -18,6 +19,9 @@ namespace MPS.AppCliente.Droid
             ToolbarResource = Resource.Layout.Toolbar;
 
             base.OnCreate(savedInstanceState);
+
+            DependencyService.Register<OS.OS, IOS>();
+            OS.OS.Activity = this;
 
             Xamarin.Essentials.Platform.Init(this, savedInstanceState);
             global::Xamarin.Forms.Forms.Init(this, savedInstanceState);

@@ -5,6 +5,7 @@ using OS = Sysne.Core.OS;
 using MPS.AppCliente.Views.OS;
 using MPS.Core.Lib.OS;
 using MPS.AppCliente.Views.Views;
+using Sysne.Core.OS;
 
 namespace MPS.AppCliente
 {
@@ -19,6 +20,9 @@ namespace MPS.AppCliente
 
             MainPage = new NavigationPage(new Login());
             (OS.DependencyService.Get<INavigationService>() as NavigationService).Navigation = Current.MainPage.Navigation;
+
+            //MainPage.Appearing += (s, e) =>
+              OS.DependencyService.Get<IOS>().SetStatusBarColor(((Color)Resources["AlterColor"]).ToHex());
         }
 
         protected override void OnStart()

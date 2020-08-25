@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 
 using Foundation;
+using Sysne.Core.OS;
 using UIKit;
 
 namespace MPS.AppCliente.iOS
@@ -22,6 +23,7 @@ namespace MPS.AppCliente.iOS
         //
         public override bool FinishedLaunching(UIApplication app, NSDictionary options)
         {
+            DependencyService.Register<OS.OS, IOS>();
             global::Xamarin.Forms.Forms.Init();
             LoadApplication(new App());
 
