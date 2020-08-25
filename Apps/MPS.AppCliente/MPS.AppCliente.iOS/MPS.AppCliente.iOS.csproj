@@ -221,4 +221,13 @@
   <ItemGroup>
     <BundleResource Include="Resources\solicitarServicioSel%402x.png" />
   </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\solicitarServicio.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\solicitarServicio%402x.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\solicitarServicio%403x.png" />
+  </ItemGroup>
 </Project>

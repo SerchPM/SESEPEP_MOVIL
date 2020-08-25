@@ -5,11 +5,11 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:cv="clr-namespace:MPS.AppCliente.Views.CV"
              mc:Ignorable="d"
-             x:Class="MPS.AppCliente.MainPage">
+             x:Class="MPS.AppCliente.SolicitarServicio">
 
     <Grid RowDefinitions="Auto,*,Auto">
         <cv:Header/>
-        <cv:StatusBar Grid.Row="1" IsLinksVisible="False"/>
+        <cv:StatusBar Grid.Row="2" IsLinksVisible="False"/>
     </Grid>
 
 </ContentPage>

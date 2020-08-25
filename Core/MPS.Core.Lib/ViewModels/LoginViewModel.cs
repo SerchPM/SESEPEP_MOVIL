@@ -14,7 +14,7 @@ namespace MPS.Core.Lib.ViewModels
         {
             get => loginCommand ??= new RelayCommand(async () =>
             {
-                await DependencyService.Get<INavigationService>().NavigateTo(PagesKeys.Main);
+                await DependencyService.Get<INavigationService>().NavigateTo(PagesKeys.SolicitarServicio);
             }, () => Validate(this, false)
                 , dependencies: (this, new[] { "" /*nameof(Usuario), nameof(Contraseña)*/ }));
         }

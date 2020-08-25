@@ -18,6 +18,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)OS\INavigationService.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)OS\ISettingsStorage.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)OS\PagesKeys.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)ViewModels\HeaderViewModel.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ViewModels\LoginViewModel.cs" />
   </ItemGroup>
 </Project>

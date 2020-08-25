@@ -1,4 +1,5 @@
-﻿using MPS.Core.Lib.OS;
+﻿using MPS.AppCliente.Views.Views;
+using MPS.Core.Lib.OS;
 using System;
 using System.Linq;
 using System.Threading.Tasks;
@@ -26,8 +27,11 @@ namespace MPS.AppCliente.Views.OS
 
             var paginaPorNavegar = pageKey switch
             {
-                PagesKeys.Main => typeof(MainPage),
-                _ => typeof(MainPage)
+                PagesKeys.SolicitarServicio => typeof(SolicitarServicio),
+                PagesKeys.Historial => typeof(Historial),
+                PagesKeys.FormaDePago => typeof(FormaDePago),
+                PagesKeys.Perfil => typeof(Perfil),
+                _ => typeof(SolicitarServicio)
             };
 
             var ultimaPagina = Navigation.NavigationStack.Where(p => p.GetType() == paginaPorNavegar).FirstOrDefault();
@@ -37,8 +41,14 @@ namespace MPS.AppCliente.Views.OS
                 {
                     case PagesKeys.Login:
                         await Navigation.PopToRootAsync(true); break;
-                    case PagesKeys.Main:
-                        await Navigation.PushAsync(new MainPage(), true); break;
+                    case PagesKeys.SolicitarServicio:
+                        await Navigation.PushAsync(new SolicitarServicio(), true); break;
+                    case PagesKeys.Historial:
+                        await Navigation.PushAsync(new Historial(), true); break;
+                    case PagesKeys.FormaDePago:
+                        await Navigation.PushAsync(new FormaDePago(), true); break;
+                    case PagesKeys.Perfil:
+                        await Navigation.PushAsync(new Perfil(), true); break;
                 }
             }
         }
@@ -48,9 +58,9 @@ namespace MPS.AppCliente.Views.OS
             switch (pageKey)
             {
                 case PagesKeys.Login:
-                    await Navigation.PushAsync(new MainPage()/*(parameter)*/, true); break;
-                case PagesKeys.Main:
-                    await Navigation.PushAsync(new MainPage()/*(parameter)*/, true); break;
+                    await Navigation.PushAsync(new SolicitarServicio()/*(parameter)*/, true); break;
+                case PagesKeys.SolicitarServicio:
+                    await Navigation.PushAsync(new SolicitarServicio()/*(parameter)*/, true); break;
             }
         }
 

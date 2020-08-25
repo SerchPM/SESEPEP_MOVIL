@@ -1,7 +1,12 @@
 ﻿<?xml version="1.0" encoding="UTF-8"?>
 <ContentView xmlns="http://xamarin.com/schemas/2014/forms" 
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:vm="clr-namespace:MPS.Core.Lib.ViewModels"
+             x:DataType="vm:HeaderViewModel"
              x:Class="MPS.AppCliente.Views.CV.Header">
+    <ContentView.BindingContext>
+        <vm:HeaderViewModel/>
+    </ContentView.BindingContext>
     <ContentView.Resources>
         <ResourceDictionary>
             <Style TargetType="Label">
@@ -9,16 +14,16 @@
             </Style>
         </ResourceDictionary>
     </ContentView.Resources>
-  <ContentView.Content>
+    <ContentView.Content>
         <Grid RowDefinitions="*,Auto,Auto" ColumnDefinitions="Auto,*" Padding="10" BackgroundColor="{StaticResource AlterColor}">
             <Image Source="logoHeader.png" Grid.RowSpan="3" Margin="-5,0,10,0"/>
             <Label Text="Mobile Private Security" Margin="0,10,0,0" FontAttributes="Bold" FontSize="Subtitle" Grid.Column="1" VerticalOptions="End"/>
             <Label Text="Nombre Apellido (Usuario)" Margin="0,0,0,10" FontSize="Medium" Grid.Column="1" Grid.Row="1" VerticalOptions="Start"/>
             <StackLayout Orientation="Horizontal" Grid.Row="2" Grid.Column="1" HorizontalOptions="EndAndExpand">
-                <ImageButton Source="solicitarServicioSel.png"/>
-                <ImageButton Source="historial.png"/>
-                <ImageButton Source="formaDePago.png"/>
-                <ImageButton Source="perfil.png"/>
+                <ImageButton Command="{Binding NavegarACommand}" CommandParameter="SolicitarServicioPage" x:Name="solicitarServicio" Source="solicitarServicioSel.png"/>
+                <ImageButton Command="{Binding NavegarACommand}" CommandParameter="HistorialPage" x:Name="historial" Source="historial.png"/>
+                <ImageButton Command="{Binding NavegarACommand}" CommandParameter="FormaDePagoPage" x:Name="formaDePago" Source="formaDePago.png"/>
+                <ImageButton Command="{Binding NavegarACommand}" CommandParameter="Perfil" x:Name="perfil" Source="perfil.png"/>
             </StackLayout>
         </Grid>
   </ContentView.Content>
