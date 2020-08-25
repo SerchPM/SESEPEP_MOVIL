@@ -25,6 +25,9 @@ namespace MPS.AppCliente.Views.OS
                 return;
             }
 
+            var últimaPágina = Navigation.NavigationStack.LastOrDefault();
+            var vieneDelLogin = (últimaPágina != null && últimaPágina is Login);
+
             var paginaPorNavegar = pageKey switch
             {
                 PagesKeys.SolicitarServicio => typeof(SolicitarServicio),
@@ -42,13 +45,13 @@ namespace MPS.AppCliente.Views.OS
                     case PagesKeys.Login:
                         await Navigation.PopToRootAsync(true); break;
                     case PagesKeys.SolicitarServicio:
-                        await Navigation.PushAsync(new SolicitarServicio(), true); break;
+                        await Navigation.PushAsync(new SolicitarServicio(), vieneDelLogin); break;
                     case PagesKeys.Historial:
-                        await Navigation.PushAsync(new Historial(), true); break;
+                        await Navigation.PushAsync(new Historial(), false); break;
                     case PagesKeys.FormaDePago:
-                        await Navigation.PushAsync(new FormaDePago(), true); break;
+                        await Navigation.PushAsync(new FormaDePago(), false); break;
                     case PagesKeys.Perfil:
-                        await Navigation.PushAsync(new Perfil(), true); break;
+                        await Navigation.PushAsync(new Perfil(), false); break;
                 }
             }
             else
@@ -56,6 +59,7 @@ namespace MPS.AppCliente.Views.OS
                 Navigation.RemovePage(ultimaPagina);
                 await Navigation.PushAsync(ultimaPagina, true);
             }
+            if (vieneDelLogin) Navigation.RemovePage(últimaPágina);
         }
 
         public async Task NavigateTo(string pageKey, params object[] parameter)
