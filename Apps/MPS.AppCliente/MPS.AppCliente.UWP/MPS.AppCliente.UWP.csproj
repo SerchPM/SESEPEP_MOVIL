@@ -105,6 +105,10 @@
     </AppxManifest>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Assets\botonAgregar.png" />
+    <Content Include="Assets\botonBuscar.png" />
+    <Content Include="Assets\botonPedirAhora.png" />
+    <Content Include="Assets\botonSolicitar.png" />
     <Content Include="Assets\cibernetica.png" />
     <Content Include="Assets\ciberneticaSel.png" />
     <Content Include="Assets\eventoSocial.png" />
@@ -129,6 +133,10 @@
     <Content Include="Assets\perfil.png" />
     <Content Include="Assets\personal.png" />
     <Content Include="Assets\personalSel.png" />
+    <Content Include="Assets\servicioExpressActivo.png" />
+    <Content Include="Assets\servicioExpressInactivo.png" />
+    <Content Include="Assets\servicioPersonalizadoActivo.png" />
+    <Content Include="Assets\servicioPersonalizadoInactivo.png" />
     <Content Include="Assets\SmallTile.scale-100.png" />
     <Content Include="Assets\SmallTile.scale-200.png" />
     <Content Include="Assets\SmallTile.scale-400.png" />
@@ -176,7 +184,7 @@
     <PackageReference Include="System.Net.Http.Json">
       <Version>3.2.1</Version>
     </PackageReference>
-    <PackageReference Include="Xamarin.Forms" Version="4.8.0.1269" />
+    <PackageReference Include="Xamarin.Forms" Version="4.8.0.1364" />
     <PackageReference Include="Microsoft.NETCore.UniversalWindowsPlatform" Version="6.2.10" />
     <PackageReference Include="Xamarin.Essentials" Version="1.5.3.2" />
   </ItemGroup>

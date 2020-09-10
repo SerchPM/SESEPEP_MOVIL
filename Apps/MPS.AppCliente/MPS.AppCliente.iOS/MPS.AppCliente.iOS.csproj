@@ -131,7 +131,7 @@
     <PackageReference Include="System.Net.Http.Json">
       <Version>3.2.1</Version>
     </PackageReference>
-    <PackageReference Include="Xamarin.Forms" Version="4.8.0.1269" />
+    <PackageReference Include="Xamarin.Forms" Version="4.8.0.1364" />
     <PackageReference Include="Xamarin.Essentials" Version="1.5.3.2" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.iOS.CSharp.targets" />
@@ -365,5 +365,77 @@
   </ItemGroup>
   <ItemGroup>
     <BundleResource Include="Resources\expand%403x.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\servicioExpressActivo.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\servicioExpressActivo%402x.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\servicioExpressActivo%403x.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\servicioPersonalizadoActivo.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\servicioPersonalizadoActivo%402x.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\servicioPersonalizadoActivo%403x.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\servicioExpressInactivo.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\servicioExpressInactivo%402x.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\servicioExpressInactivo%403x.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\servicioPersonalizadoInactivo.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\servicioPersonalizadoInactivo%402x.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\servicioPersonalizadoInactivo%403x.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\botonBuscar%402x.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\botonBuscar%403x.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\botonPedirAhora.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\botonPedirAhora%402x.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\botonPedirAhora%403x.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\botonAgregar.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\botonAgregar%402x.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\botonAgregar%403x.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\botonBuscar.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\botonSolicitar.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\botonSolicitar%402x.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\botonSolicitar%403x.png" />
   </ItemGroup>
 </Project>

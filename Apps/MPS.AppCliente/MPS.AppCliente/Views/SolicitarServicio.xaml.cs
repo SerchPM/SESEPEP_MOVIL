@@ -27,6 +27,17 @@ namespace MPS.AppCliente
         public SolicitarServicio()
         {
             InitializeComponent();
+            ViewModel.PropertyChanged += (s, e) =>
+            {
+                switch (e.PropertyName)
+                {
+                    case nameof(ViewModel.EsExpress):
+                        VisualStateManager.GoToState(this, ViewModel.EsExpress ? "Express" : "Personalizado");
+                        break;
+                    default:
+                        break;
+                }
+            };
         }
 
         private void SolicitarServicio_Tapped(object sender, EventArgs e) => IsVisibleListaServicios = !IsVisibleListaServicios;
