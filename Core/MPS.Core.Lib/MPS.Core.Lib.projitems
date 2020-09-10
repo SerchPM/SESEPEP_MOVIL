@@ -10,16 +10,17 @@
   </PropertyGroup>
   <ItemGroup>
     <Folder Include="$(MSBuildThisFileDirectory)BL\" />
-    <Folder Include="$(MSBuildThisFileDirectory)Model\" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="$(MSBuildThisFileDirectory)ApiClient\WebApiClient.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Helpers\Settings.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Model\Servicio.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)OS\INavigationService.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)OS\IOS.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)OS\ISettingsStorage.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)OS\PagesKeys.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ViewModels\HeaderViewModel.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ViewModels\LoginViewModel.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)ViewModels\SolicitudDeServicioViewModel.cs" />
   </ItemGroup>
 </Project>

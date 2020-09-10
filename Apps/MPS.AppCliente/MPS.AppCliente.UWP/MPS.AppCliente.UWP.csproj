@@ -105,17 +105,30 @@
     </AppxManifest>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Assets\cibernetica.png" />
+    <Content Include="Assets\ciberneticaSel.png" />
+    <Content Include="Assets\eventoSocial.png" />
+    <Content Include="Assets\eventoSocialSel.png" />
+    <Content Include="Assets\expand.png" />
     <Content Include="Assets\formaDePago.png" />
     <Content Include="Assets\formaDePagoSel.png" />
     <Content Include="Assets\historial.png" />
     <Content Include="Assets\historialSel.png" />
+    <Content Include="Assets\industrial.png" />
+    <Content Include="Assets\intramuros.png" />
+    <Content Include="Assets\intramurosSel.png" />
     <Content Include="Assets\LargeTile.scale-100.png" />
     <Content Include="Assets\LargeTile.scale-200.png" />
     <Content Include="Assets\LargeTile.scale-400.png" />
     <Content Include="Assets\listonesBase.png" />
     <Content Include="Assets\logoHeader.png" />
     <Content Include="Assets\logoMain.png" />
+    <Content Include="Assets\industrialSel.png" />
+    <Content Include="Assets\mercancias.png" />
+    <Content Include="Assets\mercanciasSel.png" />
     <Content Include="Assets\perfil.png" />
+    <Content Include="Assets\personal.png" />
+    <Content Include="Assets\personalSel.png" />
     <Content Include="Assets\SmallTile.scale-100.png" />
     <Content Include="Assets\SmallTile.scale-200.png" />
     <Content Include="Assets\SmallTile.scale-400.png" />
@@ -139,6 +152,8 @@
     <Content Include="Assets\StoreLogo.scale-100.png" />
     <Content Include="Assets\StoreLogo.scale-200.png" />
     <Content Include="Assets\StoreLogo.scale-400.png" />
+    <Content Include="Assets\valores.png" />
+    <Content Include="Assets\valoresSel.png" />
     <Content Include="Assets\Wide310x150Logo.scale-100.png" />
     <Content Include="Assets\Wide310x150Logo.scale-200.png" />
     <Content Include="Assets\Wide310x150Logo.scale-400.png" />

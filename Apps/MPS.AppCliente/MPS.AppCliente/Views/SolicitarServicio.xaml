@@ -4,11 +4,68 @@
              xmlns:d="http://xamarin.com/schemas/2014/forms/design"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:cv="clr-namespace:MPS.AppCliente.Views.CV"
+             xmlns:vm="clr-namespace:MPS.Core.Lib.ViewModels"
+             xmlns:model="clr-namespace:MPS.Core.Lib.Model"
              mc:Ignorable="d"
              x:Class="MPS.AppCliente.SolicitarServicio">
 
+    <VisualStateManager.VisualStateGroups>
+        <VisualStateGroup Name="SelecionDeServicio">
+            <VisualState Name="ServicioSeleccionado"/>
+            <VisualState Name="SeleccionarServicio">
+                <VisualState.Setters>
+                    <Setter TargetName="expandIcon" Property="Image.Rotation" Value="180"/>
+                    <Setter TargetName="serviciosListado" Property="Frame.IsVisible" Value="True"/>
+                </VisualState.Setters>
+            </VisualState>
+        </VisualStateGroup>
+    </VisualStateManager.VisualStateGroups>
+
     <Grid RowDefinitions="Auto,*,Auto">
         <cv:Header/>
+        <Grid x:DataType="vm:SolicitudDeServicioViewModel" Grid.Row="1" RowDefinitions="Auto,Auto,Auto,Auto,Auto,Auto,*,Auto" Padding="10">
+            <Grid.BindingContext>
+                <vm:SolicitudDeServicioViewModel/>
+            </Grid.BindingContext>
+
+            <Label Text="Solicitar servicio"/>
+            <Frame Grid.Row="1" BackgroundColor="{StaticResource AccentColor}" CornerRadius="20" Padding="10" HorizontalOptions="StartAndExpand">
+                <Grid ColumnDefinitions="Auto,*,Auto">
+                    <Image Source="{Binding ServicioSeleccionado.ImagenSeleccionada}"/>
+                    <Label Text="{Binding ServicioSeleccionado.Nombre}" Grid.Column="1" FontAttributes="Bold" Margin="10,0,25,0" VerticalOptions="CenterAndExpand" TextColor="{StaticResource BackgroundColor}"/>
+                    <Image x:Name="expandIcon" Source="expand.png" Grid.Column="2"/>
+                </Grid>
+                <Frame.GestureRecognizers>
+                    <TapGestureRecognizer Tapped="SolicitarServicio_Tapped"/>
+                </Frame.GestureRecognizers>
+            </Frame>
+
+            <Entry Grid.Row="4"/>
+
+            <Frame x:Name="serviciosListado" IsVisible="False" Grid.Row="2" Grid.RowSpan="5" VerticalOptions="Start" HorizontalOptions="Start" CornerRadius="10" BackgroundColor="{StaticResource BackgroundColor}">
+                <CollectionView VerticalOptions="Center" SelectionChanged="ServiciosListado_SelectionChanged" ItemsSource="{Binding Servicios}" SelectedItem="{Binding ServicioSeleccionado}" SelectionMode="Single">
+                    <CollectionView.ItemTemplate>
+                        <DataTemplate x:DataType="model:Servicio">
+                            <Grid ColumnDefinitions="0.1*,*" Padding="5">
+                                <VisualStateManager.VisualStateGroups>
+                                    <VisualStateGroup Name="CommonStates">
+                                        <VisualState Name="Normal"/>
+                                        <VisualState Name="Selected">
+                                            <VisualState.Setters>
+                                                <Setter Property="BackgroundColor" Value="{StaticResource BackgroundColor}"/>
+                                            </VisualState.Setters>
+                                        </VisualState>
+                                    </VisualStateGroup>
+                                </VisualStateManager.VisualStateGroups>
+                                <Image Source="{Binding Imagen}"/>
+                                <Label Text="{Binding Nombre}" Grid.Column="1" VerticalOptions="Center"/>
+                            </Grid>
+                        </DataTemplate>
+                    </CollectionView.ItemTemplate>
+                </CollectionView>
+            </Frame>
+
+        </Grid>
         <cv:StatusBar Grid.Row="2" IsLinksVisible="False"/>
     </Grid>
 

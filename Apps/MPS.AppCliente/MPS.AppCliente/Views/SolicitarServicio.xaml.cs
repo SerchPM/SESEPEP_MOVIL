@@ -13,9 +13,25 @@ namespace MPS.AppCliente
     [DesignTimeVisible(false)]
     public partial class SolicitarServicio : ContentPage
     {
+
+        bool isVisibleListaServicios = false;
+        bool IsVisibleListaServicios
+        {
+            get => isVisibleListaServicios;
+            set
+            {
+                VisualStateManager.GoToState(this, value ? "SeleccionarServicio" : "ServicioSeleccionado");
+                isVisibleListaServicios = value;
+            }
+        }
         public SolicitarServicio()
         {
             InitializeComponent();
         }
+
+        private void SolicitarServicio_Tapped(object sender, EventArgs e) => IsVisibleListaServicios = !IsVisibleListaServicios;
+
+        private void ServiciosListado_SelectionChanged(object sender, SelectionChangedEventArgs e) => IsVisibleListaServicios = false;
+
     }
 }
