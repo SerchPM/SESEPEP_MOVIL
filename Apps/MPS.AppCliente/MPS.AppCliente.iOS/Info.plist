@@ -31,5 +31,11 @@
 	<string>MPS.AppCliente</string>
 	<key>XSAppIconAssets</key>
 	<string>Assets.xcassets/AppIcon.appiconset</string>
+	<key>NSLocationAlwaysUsageDescription</key>
+	<string>¿Podemos usar su ubicación para localizar personal de seguridad cercanos?</string>
+	<key>NSLocationUsageDescription</key>
+	<string>¿Podemos usar su ubicación para ubicar servicios cerca de usted?</string>
+	<key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
+	<string>¿Podemos usar su ubicación para ubicar personal de seguridad cerca de usted?</string>
 </dict>
 </plist>

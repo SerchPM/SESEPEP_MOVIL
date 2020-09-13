@@ -25,6 +25,7 @@ namespace MPS.AppCliente.iOS
         {
             DependencyService.Register<OS.OS, IOS>();
             global::Xamarin.Forms.Forms.Init();
+            Xamarin.FormsMaps.Init();
             LoadApplication(new App());
 
             return base.FinishedLaunching(app, options);
