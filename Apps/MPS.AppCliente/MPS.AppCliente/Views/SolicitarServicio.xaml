@@ -3,6 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:d="http://xamarin.com/schemas/2014/forms/design"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:maps="clr-namespace:Xamarin.Forms.Maps;assembly=Xamarin.Forms.Maps"
              xmlns:cv="clr-namespace:MPS.AppCliente.Views.CV"
              xmlns:vm="clr-namespace:MPS.Core.Lib.ViewModels"
              xmlns:model="clr-namespace:MPS.Core.Lib.Model"
@@ -81,6 +82,7 @@
                 
 
                 <Frame BackgroundColor="Blue" Grid.Row="13" Grid.ColumnSpan="2"/>
+                <maps:Map Grid.Row="13" Grid.ColumnSpan="2"/>
 
                 <ImageButton Source="botonPedirAhora.png" IsVisible="{Binding EsExpress}" VerticalOptions="Center" HorizontalOptions="Center" Margin="10" Grid.Row="14" Grid.ColumnSpan="2"/>
                 <ImageButton Source="botonSolicitar.png" IsVisible="{Binding EsPersonalizado}" VerticalOptions="Center" HorizontalOptions="Center" Margin="10" Grid.Row="14" Grid.ColumnSpan="2"/>

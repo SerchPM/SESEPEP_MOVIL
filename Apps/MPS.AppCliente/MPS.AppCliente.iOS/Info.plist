@@ -37,5 +37,16 @@
 	<string>¿Podemos usar su ubicación para ubicar servicios cerca de usted?</string>
 	<key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
 	<string>¿Podemos usar su ubicación para ubicar personal de seguridad cerca de usted?</string>
+	<key>CFBundleDocumentTypes</key>
+	<array>
+		<dict>
+			<key>CFBundleTypeName</key>
+			<string>MKDirectionsRequest</string>
+			<key>LSItemContentTypes</key>
+			<array>
+				<string>com.apple.maps.directionsrequest</string>
+			</array>
+		</dict>
+	</array>
 </dict>
 </plist>
