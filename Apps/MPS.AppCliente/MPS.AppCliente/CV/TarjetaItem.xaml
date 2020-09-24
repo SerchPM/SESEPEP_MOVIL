@@ -1,0 +1,27 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ContentView xmlns="http://xamarin.com/schemas/2014/forms" 
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="MPS.AppCliente.Views.CV.TarjetaItem">
+  <ContentView.Content>
+        <Frame IsClippedToBounds="True" Padding="5" CornerRadius="10">
+            <Grid ColumnDefinitions="Auto, *, Auto">
+                <StackLayout Padding="10">
+                    <Frame CornerRadius="25" HeightRequest="50" WidthRequest="50" BackgroundColor="ForestGreen"
+                           HorizontalOptions="Center" Padding="0" IsClippedToBounds="True">
+                        <Image Source="" HorizontalOptions="Center" VerticalOptions="Center" />
+                    </Frame>
+                </StackLayout>
+                <StackLayout Grid.Column="1" VerticalOptions="Center" HorizontalOptions="FillAndExpand">
+                    <Label Text="XXXX - XXXX - XXXX - 3232" TextColor="CornflowerBlue" FontSize="Body"/>
+                    <Label Text="VISA" TextColor="LightGray" FontSize="Small"/>
+                </StackLayout>
+                <StackLayout Grid.Column="2" Padding="5" HorizontalOptions="End" VerticalOptions="Start">
+                    <Frame CornerRadius="13" HeightRequest="25" WidthRequest="25" BackgroundColor="White"
+                           HorizontalOptions="Center" Padding="0" IsClippedToBounds="True" BorderColor="LightGray">
+                        <Label Text="1" TextColor="LightGray" HorizontalOptions="Center" VerticalOptions="Center" VerticalTextAlignment="Center" HorizontalTextAlignment="Center"/>
+                    </Frame>
+                </StackLayout>
+            </Grid>
+        </Frame>
+  </ContentView.Content>
+</ContentView>

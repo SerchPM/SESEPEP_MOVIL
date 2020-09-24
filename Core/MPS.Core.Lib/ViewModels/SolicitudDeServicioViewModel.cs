@@ -11,10 +11,13 @@ namespace MPS.Core.Lib.ViewModels
     {
         public SolicitudDeServicioViewModel()
         {
-            ServicioSeleccionado = Servicios.FirstOrDefault(s => s.Nombre.Contains("Intramuros"));
+            ServicioSeleccionado = Servicios.FirstOrDefault(s => s.Nombre.Contains("Intramuros"));                        
         }
 
         #region Properties
+
+        public double Height => Servicio.Height;
+
         public List<Servicio> Servicios => Servicio.Listado.ToList();
 
         private Servicio servicioSeleccionado;
@@ -33,6 +36,9 @@ namespace MPS.Core.Lib.ViewModels
         }
 
         public bool EsPersonalizado { get => !EsExpress; }
+
+        bool openModalRegitsro;
+        public bool OpenModalRegistro { get => openModalRegitsro; set => Set(ref openModalRegitsro, value); }
         #endregion
 
         #region Commands
@@ -44,6 +50,15 @@ namespace MPS.Core.Lib.ViewModels
             {
                 EsExpress = p == "Express";
             }, (string p) => true);
+        }
+
+        RelayCommand cerrarModalRegistroCommand = null;
+        public RelayCommand CerrarModalRegistroCommand
+        {
+            get =>cerrarModalRegistroCommand ??= new RelayCommand(() =>
+            {
+                OpenModalRegistro = (OpenModalRegistro == true) ? false : true;
+            });
         }
         #endregion
     }

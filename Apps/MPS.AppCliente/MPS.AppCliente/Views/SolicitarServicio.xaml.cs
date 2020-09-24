@@ -27,6 +27,10 @@ namespace MPS.AppCliente
         public SolicitarServicio()
         {
             InitializeComponent();
+            iconApp.SizeChanged += (se, ee) => 
+            {
+                spacingIcon.Width = iconApp.Width;
+            };           
             ViewModel.PropertyChanged += (s, e) =>
             {
                 switch (e.PropertyName)
@@ -44,5 +48,14 @@ namespace MPS.AppCliente
 
         private void ServiciosListado_SelectionChanged(object sender, SelectionChangedEventArgs e) => IsVisibleListaServicios = false;
 
+        private void ImageButton_Clicked(object sender, EventArgs e)
+        {
+            modalServicioSolicitado.IsVisible = true;
+        }
+
+        private void Button_Clicked(object sender, EventArgs e)
+        {
+            modalServicioSolicitado.IsVisible = false;
+        }
     }
 }

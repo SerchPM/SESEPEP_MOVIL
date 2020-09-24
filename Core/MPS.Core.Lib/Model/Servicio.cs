@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Net.NetworkInformation;
 using System.Text;
 
@@ -16,6 +17,8 @@ namespace MPS.Core.Lib.Model
         public string Nombre { get; set; }
         public string Imagen { get; set; }
         public string ImagenSeleccionada { get; set; }
+
+        public static double Height = (Listado.ToList().Count * 60) + (Listado.ToList().Count * 10); 
 
         static IEnumerable<Servicio> listado = null;
         public static IEnumerable<Servicio> Listado

@@ -1,11 +1,49 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:cv="clr-namespace:MPS.AppCliente.Views.CV"
              BackgroundColor="{StaticResource AlterColor}"
              x:Class="MPS.AppCliente.Views.Views.Perfil">
     <ContentPage.Content>
-        <Grid>
-            
+        <Grid RowDefinitions="Auto,Auto,*" ColumnDefinitions=".05*,*,.05*" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" Padding="0,5">
+            <StackLayout Grid.Column="1" HorizontalOptions="Fill" VerticalOptions="Fill">
+                <StackLayout Padding="10">
+                    <Frame CornerRadius="25" HeightRequest="50" WidthRequest="50" BackgroundColor="CornflowerBlue"
+                           HorizontalOptions="Center" Padding="0" IsClippedToBounds="True">
+                        <Image Source="" HorizontalOptions="Center" VerticalOptions="Center" />
+                    </Frame>
+                </StackLayout>
+                <Label Text="Nombre Completo de la Persona" TextColor="White" FontAttributes="Bold" HorizontalOptions="Center" HorizontalTextAlignment="Center"/>
+                <StackLayout Orientation="Horizontal" HorizontalOptions="Center">
+                    <Label Text="Online" FontSize="Small" TextColor="White"/>
+                    <Image Source="" Aspect="AspectFit" HorizontalOptions="Center" VerticalOptions="Center"/>
+                </StackLayout>
+            </StackLayout>
+            <Image Grid.Column="1" Source="" HorizontalOptions="End" VerticalOptions="Start"/>
+            <Grid Grid.Column="1" Grid.Row="1" RowDefinitions="Auto,*,Auto" ColumnDefinitions=".05*,*,.05*" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
+                <ScrollView Grid.Row="1" Grid.Column="1" HorizontalOptions="FillAndExpand" VerticalScrollBarVisibility="Never">
+                    <Grid RowDefinitions="Auto,*,Auto,Auto" VerticalOptions="StartAndExpand">
+                        <Label Text="Datos generales" FontSize="Medium" FontAttributes="Bold" TextColor="White"/>
+                        <StackLayout Grid.Row="1">
+                            <cv:EntryView/>
+                            <cv:EntryView/>
+                            <cv:EntryView/>
+                            <cv:EntryView/>
+                            <cv:EntryView/>
+                            <cv:EntryView/>
+                        </StackLayout>
+                        <Label Grid.Row="2" Text="Contacto" FontSize="Medium" FontAttributes="Bold" TextColor="White"/>
+                        <StackLayout Grid.Row="3">
+                            <cv:EntryView/>
+                            <cv:EntryView/>
+                        </StackLayout>
+                    </Grid>
+                </ScrollView>
+                <StackLayout Grid.Column="1" Grid.Row="2" HorizontalOptions="End">
+                    <Button VerticalOptions="Center" HorizontalOptions="End" TextColor="White" CornerRadius="10" BackgroundColor="IndianRed" FontSize="Small" Padding="10,0" Text="Guardar"/>
+                    <Button VerticalOptions="Center" HorizontalOptions="End" TextColor="White" CornerRadius="10" BackgroundColor="LightGray" FontSize="Small" Padding="10,0" Text="Cambiar contraseña"/>
+                </StackLayout>
+            </Grid>
         </Grid>
     </ContentPage.Content>
 </ContentPage>

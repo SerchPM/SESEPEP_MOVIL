@@ -1,0 +1,58 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ContentView xmlns="http://xamarin.com/schemas/2014/forms" 
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="MPS.AppCliente.Views.CV.PersonalItem">
+  <ContentView.Content>
+        <Frame CornerRadius="10" IsClippedToBounds="True" Padding="5,10">
+            <Expander IsExpanded="False">
+                <Expander.Header>
+                    <Grid RowDefinitions="Auto,Auto" ColumnDefinitions="Auto,*,.5*">
+                        <StackLayout Padding="10" Margin="10,5">
+                            <Frame CornerRadius="25" HeightRequest="50" WidthRequest="50" BackgroundColor="LightGray"
+                           HorizontalOptions="Center" Padding="0" IsClippedToBounds="True">
+                                <Image Source="" HorizontalOptions="Center" VerticalOptions="Center" />
+                            </Frame>
+                        </StackLayout>
+                        <StackLayout Grid.Column="1" Spacing="0">
+                            <Label Text="Nombre del personal"/>
+                            <Label Text="Empresa 1"/>
+                            <StackLayout x:Name="valueStar" Orientation="Horizontal">
+                            </StackLayout>
+                        </StackLayout>
+                        <Image Grid.Column="2" VerticalOptions="Center" HorizontalOptions="Center"/>
+                        <ScrollView Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="2" Orientation="Horizontal" HorizontalScrollBarVisibility="Never">
+                            <StackLayout Orientation="Horizontal" Spacing="15">
+                                <Frame BackgroundColor="SteelBlue" CornerRadius="5" IsClippedToBounds="True" Padding="5" HorizontalOptions="Fill" VerticalOptions="Center">
+                                    <Grid ColumnDefinitions="Auto,*">
+                                        <Image Aspect="AspectFit" HorizontalOptions="Center" VerticalOptions="Center"/>
+                                        <Label Grid.Column="1" Text="28 años" FontSize="Small" HorizontalOptions="FillAndExpand" HorizontalTextAlignment="Start" VerticalOptions="Center" VerticalTextAlignment="Center" TextColor="White"/>
+                                    </Grid>
+                                </Frame>
+                                <Frame BackgroundColor="Gray" CornerRadius="5" IsClippedToBounds="True" Padding="5" HorizontalOptions="FillAndExpand" VerticalOptions="Center">
+                                    <Grid ColumnDefinitions="Auto,*">
+                                        <Image Aspect="AspectFit" HorizontalOptions="Center" VerticalOptions="Center"/>
+                                        <Label Grid.Column="1" Text="Perfil" FontSize="Small" HorizontalOptions="FillAndExpand" HorizontalTextAlignment="Start" VerticalOptions="Center" VerticalTextAlignment="Center" TextColor="White"/>
+                                    </Grid>
+                                </Frame>
+                                <Frame BackgroundColor="Gray" CornerRadius="5" IsClippedToBounds="True" Padding="5" HorizontalOptions="FillAndExpand" VerticalOptions="Center">
+                                    <Grid ColumnDefinitions="Auto,*">
+                                        <Image Aspect="AspectFit" HorizontalOptions="Center" VerticalOptions="Center"/>
+                                        <Label Grid.Column="1" Text="Especialidades" FontSize="Small" HorizontalOptions="FillAndExpand" HorizontalTextAlignment="Start" VerticalOptions="Center" VerticalTextAlignment="Center" TextColor="White"/>
+                                    </Grid>
+                                </Frame>
+                            </StackLayout>
+
+                        </ScrollView>
+                    </Grid>
+                </Expander.Header>
+                <CollectionView Grid.Row="2" Grid.Column="1" HorizontalOptions="FillAndExpand">
+                    <CollectionView.ItemTemplate>
+                        <DataTemplate>
+                            <Label TextColor="Gray" HorizontalOptions="FillAndExpand" VerticalOptions="Center"/>
+                        </DataTemplate>
+                    </CollectionView.ItemTemplate>
+                </CollectionView>
+            </Expander>
+        </Frame>
+  </ContentView.Content>
+</ContentView>

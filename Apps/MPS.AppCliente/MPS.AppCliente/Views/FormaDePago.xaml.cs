@@ -16,5 +16,15 @@ namespace MPS.AppCliente.Views.Views
         {
             InitializeComponent();
         }
+
+        private void Button_Clicked(object sender, EventArgs e)
+        {
+            modalFormPay.IsVisible = true;
+        }
+
+        private void Button_Clicked_1(object sender, EventArgs e)
+        {
+            modalFormPay.IsVisible = false;
+        }
     }
 }

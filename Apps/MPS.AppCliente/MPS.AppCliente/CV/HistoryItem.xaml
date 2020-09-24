@@ -1,0 +1,31 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ContentView xmlns="http://xamarin.com/schemas/2014/forms" 
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="MPS.AppCliente.Views.CV.HistoryItem">
+  <ContentView.Content>
+        <Frame CornerRadius="10" IsClippedToBounds="True" Padding="10">
+            <Grid RowDefinitions="Auto,*,Auto">
+                <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand">
+                    <Label Text="Seguridad Intramuros" TextColor="CadetBlue" FontSize="Medium"/>
+                    <StackLayout x:Name="valueStar" Orientation="Horizontal" HorizontalOptions="FillAndExpand" VerticalOptions="Center"/>
+                </StackLayout>
+                <Grid Grid.Row="1" ColumnDefinitions="Auto,*,Auto" RowDefinitions="*,*">
+                    <Image/>
+                    <Label Grid.Column="1" Text="11/10/2020 05:00 (Solicitud)"/>
+                    <Frame Grid.Column="2" CornerRadius="10" BackgroundColor="Black" IsClippedToBounds="True" Padding="5">
+                        <Label Text="$2,456.00" FontSize="Small" TextColor="White"/>
+                    </Frame>
+                    <Image Grid.Row="1"/>
+                    <Label Grid.Row="1" Grid.Column="1" Text="11/10/2020 03:00 (Inicio)"/>
+                    <Frame Grid.Row="1" Grid.Column="2" CornerRadius="10" BackgroundColor="LightGray" IsClippedToBounds="True" Padding="5">
+                        <Grid ColumnDefinitions="Auto,*">
+                            <Image Aspect="AspectFit" HorizontalOptions="Center" VerticalOptions="Center"/>
+                            <Label Text="12 hrs" FontSize="Small" TextColor="White"/>
+                        </Grid>
+                    </Frame>
+                </Grid>
+                <Button Grid.Row="2" HorizontalOptions="Start" VerticalOptions="Center" FontSize="Small" HeightRequest="30" Padding="10,0" Text="Enviar" BackgroundColor="ForestGreen" CornerRadius="10"/>
+            </Grid>
+        </Frame>
+    </ContentView.Content>
+</ContentView>
