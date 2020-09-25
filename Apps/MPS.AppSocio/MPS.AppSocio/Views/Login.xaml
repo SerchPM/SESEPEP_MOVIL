@@ -1,0 +1,34 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:vm="clr-namespace:MPS.Core.Lib.ViewModels"
+             x:Class="MPS.AppSocio.Views.Views.Login"
+             xmlns:cv="clr-namespace:MPS.AppSocio.Views.CV">
+    <ContentPage.Content>
+        <Grid RowDefinitions="*,Auto">
+            <Grid RowDefinitions="*,Auto,*">
+                <Image Source="logoMain.png"/>
+                <Label Text="Tu mejor opción en seguiridad privada" HorizontalOptions="Center" Grid.Row="1"/>
+                <ScrollView Grid.Row="2">
+                    <Grid RowDefinitions="*,Auto" x:DataType="vm:LoginViewModel">
+                        <Grid.BindingContext>
+                            <vm:LoginViewModel/>
+                        </Grid.BindingContext>
+                        <StackLayout VerticalOptions="Center" Padding="50,0">
+                            <Entry/>
+                            <Label Text="Usuario"/>
+                            <Entry/>
+                            <Label Text="Contraseña"/>
+                            <Button Command="{Binding LoginCommand}" Text="Entrar" HorizontalOptions="End" Padding="30,0"/>
+                        </StackLayout>
+                        <StackLayout Grid.Row="1" VerticalOptions="EndAndExpand" Padding="50,0">
+                            <Label Text="¿Olvidé mis datos?"/>
+                            <Label Text="Crear cuenta"/>
+                        </StackLayout>
+                    </Grid>
+                </ScrollView>
+            </Grid>
+            <cv:StatusBar Grid.Row="1" VerticalOptions="End" HorizontalOptions="FillAndExpand"/>
+        </Grid>
+    </ContentPage.Content>
+</ContentPage>

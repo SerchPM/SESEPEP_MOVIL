@@ -1,0 +1,28 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ContentView xmlns="http://xamarin.com/schemas/2014/forms" 
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="MPS.AppSocio.Views.CV.StatusBar">
+  <ContentView.Content>
+        <Grid VerticalOptions="End"
+            ColumnDefinitions="0.2*,*"
+            RowDefinitions="5.48*, 27.51*">
+            <BoxView Background="Gray" Grid.Row="1" Grid.ColumnSpan="2"/>
+            <Image Source="listonesBase.png" Grid.RowSpan="2" Aspect="AspectFit" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand"/>
+
+            <StackLayout x:Name="Links" Orientation="Horizontal" Grid.Column="1" Grid.Row="1" VerticalOptions="Center" HorizontalOptions="Center">
+                <StackLayout.Resources>
+                    <Style TargetType="Label">
+                        <Setter Property="Margin" Value="3"/>
+                        <Setter Property="LineBreakMode" Value="TailTruncation"/>
+                        <Setter Property="FontAttributes" Value="Bold"/>
+                        <Setter Property="TextColor" Value="{StaticResource BackgroundColor}"/>
+                    </Style>
+                </StackLayout.Resources>
+                <Label Text="Sitio web"/>
+                <Label Text="Socios"/>
+                <Label Text="Privacidad"/>
+                <Label Text="Ayuda"/>
+            </StackLayout>
+        </Grid>
+    </ContentView.Content>
+</ContentView>

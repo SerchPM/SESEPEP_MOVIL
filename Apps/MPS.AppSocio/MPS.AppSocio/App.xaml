@@ -6,6 +6,29 @@
              mc:Ignorable="d"
              x:Class="MPS.AppSocio.App">
     <Application.Resources>
+        <ResourceDictionary>
+            <Color x:Key="BackgroundColor">#FFFFFF</Color>
+            <Color x:Key="MainColor">#707070</Color>
+            <Color x:Key="SecondaryColor">#A6A3A3</Color>
+            <Color x:Key="AccentColor">#A03335</Color>
+            <Color x:Key="AlterColor">#2D374B</Color>
+            <Color x:Key="AlterColor2">#243449</Color>
+            <Color x:Key="AlterColor3">#3D516B</Color>
 
+            <Style TargetType="ContentPage" ApplyToDerivedTypes="True">
+                <Setter Property="NavigationPage.HasNavigationBar" Value="False"/>
+            </Style>
+
+            <Style TargetType="Button">
+                <Setter Property="BackgroundColor" Value="{StaticResource AccentColor}"/>
+                <Setter Property="TextColor" Value="{StaticResource BackgroundColor}"/>
+                <Setter Property="CornerRadius" Value="10"/>
+                <Setter Property="Padding" Value="25"/>
+            </Style>
+
+            <Style TargetType="ImageButton">
+                <Setter Property="BackgroundColor" Value="Transparent"/>
+            </Style>
+        </ResourceDictionary>
     </Application.Resources>
 </Application>
