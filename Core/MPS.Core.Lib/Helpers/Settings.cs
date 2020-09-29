@@ -1,4 +1,5 @@
 ﻿using MPS.Core.Lib.OS;
+using MPS.SharedAPIModel.Seguridad;
 using Sysne.Core.MVVM;
 using Sysne.Core.OS;
 using System;
@@ -21,6 +22,14 @@ namespace MPS.Core.Lib.Helpers
 
         private string webAPilUrl;
         public string WebAPIUrl { get => GetValue<string>(); set => SetValue(ref webAPilUrl, value); }
+
+        private string usuario;
+        public string Usuario { get => GetValue<string>(); set => SetValue(ref usuario, value); }
+
+        private string contraseña;
+        public string Contraseña { get => GetValue<string>(); set => SetValue(ref contraseña, value); }
+
+        public LoginResponse LoginInfo { get; set; } = new LoginResponse();
 
         void SetValue<T>(ref T field, T newValue = default, [CallerMemberName] string propertyName = null)
         {

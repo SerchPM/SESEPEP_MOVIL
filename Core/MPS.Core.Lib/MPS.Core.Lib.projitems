@@ -9,13 +9,13 @@
     <Import_RootNamespace>MPS.Core.Lib</Import_RootNamespace>
   </PropertyGroup>
   <ItemGroup>
-    <Folder Include="$(MSBuildThisFileDirectory)BL\" />
     <Folder Include="$(MSBuildThisFileDirectory)ViewModels\Clientes\" />
     <Folder Include="$(MSBuildThisFileDirectory)ViewModels\Socios\" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="$(MSBuildThisFileDirectory)ApiClient\SeguridadApi.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ApiClient\WebApiClient.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)BL\SeguridadBL.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Helpers\Settings.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Model\Servicio.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)OS\INavigationService.cs" />

@@ -261,8 +261,6 @@ namespace Sysne.Core.ApiClient
             var values = new List<KeyValuePair<string, string>>();
             foreach (var (Key, Value) in keyValuePairs)
                 values.Add(new KeyValuePair<string, string>(Key, Value));
-            //var req = new HttpRequestMessage(method, url) { Content = new FormUrlEncodedContent(values) };
-            //var res = await SendAsync(req);
             return await CallAsync<TResponse>(method, url, new FormUrlEncodedContent(values));
         }
     }

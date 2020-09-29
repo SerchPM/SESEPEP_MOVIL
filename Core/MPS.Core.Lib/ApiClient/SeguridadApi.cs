@@ -14,11 +14,11 @@ namespace MPS.Core.Lib.ApiClient
     {
         public SeguridadApi() : base(Settings.Current.WebAPIUrl, "Login") { }
 
-        public async Task<(HttpStatusCode StatusCode,LoginResponse Login)> LoginAsync(string user, string password)
+        public async Task<(HttpStatusCode StatusCode,LoginResponse LoginInfo)> LoginAsync(string usuario, string contraseña)
         {
             var res = await CallFormUrlEncoded<LoginResponse>("LoginAsync", HttpMethod.Post,
-                ("P_USUARIO",user), 
-                ("P_PWD", password));
+                ("P_USUARIO",usuario), 
+                ("P_PWD", contraseña));
 
             return res;
         }
