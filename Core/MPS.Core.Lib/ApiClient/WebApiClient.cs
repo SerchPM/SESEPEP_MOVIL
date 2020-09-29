@@ -1,5 +1,7 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Diagnostics;
+using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Net.Http.Headers;
@@ -252,6 +254,16 @@ namespace Sysne.Core.ApiClient
                 requestContent.Add(extraContent, extraName);
 
             return await CallAsync<TResponse>(HttpMethod.Post, url, requestContent);
+        }
+
+        public async Task<(HttpStatusCode StatusCode, TResponse Content)> CallFormUrlEncoded<TResponse>(string url, HttpMethod method, params (string Key, string Value)[] keyValuePairs)
+        {
+            var values = new List<KeyValuePair<string, string>>();
+            foreach (var (Key, Value) in keyValuePairs)
+                values.Add(new KeyValuePair<string, string>(Key, Value));
+            //var req = new HttpRequestMessage(method, url) { Content = new FormUrlEncodedContent(values) };
+            //var res = await SendAsync(req);
+            return await CallAsync<TResponse>(method, url, new FormUrlEncodedContent(values));
         }
     }
 

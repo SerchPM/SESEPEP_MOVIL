@@ -9,5 +9,6 @@
     <Import_RootNamespace>MPS.SharedAPIModel</Import_RootNamespace>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="$(MSBuildThisFileDirectory)Seguridad\LoginResponse.cs" />
   </ItemGroup>
 </Project>

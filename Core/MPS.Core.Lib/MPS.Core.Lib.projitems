@@ -10,8 +10,11 @@
   </PropertyGroup>
   <ItemGroup>
     <Folder Include="$(MSBuildThisFileDirectory)BL\" />
+    <Folder Include="$(MSBuildThisFileDirectory)ViewModels\Clientes\" />
+    <Folder Include="$(MSBuildThisFileDirectory)ViewModels\Socios\" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="$(MSBuildThisFileDirectory)ApiClient\SeguridadApi.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ApiClient\WebApiClient.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Helpers\Settings.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Model\Servicio.cs" />

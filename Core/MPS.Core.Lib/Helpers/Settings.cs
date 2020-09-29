@@ -9,7 +9,11 @@ namespace MPS.Core.Lib.Helpers
     public class Settings : ObservableObject
     {
         readonly ISettingsStorage settingsStorage;
-        private Settings() => settingsStorage = DependencyService.Get<ISettingsStorage>();
+        private Settings()
+        {
+            settingsStorage = DependencyService.Get<ISettingsStorage>();
+            WebAPIUrl = "https://api.mpsmovil.com/api/";
+        }
 
         [ThreadStatic]
         static Settings current;
