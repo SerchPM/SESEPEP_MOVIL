@@ -16,12 +16,13 @@ namespace MPS.AppSocio
             InitializeComponent();
 
             OS.DependencyService.Register<NavigationService, INavigationService>(OS.DependencyService.ServiceLifetime.Singleton);
+            OS.DependencyService.Register<SettingsStorage, ISettingsStorage>();
 
             MainPage = new NavigationPage(new Login());
             (OS.DependencyService.Get<INavigationService>() as NavigationService).Navigation = Current.MainPage.Navigation;
 
             //MainPage.Appearing += (s, e) =>
-            //OS.DependencyService.Get<IOS>().SetStatusBarColor(((Color)Resources["AlterColor"]).ToHex());
+            OS.DependencyService.Get<IOS>().SetStatusBarColor(((Color)Resources["AlterColor"]).ToHex());
         }
 
         protected override void OnStart()
