@@ -15,13 +15,14 @@
                             <vm:LoginViewModel/>
                         </Grid.BindingContext>
                         <StackLayout VerticalOptions="Center" Padding="50,0">
-                            <Entry/>
+                            <Entry Text="{Binding Usuario}"/>
                             <Label Text="Usuario"/>
-                            <Entry/>
+                            <Entry Text="{Binding Contraseña}" IsPassword="True"/>
                             <Label Text="Contraseña"/>
                             <Button Command="{Binding LoginCommand}" Text="Entrar" HorizontalOptions="End" Padding="30,0"/>
                         </StackLayout>
                         <StackLayout Grid.Row="1" VerticalOptions="EndAndExpand" Padding="50,0">
+                            <Label Text="{Binding Mensaje}" TextColor="{StaticResource AccentColor}" HorizontalOptions="EndAndExpand"/>
                             <Label Text="¿Olvidé mis datos?"/>
                             <Label Text="Crear cuenta"/>
                         </StackLayout>
