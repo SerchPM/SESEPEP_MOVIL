@@ -19,7 +19,6 @@ namespace MPS.Core.Lib.ViewModels
             {
                 Usuario = Settings.Current.Usuario;
                 Contraseña = Settings.Current.Contraseña;
-                LoginCommand.ExecuteAsync().RunSynchronously();
             }
         }
 

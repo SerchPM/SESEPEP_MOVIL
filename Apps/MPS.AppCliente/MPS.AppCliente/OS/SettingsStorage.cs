@@ -8,9 +8,9 @@ namespace MPS.AppCliente.Views.OS
         public T GetValue<T>([CallerMemberName] string propertyName = null) =>
             propertyName switch
             {
-                "WebAPIUrl" => (T)(object)Preferences.Get(propertyName, "https://localhost:44328/"),
+                "WebAPIUrl" => (T)(object)Preferences.Get(propertyName, "https://api.mpsmovil.com/api/"),
                 //"IntSetting" => (T)(object)Preferences.Get(propertyName, 10),
-                _ => default
+                _ => (T)(object)Preferences.Get(propertyName, string.Empty)
             };
 
         public void SetValue<T>(T newValue = default, [CallerMemberName] string propertyName = null)
@@ -24,6 +24,7 @@ namespace MPS.AppCliente.Views.OS
                 //Preferences.Set(propertyName, int.Parse(newValue.ToString());
                 //break;
                 default:
+                    Preferences.Set(propertyName, newValue.ToString());
                     break;
             }
         }

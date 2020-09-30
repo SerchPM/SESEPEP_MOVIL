@@ -17,7 +17,7 @@
                         <StackLayout VerticalOptions="Center" Padding="50,0">
                             <Entry Text="{Binding Usuario}"/>
                             <Label Text="Usuario"/>
-                            <Entry Text="{Binding Contraseña}"/>
+                            <Entry Text="{Binding Contraseña}" IsPassword="True"/>
                             <Label Text="Contraseña"/>
                             <Button Command="{Binding LoginCommand}" Text="Entrar" HorizontalOptions="End" Padding="30,0"/>
                         </StackLayout>
