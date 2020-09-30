@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Xamarin.Forms;
+using Xamarin.Forms.Maps;
 
 namespace MPS.AppCliente
 {
@@ -56,6 +57,26 @@ namespace MPS.AppCliente
         private void Button_Clicked(object sender, EventArgs e)
         {
             modalServicioSolicitado.IsVisible = false;
+        }
+
+        protected override void OnAppearing()
+        {
+            base.OnAppearing();
+            Position position = new Position(19.432476, -99.133606);
+            if (Device.RuntimePlatform == Device.Android)
+            {
+                Task.Delay(2000)
+                    .ContinueWith(task => Device.BeginInvokeOnMainThread(() => Map.MoveToRegion(MapSpan.FromCenterAndRadius(position, Distance.FromKilometers(0.5)))));
+            }
+            else
+                Map.MoveToRegion(MapSpan.FromCenterAndRadius(position, Distance.FromKilometers(1.5)));
+        }
+        private void Map_MapClicked(object sender, Xamarin.Forms.Maps.MapClickedEventArgs e)
+        {
+            var (la, lo) = (e.Position.Latitude, e.Position.Longitude);
+            Position position = new Position(la, lo);
+            MapSpan mapSpan = new MapSpan(position, 0.01, 0.01);
+            Map = new Map(mapSpan);
         }
     }
 }

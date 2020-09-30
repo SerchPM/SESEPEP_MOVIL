@@ -9,6 +9,9 @@
     <Import_RootNamespace>MPS.SharedAPIModel</Import_RootNamespace>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="$(MSBuildThisFileDirectory)Operaciones\Servicio.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Seguridad\LoginResponse.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Solicitud\Socios.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Solicitud\SolicitudResponse.cs" />
   </ItemGroup>
 </Project>

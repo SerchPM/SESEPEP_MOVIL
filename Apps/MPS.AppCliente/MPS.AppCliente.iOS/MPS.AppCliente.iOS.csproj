@@ -521,4 +521,40 @@
   <ItemGroup>
     <BundleResource Include="Resources\Default-Portrait.png" />
   </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\checkoff%403x.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\iglesia.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\iglesia%402x.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\iglesia%403x.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\checkin.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\checkin%402x.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\checkin%403x.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\checkoff.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\checkoff%402x.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\iglesiaon%402x.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\iglesiaon%403x.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\iglesiaon.png" />
+  </ItemGroup>
 </Project>

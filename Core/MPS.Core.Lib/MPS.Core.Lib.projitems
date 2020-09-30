@@ -9,13 +9,17 @@
     <Import_RootNamespace>MPS.Core.Lib</Import_RootNamespace>
   </PropertyGroup>
   <ItemGroup>
-    <Folder Include="$(MSBuildThisFileDirectory)ViewModels\Clientes\" />
     <Folder Include="$(MSBuildThisFileDirectory)ViewModels\Socios\" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="$(MSBuildThisFileDirectory)ApiClient\OperacionesApi.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ApiClient\SeguridadApi.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)ApiClient\SolicitudApi.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ApiClient\WebApiClient.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)BL\OperacionesBL.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)BL\SeguridadBL.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)BL\SolicitudBL.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Helpers\DateTimeHelper.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Helpers\Settings.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Model\Servicio.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)OS\INavigationService.cs" />
@@ -24,6 +28,6 @@
     <Compile Include="$(MSBuildThisFileDirectory)OS\PagesKeys.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ViewModels\HeaderViewModel.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ViewModels\LoginViewModel.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)ViewModels\SolicitudDeServicioViewModel.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)ViewModels\Clientes\SolicitudDeServicioViewModel.cs" />
   </ItemGroup>
 </Project>

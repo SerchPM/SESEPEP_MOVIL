@@ -1,4 +1,5 @@
-﻿using System;
+﻿using MPS.Core.Lib.Helpers;
+using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
@@ -107,6 +108,12 @@ namespace Sysne.Core.ApiClient
                     }
                     sb.Remove(sb.Length - 1, 1);
                 }
+                string token = Settings.Current.LoginInfo.token;
+                if (!string.IsNullOrEmpty(token))
+                {
+                    DefaultRequestHeaders.Remove("Authorization");
+                    DefaultRequestHeaders.Add("Authorization", "Bearer " + token);
+                }
                 return await CallAsync<TResponse>(HttpMethod.Get, $"{url}{sb}");
             }
             catch (HttpRequestException ex)
@@ -131,6 +138,12 @@ namespace Sysne.Core.ApiClient
                         sb.Append($"{param.Item1}={param.Item2}&");
                     }
                     sb.Remove(sb.Length - 1, 1);
+                }
+                string token = Settings.Current.LoginInfo.token;
+                if (!string.IsNullOrEmpty(token))
+                {
+                    DefaultRequestHeaders.Remove("Authorization");
+                    DefaultRequestHeaders.Add("Authorization", "Bearer " + token);
                 }
                 return await CallAsync<TResponse>(HttpMethod.Post, $"{url}{sb}");
             }
@@ -186,6 +199,12 @@ namespace Sysne.Core.ApiClient
                     }
                     sb.Remove(sb.Length - 1, 1);
                 }
+                string token = Settings.Current.LoginInfo.token;
+                if (!string.IsNullOrEmpty(token))
+                {
+                    DefaultRequestHeaders.Remove("Authorization");
+                    DefaultRequestHeaders.Add("Authorization", "Bearer " + token);
+                }
                 return await CallAsync(HttpMethod.Post, $"{url}{sb}");
             }
             catch (HttpRequestException ex)
@@ -210,6 +229,12 @@ namespace Sysne.Core.ApiClient
                     }
                     sb.Remove(sb.Length - 1, 1);
                 }
+                string token = Settings.Current.LoginInfo.token;
+                if (!string.IsNullOrEmpty(token))
+                {
+                    DefaultRequestHeaders.Remove("Authorization");
+                    DefaultRequestHeaders.Add("Authorization", "Bearer " + token);
+                }
                 return await CallAsync(HttpMethod.Delete, $"{url}{sb}");
             }
             catch (HttpRequestException ex)
@@ -232,6 +257,12 @@ namespace Sysne.Core.ApiClient
                     }
                     sb.Remove(sb.Length - 1, 1);
                 }
+                string token = Settings.Current.LoginInfo.token;
+                if (!string.IsNullOrEmpty(token))
+                {
+                    DefaultRequestHeaders.Remove("Authorization");
+                    DefaultRequestHeaders.Add("Authorization", "Bearer " + token);
+                }
                 return await CallAsync<TResponse>(HttpMethod.Delete, $"{url}{sb}");
             }
             catch (HttpRequestException ex)
@@ -252,7 +283,12 @@ namespace Sysne.Core.ApiClient
             requestContent.Add(imageContent, contentName, fileName);
             if (extraContent != null)
                 requestContent.Add(extraContent, extraName);
-
+            string token = Settings.Current.LoginInfo.token;
+            if (!string.IsNullOrEmpty(token))
+            {
+                DefaultRequestHeaders.Remove("Authorization");
+                DefaultRequestHeaders.Add("Authorization", "Bearer " + token);
+            }
             return await CallAsync<TResponse>(HttpMethod.Post, url, requestContent);
         }
 
@@ -261,6 +297,12 @@ namespace Sysne.Core.ApiClient
             var values = new List<KeyValuePair<string, string>>();
             foreach (var (Key, Value) in keyValuePairs)
                 values.Add(new KeyValuePair<string, string>(Key, Value));
+            string token = Settings.Current.LoginInfo.token;
+            if (!string.IsNullOrEmpty(token))
+            {
+                DefaultRequestHeaders.Remove("Authorization");
+                DefaultRequestHeaders.Add("Authorization", "Bearer " + token);
+            }
             return await CallAsync<TResponse>(method, url, new FormUrlEncodedContent(values));
         }
     }
