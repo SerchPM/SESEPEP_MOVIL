@@ -17,6 +17,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)ApiClient\SolicitudApi.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ApiClient\WebApiClient.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)BL\OperacionesBL.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)ApiSocio\SociosApi.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)BL\SeguridadBL.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)BL\SolicitudBL.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Helpers\DateTimeHelper.cs" />

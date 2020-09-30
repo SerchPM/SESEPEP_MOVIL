@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Sysne.Core.OS;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -30,6 +31,7 @@ namespace MPS.AppSocio.UWP
         {
             this.InitializeComponent();
             this.Suspending += OnSuspending;
+            DependencyService.Register<OS.OS, IOS>();
         }
 
         /// <summary>
@@ -58,6 +60,8 @@ namespace MPS.AppSocio.UWP
                 rootFrame.NavigationFailed += OnNavigationFailed;
 
                 Xamarin.Forms.Forms.Init(e);
+                Xamarin.FormsMaps.Init("kgUMkzKsLrvdttCQu2lo~kHJiCIhrjuASDIjaPJtERA~Au_Ln9T0P8FlMZ7X2V892EjoE1atpIYMnIgZvenVVivAI502QBB0cU__IufV8NUb");
+
 
                 if (e.PreviousExecutionState == ApplicationExecutionState.Terminated)
                 {

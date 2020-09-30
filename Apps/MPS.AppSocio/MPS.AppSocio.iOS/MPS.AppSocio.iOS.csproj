@@ -47,11 +47,12 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <MtouchArch>ARM64</MtouchArch>
-    <CodesignKey>iPhone Developer</CodesignKey>
+    <CodesignKey>Apple Development: Benjamin Romero (5XE47RU975)</CodesignKey>
     <MtouchDebug>true</MtouchDebug>
     <CodesignEntitlements>Entitlements.plist</CodesignEntitlements>
     <MtouchLink>None</MtouchLink>
     <MtouchInterpreter>-all</MtouchInterpreter>
+    <CodesignProvision>VS: WildCard Development</CodesignProvision>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|iPhone' ">
     <DebugType>none</DebugType>
@@ -68,6 +69,7 @@
     <Compile Include="AppDelegate.cs" />
     <None Include="Entitlements.plist" />
     <None Include="Info.plist" />
+    <Compile Include="OS\OS.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -142,5 +144,353 @@
       <Project>{1D390EE2-2D4E-48B8-A604-CA9A573EC91E}</Project>
       <Name>MPS.AppSocio.Views</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\Default.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\Default%402x.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\Default-568h%402x.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\Default-Portrait.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\Default-Portrait%402x.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\agregar.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\agregar%402x.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\agregar%403x.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\botonAgregar.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\botonAgregar%402x.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\botonAgregar%403x.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\botonBuscar.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\botonBuscar%402x.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\botonBuscar%403x.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\botonPedirAhora.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\botonPedirAhora%402x.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\botonPedirAhora%403x.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\botonSolicitar.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\botonSolicitar%402x.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\botonSolicitar%403x.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\calendario.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\calendario%402x.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\calendario%403x.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\cibernetica.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\cibernetica%402x.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\cibernetica%403x.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\ciberneticaSel.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\ciberneticaSel%402x.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\ciberneticaSel%403x.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\eventoSocial.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\eventoSocial%402x.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\eventoSocial%403x.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\eventoSocialSel.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\eventoSocialSel%402x.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\eventoSocialSel%403x.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\expand.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\expand%402x.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\expand%403x.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\flash.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\flash%402x.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\flash%403x.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\formaDePago.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\formaDePago%402x.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\formaDePago%403x.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\formaDePagoSel.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\formaDePagoSel%402x.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\formaDePagoSel%403x.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\historial.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\historial%402x.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\historial%403x.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\historialSel.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\historialSel%402x.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\historialSel%403x.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\industrial.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\industrial%402x.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\industrial%403x.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\industrialSel.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\industrialSel%402x.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\industrialSel%403x.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\intramuros.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\intramuros%402x.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\intramuros%403x.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\intramurosSel.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\intramurosSel%402x.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\intramurosSel%403x.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\listonesBase.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\listonesBase%402x.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\listonesBase%403x.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\logoHeader.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\logoHeader%402x.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\logoHeader%403x.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\logoMain.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\logoMain%402x.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\logoMain%403x.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\lupa.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\lupa%402x.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\lupa%403x.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\mercancias.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\mercancias%402x.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\mercancias%403x.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\mercanciasSel.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\mercanciasSel%402x.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\mercanciasSel%403x.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\perfil.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\perfil%402x.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\perfil%403x.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\personal.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\personal%402x.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\personal%403x.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\personalSel.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\personalSel%402x.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\personalSel%403x.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\servicioExpressActivo.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\servicioExpressActivo%402x.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\servicioExpressActivo%403x.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\servicioExpressInactivo.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\servicioExpressInactivo%402x.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\servicioExpressInactivo%403x.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\servicioPersonalizadoActivo.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\servicioPersonalizadoActivo%402x.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\servicioPersonalizadoActivo%403x.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\servicioPersonalizadoInactivo.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\servicioPersonalizadoInactivo%402x.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\servicioPersonalizadoInactivo%403x.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\solicitarServicio.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\solicitarServicio%402x.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\solicitarServicio%403x.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\solicitarServicioSel.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\solicitarServicioSel%402x.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\solicitarServicioSel%403x.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\valores.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\valores%402x.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\valores%403x.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\valoresSel.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\valoresSel%402x.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\valoresSel%403x.png" />
   </ItemGroup>
 </Project>

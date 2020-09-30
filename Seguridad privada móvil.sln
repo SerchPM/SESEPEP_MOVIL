@@ -39,7 +39,7 @@ Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "MPS.SharedAPIModel", "Core\
 EndProject
 Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "Core.MVVM", "Core\Core.MVVM\Core.MVVM.shproj", "{4C2067F4-752A-4ED6-A586-4FDBE28B3D27}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MPS.Tests.ApiClientTest", "Tests\MPS.Tests.ApiClientTest\MPS.Tests.ApiClientTest.csproj", "{A87D03F6-9F66-4F42-B241-7AEFA2528FB6}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MPS.Tests.ApiClientTest", "Tests\MPS.Tests.ApiClientTest\MPS.Tests.ApiClientTest.csproj", "{A87D03F6-9F66-4F42-B241-7AEFA2528FB6}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{B4D16D8D-2187-467F-9AC6-BC2A381AB67D}"
 EndProject
@@ -137,6 +137,7 @@ Global
 		{1EF55D40-E398-4762-99ED-ABA8804438CC}.Debug|ARM.ActiveCfg = Debug|iPhone
 		{1EF55D40-E398-4762-99ED-ABA8804438CC}.Debug|iPhone.ActiveCfg = Debug|iPhone
 		{1EF55D40-E398-4762-99ED-ABA8804438CC}.Debug|iPhone.Build.0 = Debug|iPhone
+		{1EF55D40-E398-4762-99ED-ABA8804438CC}.Debug|iPhone.Deploy.0 = Debug|iPhone
 		{1EF55D40-E398-4762-99ED-ABA8804438CC}.Debug|iPhoneSimulator.ActiveCfg = Debug|iPhoneSimulator
 		{1EF55D40-E398-4762-99ED-ABA8804438CC}.Debug|iPhoneSimulator.Build.0 = Debug|iPhoneSimulator
 		{1EF55D40-E398-4762-99ED-ABA8804438CC}.Debug|x64.ActiveCfg = Debug|iPhone
@@ -237,6 +238,7 @@ Global
 		{2A550752-4E2C-47B3-A48C-E41E3F731C09}.Debug|ARM.ActiveCfg = Debug|iPhone
 		{2A550752-4E2C-47B3-A48C-E41E3F731C09}.Debug|iPhone.ActiveCfg = Debug|iPhone
 		{2A550752-4E2C-47B3-A48C-E41E3F731C09}.Debug|iPhone.Build.0 = Debug|iPhone
+		{2A550752-4E2C-47B3-A48C-E41E3F731C09}.Debug|iPhone.Deploy.0 = Debug|iPhone
 		{2A550752-4E2C-47B3-A48C-E41E3F731C09}.Debug|iPhoneSimulator.ActiveCfg = Debug|iPhoneSimulator
 		{2A550752-4E2C-47B3-A48C-E41E3F731C09}.Debug|iPhoneSimulator.Build.0 = Debug|iPhoneSimulator
 		{2A550752-4E2C-47B3-A48C-E41E3F731C09}.Debug|x64.ActiveCfg = Debug|iPhone

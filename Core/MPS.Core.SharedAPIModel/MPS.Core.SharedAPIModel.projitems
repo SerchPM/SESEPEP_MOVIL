@@ -13,5 +13,6 @@
     <Compile Include="$(MSBuildThisFileDirectory)Seguridad\LoginResponse.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Solicitud\Socios.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Solicitud\SolicitudResponse.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Socios\NuevoSocio.cs" />
   </ItemGroup>
 </Project>

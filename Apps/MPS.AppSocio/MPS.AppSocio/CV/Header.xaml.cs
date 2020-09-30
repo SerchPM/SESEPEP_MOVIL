@@ -1,4 +1,5 @@
-﻿using System;
+﻿using MPS.Core.Lib.ViewModels;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -15,6 +16,7 @@ namespace MPS.AppSocio.Views.CV
         public Header()
         {
             InitializeComponent();
+            ViewModel.NombreCommand.Execute(null);
         }
         public HeaderPages ActivePage
         {
@@ -38,6 +40,8 @@ namespace MPS.AppSocio.Views.CV
             Historial,
             FormaDePago,
             Perfil
-        }       
+        }
+
+        HeaderViewModel ViewModel => BindingContext as HeaderViewModel;
     }
 }

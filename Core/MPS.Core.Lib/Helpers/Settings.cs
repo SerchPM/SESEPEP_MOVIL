@@ -13,7 +13,6 @@ namespace MPS.Core.Lib.Helpers
         private Settings()
         {
             settingsStorage = DependencyService.Get<ISettingsStorage>();
-            WebAPIUrl = "https://api.mpsmovil.com/api/";
         }
 
         [ThreadStatic]
