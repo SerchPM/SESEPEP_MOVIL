@@ -16,7 +16,6 @@ namespace MPS.AppCliente.Views.CV
         public Header()
         {
             InitializeComponent();
-            ViewModel.NombreCommand.Execute(null);
         }
 
 
