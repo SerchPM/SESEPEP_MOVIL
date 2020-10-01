@@ -12,6 +12,7 @@
     <Folder Include="$(MSBuildThisFileDirectory)ViewModels\Socios\" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="$(MSBuildThisFileDirectory)ApiClient\ClientesApi.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ApiClient\OperacionesApi.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ApiClient\SeguridadApi.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ApiClient\SolicitudApi.cs" />

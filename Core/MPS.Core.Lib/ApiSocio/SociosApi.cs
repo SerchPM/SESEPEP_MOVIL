@@ -13,8 +13,11 @@ namespace MPS.Core.Lib.ApiSocio
 {
     public class SociosApi : WebApiClient
     {
+        #region Constructor
         public SociosApi() : base(Settings.Current.WebAPIUrl, "Socios") { }
+        #endregion
 
+        #region Métodos
         public async Task<(HttpStatusCode StatusCode, Respuesta Respuesta)> CrearSocioAsync(NuevoSocio nuevoSocio)
         {
             var res = await CallFormUrlEncoded<Respuesta>("CrearSocio", HttpMethod.Post,
@@ -51,4 +54,5 @@ namespace MPS.Core.Lib.ApiSocio
             return res;
         }
     }
+    #endregion
 }

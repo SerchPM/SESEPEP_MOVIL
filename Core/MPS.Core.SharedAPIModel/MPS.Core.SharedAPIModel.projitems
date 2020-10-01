@@ -17,4 +17,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)Socios\NuevoSocio.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Socios\SocioDisponible.cs" />
   </ItemGroup>
+  <ItemGroup>
+    <Folder Include="$(MSBuildThisFileDirectory)Clientes\" />
+  </ItemGroup>
 </Project>
