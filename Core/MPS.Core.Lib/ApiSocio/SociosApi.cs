@@ -1,4 +1,5 @@
 ﻿using MPS.Core.Lib.Helpers;
+using MPS.SharedAPIModel.Seguridad;
 using MPS.SharedAPIModel.Socios;
 using Sysne.Core.ApiClient;
 using System;
@@ -14,9 +15,9 @@ namespace MPS.Core.Lib.ApiSocio
     {
         public SociosApi() : base(Settings.Current.WebAPIUrl, "Socios") { }
 
-        public async Task<(HttpStatusCode StatusCode, bool Exito)> CrearSocioAsync(NuevoSocio nuevoSocio)
+        public async Task<(HttpStatusCode StatusCode, Respuesta Respuesta)> CrearSocioAsync(NuevoSocio nuevoSocio)
         {
-            var res = await CallFormUrlEncoded<bool>("CrearSocio", HttpMethod.Post,
+            var res = await CallFormUrlEncoded<Respuesta>("CrearSocio", HttpMethod.Post,
                 ("P_NOMBRE", nuevoSocio.P_NOMBRE),
                 ("P_APELLIDO_1", nuevoSocio.P_APELLIDO_1),
                 ("P_APELLIDO_2", nuevoSocio.P_APELLIDO_2),
@@ -33,6 +34,20 @@ namespace MPS.Core.Lib.ApiSocio
                 ("P_PWD", nuevoSocio.P_PWD),
                 ("P_E_MAIL", nuevoSocio.P_E_MAIL),
                 ("P_TEL_NUMERO", nuevoSocio.P_TEL_NUMERO.ToString()));
+            return res;
+        }
+
+        public async Task<(HttpStatusCode StatusCode, Respuesta Respuesta)> ActualizaSocioAsync(Guid socio, NuevoSocio info, string img)
+        {
+            var res = await CallFormUrlEncoded<Respuesta>("ActualizaInfoSocio", HttpMethod.Post,
+                ("P_GUID_SOCIO", socio.ToString()),
+                ("P_NOMBRE", info.P_NOMBRE),
+                ("P_APELLIDO_1", info.P_APELLIDO_1),
+                ("P_APELLIDO_2", info.P_APELLIDO_2),
+                ("P_FECHA_NACIMIENTO", info.P_FECHA_NACIMIENTO),
+                ("P_SEXO", info.P_GUID_SEXO.ToString()),
+                ("P_TEL_NUMERO", info.P_TEL_NUMERO.ToString()),
+                ("P_IMAGEN", img));
             return res;
         }
     }

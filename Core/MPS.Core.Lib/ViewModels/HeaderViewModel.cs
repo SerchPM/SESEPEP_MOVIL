@@ -10,17 +10,14 @@ namespace MPS.Core.Lib.ViewModels
 {
     public class HeaderViewModel:ViewModelBase
     {
+        public HeaderViewModel()
+        {
+            if (!string.IsNullOrEmpty(Settings.Current.LoginInfo.details.nameid))
+                NombreSocio = Settings.Current.LoginInfo.details.nameid;
+        }
+
         private string nombreSocio;
         public string NombreSocio { get => nombreSocio; set { Set(ref nombreSocio, value); } }
-
-        RelayCommand nombreCommand = null;
-        public RelayCommand NombreCommand
-        {
-            get => nombreCommand ?? (nombreCommand = new RelayCommand(() =>
-            {
-                NombreSocio = Settings.Current.LoginInfo.details.nameid;
-            }));
-        }
 
         RelayCommand<string> navegarACommand = null;
         public RelayCommand<string> NavegarACommand

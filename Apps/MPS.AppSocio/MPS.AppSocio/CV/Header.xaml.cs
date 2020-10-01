@@ -16,7 +16,6 @@ namespace MPS.AppSocio.Views.CV
         public Header()
         {
             InitializeComponent();
-            ViewModel.NombreCommand.Execute(null);
         }
         public HeaderPages ActivePage
         {
