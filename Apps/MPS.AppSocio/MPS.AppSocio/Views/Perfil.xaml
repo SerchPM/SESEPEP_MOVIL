@@ -3,54 +3,74 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="MPS.AppSocio.Views.Views.Perfil"
              xmlns:cv="clr-namespace:MPS.AppSocio.Views.CV"
+             xmlns:vm="clr-namespace:MPS.Core.Lib.ViewModels.Socios"
              BackgroundColor="{StaticResource AlterColor}">
-    <ContentPage.Content>
-        <Grid RowDefinitions="Auto,Auto,*" ColumnDefinitions=".05*,*,.05*" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" Padding="0,5">
-            <StackLayout Grid.Column="1" HorizontalOptions="Fill" VerticalOptions="Fill">
-                <StackLayout Padding="10">
-                    <Frame CornerRadius="25" HeightRequest="50" WidthRequest="50" BackgroundColor="CornflowerBlue"
+    <ContentPage.Content/>
+    <ContentPage.BindingContext>
+        <vm:DetalleSocioViewModel/>
+    </ContentPage.BindingContext>
+    <Grid RowDefinitions="Auto,Auto,*" ColumnDefinitions=".05*,*,.05*" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" Padding="0,5">
+        <StackLayout Grid.Column="1" HorizontalOptions="Fill" VerticalOptions="Fill">
+            <StackLayout Padding="10">
+                <Frame CornerRadius="25" HeightRequest="50" WidthRequest="50" BackgroundColor="CornflowerBlue"
                            HorizontalOptions="Center" Padding="0" IsClippedToBounds="True">
-                        <Image Source="" HorizontalOptions="Center" VerticalOptions="Center" />
-                    </Frame>
-                </StackLayout>
-                <Label Text="Nombre Completo de la Persona" TextColor="White" FontAttributes="Bold" HorizontalOptions="Center" HorizontalTextAlignment="Center"/>
-                <StackLayout Orientation="Horizontal" HorizontalOptions="Center">
-                    <Label Text="Online" FontSize="Small" TextColor="White"/>
-                    <Image Source="" Aspect="AspectFit" HorizontalOptions="Center" VerticalOptions="Center"/>
-                </StackLayout>
-                <Frame IsClippedToBounds="True" Padding="5" CornerRadius="15" BackgroundColor="LightGray" HorizontalOptions="Center">
-                    <Grid ColumnDefinitions="Auto,Auto">
-                        <Image HorizontalOptions="Center" VerticalOptions="Center"/>
-                        <Label Grid.Column="1" Text="4.8" FontSize="Small" TextColor="White" HorizontalOptions="End"/>
-                    </Grid>
+                    <Image Source="{Binding DetallesSocio.IMAGEN}" HorizontalOptions="Center" VerticalOptions="Center" />
                 </Frame>
             </StackLayout>
-            <Image Grid.Column="1" Source="" HorizontalOptions="End" VerticalOptions="Start"/>
-            <Grid Grid.Column="1" Grid.Row="1" RowDefinitions="Auto,*,Auto" ColumnDefinitions=".05*,*,.05*" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
-                <ScrollView Grid.Row="1" Grid.Column="1" HorizontalOptions="FillAndExpand" VerticalScrollBarVisibility="Never">
-                    <Grid RowDefinitions="Auto,*,Auto,Auto" VerticalOptions="StartAndExpand">
-                        <Label Text="Datos generales" FontSize="Medium" FontAttributes="Bold" TextColor="White"/>
-                        <StackLayout Grid.Row="1">
-                            <cv:EntryView/>
-                            <cv:EntryView/>
-                            <cv:EntryView/>
-                            <cv:EntryView/>
-                            <cv:EntryView/>
-                            <cv:EntryView/>
-                        </StackLayout>
-                        <Label Grid.Row="2" Text="Contacto" FontSize="Medium" FontAttributes="Bold" TextColor="White"/>
-                        <StackLayout Grid.Row="3">
-                            <cv:EntryView/>
-                            <cv:EntryView/>
-                        </StackLayout>
-                    </Grid>
-                </ScrollView>
-                <StackLayout Grid.Column="1" Grid.Row="2" HorizontalOptions="End">
-                    <Button VerticalOptions="Center" HorizontalOptions="End" TextColor="White" CornerRadius="10" BackgroundColor="IndianRed" FontSize="Small" Padding="10,0" Text="Guardar"/>
-                    <Button VerticalOptions="Center" HorizontalOptions="End" TextColor="White" CornerRadius="10" BackgroundColor="LightGray" FontSize="Small" Padding="10,0" Text="Cambiar contraseña"/>
-                </StackLayout>
-            </Grid>
+            <Label Text="{Binding NombreCompleto}" TextColor="White" FontAttributes="Bold" HorizontalOptions="Center" HorizontalTextAlignment="Center"/>
+            <StackLayout Orientation="Horizontal" HorizontalOptions="Center">
+                <Label Text="Online" FontSize="Small" TextColor="White"/>
+                <Image Source="" Aspect="AspectFit" HorizontalOptions="Center" VerticalOptions="Center"/>
+            </StackLayout>
+            <Frame IsClippedToBounds="True" Padding="5" CornerRadius="15" BackgroundColor="LightGray" HorizontalOptions="Center">
+                <Grid ColumnDefinitions="Auto,Auto">
+                    <Image HorizontalOptions="Center" VerticalOptions="Center"/>
+                    <Label Grid.Column="1" Text="4.8" FontSize="Small" TextColor="White" HorizontalOptions="End"/>
+                </Grid>
+            </Frame>
+        </StackLayout>
+        <Image Grid.Column="1" Source="" HorizontalOptions="End" VerticalOptions="Start"/>
+        <Grid Grid.Column="1" Grid.Row="1" RowDefinitions="Auto,*,Auto" ColumnDefinitions=".05*,*,.05*" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
+            <ScrollView Grid.Row="1" Grid.Column="1" HorizontalOptions="FillAndExpand" VerticalScrollBarVisibility="Never">
+                <Grid RowDefinitions="Auto,*,Auto,Auto" VerticalOptions="StartAndExpand">
+                    <Label Text="Datos generales" FontSize="Medium" FontAttributes="Bold" TextColor="White"/>
+                    <StackLayout Grid.Row="1">
+                        <Entry HorizontalOptions="FillAndExpand" VerticalOptions="Center" TextColor="Gray" FontSize="Body" HorizontalTextAlignment="Start" Text="{Binding NoCliente}"/>
+                        <Label Grid.Row="1" TextColor="Gray" FontSize="Small" HorizontalTextAlignment="Start" Text="No. Socio" Margin="0,0,0,5"/>
+                        <Entry HorizontalOptions="FillAndExpand" VerticalOptions="Center" TextColor="Gray" FontSize="Body" HorizontalTextAlignment="Start" Text="{Binding DetallesSocio.NOMBRE}"/>
+                        <Label Grid.Row="1" TextColor="Gray" FontSize="Small" HorizontalTextAlignment="Start" Text="Nombre(s)" Margin="0,0,0,5"/>
+                        <Entry HorizontalOptions="FillAndExpand" VerticalOptions="Center" TextColor="Gray" FontSize="Body" HorizontalTextAlignment="Start" Text="{Binding DetallesSocio.APELLIDO_1}"/>
+                        <Label Grid.Row="1" TextColor="Gray" FontSize="Small" HorizontalTextAlignment="Start" Text="Apellido Paterno" Margin="0,0,0,5"/>
+                        <Entry HorizontalOptions="FillAndExpand" VerticalOptions="Center" TextColor="Gray" FontSize="Body" HorizontalTextAlignment="Start" Text="{Binding DetallesSocio.APELLIDO_2}"/>
+                        <Label Grid.Row="1" TextColor="Gray" FontSize="Small" HorizontalTextAlignment="Start" Text="Apellido Materno" Margin="0,0,0,5"/>
+                        <Entry HorizontalOptions="FillAndExpand" VerticalOptions="Center" TextColor="Gray" FontSize="Body" HorizontalTextAlignment="Start" Text="{Binding DetallesSocio.FECHA_NACIMIENTO}"/>
+                        <Label Grid.Row="1" TextColor="Gray" FontSize="Small" HorizontalTextAlignment="Start" Text="Fecha de Nacimiento" Margin="0,0,0,5"/>
+                        <Entry HorizontalOptions="FillAndExpand" VerticalOptions="Center" TextColor="Gray" FontSize="Body" HorizontalTextAlignment="Start" Text="SEXO"/>
+                        <Label Grid.Row="1" TextColor="Gray" FontSize="Small" HorizontalTextAlignment="Start" Text="Sexo" Margin="0,0,0,5"/>
+                        <!--<cv:EntryView TextMenu="No. Socio" Info="{Binding NoCliente}"/>
+                        <cv:EntryView TextMenu="Nombre(s)" Info="{Binding DetallesSocio.NOMBRE}"/>
+                        <cv:EntryView TextMenu="Apellido Paterno" Info="{Binding DetallesSocio.APELLIDO_1}"/>
+                        <cv:EntryView TextMenu="Apellido Materno" Info="{Binding DetallesSocio.APELLIDO_2}"/>
+                        <cv:EntryView TextMenu="Fecha de Nacimiento" Info="{Binding DetallesSocio.FECHA_NACIMIENTO}"/>
+                        <cv:EntryView TextMenu="Sexo"/>-->
+                    </StackLayout>
+                    <Label Grid.Row="2" Text="Contacto" FontSize="Medium" FontAttributes="Bold" TextColor="White"/>
+                    <StackLayout Grid.Row="3">
+                        <Entry HorizontalOptions="FillAndExpand" VerticalOptions="Center" TextColor="Gray" FontSize="Body" HorizontalTextAlignment="Start" Text="{Binding DetallesSocio.E_MAIL}"/>
+                        <Label Grid.Row="1" TextColor="Gray" FontSize="Small" HorizontalTextAlignment="Start" Text="Correo Electrónico" Margin="0,0,0,5"/>
+                        <Entry HorizontalOptions="FillAndExpand" VerticalOptions="Center" TextColor="Gray" FontSize="Body" HorizontalTextAlignment="Start" Text="{Binding DetallesSocio.TEL_NUMERO}"/>
+                        <Label Grid.Row="1" TextColor="Gray" FontSize="Small" HorizontalTextAlignment="Start" Text="Teléfono" Margin="0,0,0,5"/>
+                        <!--<cv:EntryView TextMenu="Correo Electrónico" Info="{Binding DetallesSocio.E_MAIL}"/>
+                        <cv:EntryView TextMenu="Teléfono" Info="{Binding DetallesSocio.TEL_NUMERO}"/>-->
+                    </StackLayout>
+                </Grid>
+            </ScrollView>
+            <StackLayout Grid.Column="1" Grid.Row="2" HorizontalOptions="End">
+                <Button VerticalOptions="Center" HorizontalOptions="End" TextColor="White" CornerRadius="10" BackgroundColor="IndianRed" FontSize="Small" Padding="10,0" Text="Guardar"/>
+                <Button VerticalOptions="Center" HorizontalOptions="End" TextColor="White" CornerRadius="10" BackgroundColor="LightGray" FontSize="Small" Padding="10,0" Text="Cambiar contraseña"/>
+            </StackLayout>
         </Grid>
+    </Grid>
 
-    </ContentPage.Content>
+
 </ContentPage>

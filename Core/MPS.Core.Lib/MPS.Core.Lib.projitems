@@ -9,9 +9,6 @@
     <Import_RootNamespace>MPS.Core.Lib</Import_RootNamespace>
   </PropertyGroup>
   <ItemGroup>
-    <Folder Include="$(MSBuildThisFileDirectory)ViewModels\Socios\" />
-  </ItemGroup>
-  <ItemGroup>
     <Compile Include="$(MSBuildThisFileDirectory)ApiClient\ClientesApi.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ApiClient\OperacionesApi.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ApiClient\SeguridadApi.cs" />
@@ -20,6 +17,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)BL\OperacionesBL.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ApiSocio\SociosApi.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)BL\SeguridadBL.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)BL\SociosBL.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)BL\SolicitudBL.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Helpers\DateTimeHelper.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Helpers\Settings.cs" />
@@ -31,5 +29,6 @@
     <Compile Include="$(MSBuildThisFileDirectory)ViewModels\HeaderViewModel.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ViewModels\LoginViewModel.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ViewModels\Clientes\SolicitudDeServicioViewModel.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)ViewModels\Socios\DetalleSocioViewModel.cs" />
   </ItemGroup>
 </Project>

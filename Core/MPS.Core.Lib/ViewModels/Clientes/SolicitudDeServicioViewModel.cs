@@ -52,8 +52,8 @@ namespace MPS.Core.Lib.ViewModels.Clientes
         private TimeSpan hora = new TimeSpan(12, 0, 0);
         public TimeSpan Hora { get => hora; set => Set(ref hora, value); }
 
-        private List<Socios> socios;
-        public List<Socios> Socios { get => socios; set => Set(ref socios, value); }
+        //private List<Socios> socios;
+        //public List<Socios> Socios { get => socios; set => Set(ref socios, value); }
 
         private bool terminos;
         public bool Terminos 

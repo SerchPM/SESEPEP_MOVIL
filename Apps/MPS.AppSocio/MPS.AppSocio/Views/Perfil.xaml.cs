@@ -1,4 +1,5 @@
-﻿using System;
+﻿using MPS.Core.Lib.ViewModels.Socios;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -15,6 +16,9 @@ namespace MPS.AppSocio.Views.Views
         public Perfil()
         {
             InitializeComponent();
+            ViewModel.ObtenerDetalleSocioCommand.Execute(null);
         }
+
+        DetalleSocioViewModel ViewModel => BindingContext as DetalleSocioViewModel;
     }
 }

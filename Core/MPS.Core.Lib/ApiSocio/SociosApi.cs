@@ -18,6 +18,11 @@ namespace MPS.Core.Lib.ApiSocio
         #endregion
 
         #region Métodos
+        /// <summary>
+        /// Registra un nuevo socio
+        /// </summary>
+        /// <param name="nuevoSocio"></param>
+        /// <returns></returns>
         public async Task<(HttpStatusCode StatusCode, Respuesta Respuesta)> CrearSocioAsync(NuevoSocio nuevoSocio)
         {
             var res = await CallFormUrlEncoded<Respuesta>("CrearSocio", HttpMethod.Post,
@@ -40,6 +45,13 @@ namespace MPS.Core.Lib.ApiSocio
             return res;
         }
 
+        /// <summary>
+        /// Actualiza la información del socio
+        /// </summary>
+        /// <param name="socio"></param>
+        /// <param name="info"></param>
+        /// <param name="img"></param>
+        /// <returns></returns>
         public async Task<(HttpStatusCode StatusCode, Respuesta Respuesta)> ActualizaSocioAsync(Guid socio, NuevoSocio info, string img)
         {
             var res = await CallFormUrlEncoded<Respuesta>("ActualizaInfoSocio", HttpMethod.Post,
@@ -51,6 +63,19 @@ namespace MPS.Core.Lib.ApiSocio
                 ("P_SEXO", info.P_GUID_SEXO.ToString()),
                 ("P_TEL_NUMERO", info.P_TEL_NUMERO.ToString()),
                 ("P_IMAGEN", img));
+            return res;
+        }
+
+        /// <summary>
+        /// Devuelve los detalles de un socio en particular
+        /// </summary>
+        /// <param name="Id"></param>
+        /// <returns></returns>
+        public async Task<(HttpStatusCode StatusCode, DetalleSocio DetalleSocio)> DetalleSocioAsync(string Id) //=>
+                                                                                                               //await CallPostAsync<string, DetalleSocio>("ConsultaSocioDetalle", Id);
+        {
+            var res = await CallFormUrlEncoded<DetalleSocio>("ConsultaSocioDetalle", HttpMethod.Post,
+                ("P_GUID_SOCIO", Id));
             return res;
         }
     }

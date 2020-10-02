@@ -14,12 +14,12 @@
                 <Grid Grid.Row="1" RowDefinitions="Auto, Auto,1.5*,Auto" VerticalOptions="Start" Padding="10,10,5,5" BackgroundColor="CornflowerBlue" Opacity=".8" Margin="0">
                     <Label Text="Seguridad Escolta" FontAttributes="Italic" TextColor="Gray"  FontSize="Medium"/>
                     <Grid Grid.Row="1" ColumnDefinitions="*,.5*">
-                        <Label Text="Nombre del cliente" TextColor="White" FontSize="Body"/>
+                        <Label Text="{Binding}" TextColor="White" FontSize="Body"/>
                         <StackLayout Grid.Column="1" HorizontalOptions="End">
                             <Frame IsClippedToBounds="True" Padding="5" CornerRadius="15" BackgroundColor="Black">
                                 <Grid ColumnDefinitions="Auto,Auto">
                                     <Image HorizontalOptions="Center" VerticalOptions="Center"/>
-                                    <Label Grid.Column="1" Text="5.0" FontSize="Small" TextColor="White" HorizontalOptions="End"/>
+                                    <Label Grid.Column="1" Text="{Binding}" FontSize="Small" TextColor="White" HorizontalOptions="End"/>
                                 </Grid>
                             </Frame>
                             <Label Text="Estatus" TextColor="White" FontSize="Small" HorizontalTextAlignment="End"/>
@@ -28,11 +28,11 @@
                     <StackLayout Grid.Row="2">
                         <StackLayout Orientation="Horizontal">
                             <Image HorizontalOptions="Start" VerticalOptions="Center" Aspect="AspectFit"/>
-                            <Label Text="Dirección 1" FontSize="Body" TextColor="Gray"/>
+                            <Label Text="{Binding}" FontSize="Body" TextColor="Gray"/>
                         </StackLayout>
                         <StackLayout Orientation="Horizontal">
                             <Image HorizontalOptions="Start" VerticalOptions="Center" Aspect="AspectFit"/>
-                            <Label Text="Dirección 2" FontSize="Body" TextColor="Gray"/>
+                            <Label Text="{Binding}" FontSize="Body" TextColor="Gray"/>
                         </StackLayout>
                     </StackLayout>
                     <Button Grid.Row="3" HorizontalOptions="End" VerticalOptions="Center" BorderColor="White" BorderWidth="1" CornerRadius="20" BackgroundColor="Transparent" Text="Finalizar" FontSize="Small" Padding="10,15" HeightRequest="45"/>
