@@ -14,10 +14,12 @@
                     </StackLayout>
                     <StackLayout Grid.Row="1" Grid.ColumnSpan="3" VerticalOptions="Center" HorizontalOptions="FillAndExpand">
                         <Grid RowDefinitions="Auto,Auto" VerticalOptions="Center">
-                            <cv:EntryView/>
+                            <Entry HorizontalOptions="FillAndExpand" VerticalOptions="Center" TextColor="Gray" FontSize="Body" HorizontalTextAlignment="Start" Text="{Binding NoCliente}"/>
+                            <Label Grid.Row="1" TextColor="Gray" FontSize="Small" HorizontalTextAlignment="Start" Text="No. de Cuenta/Tarjeta" Margin="0,0,0,5"/>
                         </Grid>
                         <Grid RowDefinitions="Auto,Auto" VerticalOptions="Center">
-                            <cv:EntryView/>
+                            <Entry HorizontalOptions="FillAndExpand" VerticalOptions="Center" TextColor="Gray" FontSize="Body" HorizontalTextAlignment="Start" Text="{Binding NoCliente}"/>
+                            <Label Grid.Row="1" TextColor="Gray" FontSize="Small" HorizontalTextAlignment="Start" Text="Banco" Margin="0,0,0,5"/>
                         </Grid>
                     </StackLayout>
                     <Button Grid.Row="2" Grid.ColumnSpan="3" HorizontalOptions="EndAndExpand" HeightRequest="30" BackgroundColor="IndianRed" CornerRadius="10" FontSize="Small" VerticalOptions="Center" Text="Actualizar datos" Padding="10,0"/>

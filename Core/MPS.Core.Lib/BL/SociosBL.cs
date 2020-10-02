@@ -1,4 +1,5 @@
 ﻿using MPS.Core.Lib.ApiSocio;
+using MPS.SharedAPIModel.Seguridad;
 using MPS.SharedAPIModel.Socios;
 using System;
 using System.Collections.Generic;
@@ -19,6 +20,16 @@ namespace MPS.Core.Lib.BL
             {
                 return (false, new DetalleSocio());
             }
+        }
+
+        public async Task<(bool Valido, Respuesta Respuesta)> ActualizaInfoSocio(string Id, DetalleSocio Info)
+        {
+            var (StatusCode, Response) = await (new SociosApi()).ActualizaSocioAsync(Id, Info);
+            var valido = StatusCode == System.Net.HttpStatusCode.OK;
+            if (valido)
+                return (valido, Response);
+            else
+                return (false, new Respuesta());
         }
     }
 }

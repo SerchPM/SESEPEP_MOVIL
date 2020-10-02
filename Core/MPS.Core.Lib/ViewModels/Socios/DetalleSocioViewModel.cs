@@ -1,5 +1,6 @@
 ﻿using MPS.Core.Lib.BL;
 using MPS.Core.Lib.Helpers;
+using MPS.Core.Lib.OS;
 using MPS.SharedAPIModel.Socios;
 using Sysne.Core.MVVM;
 using Sysne.Core.MVVM.Patterns;
@@ -7,6 +8,7 @@ using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Text;
+//using Xamarin.Forms;
 
 namespace MPS.Core.Lib.ViewModels.Socios
 {
@@ -26,6 +28,9 @@ namespace MPS.Core.Lib.ViewModels.Socios
         string nombreCompleto;
         public string NombreCompleto { get => nombreCompleto; set { Set(ref nombreCompleto, value); } }
 
+        string ranking;
+        public string Ranking { get => ranking; set { Set(ref ranking, value); } }
+
         string noCliente;
         public string NoCliente { get => noCliente; set { Set(ref noCliente, value); } }
 
@@ -36,8 +41,18 @@ namespace MPS.Core.Lib.ViewModels.Socios
             {
                 var (exito, detalles) = await bl.DetalleSocio(Id);
                 NoCliente = detalles.NO_CLIENTE.ToString()??"";
+                Ranking = detalles.RANKING.ToString();
                 DetallesSocio = detalles;
                 NombreCompleto = $"{DetallesSocio.NOMBRE}{DetallesSocio.APELLIDO_1}{DetallesSocio.APELLIDO_2}";
+            }));
+        }
+
+        RelayCommand<DetalleSocio> actualizaInfoCommand = null;
+        public RelayCommand<DetalleSocio> ActualizaInfoCommand
+        {
+            get => actualizaInfoCommand ?? (actualizaInfoCommand = new RelayCommand<DetalleSocio>(async (DetalleSocio info) =>
+            {
+                var (exito, respuesta) = await bl.ActualizaInfoSocio(Id, info);
             }));
         }
     }

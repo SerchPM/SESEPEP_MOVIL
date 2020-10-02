@@ -25,7 +25,7 @@
             <Frame IsClippedToBounds="True" Padding="5" CornerRadius="15" BackgroundColor="LightGray" HorizontalOptions="Center">
                 <Grid ColumnDefinitions="Auto,Auto">
                     <Image HorizontalOptions="Center" VerticalOptions="Center"/>
-                    <Label Grid.Column="1" Text="4.8" FontSize="Small" TextColor="White" HorizontalOptions="End"/>
+                    <Label Grid.Column="1" Text="{Binding Ranking}" FontSize="Small" TextColor="White" HorizontalOptions="End"/>
                 </Grid>
             </Frame>
         </StackLayout>
@@ -66,8 +66,8 @@
                 </Grid>
             </ScrollView>
             <StackLayout Grid.Column="1" Grid.Row="2" HorizontalOptions="End">
-                <Button VerticalOptions="Center" HorizontalOptions="End" TextColor="White" CornerRadius="10" BackgroundColor="IndianRed" FontSize="Small" Padding="10,0" Text="Guardar"/>
-                <Button VerticalOptions="Center" HorizontalOptions="End" TextColor="White" CornerRadius="10" BackgroundColor="LightGray" FontSize="Small" Padding="10,0" Text="Cambiar contraseña"/>
+                <Button Command="{Binding ActualizaInfoCommand}" VerticalOptions="Center" HorizontalOptions="End" TextColor="White" CornerRadius="10" BackgroundColor="IndianRed" FontSize="Small" Padding="10,0" Text="Guardar"/>
+                <Button Clicked="PasswordPopUp" VerticalOptions="Center" HorizontalOptions="End" TextColor="White" CornerRadius="10" BackgroundColor="LightGray" FontSize="Small" Padding="10,0" Text="Cambiar contraseña"/>
             </StackLayout>
         </Grid>
     </Grid>

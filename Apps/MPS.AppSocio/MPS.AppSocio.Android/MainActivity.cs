@@ -20,6 +20,8 @@ namespace MPS.AppSocio.Droid
 
             base.OnCreate(savedInstanceState);
 
+            Rg.Plugins.Popup.Popup.Init(this, savedInstanceState);
+
             DependencyService.Register<OS.OS, IOS>();
             OS.OS.Activity = this;
             Xamarin.Forms.Forms.SetFlags("Expander_Experimental");

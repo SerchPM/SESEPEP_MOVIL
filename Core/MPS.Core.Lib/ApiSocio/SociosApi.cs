@@ -52,17 +52,16 @@ namespace MPS.Core.Lib.ApiSocio
         /// <param name="info"></param>
         /// <param name="img"></param>
         /// <returns></returns>
-        public async Task<(HttpStatusCode StatusCode, Respuesta Respuesta)> ActualizaSocioAsync(Guid socio, NuevoSocio info, string img)
+        public async Task<(HttpStatusCode StatusCode, Respuesta Respuesta)> ActualizaSocioAsync(string socio, DetalleSocio info)
         {
             var res = await CallFormUrlEncoded<Respuesta>("ActualizaInfoSocio", HttpMethod.Post,
-                ("P_GUID_SOCIO", socio.ToString()),
-                ("P_NOMBRE", info.P_NOMBRE),
-                ("P_APELLIDO_1", info.P_APELLIDO_1),
-                ("P_APELLIDO_2", info.P_APELLIDO_2),
-                ("P_FECHA_NACIMIENTO", info.P_FECHA_NACIMIENTO),
-                ("P_SEXO", info.P_GUID_SEXO.ToString()),
-                ("P_TEL_NUMERO", info.P_TEL_NUMERO.ToString()),
-                ("P_IMAGEN", img));
+                ("P_GUID_SOCIO", socio),
+                ("P_NOMBRE", info.NOMBRE),
+                ("P_APELLIDO_1", info.APELLIDO_1),
+                ("P_APELLIDO_2", info.APELLIDO_2),
+                ("P_FECHA_NACIMIENTO", info.FECHA_NACIMIENTO),
+                ("P_SEXO", info.GUID_SEXO.ToString()),
+                ("P_TEL_NUMERO", info.TEL_NUMERO));
             return res;
         }
 
@@ -71,8 +70,7 @@ namespace MPS.Core.Lib.ApiSocio
         /// </summary>
         /// <param name="Id"></param>
         /// <returns></returns>
-        public async Task<(HttpStatusCode StatusCode, DetalleSocio DetalleSocio)> DetalleSocioAsync(string Id) //=>
-                                                                                                               //await CallPostAsync<string, DetalleSocio>("ConsultaSocioDetalle", Id);
+        public async Task<(HttpStatusCode StatusCode, DetalleSocio DetalleSocio)> DetalleSocioAsync(string Id) 
         {
             var res = await CallFormUrlEncoded<DetalleSocio>("ConsultaSocioDetalle", HttpMethod.Post,
                 ("P_GUID_SOCIO", Id));

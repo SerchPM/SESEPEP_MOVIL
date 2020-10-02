@@ -1,4 +1,6 @@
-﻿using MPS.Core.Lib.ViewModels.Socios;
+﻿using MPS.AppSocio.Views.CV;
+using MPS.Core.Lib.ViewModels.Socios;
+using Rg.Plugins.Popup.Services;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -20,5 +22,10 @@ namespace MPS.AppSocio.Views.Views
         }
 
         DetalleSocioViewModel ViewModel => BindingContext as DetalleSocioViewModel;
+
+        private void PasswordPopUp(object o, EventArgs e)
+        {
+            PopupNavigation.Instance.PushAsync(new PasswordPopUp());
+        }
     }
 }
