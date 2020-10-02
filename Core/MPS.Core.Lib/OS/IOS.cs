@@ -1,4 +1,5 @@
-﻿using System;
+﻿using MPS.SharedAPIModel;
+using System;
 using System.Collections.Generic;
 using System.Text;
 using System.Threading.Tasks;
@@ -15,5 +16,8 @@ namespace Sysne.Core.OS
         void HideNavigation(bool show);
         // string NombreArchivo { get; set; }
         void ShowToast(string text);
+
+        Task<Geoposicion> ObtenerGeoposicion(bool precision);
+
     }
 }

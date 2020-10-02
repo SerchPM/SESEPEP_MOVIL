@@ -2,8 +2,9 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-
+using System.Threading.Tasks;
 using Foundation;
+using MPS.SharedAPIModel;
 using UIKit;
 
 namespace MPS.AppSocio.iOS.OS
@@ -50,6 +51,11 @@ namespace MPS.AppSocio.iOS.OS
             {
                 alertDelay.Dispose();
             }
+        }
+
+        public Task<Geoposicion> ObtenerGeoposicion(bool precision)
+        {
+            throw new NotImplementedException();
         }
     }
 }

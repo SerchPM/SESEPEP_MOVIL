@@ -27,7 +27,7 @@ namespace MPS.Core.Lib.ApiClient
             var res = await CallFormUrlEncoded<SolicitudResponse>("CrearSolicitud", HttpMethod.Post,
                 ("P_GUID_TIPO_SOLICITUD", solicitud.IdTipoSolicitud.ToString()),
                 ("P_TIPO_SERVICIO", solicitud.IdTipoServicio.ToString()),
-                ("P_FECHA_SOLICITUD", solicitud.FechaSolicitud.ToString()),
+                ("P_FECHA_SOLICITUD", solicitud.FechaSolicitud.ToDateTimeFormat24H()),
                 ("P_HORAS_PACTADAS", solicitud.HorasSolicidatas.ToString()),
                 ("P_GUID_CLIENTE", solicitud.IdCliente.ToString()),
                 ("P_GUID_SOCIO", solicitud.IdSocio.ToString()),

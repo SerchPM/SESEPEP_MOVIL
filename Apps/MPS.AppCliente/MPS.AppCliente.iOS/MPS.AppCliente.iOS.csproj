@@ -65,6 +65,7 @@
     <CodesignEntitlements>Entitlements.plist</CodesignEntitlements>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="CV\CustomMapRender.cs" />
     <Compile Include="Main.cs" />
     <Compile Include="AppDelegate.cs" />
     <None Include="Entitlements.plist" />
@@ -126,6 +127,9 @@
     <Reference Include="System.Numerics.Vectors" />
   </ItemGroup>
   <ItemGroup>
+    <PackageReference Include="Newtonsoft.Json">
+      <Version>12.0.3</Version>
+    </PackageReference>
     <PackageReference Include="System.ComponentModel.Annotations">
       <Version>4.7.0</Version>
     </PackageReference>
@@ -557,5 +561,23 @@
   </ItemGroup>
   <ItemGroup>
     <BundleResource Include="Resources\iglesiaon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\eliminar.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\eliminar%402x.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\eliminar%403x.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\especialidades.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\especialidades%402x.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\especialidades%403x.png" />
   </ItemGroup>
 </Project>

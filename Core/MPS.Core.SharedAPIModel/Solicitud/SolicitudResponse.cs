@@ -30,10 +30,10 @@ namespace MPS.SharedAPIModel.Solicitud
         public int TiempoGenerarSolicitud { get; set; }
         public string VersionApp { get; set; }
         public string Movil { get; set; }
-        public decimal Latitud { get; set; }
-        public decimal Longitud { get; set; }
+        public double Latitud { get; set; }
+        public double Longitud { get; set; }
         public decimal Latitud2 { get; set; }
         public decimal Longitud2 { get; set; }
-        public int? NoElementos { get; set; }
+        public int NoElementos { get; set; }
     }
 }

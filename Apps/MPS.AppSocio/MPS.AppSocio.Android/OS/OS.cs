@@ -2,13 +2,14 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-
+using System.Threading.Tasks;
 using Android.App;
 using Android.Content;
 using Android.OS;
 using Android.Runtime;
 using Android.Views;
 using Android.Widget;
+using MPS.SharedAPIModel;
 using Sysne.Core.OS;
 
 namespace MPS.AppSocio.Droid.OS
@@ -39,6 +40,11 @@ namespace MPS.AppSocio.Droid.OS
         public void ShowToast(string text)
         {
             (Toast.MakeText(Application.Context, text, ToastLength.Short)).Show();
+        }
+
+        public Task<Geoposicion> ObtenerGeoposicion(bool precision)
+        {
+            throw new NotImplementedException();
         }
     }
 }
