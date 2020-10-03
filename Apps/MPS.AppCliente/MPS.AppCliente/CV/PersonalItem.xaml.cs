@@ -1,9 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-
+using System.Windows.Input;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
@@ -59,21 +60,74 @@ namespace MPS.AppCliente.Views.CV
             me.especialidades.Text = me.Especialidades;
         });
 
-        public bool Seleccionado
+        public string Imagen
         {
-            get => (bool)GetValue(SeleccionadoProperty);
-            set => SetValue(SeleccionadoProperty, value);
+            get => (string)GetValue(ImagenProperty);
+            set => SetValue(ImagenProperty, value);
         }
 
-        public static readonly BindableProperty SeleccionadoProperty = BindableProperty.Create(nameof(Seleccionado), typeof(bool), typeof(PersonalItem),
+        public static readonly BindableProperty ImagenProperty = BindableProperty.Create(nameof(Imagen), typeof(string), typeof(PersonalItem), default(string),
         propertyChanged: (bindable, oldValue, newValue) =>
         {
             var me = (PersonalItem)bindable;
-            me.Seleccionado = (bool)newValue;
-            if (me.Seleccionado)
-                me.activo.Source = "checkin.png";
-            else
-                me.activo.Source = "checkoff.png";
+            me.Imagen = (string)newValue;
+            me.perfil.Source = ImageSource.FromStream(() => new MemoryStream(Convert.FromBase64String(me.Imagen)));
         });
+
+        public string SourseSelected
+        {
+            get => (string)GetValue(SourseSelectedProperty);
+            set => SetValue(SourseSelectedProperty, value);
+        }
+
+        public static readonly BindableProperty SourseSelectedProperty = BindableProperty.Create(nameof(SourseSelected), typeof(string), typeof(PersonalItem), default(string),
+        propertyChanged: (bindable, oldValue, newValue) =>
+        {
+            var me = (PersonalItem)bindable;
+            me.SourseSelected = (string)newValue;
+            me.activo.Source = me.SourseSelected;
+        });
+
+        public string Edad
+        {
+            get => (string)GetValue(EdadProperty);
+            set => SetValue(EdadProperty, value);
+        }
+
+        public static readonly BindableProperty EdadProperty = BindableProperty.Create(nameof(Edad), typeof(string), typeof(PersonalItem), default(string),
+        propertyChanged: (bindable, oldValue, newValue) =>
+        {
+            var me = (PersonalItem)bindable;
+            me.Edad = (string)newValue;
+            me.edad.Text = me.Edad;
+        });
+
+        public ICommand SelectedCommand
+        {
+            get => (ICommand)GetValue(SelectedCommandProperty);
+            set => SetValue(SelectedCommandProperty, value);
+        }
+
+        public static readonly BindableProperty SelectedCommandProperty = BindableProperty.Create(nameof(SelectedCommand), typeof(ICommand), typeof(PersonalItem), default(ICommand),
+            propertyChanged: (bindable, oldValue, newValue) =>
+            {
+                var me = (PersonalItem)bindable;
+                me.SelectedCommand = (ICommand)newValue;
+                me.activo.Command = me.SelectedCommand;
+            });
+
+        public object SelectedCommandParameter
+        {
+            get => (object)GetValue(SelectedCommandParameterProperty);
+            set => SetValue(SelectedCommandParameterProperty, value);
+        }
+
+        public static readonly BindableProperty SelectedCommandParameterProperty = BindableProperty.Create(nameof(SelectedCommandParameter), typeof(object), typeof(PersonalItem), default(object),
+            propertyChanged: (bindable, oldValue, newValue) =>
+            {
+                var me = (PersonalItem)bindable;
+                me.SelectedCommandParameter = (object)newValue;
+                me.activo.CommandParameter = me.SelectedCommandParameter;
+            });
     }
 }

@@ -10,10 +10,15 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="$(MSBuildThisFileDirectory)ApiClient\ClientesApi.cs" />
+    <Folder Include="$(MSBuildThisFileDirectory)ViewModels\Socios\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="$(MSBuildThisFileDirectory)ApiClient\GoogleReverseGeocodingService.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ApiClient\OperacionesApi.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ApiClient\SeguridadApi.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ApiClient\SolicitudApi.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ApiClient\WebApiClient.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)BL\MapBL.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)BL\OperacionesBL.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ApiSocio\SociosApi.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)BL\SeguridadBL.cs" />

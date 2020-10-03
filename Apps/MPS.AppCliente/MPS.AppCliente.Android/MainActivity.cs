@@ -7,6 +7,7 @@ using Android.Views;
 using Android.Widget;
 using Android.OS;
 using Sysne.Core.OS;
+using Android;
 
 namespace MPS.AppCliente.Droid
 {
@@ -19,7 +20,7 @@ namespace MPS.AppCliente.Droid
             ToolbarResource = Resource.Layout.Toolbar;
 
             base.OnCreate(savedInstanceState);
-
+            CheckAppPermissions();
             DependencyService.Register<OS.OS, IOS>();
             OS.OS.Activity = this;
             Xamarin.Forms.Forms.SetFlags("Expander_Experimental");
@@ -28,6 +29,21 @@ namespace MPS.AppCliente.Droid
             Xamarin.FormsMaps.Init(this, savedInstanceState);
             LoadApplication(new App());
         }
+        private void CheckAppPermissions()
+        {
+            if ((int)Build.VERSION.SdkInt < 23)
+                return;
+            else
+            {
+                if (PackageManager.CheckPermission(Manifest.Permission.AccessCoarseLocation, PackageName) != Permission.Granted
+                    && PackageManager.CheckPermission(Manifest.Permission.AccessFineLocation, PackageName) != Permission.Granted)
+                {
+                    var permissions = new string[] { Manifest.Permission.AccessCoarseLocation, Manifest.Permission.AccessFineLocation};
+                    RequestPermissions(permissions, 100);
+                }
+            }
+        }
+
         public override void OnRequestPermissionsResult(int requestCode, string[] permissions, [GeneratedEnum] Android.Content.PM.Permission[] grantResults)
         {
             Xamarin.Essentials.Platform.OnRequestPermissionsResult(requestCode, permissions, grantResults);

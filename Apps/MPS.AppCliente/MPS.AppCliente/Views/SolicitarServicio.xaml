@@ -3,11 +3,12 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:d="http://xamarin.com/schemas/2014/forms/design"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-             xmlns:maps="clr-namespace:Xamarin.Forms.Maps;assembly=Xamarin.Forms.Maps"
+             xmlns:MyMap="clr-namespace:MPS.AppCliente.Views.MyMap"
              xmlns:cv="clr-namespace:MPS.AppCliente.Views.CV"
              xmlns:vm="clr-namespace:MPS.Core.Lib.ViewModels.Clientes"
              xmlns:modelOperaciones="clr-namespace:MPS.SharedAPIModel.Operaciones"
              xmlns:modelSoli="clr-namespace:MPS.SharedAPIModel.Solicitud"
+             xmlns:modelSocios="clr-namespace:MPS.SharedAPIModel.Socios"
              mc:Ignorable="d"
              x:Class="MPS.AppCliente.SolicitarServicio">
     <ContentPage.BindingContext>
@@ -38,7 +39,7 @@
     <Grid RowDefinitions="Auto,*,Auto">
         <cv:Header/>
         <ScrollView Grid.Row="1">
-            <Grid x:DataType="vm:SolicitudDeServicioViewModel"  RowDefinitions="Auto,Auto,Auto,Auto,Auto,Auto,Auto,Auto,Auto,Auto,Auto,Auto,Auto,1.5*,Auto" Padding="10">
+            <Grid x:DataType="vm:SolicitudDeServicioViewModel"  RowDefinitions="Auto,Auto,Auto,Auto,Auto,Auto,Auto,Auto,Auto,Auto,Auto,Auto,Auto,Auto,5.5*,Auto" Padding="10">
 
                 <Label Text="Solicitar servicio"/>
                 <Frame Grid.Row="1" BackgroundColor="{StaticResource AccentColor}" CornerRadius="20" Padding="10" HorizontalOptions="StartAndExpand">
@@ -59,33 +60,36 @@
                 </StackLayout>
 
 
-                <DatePicker IsVisible="{Binding EsPersonalizado}" Grid.Row="4" Date="{Binding Fecha}"/>
+                <DatePicker IsVisible="{Binding EsPersonalizado}" Grid.Row="4" Date="{Binding Fecha, Mode=TwoWay}"/>
                 <Label IsVisible="{Binding EsPersonalizado}" Text="Fecha" Grid.Row="5" VerticalOptions="Start"/>
-                <TimePicker IsVisible="{Binding EsPersonalizado}" Grid.Row="4" Grid.Column="1" Time="{Binding Hora}"/>
+                <TimePicker IsVisible="{Binding EsPersonalizado}" Grid.Row="4" Grid.Column="1" Time="{Binding Hora, Mode=TwoWay}"/>
                 <Label IsVisible="{Binding EsPersonalizado}" Text="Hora" Grid.Row="5" Grid.Column="1" VerticalOptions="Start"/>
 
 
-                <Entry Grid.Row="6" Keyboard="Numeric" Text="{Binding SolicitudServicio.HorasSolicidatas}"/>
+                <Entry Grid.Row="6" Keyboard="Numeric" Text="{Binding SolicitudServicio.HorasSolicidatas, Mode=TwoWay}"/>
                 <Label Text="Horas estimadas" Grid.Row="7" VerticalOptions="Start"/>
-                <Entry Grid.Row="6" Grid.Column="1" Keyboard="Numeric" Text="{Binding SolicitudServicio.NoElementos}"/>
+                <Entry Grid.Row="6" Grid.Column="1" Keyboard="Numeric" Text="{Binding SolicitudServicio.NoElementos, Mode=TwoWay}"/>
                 <Label Text="Unidades" Grid.Row="7" Grid.Column="1" VerticalOptions="Start"/>
 
                 <Label IsVisible="{Binding EsPersonalizado}" Text="Agregar personal" Grid.Row="8" VerticalOptions="End"/>
-                <ImageButton IsVisible="{Binding EsPersonalizado}" Source="botonAgregar.png" Grid.Row="9" HorizontalOptions="Start" Command="{Binding CerrarModalRegistroCommand}"/>
+                <StackLayout IsVisible="{Binding EsPersonalizado}" x:Name="personalSelected" Grid.Row="9" Grid.ColumnSpan="2" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" Spacing="10" Orientation="Vertical">
 
-                <Label Text="Dirección" Grid.Row="10" VerticalOptions="End"/>
-                <Grid Grid.Row="11" Grid.ColumnSpan="2" ColumnDefinitions="*,Auto">
-                    <Entry/>
-                    <ImageButton Source="botonBuscar.png" Grid.Column="1"/>
+                </StackLayout>
+                <ImageButton IsVisible="{Binding EsPersonalizado}" Source="botonAgregar.png" Grid.Row="10" HorizontalOptions="Start" Command="{Binding CerrarModalRegistroCommand}"/>
+               
+                <Label Text="Dirección" Grid.Row="11" VerticalOptions="End"/>
+                <Grid Grid.Row="12" Grid.ColumnSpan="2" ColumnDefinitions="*,Auto">
+                    <Entry Text="{Binding NombreUbicacion, Mode=TwoWay}"/>
+                    <ImageButton Source="botonBuscar.png" Grid.Column="1" Command="{Binding BuscarUbicacionCommand}"/>
                 </Grid>
-                <Label Text="Busca dirección o selecciona en el mapa" Grid.Row="12" Grid.ColumnSpan="2"/>
+                <Label Text="Busca dirección o selecciona en el mapa" Grid.Row="13" Grid.ColumnSpan="2"/>
 
 
-                <Frame BackgroundColor="Blue" Grid.Row="13" Grid.ColumnSpan="2"/>
-                <maps:Map x:Name="Map" Grid.Row="13" Grid.ColumnSpan="2" MapClicked="Map_MapClicked"/>
+                <Frame BackgroundColor="Blue" Grid.Row="14" Grid.ColumnSpan="2"/>
+                <MyMap:CustomMap x:Name="Map" Grid.Row="14" Grid.ColumnSpan="2" MapClicked="Map_MapClicked"/>
 
-                <ImageButton Source="botonPedirAhora.png" IsVisible="{Binding EsExpress}" VerticalOptions="Center" HorizontalOptions="Center" Margin="10" Grid.Row="14" Grid.ColumnSpan="2" Clicked="ImageButton_Clicked"/>
-                <ImageButton Source="botonSolicitar.png" IsVisible="{Binding EsPersonalizado}" VerticalOptions="Center" HorizontalOptions="Center" Margin="10" Grid.Row="14" Grid.ColumnSpan="2" Clicked="ImageButton_Clicked"/>
+                <ImageButton Source="botonPedirAhora.png" IsVisible="{Binding EsExpress}" VerticalOptions="Center" HorizontalOptions="Center" Margin="10" Grid.Row="15" Grid.ColumnSpan="2" Command="{Binding ModalRegistrarServiciosCommand}"/>
+                <ImageButton Source="botonSolicitar.png" IsVisible="{Binding EsPersonalizado}" VerticalOptions="Center" HorizontalOptions="Center" Margin="10" Grid.Row="15" Grid.ColumnSpan="2" Command="{Binding ModalRegistrarServiciosCommand}"/>
 
                 <Frame x:Name="serviciosListado" IsVisible="False" Grid.Row="2" Grid.RowSpan="13" VerticalOptions="Fill" HorizontalOptions="Start" CornerRadius="10" BackgroundColor="{StaticResource BackgroundColor}">
                     <CollectionView VerticalOptions="FillAndExpand" SelectionChanged="ServiciosListado_SelectionChanged" ItemsSource="{Binding Servicios}" SelectedItem="{Binding ServicioSeleccionado}" SelectionMode="Single">
@@ -117,29 +121,27 @@
         <BoxView Grid.RowSpan="3" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" Opacity=".6" BackgroundColor="CadetBlue" IsVisible="{Binding OpenModalRegistro}"/>
         <Grid x:DataType="vm:SolicitudDeServicioViewModel" Grid.RowSpan="3" Margin="10,15" IsVisible="{Binding OpenModalRegistro}">
             <Frame CornerRadius="15" BackgroundColor="White" Padding="15">
-                <Grid RowDefinitions="Auto, Auto, *, .1*">
+                <Grid RowDefinitions="Auto, Auto, *, .15*">
                     <Label Text="Agregar personal" FontSize="Medium" TextColor="DarkBlue" FontAttributes="Bold"/>
                     <Grid Grid.Row="1" RowDefinitions="Auto, Auto" ColumnDefinitions="*,Auto" Margin="0,0,0,15">
                         <Entry HorizontalOptions="FillAndExpand" VerticalOptions="Center"/>
                         <Label Grid.Row="1" Text="Buscar por partner, edad, perfil, ranking" Margin="10,0,0,0"/>
                         <ImageButton Source="botonBuscar" CornerRadius="10" VerticalOptions="Center" HorizontalOptions="Center" Aspect="Fill" Grid.RowSpan="2" Grid.Column="1"/>
                     </Grid>
-                    <CollectionView Grid.Row="2" VerticalOptions="FillAndExpand" ItemsSource="{Binding Socios}">
-                        <CollectionView.ItemTemplate>
-                            <DataTemplate x:DataType="modelSoli:Socios">
-                                <cv:PersonalItem Nombre="{Binding NOMBRE_COMPLETO}" NombreEmpresa="{Binding NO_SOCIO}" Especialidades="{Binding SERVICIOS}" Seleccionado="{Binding Seleccionado}" Grid.Row="2" VerticalOptions="Center" Margin="0,10"/>
-                            </DataTemplate>
-                        </CollectionView.ItemTemplate>
-                    </CollectionView>
+                    <ScrollView Grid.Row="2" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" Orientation="Vertical">
+                        <StackLayout x:Name="personales" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" Spacing="10" Orientation="Vertical">
+
+                        </StackLayout>
+                    </ScrollView>
                     <StackLayout Grid.Row="3" Orientation="Horizontal" HorizontalOptions="CenterAndExpand" Spacing="20" VerticalOptions="Fill">
                         <Button VerticalOptions="Center" HorizontalOptions="Fill"   Background="Gray" CornerRadius="10" Text="Cancelar" TextColor="White" FontSize="Body" Command="{Binding CerrarModalRegistroCommand}"/>
-                        <Button VerticalOptions="Center" HorizontalOptions="Fill" Background="IndianRed" CornerRadius="10" Text="Agregar" TextColor="White" FontSize="Body" Command="{Binding CerrarModalRegistroCommand}"/>
+                        <Button VerticalOptions="Center" HorizontalOptions="Fill" Background="IndianRed" CornerRadius="10" Text="Agregar" TextColor="White" FontSize="Body" Command="{Binding MostrarPersonalSeleccionadoCommand}"/>
                     </StackLayout>
                 </Grid>
             </Frame>
         </Grid>
         <!--Modal Servicio Solicitado-->
-        <Grid x:Name="modalServicioSolicitado" Grid.RowSpan="3" RowDefinitions=".3*,*,.3*" ColumnDefinitions=".05*,*,.05*" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" IsVisible="False">
+        <Grid IsVisible="{Binding ModalAgregarServicio}" Grid.RowSpan="3" RowDefinitions=".3*,*,.3*" ColumnDefinitions=".05*,*,.05*" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
             <Frame Grid.Row="1" Grid.Column="1" IsClippedToBounds="True" Padding="15,20" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" CornerRadius="10">
                 <Grid RowDefinitions="Auto,*,Auto">
                     <StackLayout Orientation="Horizontal">
@@ -158,11 +160,11 @@
                         <StackLayout Grid.Column="1" Margin="0,10">
                             <StackLayout>
                                 <Label Text="Costo" TextColor="LightGray"/>
-                                <Label Text="{Binding SolicitudServicio.TotalPago}"/>
+                                <Label Text="{Binding SolicitudServicio.TotalPago, Mode=TwoWay}"/>
                             </StackLayout>
                             <StackLayout Margin="0,10">
                                 <Label Text="Tiempo aproximado de llegada" TextColor="LightGray"/>
-                                <Label Text="{Binding SolicitudServicio.TiempoGenerarSolicitud}"/>
+                                <Label Text="{Binding SolicitudServicio.TiempoGenerarSolicitud, Mode=TwoWay}"/>
                             </StackLayout>
                             <StackLayout Margin="0,10" Orientation="Horizontal">
                                 <CheckBox Color="Gray" IsChecked="{Binding Terminos}"/>
@@ -171,11 +173,45 @@
                         </StackLayout>
                     </Grid>
                     <StackLayout Grid.Row="2" HorizontalOptions="CenterAndExpand" Orientation="Horizontal">
-                        <Button VerticalOptions="Center" HorizontalOptions="Fill" Padding="0"  Background="Gray" CornerRadius="10" Text="Cancelar" TextColor="White" FontSize="Body" Clicked="Button_Clicked"/>
+                        <Button VerticalOptions="Center" HorizontalOptions="Fill" Padding="0"  Background="Gray" CornerRadius="10" Text="Cancelar" TextColor="White" FontSize="Body" Command="{Binding OcultarModalServiciosCommand}"/>
                         <Button VerticalOptions="Center" HorizontalOptions="Fill" Padding="0" Background="IndianRed" CornerRadius="10" Text="Contratar" TextColor="White" FontSize="Body" Command="{Binding RegistrarSolicitudCommand}"/>
                     </StackLayout>
                 </Grid>
             </Frame>
         </Grid>
+        <!--Modal Informativo-->
+        <Frame BackgroundColor="Gray" Opacity="0.5" Grid.RowSpan="3" IsVisible="{Binding Modal}"/>
+        <Frame Grid.RowSpan="3" VerticalOptions="Center" HorizontalOptions="Center" IsVisible="{Binding Modal}" BackgroundColor="White" CornerRadius="20">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width=".05*"/>
+                    <ColumnDefinition />
+                    <ColumnDefinition Width=".05*"/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height=".7*"/>
+                </Grid.RowDefinitions>
+                <Label Grid.Column="1" Text="{Binding Mensaje, Mode=TwoWay}" TextColor="Gray" FontSize="{OnPlatform Android=Body, iOS=Small}" VerticalTextAlignment="Center" VerticalOptions="Center" HorizontalTextAlignment="Center" HorizontalOptions="Center"/>
+                <StackLayout  Grid.Row="1" Grid.Column="1">
+                    <Button CornerRadius="20" HorizontalOptions="CenterAndExpand" Padding="{OnPlatform Android='50,15', iOS='25,10'}" FontAttributes="None" Text="Aceptar" Command="{Binding OcultarModalCommand}" TextColor="White" FontSize="{OnPlatform Android=Body, iOS=Small}">
+                        <VisualStateManager.VisualStateGroups>
+                            <VisualStateGroup x:Name="Common">
+                                <VisualState x:Name="Disabled">
+                                    <VisualState.Setters>
+                                        <Setter Property="BackgroundColor" Value="#F4F1F1"/>
+                                    </VisualState.Setters>
+                                </VisualState>
+                                <VisualState x:Name="Normal">
+                                    <VisualState.Setters>
+                                        <Setter Property="BackgroundColor" Value="IndianRed"/>
+                                    </VisualState.Setters>
+                                </VisualState>
+                            </VisualStateGroup>
+                        </VisualStateManager.VisualStateGroups>
+                    </Button>
+                </StackLayout>
+            </Grid>
+        </Frame>
     </Grid>
 </ContentPage>

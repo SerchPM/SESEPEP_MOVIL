@@ -28,6 +28,12 @@ namespace MPS.Core.Lib.Helpers
         private string contraseña;
         public string Contraseña { get => GetValue<string>(); set => SetValue(ref contraseña, value); }
 
+        private string modeloDispositivo;
+        /// <summary>
+        /// Obtiene o asigna el modelo del dispositivo
+        /// </summary>
+        public string ModeloDispositivo { get => GetValue<string>(); set => SetValue(ref modeloDispositivo, value); }
+
         public LoginResponse LoginInfo { get; set; } = new LoginResponse();
 
         void SetValue<T>(ref T field, T newValue = default, [CallerMemberName] string propertyName = null)
@@ -38,5 +44,25 @@ namespace MPS.Core.Lib.Helpers
 
         T GetValue<T>([CallerMemberName] string propertyName = null) =>
             settingsStorage.GetValue<T>(propertyName);
+
+        private string estadoMonitorista;
+        /// <summary>
+        /// Obtiene o asigna el estado de la república donde se encuentra el cliente.
+        /// </summary>
+        public string Estado { get => GetValue<string>(); set => SetValue(ref estadoMonitorista, value); }
+
+        private string paisMonitorista;
+        /// <summary>
+        /// Obtiene o asigna el país donde se encuentra el cliente.
+        /// </summary>
+        public string Pais { get => GetValue<string>(); set => Set(ref paisMonitorista, value); }
+
+        private string mapServiceToken;
+        /// <summary>
+        /// Obtiene o asigna el token del mapa de Bing.
+        /// </summary>
+        public string MapServiceToken { get => GetValue<string>(mapServiceToken); set => Set(ref mapServiceToken, value); }
+
+  
     }
 }

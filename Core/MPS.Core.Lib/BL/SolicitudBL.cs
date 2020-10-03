@@ -1,8 +1,11 @@
 ﻿using MPS.Core.Lib.ApiClient;
+using MPS.Core.Lib.ApiSocio;
 using MPS.SharedAPIModel.Operaciones;
+using MPS.SharedAPIModel.Socios;
 using MPS.SharedAPIModel.Solicitud;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Net;
 using System.Text;
 using System.Threading.Tasks;
@@ -18,8 +21,8 @@ namespace MPS.Core.Lib.BL
         private OperacionesApi operacionesApi;
         public OperacionesApi OperacionesApi => operacionesApi ??= new OperacionesApi();
 
-        //private SociosApi sociosApi;
-        //public SociosApi SociosApi => sociosApi ??= new SociosApi();
+        private SociosApi sociosApi;
+        public SociosApi SociosApi => sociosApi ??= new SociosApi();
         #endregion
 
         #region Metodos
@@ -28,13 +31,13 @@ namespace MPS.Core.Lib.BL
         /// </summary>
         /// <param name="solicitud">Objeto con la informacion de la solicitud</param>
         /// <returns></returns>
-        public async Task<SolicitudResponse> RegistrarSolicitudAsync(Solicitud solicitud)
+        public async Task<(bool, string)> RegistrarSolicitudAsync(Solicitud solicitud)
         {
             var (statusCode, resultado) = await SolicitudApi.RegistrarSolicitudAsync(solicitud);
-            if (statusCode == HttpStatusCode.OK)
-                return resultado;
+            if (statusCode == HttpStatusCode.OK && !string.IsNullOrEmpty(resultado.ESTATUS) && resultado.ESTATUS.Equals("OK"))
+                return (true, "Solicitud registrada exitosamente");
             else
-                return new SolicitudResponse();
+                return (false, "Ocurrio un error al registar la solicitud, intente mas tarde");
         }
 
         /// <summary>
@@ -96,29 +99,69 @@ namespace MPS.Core.Lib.BL
                 return servicios;
         }
 
-        //public async Task<List<Socios>> ObtenerSociosAsync(Guid tipoServicio)
-        //{
-        //    var (statusCode, resultado) = await SociosApi.GetServiciosAsync(tipoServicio);
-        //    if (statusCode == HttpStatusCode.OK)
-        //    {
-        //        foreach (var personal in resultado)
-        //        {
-        //            var especialidadDiv = personal.SERVICIOS.Split('-');
-        //            personal.SERVICIOS = string.Empty;
-        //            int posicion = 0;
-        //            foreach (var especialidad in especialidadDiv)
-        //            {
-        //                if (posicion > 0)
-        //                    personal.SERVICIOS += $"-{especialidad}\n";
-        //                posicion++;
-        //            }
+        /// <summary>
+        /// Obtiene al personal que cuente con las carecteristicas del servico
+        /// </summary>
+        /// <param name="idTipoServicio">Identificador del servicio</param>
+        /// <param name="fecha">Fecha y hora del servicio solicitado</param>
+        /// <param name="horasSolicitadas">Horas que solicita de servicio el cliente</param>
+        /// <returns></returns>
+        public async Task<List<Socios>> ObtenerSociosCercanosAsync(double latitud, double longitud, Guid tipoServicio)
+        {
+            var (statusCode, resultado) = await SociosApi.GetSociosCercanosAsync(latitud, longitud, tipoServicio);
+            if (statusCode == HttpStatusCode.OK)
+            {
+                foreach (var personal in resultado)
+                {
+                    if (!string.IsNullOrEmpty(personal.SERVICIOS))
+                    {
+                        var especialidadDiv = personal.SERVICIOS.Split('-');
+                        personal.SERVICIOS = string.Empty;
+                        int posicion = 0;
+                        foreach (var especialidad in especialidadDiv)
+                        {
+                            if (posicion > 0)
+                                personal.SERVICIOS += $"-{especialidad}\n";
+                            posicion++;
+                        }
+                    }
+                }
+                return resultado;
+            }
+            else
+                return new List<Socios>();
+        }
 
-        //        }
-        //        return resultado;
-        //    }
-        //    else
-        //        return new List<Socios>();
-        //}
+        /// <summary>
+        /// Obtiene al personal que cuente con las carecteristicas del servico
+        /// </summary>
+        /// <param name="idTipoServicio">Identificador del servicio</param>
+        /// <param name="fecha">Fecha y hora del servicio solicitado</param>
+        /// <param name="horasSolicitadas">Horas que solicita de servicio el cliente</param>
+        /// <returns></returns>
+        public async Task<List<Socios>> ObtenerSociosAsync(Guid idTipoServicio, DateTime fecha, int horasSolicitadas)
+        {
+            var (statusCode, resultado) = await SociosApi.GetSociosAsync(idTipoServicio, fecha, horasSolicitadas);
+            if (statusCode == HttpStatusCode.OK)
+            {
+                foreach (var personal in resultado)
+                {
+                    var especialidadDiv = personal.SERVICIOS.Split('-');
+                    personal.SERVICIOS = string.Empty;
+                    int posicion = 0;
+                    foreach (var especialidad in especialidadDiv)
+                    {
+                        if (posicion > 0)
+                            personal.SERVICIOS += $"-{especialidad}\n";
+                        posicion++;
+                    }
+
+                }
+                return resultado;
+            }
+            else
+                return new List<Socios>();
+        }
         #endregion
     }
 }

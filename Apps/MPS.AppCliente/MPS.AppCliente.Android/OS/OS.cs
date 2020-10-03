@@ -14,6 +14,7 @@ using System.Threading.Tasks;
 using Xamarin.Essentials;
 using System.Net;
 using System.Net.Mail;
+using MPS.SharedAPIModel;
 
 namespace MPS.AppCliente.Droid.OS
 {
@@ -43,6 +44,33 @@ namespace MPS.AppCliente.Droid.OS
         public void ShowToast(string text)
         {
             (Toast.MakeText(Application.Context, text, ToastLength.Short)).Show();
+        }
+
+        public async Task<Geoposicion> ObtenerGeoposicion(bool precision)
+        {
+            try
+            {
+                var request = new GeolocationRequest(precision ? GeolocationAccuracy.Best : GeolocationAccuracy.Best, TimeSpan.FromSeconds(0));
+                var location = await Geolocation.GetLastKnownLocationAsync();
+                if (location != null)
+                {
+                    location = await Geolocation.GetLocationAsync(request);
+                    return new Geoposicion(location.Latitude, location.Longitude);
+                }
+                return new Geoposicion(0, 0);
+            }
+            catch (FeatureNotSupportedException)
+            {
+                return new Geoposicion(0, 0);
+            }
+            catch (PermissionException)
+            {
+                return new Geoposicion(0, 0);
+            }
+            catch (Exception)
+            {
+                return new Geoposicion(0, 0);
+            }
         }
     }
 }
