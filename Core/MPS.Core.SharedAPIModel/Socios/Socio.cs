@@ -1,11 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.IO;
 using System.Text;
 
 namespace MPS.SharedAPIModel.Socios
 {
-    public class Socios
+    public class Socio
     {
         public Guid GUID_SOCIO { get; set; }
         public string NO_SOCIO { get; set; }

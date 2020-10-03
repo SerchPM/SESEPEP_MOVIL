@@ -106,7 +106,7 @@ namespace MPS.Core.Lib.BL
         /// <param name="fecha">Fecha y hora del servicio solicitado</param>
         /// <param name="horasSolicitadas">Horas que solicita de servicio el cliente</param>
         /// <returns></returns>
-        public async Task<List<Socios>> ObtenerSociosCercanosAsync(double latitud, double longitud, Guid tipoServicio)
+        public async Task<List<Socio>> ObtenerSociosCercanosAsync(double latitud, double longitud, Guid tipoServicio)
         {
             var (statusCode, resultado) = await SociosApi.GetSociosCercanosAsync(latitud, longitud, tipoServicio);
             if (statusCode == HttpStatusCode.OK)
@@ -129,7 +129,7 @@ namespace MPS.Core.Lib.BL
                 return resultado;
             }
             else
-                return new List<Socios>();
+                return new List<Socio>();
         }
 
         /// <summary>
@@ -139,7 +139,7 @@ namespace MPS.Core.Lib.BL
         /// <param name="fecha">Fecha y hora del servicio solicitado</param>
         /// <param name="horasSolicitadas">Horas que solicita de servicio el cliente</param>
         /// <returns></returns>
-        public async Task<List<Socios>> ObtenerSociosAsync(Guid idTipoServicio, DateTime fecha, int horasSolicitadas)
+        public async Task<List<Socio>> ObtenerSociosAsync(Guid idTipoServicio, DateTime fecha, int horasSolicitadas)
         {
             var (statusCode, resultado) = await SociosApi.GetSociosAsync(idTipoServicio, fecha, horasSolicitadas);
             if (statusCode == HttpStatusCode.OK)
@@ -160,7 +160,7 @@ namespace MPS.Core.Lib.BL
                 return resultado;
             }
             else
-                return new List<Socios>();
+                return new List<Socio>();
         }
         #endregion
     }

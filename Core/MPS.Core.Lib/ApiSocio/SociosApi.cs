@@ -84,8 +84,8 @@ namespace MPS.Core.Lib.ApiSocio
         /// <param name="fecha">Fecha y hora del servicio solicitado</param>
         /// <param name="horasSolicitadas">Horas que solicita de servicio el cliente</param>
         /// <returns></returns>
-        public async Task<(HttpStatusCode StatusCode, List<Socios> catalogo)> GetSociosAsync(Guid idTipoServicio, DateTime fecha, int horasSolicitadas) =>
-         await CallPostAsync<List<Socios>>("ConsultaSociosDisponibles", ("P_GUID_TIPO_SOLICITUD", idTipoServicio), ("P_FECHAHORA_SOLICITUD", fecha.ToDateTimeFormat24H()), ("P_HORAS_SOLICITADAS", horasSolicitadas));
+        public async Task<(HttpStatusCode StatusCode, List<Socio> catalogo)> GetSociosAsync(Guid idTipoServicio, DateTime fecha, int horasSolicitadas) =>
+         await CallPostAsync<List<Socio>>("ConsultaSociosDisponibles", ("P_GUID_TIPO_SOLICITUD", idTipoServicio), ("P_FECHAHORA_SOLICITUD", fecha.ToDateTimeFormat24H()), ("P_HORAS_SOLICITADAS", horasSolicitadas));
 
         /// <summary>
         /// Obtiene al personal que cuente con las carecteristicas del servico y que esten mas sercanos a la ubicacion establecidas
@@ -94,8 +94,8 @@ namespace MPS.Core.Lib.ApiSocio
         /// <param name="longitud">Longitud de la ubicacion establecida</param>
         /// <param name="idTipoServicio">Identificador del servicio</param>
         /// <returns></returns>
-        public async Task<(HttpStatusCode StatusCode, List<Socios> catalogo)> GetSociosCercanosAsync(double latitud, double longitud, Guid idTipoServicio) =>
-        await CallPostAsync<List<Socios>>("ConsultaSociosCercanos", ("P_LATITUD", latitud), ("P_LONGITUD", longitud), ("P_GUID_TIPO_SOLICITUD", idTipoServicio));
+        public async Task<(HttpStatusCode StatusCode, List<Socio> catalogo)> GetSociosCercanosAsync(double latitud, double longitud, Guid idTipoServicio) =>
+        await CallPostAsync<List<Socio>>("ConsultaSociosCercanos", ("P_LATITUD", latitud), ("P_LONGITUD", longitud), ("P_GUID_TIPO_SOLICITUD", idTipoServicio));
 
     }
     #endregion

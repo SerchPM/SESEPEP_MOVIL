@@ -60,14 +60,14 @@ namespace MPS.Core.Lib.ViewModels.Clientes
         private TimeSpan hora = new TimeSpan(12, 0, 0);
         public TimeSpan Hora { get => hora; set => Set(ref hora, value); }
 
-        private List<Socios> socios = new List<Socios>();
-        public List<Socios> Socios { get => socios; set => Set(ref socios, value); }
+        private List<Socio> socios = new List<Socio>();
+        public List<Socio> Socios { get => socios; set => Set(ref socios, value); }
 
-        private List<Socios> sociosSeleccionado = new List<Socios>();
-        public List<Socios> SociosSeleccionado { get => sociosSeleccionado; set => Set(ref sociosSeleccionado, value); }
+        private List<Socio> sociosSeleccionado = new List<Socio>();
+        public List<Socio> SociosSeleccionado { get => sociosSeleccionado; set => Set(ref sociosSeleccionado, value); }
 
-        private Socios socioRemove = new Socios();
-        public Socios SocioRemove { get => socioRemove; set => Set(ref socioRemove, value); }
+        private Socio socioRemove = new Socio();
+        public Socio SocioRemove { get => socioRemove; set => Set(ref socioRemove, value); }
 
         private Geoposicion ubicacionSolicitud;
         public Geoposicion UbicacionSolicitud { get => ubicacionSolicitud; set => Set(ref ubicacionSolicitud, value); }
@@ -224,10 +224,10 @@ namespace MPS.Core.Lib.ViewModels.Clientes
             });
         }
 
-        private RelayCommand<Socios> seleccionarPersonalCommand = null;
-        public RelayCommand<Socios> SeleccionarPersonalCommand
+        private RelayCommand<Socio> seleccionarPersonalCommand = null;
+        public RelayCommand<Socio> SeleccionarPersonalCommand
         {
-            get => seleccionarPersonalCommand ??= new RelayCommand<Socios>((socio) =>
+            get => seleccionarPersonalCommand ??= new RelayCommand<Socio>((socio) =>
             {
                 if (SociosSeleccionado.Where(w => w.GUID_SOCIO.Equals(socio.GUID_SOCIO)).Count() > 0)
                     SociosSeleccionado.Remove(socio);
@@ -248,10 +248,10 @@ namespace MPS.Core.Lib.ViewModels.Clientes
             });
         }
 
-        private RelayCommand<Socios> removePersonalCommand = null;
-        public RelayCommand<Socios> RemovePersonalCommand
+        private RelayCommand<Socio> removePersonalCommand = null;
+        public RelayCommand<Socio> RemovePersonalCommand
         {
-            get => removePersonalCommand ??= new RelayCommand<Socios>((socio) =>
+            get => removePersonalCommand ??= new RelayCommand<Socio>((socio) =>
             {
                 SociosSeleccionado.Remove(socio);
                 if (SocioRemove != null)
