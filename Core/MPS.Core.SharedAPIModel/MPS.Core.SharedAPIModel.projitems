@@ -16,6 +16,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)Socios\DetalleSocio.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Socios\Respuesta.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Socios\Socio.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Solicitud\AsignarSolicitudResponse.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Solicitud\SolicitudResponse.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Socios\NuevoSocio.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Socios\SocioDisponible.cs" />

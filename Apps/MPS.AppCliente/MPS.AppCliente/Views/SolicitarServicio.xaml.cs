@@ -45,6 +45,7 @@ namespace MPS.AppCliente
                     case "CargarPersonal":
                         if (ViewModel.CargarPersonal)
                         {
+                            personales.Children.Clear();
                             foreach (var socio in ViewModel.Socios)
                             {
                                 PersonalItem personal = new PersonalItem
@@ -88,6 +89,7 @@ namespace MPS.AppCliente
                     case "CargarPersonalSeleccionado":
                         if (ViewModel.CargarPersonalSeleccionado)
                         {
+                            personalSelected.Children.Clear();
                             foreach (var socio in ViewModel.SociosSeleccionado)
                             {
                                 PersonalRemove personal = new PersonalRemove
@@ -143,12 +145,11 @@ namespace MPS.AppCliente
 
         protected override void OnAppearing()
         {
+            Map.MoveToRegion(MapSpan.FromCenterAndRadius(new Position(19.043455, -98.198686), Distance.FromMiles(0.2)));
             ViewModel.ObtenerComponentesCommand.Execute();
             if (string.IsNullOrEmpty(Settings.Current.ModeloDispositivo))
-            {
-                var r = DeviceInfo.Model;
                 Settings.Current.ModeloDispositivo = DeviceInfo.Model;
-            }
+            
         }
 
         private void SolicitarServicio_Tapped(object sender, EventArgs e) => IsVisibleListaServicios = !IsVisibleListaServicios;

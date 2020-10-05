@@ -83,9 +83,10 @@ namespace MPS.Core.Lib.ApiSocio
         /// <param name="idTipoServicio">Identificador del servicio</param>
         /// <param name="fecha">Fecha y hora del servicio solicitado</param>
         /// <param name="horasSolicitadas">Horas que solicita de servicio el cliente</param>
+        /// <param name="filtro">Filtro para una busqueda especifica de un socio(s)</param>
         /// <returns></returns>
-        public async Task<(HttpStatusCode StatusCode, List<Socio> catalogo)> GetSociosAsync(Guid idTipoServicio, DateTime fecha, int horasSolicitadas) =>
-         await CallPostAsync<List<Socio>>("ConsultaSociosDisponibles", ("P_GUID_TIPO_SOLICITUD", idTipoServicio), ("P_FECHAHORA_SOLICITUD", fecha.ToDateTimeFormat24H()), ("P_HORAS_SOLICITADAS", horasSolicitadas));
+        public async Task<(HttpStatusCode StatusCode, List<Socio> catalogo)> GetSociosAsync(Guid idTipoServicio, DateTime fecha, int horasSolicitadas, string filtro) =>
+         await CallPostAsync<List<Socio>>("ConsultaSociosDisponibles", ("P_GUID_TIPO_SOLICITUD", idTipoServicio), ("P_FECHAHORA_SOLICITUD", fecha.ToDateTimeFormat24H()), ("P_HORAS_SOLICITADAS", horasSolicitadas), ("P_PARAMETRO_BUSQUEDA", filtro));
 
         /// <summary>
         /// Obtiene al personal que cuente con las carecteristicas del servico y que esten mas sercanos a la ubicacion establecidas

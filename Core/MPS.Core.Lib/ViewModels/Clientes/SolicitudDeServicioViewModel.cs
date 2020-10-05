@@ -20,19 +20,22 @@ namespace MPS.Core.Lib.ViewModels.Clientes
         {
         }
         #endregion
+
         #region Eventos
         public event EventHandler<UbicacionActualEvent> ObteniendoUbicacion;
         #endregion
+
         #region Properties
         MapBL mapaBL;
         /// <summary>
         /// Obtiene o asigna la instancia de la clase de logica de operacione con Mapas.
         /// </summary>
-        MapBL MapaBL => mapaBL ?? (mapaBL = new MapBL());
+        MapBL MapaBL => mapaBL ??= new MapBL();
+
         private List<Servicio> servicios = new List<Servicio>();
         public List<Servicio> Servicios { get => servicios; set => Set(ref servicios, value); }
 
-        private Servicio servicioSeleccionado;
+        private Servicio servicioSeleccionado = new Servicio();
         public Servicio ServicioSeleccionado { get => servicioSeleccionado; set => Set(ref servicioSeleccionado, value); }
 
         private bool esExpress = true;
@@ -98,6 +101,9 @@ namespace MPS.Core.Lib.ViewModels.Clientes
 
         private bool modalAgregarServicio;
         public bool ModalAgregarServicio { get => modalAgregarServicio; set => Set(ref modalAgregarServicio, value); }
+
+        private string filtroSocios = string.Empty;
+        public string FiltroSocios { get => filtroSocios; set => Set(ref filtroSocios, value); }
         #endregion
 
         #region Commands
@@ -108,14 +114,26 @@ namespace MPS.Core.Lib.ViewModels.Clientes
             get => cambiarPrioridadCommand ??= new RelayCommand<string>((string p) =>
             {
                 EsExpress = p == "Express";
+                if (EsExpress)
+                {
+                    SociosSeleccionado.Clear();
+                    CargarPersonalSeleccionado = true;
+                }
             }, (string p) => true);
         }
 
         RelayCommand cerrarModalRegistroCommand = null;
         public RelayCommand CerrarModalRegistroCommand
         {
-            get =>cerrarModalRegistroCommand ??= new RelayCommand(() =>
+            get =>cerrarModalRegistroCommand ??= new RelayCommand(async () =>
             {
+                if(EsPersonalizado && SolicitudServicio.HorasSolicidatas == 0)
+                {
+                    Mensaje = "No a especificado las horas estimadas";
+                    Modal = true;
+                    return;
+                }
+                SeleccionarPersonal = true;
                 OpenModalRegistro = (OpenModalRegistro == true) ? false : true;
             });
         }
@@ -143,7 +161,6 @@ namespace MPS.Core.Lib.ViewModels.Clientes
                         Settings.Current.Pais = pais;
                         Settings.Current.Estado = estado;
                     }
-                    Socios = await bl.ObtenerSociosAsync(ServicioSeleccionado.Guid, Fecha, 8);
                     if (Socios.Count > 0)
                         CargarPersonal = true;
                 }
@@ -166,11 +183,16 @@ namespace MPS.Core.Lib.ViewModels.Clientes
                     SolicitudServicio.Movil = Settings.Current.ModeloDispositivo;
                     SolicitudServicio.Latitud = UbicacionSolicitud.Latitud.Value;
                     SolicitudServicio.Longitud = UbicacionSolicitud.Longitud.Value;
-                    var (result, mensaje) = await bl.RegistrarSolicitudAsync(SolicitudServicio);
+                    var (idSolicitud,(result, mensaje)) = await bl.RegistrarSolicitudAsync(SolicitudServicio);
                     if (result)
                     {
+                        foreach (var socio in SociosSeleccionado)
+                            await bl.AsignarSocioAsync(new SocioAsignado { IdSolicitud = idSolicitud, IdSocio = socio.GUID_SOCIO, Estatus = 0});
                         SolicitudServicio = new Solicitud() { TotalPago = 1000, TiempoGenerarSolicitud = 5 };
+                        SociosSeleccionado.Clear();
+                        CargarPersonalSeleccionado = true;
                         Mensaje = mensaje;
+                        Terminos = false;
                         Modal = true;
                     }
                     else
@@ -195,13 +217,21 @@ namespace MPS.Core.Lib.ViewModels.Clientes
         {
             get => modalRegistrarServiciosCommand ??= new RelayCommand(() =>
             {
-                if (SolicitudServicio.NoElementos > 0 && SolicitudServicio.HorasSolicidatas > 0)
-                    ModalAgregarServicio = true;
-                else
+                if (SolicitudServicio.NoElementos == 0 && SolicitudServicio.HorasSolicidatas == 0)
                 {
                     Mensaje = "Faltan campos por capturar,\nverifique informacion";
                     Modal = true;
+                    return;
                 }
+                if (EsPersonalizado)
+                    if (SociosSeleccionado.Count == 0)
+                    {
+                        Mensaje = "Debe de agregar al menos a un personal";
+                        Modal = true;
+                        return;
+                    }
+
+                ModalAgregarServicio = true;
             });
         }
 
@@ -222,6 +252,16 @@ namespace MPS.Core.Lib.ViewModels.Clientes
             {
                 ModalAgregarServicio = false;
             });
+        }
+
+        private RelayCommand buscarSociosCommand = null;
+        public RelayCommand BuscarSociosCommand
+        {
+            get => buscarSociosCommand ?? (buscarSociosCommand = new RelayCommand(async () =>
+            {
+                Socios = await bl.ObtenerSociosAsync(ServicioSeleccionado.Guid, Fecha, SolicitudServicio.HorasSolicidatas, FiltroSocios);
+                SeleccionarPersonal = true;
+            }));
         }
 
         private RelayCommand<Socio> seleccionarPersonalCommand = null;
@@ -245,6 +285,8 @@ namespace MPS.Core.Lib.ViewModels.Clientes
             {
                 CargarPersonalSeleccionado = true;
                 OpenModalRegistro = (OpenModalRegistro == true) ? false : true;
+                Socios.Clear();
+                CargarPersonal = true;
             });
         }
 
@@ -275,7 +317,6 @@ namespace MPS.Core.Lib.ViewModels.Clientes
                     };
                     ObteniendoUbicacion(this, args);
                     UbicacionSolicitud = new Geoposicion(geoposicion.Latitud, geoposicion.Longitud);
-                    Socios = await bl.ObtenerSociosCercanosAsync(geoposicion.Latitud.Value, geoposicion.Longitud.Value, ServicioSeleccionado.Guid);
                 }
             });
         }
@@ -297,7 +338,6 @@ namespace MPS.Core.Lib.ViewModels.Clientes
                         };
                         ObteniendoUbicacion(this, args);
                         UbicacionSolicitud = new Geoposicion(geoposicion.Latitud, geoposicion.Longitud);
-                        Socios = await bl.ObtenerSociosCercanosAsync(geoposicion.Latitud.Value, geoposicion.Longitud.Value, ServicioSeleccionado.Guid);
                     }
                 }
             });

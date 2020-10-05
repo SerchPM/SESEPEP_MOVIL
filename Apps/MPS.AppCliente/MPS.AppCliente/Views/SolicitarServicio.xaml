@@ -39,7 +39,7 @@
     <Grid RowDefinitions="Auto,*,Auto">
         <cv:Header/>
         <ScrollView Grid.Row="1">
-            <Grid x:DataType="vm:SolicitudDeServicioViewModel"  RowDefinitions="Auto,Auto,Auto,Auto,Auto,Auto,Auto,Auto,Auto,Auto,Auto,Auto,Auto,Auto,5.5*,Auto" Padding="10">
+            <Grid x:DataType="vm:SolicitudDeServicioViewModel"  RowDefinitions="Auto,Auto,Auto,Auto,Auto,Auto,Auto,Auto,Auto,Auto,Auto,Auto,Auto,Auto, *,Auto" Padding="10">
 
                 <Label Text="Solicitar servicio"/>
                 <Frame Grid.Row="1" BackgroundColor="{StaticResource AccentColor}" CornerRadius="20" Padding="10" HorizontalOptions="StartAndExpand">
@@ -86,7 +86,7 @@
 
 
                 <Frame BackgroundColor="Blue" Grid.Row="14" Grid.ColumnSpan="2"/>
-                <MyMap:CustomMap x:Name="Map" Grid.Row="14" Grid.ColumnSpan="2" MapClicked="Map_MapClicked"/>
+                <MyMap:CustomMap x:Name="Map" Grid.Row="14" Grid.ColumnSpan="2" MapClicked="Map_MapClicked" HeightRequest="300"/>
 
                 <ImageButton Source="botonPedirAhora.png" IsVisible="{Binding EsExpress}" VerticalOptions="Center" HorizontalOptions="Center" Margin="10" Grid.Row="15" Grid.ColumnSpan="2" Command="{Binding ModalRegistrarServiciosCommand}"/>
                 <ImageButton Source="botonSolicitar.png" IsVisible="{Binding EsPersonalizado}" VerticalOptions="Center" HorizontalOptions="Center" Margin="10" Grid.Row="15" Grid.ColumnSpan="2" Command="{Binding ModalRegistrarServiciosCommand}"/>
@@ -121,12 +121,12 @@
         <BoxView Grid.RowSpan="3" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" Opacity=".6" BackgroundColor="CadetBlue" IsVisible="{Binding OpenModalRegistro}"/>
         <Grid x:DataType="vm:SolicitudDeServicioViewModel" Grid.RowSpan="3" Margin="10,15" IsVisible="{Binding OpenModalRegistro}">
             <Frame CornerRadius="15" BackgroundColor="White" Padding="15">
-                <Grid RowDefinitions="Auto, Auto, *, .15*">
+                <Grid RowDefinitions="Auto, Auto, *, Auto">
                     <Label Text="Agregar personal" FontSize="Medium" TextColor="DarkBlue" FontAttributes="Bold"/>
                     <Grid Grid.Row="1" RowDefinitions="Auto, Auto" ColumnDefinitions="*,Auto" Margin="0,0,0,15">
-                        <Entry HorizontalOptions="FillAndExpand" VerticalOptions="Center"/>
+                        <Entry HorizontalOptions="FillAndExpand" VerticalOptions="Center" Text="{Binding FiltroSocios, Mode=TwoWay}"/>
                         <Label Grid.Row="1" Text="Buscar por partner, edad, perfil, ranking" Margin="10,0,0,0"/>
-                        <ImageButton Source="botonBuscar" CornerRadius="10" VerticalOptions="Center" HorizontalOptions="Center" Aspect="Fill" Grid.RowSpan="2" Grid.Column="1"/>
+                        <ImageButton Source="botonBuscar" CornerRadius="10" VerticalOptions="Center" HorizontalOptions="Center" Aspect="Fill" Grid.RowSpan="2" Grid.Column="1" Command="{Binding BuscarSociosCommand}"/>
                     </Grid>
                     <ScrollView Grid.Row="2" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" Orientation="Vertical">
                         <StackLayout x:Name="personales" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" Spacing="10" Orientation="Vertical">
@@ -134,13 +134,14 @@
                         </StackLayout>
                     </ScrollView>
                     <StackLayout Grid.Row="3" Orientation="Horizontal" HorizontalOptions="CenterAndExpand" Spacing="20" VerticalOptions="Fill">
-                        <Button VerticalOptions="Center" HorizontalOptions="Fill"   Background="Gray" CornerRadius="10" Text="Cancelar" TextColor="White" FontSize="Body" Command="{Binding CerrarModalRegistroCommand}"/>
-                        <Button VerticalOptions="Center" HorizontalOptions="Fill" Background="IndianRed" CornerRadius="10" Text="Agregar" TextColor="White" FontSize="Body" Command="{Binding MostrarPersonalSeleccionadoCommand}"/>
+                        <Button Command="{Binding CerrarModalRegistroCommand}" Text="Cancelar" HorizontalOptions="Start" Padding="30,0" TextColor="White" Background="Gray"/>
+                        <Button Command="{Binding MostrarPersonalSeleccionadoCommand}" Text="Agregar" HorizontalOptions="End" Padding="30,0" TextColor="White" Background="IndianRed"/>
                     </StackLayout>
                 </Grid>
             </Frame>
         </Grid>
         <!--Modal Servicio Solicitado-->
+        <Frame BackgroundColor="Gray" Opacity="0.5" Grid.RowSpan="3" IsVisible="{Binding ModalAgregarServicio}"/>
         <Grid IsVisible="{Binding ModalAgregarServicio}" Grid.RowSpan="3" RowDefinitions=".3*,*,.3*" ColumnDefinitions=".05*,*,.05*" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
             <Frame Grid.Row="1" Grid.Column="1" IsClippedToBounds="True" Padding="15,20" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" CornerRadius="10">
                 <Grid RowDefinitions="Auto,*,Auto">
@@ -149,7 +150,8 @@
                         <StackLayout HorizontalOptions="Start">
                             <Label Text="Servicio solicitado" FontSize="Medium" TextColor="LightGray" Margin="10,0,0,0"/>
                             <Label Text="Seguridad Intramuros" FontSize="Medium" TextColor="IndianRed" Margin="10,0,0,0"/>
-                            <Image Source="servicioExpressActivo.png" Margin="0,0,0,0"/>
+                            <Image IsVisible="{Binding EsExpress}" Source="servicioExpressActivo.png" Margin="0,0,0,0"/>
+                            <Image IsVisible="{Binding EsPersonalizado}" Source="servicioPersonalizadoActivo.png" Margin="0,0,0,0"/>
                         </StackLayout>
                     </StackLayout>
                     <Grid Grid.Row="1">
@@ -167,14 +169,14 @@
                                 <Label Text="{Binding SolicitudServicio.TiempoGenerarSolicitud, Mode=TwoWay}"/>
                             </StackLayout>
                             <StackLayout Margin="0,10" Orientation="Horizontal">
-                                <CheckBox Color="Gray" IsChecked="{Binding Terminos}"/>
+                                <CheckBox Color="Gray" IsChecked="{Binding Terminos, Mode=TwoWay}"/>
                                 <Label Text="He leído y estoy de acuerdo con los términos y condiciones" LineBreakMode="WordWrap"/>
                             </StackLayout>
                         </StackLayout>
                     </Grid>
                     <StackLayout Grid.Row="2" HorizontalOptions="CenterAndExpand" Orientation="Horizontal">
-                        <Button VerticalOptions="Center" HorizontalOptions="Fill" Padding="0"  Background="Gray" CornerRadius="10" Text="Cancelar" TextColor="White" FontSize="Body" Command="{Binding OcultarModalServiciosCommand}"/>
-                        <Button VerticalOptions="Center" HorizontalOptions="Fill" Padding="0" Background="IndianRed" CornerRadius="10" Text="Contratar" TextColor="White" FontSize="Body" Command="{Binding RegistrarSolicitudCommand}"/>
+                        <Button Command="{Binding OcultarModalServiciosCommand}" Text="Cancelar" HorizontalOptions="Start" Padding="30,0" TextColor="White" Background="Gray"/>
+                        <Button Command="{Binding RegistrarSolicitudCommand}" Text="Contratar" HorizontalOptions="End" Padding="30,0" TextColor="White" Background="IndianRed"/>
                     </StackLayout>
                 </Grid>
             </Frame>

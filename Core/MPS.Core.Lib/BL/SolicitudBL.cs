@@ -31,13 +31,13 @@ namespace MPS.Core.Lib.BL
         /// </summary>
         /// <param name="solicitud">Objeto con la informacion de la solicitud</param>
         /// <returns></returns>
-        public async Task<(bool, string)> RegistrarSolicitudAsync(Solicitud solicitud)
+        public async Task<(Guid ,(bool, string))> RegistrarSolicitudAsync(Solicitud solicitud)
         {
             var (statusCode, resultado) = await SolicitudApi.RegistrarSolicitudAsync(solicitud);
             if (statusCode == HttpStatusCode.OK && !string.IsNullOrEmpty(resultado.ESTATUS) && resultado.ESTATUS.Equals("OK"))
-                return (true, "Solicitud registrada exitosamente");
+                return (resultado.GUID, (true, "Solicitud registrada exitosamente"));
             else
-                return (false, "Ocurrio un error al registar la solicitud, intente mas tarde");
+                return (Guid.Empty, (false, "Ocurrio un error al registar la solicitud, intente mas tarde"));
         }
 
         /// <summary>
@@ -138,29 +138,46 @@ namespace MPS.Core.Lib.BL
         /// <param name="idTipoServicio">Identificador del servicio</param>
         /// <param name="fecha">Fecha y hora del servicio solicitado</param>
         /// <param name="horasSolicitadas">Horas que solicita de servicio el cliente</param>
+        /// <param name="filtro">Filtro para una busqueda especifica de un socio(s)</param>
         /// <returns></returns>
-        public async Task<List<Socio>> ObtenerSociosAsync(Guid idTipoServicio, DateTime fecha, int horasSolicitadas)
+        public async Task<List<Socio>> ObtenerSociosAsync(Guid idTipoServicio, DateTime fecha, int horasSolicitadas, string filtro)
         {
-            var (statusCode, resultado) = await SociosApi.GetSociosAsync(idTipoServicio, fecha, horasSolicitadas);
+            var (statusCode, resultado) = await SociosApi.GetSociosAsync(idTipoServicio, fecha, horasSolicitadas, filtro);
             if (statusCode == HttpStatusCode.OK)
             {
                 foreach (var personal in resultado)
                 {
-                    var especialidadDiv = personal.SERVICIOS.Split('-');
-                    personal.SERVICIOS = string.Empty;
-                    int posicion = 0;
-                    foreach (var especialidad in especialidadDiv)
+                    if (!string.IsNullOrEmpty(personal.SERVICIOS))
                     {
-                        if (posicion > 0)
-                            personal.SERVICIOS += $"-{especialidad}\n";
-                        posicion++;
+                        var especialidadDiv = personal.SERVICIOS.Split('-');
+                        personal.SERVICIOS = string.Empty;
+                        int posicion = 0;
+                        foreach (var especialidad in especialidadDiv)
+                        {
+                            if (posicion > 0)
+                                personal.SERVICIOS += $"-{especialidad}\n";
+                            posicion++;
+                        }
                     }
-
                 }
                 return resultado;
             }
             else
                 return new List<Socio>();
+        }
+       
+        /// <summary>
+        /// Registra a un socio que fue solicitado para un nuevo servicio personalizado
+        /// </summary>
+        /// <param name="socioAsignado">Objero con la informacion del socio y solicitud</param>
+        /// <returns></returns>
+        public async Task<bool> AsignarSocioAsync(SocioAsignado socioAsignado)
+        {
+            var (statusCode, resultado) = await SolicitudApi.AsignarSocioAsync(socioAsignado);
+            if (statusCode == HttpStatusCode.OK && !string.IsNullOrEmpty(resultado.ESTATUS) && resultado.ESTATUS.Equals("OK"))
+                return true;
+            else
+                return false;
         }
         #endregion
     }

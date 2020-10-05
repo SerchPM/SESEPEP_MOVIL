@@ -47,6 +47,14 @@ namespace MPS.Core.Lib.ApiClient
                 ("P_NO_ELEMENTOS", solicitud.NoElementos.ToString()));
             return res;
         }
+
+        /// <summary>
+        /// Registra a un socio que fue solicitado para un nuevo servicio personalizado
+        /// </summary>
+        /// <param name="socioAsignado">Objero con la informacion del socio y solicitud</param>
+        /// <returns></returns>
+        public async Task<(HttpStatusCode StatusCode, AsignarSolicitudResponse asignarSolicitudInfo)> AsignarSocioAsync(SocioAsignado socioAsignado) =>
+            await CallPostAsync<AsignarSolicitudResponse>("ActualizarSolicitudEstatus", ("P_GUID_SOLICITUD", socioAsignado.IdSolicitud), ("P_ESTATUS", socioAsignado.Estatus), ("P_GUID_SOCIO", socioAsignado.IdSocio));
         #endregion
     }
 }
