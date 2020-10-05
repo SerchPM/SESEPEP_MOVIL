@@ -11,6 +11,5 @@ namespace MPS.SharedAPIModel.Seguridad
         public string GUID { get; set; }
         public string FOLIO { get; set; }
         public DateTime FECHA { get; set; }
-        public object ATRIBUTO1 { get; set; }
     }
 }

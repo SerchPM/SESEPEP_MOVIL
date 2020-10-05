@@ -60,22 +60,26 @@ namespace MPS.Core.Lib.ApiSocio
                 ("P_APELLIDO_1", info.APELLIDO_1),
                 ("P_APELLIDO_2", info.APELLIDO_2),
                 ("P_FECHA_NACIMIENTO", info.FECHA_NACIMIENTO),
-                ("P_SEXO", info.GUID_SEXO.ToString()),
+                ("P_SEXO", info.GUID_SEXO),
                 ("P_TEL_NUMERO", info.TEL_NUMERO));
+        //await CallPostAsync<Respuesta>("ActualizaInfoSocio",
+        //        ("P_GUID_SOCIO", socio),
+        //        ("P_NOMBRE", info.NOMBRE),
+        //        ("P_APELLIDO_1", info.APELLIDO_1),
+        //        ("P_APELLIDO_2", info.APELLIDO_2),
+        //        ("P_FECHA_NACIMIENTO", info.FECHA_NACIMIENTO),
+        //        ("P_SEXO", info.GUID_SEXO),
+        //        ("P_TEL_NUMERO", info.TEL_NUMERO));
             return res;
         }
 
-        /// <summary>
-        /// Devuelve los detalles de un socio en particular
-        /// </summary>
-        /// <param name="Id"></param>
-        /// <returns></returns>
-        public async Task<(HttpStatusCode StatusCode, DetalleSocio DetalleSocio)> DetalleSocioAsync(string Id) 
-        {
-            var res = await CallFormUrlEncoded<DetalleSocio>("ConsultaSocioDetalle", HttpMethod.Post,
-                ("P_GUID_SOCIO", Id));
-            return res;
-        }
+    /// <summary>
+    /// Devuelve los detalles de un socio en particular
+    /// </summary>
+    /// <param name="Id"></param>
+    /// <returns></returns>
+    public async Task<(HttpStatusCode StatusCode, DetalleSocio DetalleSocio)> DetalleSocioAsync(string Id) =>
+            await CallPostAsync<DetalleSocio>("ConsultaSocioDetalle", ("P_GUID_SOCIO", Id));
     }
     #endregion
 }

@@ -8,6 +8,7 @@ using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Text;
+using Xamarin.Forms;
 //using Xamarin.Forms;
 
 namespace MPS.Core.Lib.ViewModels.Socios
@@ -17,7 +18,18 @@ namespace MPS.Core.Lib.ViewModels.Socios
         public DetalleSocioViewModel()
         {
             Id = Settings.Current.LoginInfo.Usr.Id;
+            NoCliente = "";
+            Ranking = "0.0";
+            Sexo = "";
+            Fecha_Nacimiento = DateTime.Now;
         }
+        string mensaje;
+        public string Mensaje { get => mensaje; set { Set(ref mensaje, value); } }
+        bool popUp;
+        public bool PopUP { get => popUp; set { Set(ref popUp, value); } }
+
+        DateTime fecha_Nacimiento;
+        public DateTime Fecha_Nacimiento { get => fecha_Nacimiento; set { Set(ref fecha_Nacimiento, value); } }
 
         string id;
         public string Id { get => id; set { Set(ref id, value); } }
@@ -34,16 +46,38 @@ namespace MPS.Core.Lib.ViewModels.Socios
         string noCliente;
         public string NoCliente { get => noCliente; set { Set(ref noCliente, value); } }
 
+        string sexo;
+        public string Sexo { get => sexo; set { Set(ref sexo, value); } }
+
         RelayCommand obtenerDetalleSocioCommand = null;
         public RelayCommand ObtenerDetalleSocioCommand
         {
             get => obtenerDetalleSocioCommand ?? (obtenerDetalleSocioCommand = new RelayCommand(async () =>
             {
                 var (exito, detalles) = await bl.DetalleSocio(Id);
-                NoCliente = detalles.NO_CLIENTE.ToString()??"";
-                Ranking = detalles.RANKING.ToString();
-                DetallesSocio = detalles;
-                NombreCompleto = $"{DetallesSocio.NOMBRE}{DetallesSocio.APELLIDO_1}{DetallesSocio.APELLIDO_2}";
+                if (detalles == null)
+                {
+                    DetallesSocio = new DetalleSocio();
+                }
+                else
+                {
+                    DetallesSocio = detalles;
+                }
+                switch (detalles.GUID_SEXO)
+                {
+                    case "3cf6a15f-8692-4fe2-bb53-6b8d33ff4fce": Sexo = "Mujer/Femenino"; 
+                        break;
+                    case "ff32e57f-e1b7-4f03-a75a-c6af65f47e88": Sexo = "Hombre/Masculino";
+                        break;
+                    default: break;
+                }
+                if (!(string.IsNullOrEmpty(detalles.FECHA_NACIMIENTO)))
+                    Fecha_Nacimiento = Convert.ToDateTime(detalles.FECHA_NACIMIENTO);
+                if (!(string.IsNullOrEmpty(detalles.NO_CLIENTE)))
+                    NoCliente = detalles.NO_CLIENTE;
+                if (detalles.RANKING != null)
+                    Ranking = detalles.RANKING.ToString("0.0");
+                NombreCompleto = $"{DetallesSocio.NOMBRE}{" "}{DetallesSocio.APELLIDO_1}{" "}{DetallesSocio.APELLIDO_2}";
             }));
         }
 
@@ -52,7 +86,27 @@ namespace MPS.Core.Lib.ViewModels.Socios
         {
             get => actualizaInfoCommand ?? (actualizaInfoCommand = new RelayCommand<DetalleSocio>(async (DetalleSocio info) =>
             {
+                switch (Sexo)
+                {
+                    case "Mujer/Femenino":
+                        info.GUID_SEXO = "3cf6a15f-8692-4fe2-bb53-6b8d33ff4fce";
+                        break;
+                    case "Hombre/Masculino":
+                        info.GUID_SEXO = "ff32e57f-e1b7-4f03-a75a-c6af65f47e88";
+                        break;
+                    default: break;
+                }
                 var (exito, respuesta) = await bl.ActualizaInfoSocio(Id, info);
+                if (exito)
+                {
+                    Mensaje = "Registro exitoso.";
+                    PopUP = true;
+                }
+                else
+                {
+                    Mensaje = "Problema interno del servidor.";
+                    PopUP = false;
+                }
             }));
         }
     }
