@@ -27,12 +27,12 @@ namespace MPS.SharedAPIModel.Socios
         public string REFERENCIA { get; set; }
         public string IMAGEN { get; set; }
         public string TIPO_IMAGEN { get; set; }
-        public object RANKING { get; set; }
+        public float RANKING { get; set; }
         public object ULTIMA_SOLICITUD { get; set; }
-        public object NO_CLIENTE { get; set; }
+        public string NO_CLIENTE { get; set; }
         public object FECHA_INICIO_SOLICITUD { get; set; }
         public object FECHA_FIN_SOLICITUD { get; set; }
         public object ESTATUS_SOLICITUD { get; set; }
-        public Guid GUID_SEXO { get; set; }
+        public string GUID_SEXO { get; set; }
     }
 }
