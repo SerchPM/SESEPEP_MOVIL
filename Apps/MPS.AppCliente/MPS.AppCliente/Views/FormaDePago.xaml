@@ -2,7 +2,12 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:cv="clr-namespace:MPS.AppCliente.Views.CV"
-             x:Class="MPS.AppCliente.Views.Views.FormaDePago">
+             x:Class="MPS.AppCliente.Views.Views.FormaDePago"
+             xmlns:vm="clr-namespace:MPS.Core.Lib.ViewModels.Clientes">
+    
+    <ContentPage.BindingContext>
+        <vm:FormaDePagoViewModel x:Name="ViewModel"/>
+    </ContentPage.BindingContext>
     <ContentPage.Content>
         <Grid RowDefinitions="Auto,*,Auto">
             <cv:Header ActivePage="FormaDePago"/>
@@ -18,35 +23,76 @@
                         </DataTemplate>
                     </CollectionView.ItemTemplate>
                 </CollectionView>
-                <Button Grid.Row="2" VerticalOptions="Center" HorizontalOptions="Center" CornerRadius="10" BackgroundColor="IndianRed" FontSize="Small" Padding="10,0" Text="Nueva Tarjeta" Clicked="Button_Clicked"/>
+                <Button Grid.Row="2" VerticalOptions="Center" HorizontalOptions="Center" CornerRadius="10" BackgroundColor="IndianRed" FontSize="Small" Padding="10,0" Text="Nueva Tarjeta" Command="{Binding AgregarTarjetaCommand}"/>
             </Grid>
             <cv:StatusBar Grid.Row="2" IsLinksVisible="False"/>
             <!--Modal Agregar Forma de Pago-->
-            <Grid x:Name="modalFormPay" Grid.RowSpan="3" RowDefinitions=".3*,*,.3*" ColumnDefinitions=".1*,*,.1*" IsVisible="False">
+            <Frame VerticalOptions="FillAndExpand" Grid.RowSpan="3" HorizontalOptions="FillAndExpand" BackgroundColor="Gray" Opacity=".5" IsVisible="{Binding ModalRegistro}"/>
+            <Grid x:Name="modalFormPay" Grid.RowSpan="3" RowDefinitions=".3*,*,.3*" ColumnDefinitions=".1*,*,.1*" IsVisible="{Binding ModalRegistro}">
                 <Frame Grid.Column="1" Grid.Row="1" CornerRadius="10" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" BackgroundColor="White" IsClippedToBounds="True">
                     <Grid RowDefinitions="Auto, *, Auto" Padding="5">
                         <Label Text="Agregar forma de pago" Margin="0,0,0,0" TextColor="IndianRed" FontAttributes="Bold" FontSize="Medium"/>
                         <ScrollView Grid.Row="1">
-                            <StackLayout VerticalOptions="Start">
-                                <cv:EntryView/>
-                                <Grid ColumnDefinitions="*,*">
-                                    <cv:EntryView/>
-                                    <cv:EntryView Grid.Column="1"/>
+                            <Grid RowDefinitions="Auto, Auto, Auto, Auto, Auto, Auto">
+                                <Entry Keyboard="Numeric" MaxLength="16" Text="{Binding Tarjeta.NoTarjeta, Mode=TwoWay}"/>
+                                <Label Grid.Row="1" Text="No. Cuenta/Tarjeta" VerticalOptions="Start"/>
+                                <Grid Grid.Row="2" RowDefinitions="Auto, Auto" ColumnDefinitions="*,*">
+                                    <Picker VerticalOptions="Start" ItemsSource="{Binding Meses}" SelectedItem="{Binding MesSelected, Mode=TwoWay, UpdateSourceEventName=PropertyChanged}"/>
+                                    <Label Grid.Row="1" Text="Exp. Mes" VerticalOptions="Start"/>
+                                    <Picker  Grid.Column="1" VerticalOptions="Start" ItemsSource="{Binding Años}" SelectedItem="{Binding AñoSelected, Mode=TwoWay, UpdateSourceEventName=PropertyChanged}"/>
+                                    <Label Grid.Column="1" Grid.Row="1" Text="Exp. Año" VerticalOptions="Start"/>
                                 </Grid>
-                                <cv:EntryView/>
-                                <Grid RowDefinitions="*,*" VerticalOptions="Center">
-                                    <cv:EntryView/>
-                                    <cv:EntryView Grid.Column="1"/>
+                                <Picker  Grid.Row="3" VerticalOptions="Start" ItemsSource="{Binding Tarjetas}" SelectedItem="{Binding Tarjetaselected, Mode=TwoWay, UpdateSourceEventName=PropertyChanged}"/>
+                                <Label Grid.Row="4" Text="Marca" VerticalOptions="Start"/>
+                                <Grid Grid.Row="5" RowDefinitions="Auto, Auto" ColumnDefinitions="*,*" VerticalOptions="Center">
+                                    <Entry Keyboard="Numeric" IsPassword="True" MaxLength="3" Text="{Binding Tarjeta.CVV, Mode=TwoWay}"/>
+                                    <Label Grid.Row="1" Text="CVV" VerticalOptions="Start"/>
+                                    <Entry Grid.Column="1"/>
+                                    <Label Grid.Column="1" Grid.Row="1" Text="Orden" VerticalOptions="Start"/>
                                 </Grid>
-                            </StackLayout>
+                            </Grid>
                         </ScrollView>
                         <Grid Grid.Row="2" ColumnDefinitions="*,*" VerticalOptions="Center">
-                            <Button VerticalOptions="Center" HorizontalOptions="Center" CornerRadius="10" BackgroundColor="LightGray" FontSize="Small" Padding="10,0" Text="Cancelar" Clicked="Button_Clicked_1"/>
-                            <Button Grid.Column="1" VerticalOptions="Center" HorizontalOptions="Center" CornerRadius="10" BackgroundColor="IndianRed" FontSize="Small" Padding="10,0" Text="Guardar" Clicked="Button_Clicked_1"/>
+                            <Button VerticalOptions="Center" HorizontalOptions="Center" CornerRadius="10" BackgroundColor="LightGray" FontSize="Small" Padding="10,0" Text="Cancelar" Command="{Binding OcultarModalRegistroCommand}"/>
+                            <Button Grid.Column="1" VerticalOptions="Center" HorizontalOptions="Center" CornerRadius="10" BackgroundColor="IndianRed" FontSize="Small" Padding="10,0" Text="Guardar" Command="{Binding RegistrarFormaDePagoCommand}"/>
                         </Grid>
                     </Grid>
                 </Frame>
             </Grid>
+            <!--Modal Informativo-->
+            <Frame BackgroundColor="Gray" Opacity="0.5" Grid.RowSpan="3" IsVisible="{Binding Modal}"/>
+            <Frame Grid.RowSpan="3" VerticalOptions="Center" HorizontalOptions="Center" IsVisible="{Binding Modal}" BackgroundColor="White" CornerRadius="20">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width=".05*"/>
+                        <ColumnDefinition />
+                        <ColumnDefinition Width=".05*"/>
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height=".7*"/>
+                    </Grid.RowDefinitions>
+                    <Label Grid.Column="1" Text="{Binding Mensaje, Mode=TwoWay}" TextColor="Gray" FontSize="{OnPlatform Android=Body, iOS=Small}" VerticalTextAlignment="Center" VerticalOptions="Center" HorizontalTextAlignment="Center" HorizontalOptions="Center"/>
+                    <StackLayout  Grid.Row="1" Grid.Column="1">
+                        <Button CornerRadius="20" HorizontalOptions="CenterAndExpand" Padding="{OnPlatform Android='50,15', iOS='25,10'}" FontAttributes="None" Text="Aceptar" Command="{Binding OcultarModalCommand}" TextColor="White" FontSize="{OnPlatform Android=Body, iOS=Small}">
+                            <VisualStateManager.VisualStateGroups>
+                                <VisualStateGroup x:Name="Common">
+                                    <VisualState x:Name="Disabled">
+                                        <VisualState.Setters>
+                                            <Setter Property="BackgroundColor" Value="#F4F1F1"/>
+                                        </VisualState.Setters>
+                                    </VisualState>
+                                    <VisualState x:Name="Normal">
+                                        <VisualState.Setters>
+                                            <Setter Property="BackgroundColor" Value="IndianRed"/>
+                                        </VisualState.Setters>
+                                    </VisualState>
+                                </VisualStateGroup>
+                            </VisualStateManager.VisualStateGroups>
+                        </Button>
+                    </StackLayout>
+                </Grid>
+            </Frame>
         </Grid>  
     </ContentPage.Content>
 </ContentPage>

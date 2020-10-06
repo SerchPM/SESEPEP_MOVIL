@@ -1,4 +1,5 @@
 ﻿using MPS.Core.Lib.Helpers;
+using MPS.SharedAPIModel.Clientes;
 using MPS.SharedAPIModel.Operaciones;
 using MPS.SharedAPIModel.Seguridad;
 using Sysne.Core.ApiClient;
@@ -25,6 +26,13 @@ namespace MPS.Core.Lib.ApiClient
         /// <returns></returns>
         public async Task<(HttpStatusCode StatusCode, List<Servicio> catalogo)> GetServiciosAsync() =>
             await CallPostAsync<List<Servicio>>("ConsultaUnCatalogo", ("P_CATALOGO", "CAT_TIPO_SOLICITUD"));
+
+        /// <summary>
+        /// Obtiene los diferentes tipos tarjetas disponibles
+        /// </summary>
+        /// <returns></returns>
+        public async Task<(HttpStatusCode StatusCode, List<Tarjeta> catalogo)> GetTarjetasAsync() =>
+            await CallPostAsync<List<Tarjeta>>("ConsultaUnCatalogo", ("P_CATALOGO", "CAT_MARCAS_TARJETAS"));
         #endregion
     }
 }

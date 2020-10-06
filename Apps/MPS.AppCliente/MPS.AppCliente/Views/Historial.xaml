@@ -2,7 +2,11 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:cv="clr-namespace:MPS.AppCliente.Views.CV"
-             x:Class="MPS.AppCliente.Views.Views.Historial">
+             x:Class="MPS.AppCliente.Views.Views.Historial"
+             xmlns:vm="clr-namespace:MPS.Core.Lib.ViewModels.Clientes">
+    <ContentPage.BindingContext>
+        <vm:HistorialViewModel/>
+    </ContentPage.BindingContext>
     <ContentPage.Content>
         <Grid RowDefinitions="Auto,*,Auto">
             <cv:Header ActivePage="Historial"/>

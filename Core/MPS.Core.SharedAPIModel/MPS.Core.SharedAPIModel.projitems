@@ -10,6 +10,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="$(MSBuildThisFileDirectory)Address.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Clientes\Tarjeta.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Geoposicion.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Operaciones\Servicio.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Seguridad\LoginResponse.cs" />
@@ -20,8 +21,5 @@
     <Compile Include="$(MSBuildThisFileDirectory)Solicitud\SolicitudResponse.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Socios\NuevoSocio.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Socios\SocioDisponible.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <Folder Include="$(MSBuildThisFileDirectory)Clientes\" />
   </ItemGroup>
 </Project>

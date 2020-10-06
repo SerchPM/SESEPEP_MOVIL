@@ -1,4 +1,5 @@
-﻿using System;
+﻿using MPS.Core.Lib.ViewModels.Clientes;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -17,14 +18,10 @@ namespace MPS.AppCliente.Views.Views
             InitializeComponent();
         }
 
-        private void Button_Clicked(object sender, EventArgs e)
+        protected override void OnAppearing()
         {
-            modalFormPay.IsVisible = true;
-        }
-
-        private void Button_Clicked_1(object sender, EventArgs e)
-        {
-            modalFormPay.IsVisible = false;
+            base.OnAppearing();
+            ViewModel.ObtenerComponentesCommand.Execute();
         }
     }
 }

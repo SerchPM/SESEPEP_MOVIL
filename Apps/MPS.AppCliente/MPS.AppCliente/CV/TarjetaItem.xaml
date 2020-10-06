@@ -6,19 +6,19 @@
         <Frame IsClippedToBounds="True" Padding="5" CornerRadius="10">
             <Grid ColumnDefinitions="Auto, *, Auto">
                 <StackLayout Padding="10">
-                    <Frame CornerRadius="25" HeightRequest="50" WidthRequest="50" BackgroundColor="ForestGreen"
+                    <Frame CornerRadius="25" HeightRequest="50" WidthRequest="50" BackgroundColor="{StaticResource AlterColor}"
                            HorizontalOptions="Center" Padding="0" IsClippedToBounds="True">
-                        <Image Source="" HorizontalOptions="Center" VerticalOptions="Center" />
+                        <Image Source="tarjeta.png" HorizontalOptions="Center" VerticalOptions="Center" />
                     </Frame>
                 </StackLayout>
                 <StackLayout Grid.Column="1" VerticalOptions="Center" HorizontalOptions="FillAndExpand">
-                    <Label Text="XXXX - XXXX - XXXX - 3232" TextColor="CornflowerBlue" FontSize="Body"/>
-                    <Label Text="VISA" TextColor="LightGray" FontSize="Small"/>
+                    <Label x:Name="noTarjeta" TextColor="CornflowerBlue" FontSize="Body"/>
+                    <Label x:Name="tipoTarjeta" TextColor="LightGray" FontSize="Small"/>
                 </StackLayout>
                 <StackLayout Grid.Column="2" Padding="5" HorizontalOptions="End" VerticalOptions="Start">
                     <Frame CornerRadius="13" HeightRequest="25" WidthRequest="25" BackgroundColor="White"
                            HorizontalOptions="Center" Padding="0" IsClippedToBounds="True" BorderColor="LightGray">
-                        <Label Text="1" TextColor="LightGray" HorizontalOptions="Center" VerticalOptions="Center" VerticalTextAlignment="Center" HorizontalTextAlignment="Center"/>
+                        <Label x:Name="orden" TextColor="LightGray" HorizontalOptions="Center" VerticalOptions="Center" VerticalTextAlignment="Center" HorizontalTextAlignment="Center"/>
                     </Frame>
                 </StackLayout>
             </Grid>

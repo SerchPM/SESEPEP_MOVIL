@@ -580,4 +580,49 @@
   <ItemGroup>
     <BundleResource Include="Resources\especialidades%403x.png" />
   </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\tarjeta.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\tarjeta%402x.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\tarjeta%403x.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\direccion1.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\direccion1%402x.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\direccion1%403x.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\direccion2.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\direccion2%402x.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\direccion2%403x.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\finsolicitud.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\finsolicitud%402x.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\finsolicitud%403x.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\iniciosolicitud.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\iniciosolicitud%402x.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\iniciosolicitud%403x.png" />
+  </ItemGroup>
 </Project>

@@ -1,6 +1,5 @@
 ﻿using MPS.Core.Lib.ApiClient;
 using MPS.SharedAPIModel.Clientes;
-using MPS.SharedAPIModel.Operaciones;
 using System;
 using System.Collections.Generic;
 using System.Net;
@@ -9,11 +8,11 @@ using System.Threading.Tasks;
 
 namespace MPS.Core.Lib.BL
 {
-    public class OperacionesBL
+    public class ClientesBL
     {
         #region Propiedades
-        private OperacionesApi operacionesApi;
-        public OperacionesApi OperacionesApi => operacionesApi ??= new OperacionesApi();
+        private ClientesApi clientesApi;
+        public ClientesApi ClientesApi => clientesApi ??= new ClientesApi();
         #endregion
 
         #region Metodos
@@ -21,13 +20,13 @@ namespace MPS.Core.Lib.BL
         /// Obtiene los diferentes tipos tarjetas disponibles
         /// </summary>
         /// <returns></returns>
-        public async Task<List<Tarjeta>> GetTarjetasAsync()
+        public async Task<List<int>> GetTarjetasClienteAsync(Guid idCliente)
         {
-            var (statusCode, resultado) = await OperacionesApi.GetTarjetasAsync();
+            var (statusCode, resultado) = await ClientesApi.GetTarjetasClienteAsync(idCliente);
             if (statusCode == HttpStatusCode.OK)
                 return resultado;
             else
-                return new List<Tarjeta>();
+                return new List<int>();
         }
         #endregion
     }

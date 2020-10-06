@@ -3,7 +3,11 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:cv="clr-namespace:MPS.AppCliente.Views.CV"
              BackgroundColor="{StaticResource AlterColor}"
-             x:Class="MPS.AppCliente.Views.Views.Perfil">
+             x:Class="MPS.AppCliente.Views.Views.Perfil"
+             xmlns:vm="clr-namespace:MPS.Core.Lib.ViewModels.Clientes">
+    <ContentPage.BindingContext>
+        <vm:PerfilViewModel/>
+    </ContentPage.BindingContext>
     <ContentPage.Content>
         <Grid RowDefinitions="Auto,Auto,*" ColumnDefinitions=".05*,*,.05*" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" Padding="0,5">
             <StackLayout Grid.Column="1" HorizontalOptions="Fill" VerticalOptions="Fill">
