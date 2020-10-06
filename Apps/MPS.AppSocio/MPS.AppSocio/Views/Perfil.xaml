@@ -25,7 +25,7 @@
             <Frame IsClippedToBounds="True" Padding="5" CornerRadius="15" BackgroundColor="LightGray" HorizontalOptions="Center">
                 <Grid ColumnDefinitions="Auto,Auto">
                     <Image HorizontalOptions="Center" VerticalOptions="Center"/>
-                    <Label Grid.Column="1" Text="{Binding Ranking}" FontSize="Small" TextColor="White" HorizontalOptions="End"/>
+                    <Label Grid.Column="1" Text="{Binding Ranking}" FontSize="Small" TextColor="Black" HorizontalOptions="End"/>
                 </Grid>
             </Frame>
         </StackLayout>
@@ -35,17 +35,17 @@
                 <Grid RowDefinitions="Auto,*,Auto,Auto" VerticalOptions="StartAndExpand">
                     <Label Text="Datos generales" FontSize="Medium" FontAttributes="Bold" TextColor="White"/>
                     <StackLayout Grid.Row="1">
-                        <Entry HorizontalOptions="FillAndExpand" VerticalOptions="Center" TextColor="Gray" FontSize="Body" HorizontalTextAlignment="Start" Text="{Binding NoCliente}"/>
+                        <Label HorizontalOptions="FillAndExpand" VerticalOptions="Center" TextColor="White" FontSize="Body" HorizontalTextAlignment="Start" Text="{Binding NoCliente}"/>
                         <Label Grid.Row="1" TextColor="Gray" FontSize="Small" HorizontalTextAlignment="Start" Text="No. Socio" Margin="0,0,0,5"/>
-                        <Entry HorizontalOptions="FillAndExpand" VerticalOptions="Center" TextColor="Gray" FontSize="Body" HorizontalTextAlignment="Start" Text="{Binding DetallesSocio.NOMBRE}"/>
+                        <Entry x:Name="Nombre" HorizontalOptions="FillAndExpand" VerticalOptions="Center" TextColor="White" FontSize="Body" HorizontalTextAlignment="Start" Text="{Binding DetallesSocio.NOMBRE}"/>
                         <Label Grid.Row="1" TextColor="Gray" FontSize="Small" HorizontalTextAlignment="Start" Text="Nombre(s)" Margin="0,0,0,5"/>
-                        <Entry HorizontalOptions="FillAndExpand" VerticalOptions="Center" TextColor="Gray" FontSize="Body" HorizontalTextAlignment="Start" Text="{Binding DetallesSocio.APELLIDO_1}"/>
+                        <Entry x:Name="Apellido_paterno" HorizontalOptions="FillAndExpand" VerticalOptions="Center" TextColor="White" FontSize="Body" HorizontalTextAlignment="Start" Text="{Binding DetallesSocio.APELLIDO_1}"/>
                         <Label Grid.Row="1" TextColor="Gray" FontSize="Small" HorizontalTextAlignment="Start" Text="Apellido Paterno" Margin="0,0,0,5"/>
-                        <Entry HorizontalOptions="FillAndExpand" VerticalOptions="Center" TextColor="Gray" FontSize="Body" HorizontalTextAlignment="Start" Text="{Binding DetallesSocio.APELLIDO_2}"/>
+                        <Entry x:Name="Apellido_materno" HorizontalOptions="FillAndExpand" VerticalOptions="Center" TextColor="White" FontSize="Body" HorizontalTextAlignment="Start" Text="{Binding DetallesSocio.APELLIDO_2}"/>
                         <Label Grid.Row="1" TextColor="Gray" FontSize="Small" HorizontalTextAlignment="Start" Text="Apellido Materno" Margin="0,0,0,5"/>
-                        <Entry HorizontalOptions="FillAndExpand" VerticalOptions="Center" TextColor="Gray" FontSize="Body" HorizontalTextAlignment="Start" Text="{Binding DetallesSocio.FECHA_NACIMIENTO}"/>
+                        <DatePicker x:Name="Fecha_nacimiento" HorizontalOptions="FillAndExpand" VerticalOptions="Center" TextColor="White" FontSize="Body" Date="{Binding DetallesSocio.FECHA_NACIMIENTO}"/>
                         <Label Grid.Row="1" TextColor="Gray" FontSize="Small" HorizontalTextAlignment="Start" Text="Fecha de Nacimiento" Margin="0,0,0,5"/>
-                        <Entry HorizontalOptions="FillAndExpand" VerticalOptions="Center" TextColor="Gray" FontSize="Body" HorizontalTextAlignment="Start" Text="SEXO"/>
+                        <Label HorizontalOptions="FillAndExpand" VerticalOptions="Center" TextColor="White" FontSize="Body" HorizontalTextAlignment="Start" Text="{Binding Sexo}"/>
                         <Label Grid.Row="1" TextColor="Gray" FontSize="Small" HorizontalTextAlignment="Start" Text="Sexo" Margin="0,0,0,5"/>
                         <!--<cv:EntryView TextMenu="No. Socio" Info="{Binding NoCliente}"/>
                         <cv:EntryView TextMenu="Nombre(s)" Info="{Binding DetallesSocio.NOMBRE}"/>
@@ -56,9 +56,9 @@
                     </StackLayout>
                     <Label Grid.Row="2" Text="Contacto" FontSize="Medium" FontAttributes="Bold" TextColor="White"/>
                     <StackLayout Grid.Row="3">
-                        <Entry HorizontalOptions="FillAndExpand" VerticalOptions="Center" TextColor="Gray" FontSize="Body" HorizontalTextAlignment="Start" Text="{Binding DetallesSocio.E_MAIL}"/>
+                        <Entry x:Name="Correo" HorizontalOptions="FillAndExpand" VerticalOptions="Center" TextColor="White" FontSize="Body" HorizontalTextAlignment="Start" Text="{Binding DetallesSocio.E_MAIL}"/>
                         <Label Grid.Row="1" TextColor="Gray" FontSize="Small" HorizontalTextAlignment="Start" Text="Correo Electrónico" Margin="0,0,0,5"/>
-                        <Entry HorizontalOptions="FillAndExpand" VerticalOptions="Center" TextColor="Gray" FontSize="Body" HorizontalTextAlignment="Start" Text="{Binding DetallesSocio.TEL_NUMERO}"/>
+                        <Entry x:Name="Telefono" HorizontalOptions="FillAndExpand" VerticalOptions="Center" TextColor="White" FontSize="Body" HorizontalTextAlignment="Start" Text="{Binding DetallesSocio.TEL_NUMERO}"/>
                         <Label Grid.Row="1" TextColor="Gray" FontSize="Small" HorizontalTextAlignment="Start" Text="Teléfono" Margin="0,0,0,5"/>
                         <!--<cv:EntryView TextMenu="Correo Electrónico" Info="{Binding DetallesSocio.E_MAIL}"/>
                         <cv:EntryView TextMenu="Teléfono" Info="{Binding DetallesSocio.TEL_NUMERO}"/>-->
@@ -66,7 +66,7 @@
                 </Grid>
             </ScrollView>
             <StackLayout Grid.Column="1" Grid.Row="2" HorizontalOptions="End">
-                <Button Command="{Binding ActualizaInfoCommand}" VerticalOptions="Center" HorizontalOptions="End" TextColor="White" CornerRadius="10" BackgroundColor="IndianRed" FontSize="Small" Padding="10,0" Text="Guardar"/>
+                <Button Clicked="Actualizar_Info" VerticalOptions="Center" HorizontalOptions="End" TextColor="White" CornerRadius="10" BackgroundColor="IndianRed" FontSize="Small" Padding="10,0" Text="Guardar"/>
                 <Button Clicked="PasswordPopUp" VerticalOptions="Center" HorizontalOptions="End" TextColor="White" CornerRadius="10" BackgroundColor="LightGray" FontSize="Small" Padding="10,0" Text="Cambiar contraseña"/>
             </StackLayout>
         </Grid>
