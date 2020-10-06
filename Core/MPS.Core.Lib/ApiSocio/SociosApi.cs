@@ -61,7 +61,8 @@ namespace MPS.Core.Lib.ApiSocio
                 ("P_APELLIDO_2", info.APELLIDO_2),
                 ("P_FECHA_NACIMIENTO", info.FECHA_NACIMIENTO),
                 ("P_SEXO", info.GUID_SEXO),
-                ("P_TEL_NUMERO", info.TEL_NUMERO));
+                ("P_TEL_NUMERO", info.TEL_NUMERO),
+                ("P_PWD", info.P_PWD));
         //await CallPostAsync<Respuesta>("ActualizaInfoSocio",
         //        ("P_GUID_SOCIO", socio),
         //        ("P_NOMBRE", info.NOMBRE),

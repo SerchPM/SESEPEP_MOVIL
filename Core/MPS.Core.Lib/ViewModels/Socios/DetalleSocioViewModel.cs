@@ -1,4 +1,5 @@
-﻿using MPS.Core.Lib.BL;
+﻿using Core.MVVM.Helpers;
+using MPS.Core.Lib.BL;
 using MPS.Core.Lib.Helpers;
 using MPS.Core.Lib.OS;
 using MPS.SharedAPIModel.Socios;
@@ -7,6 +8,7 @@ using Sysne.Core.MVVM.Patterns;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Security.Cryptography;
 using System.Text;
 using Xamarin.Forms;
 //using Xamarin.Forms;
@@ -22,11 +24,10 @@ namespace MPS.Core.Lib.ViewModels.Socios
             Ranking = "0.0";
             Sexo = "";
             Fecha_Nacimiento = DateTime.Now;
+            Mensaje = "";
         }
         string mensaje;
         public string Mensaje { get => mensaje; set { Set(ref mensaje, value); } }
-        bool popUp;
-        public bool PopUP { get => popUp; set { Set(ref popUp, value); } }
 
         DateTime fecha_Nacimiento;
         public DateTime Fecha_Nacimiento { get => fecha_Nacimiento; set { Set(ref fecha_Nacimiento, value); } }
@@ -96,17 +97,36 @@ namespace MPS.Core.Lib.ViewModels.Socios
                         break;
                     default: break;
                 }
+                info.P_PWD = "";
                 var (exito, respuesta) = await bl.ActualizaInfoSocio(Id, info);
                 if (exito)
                 {
                     Mensaje = "Registro exitoso.";
-                    PopUP = true;
                 }
                 else
                 {
                     Mensaje = "Problema interno del servidor.";
-                    PopUP = false;
                 }
+            }));
+        }
+
+        RelayCommand<string> updatePasswordCommand = null;
+        public RelayCommand<string> UpdatePasswordCommand
+        {
+            get => updatePasswordCommand ?? (updatePasswordCommand = new RelayCommand<string>(async (string password) =>
+            {
+                var c = Crypto.EncodePassword(password);
+                DetalleSocio pwd = new DetalleSocio
+                {
+                    NOMBRE = "",
+                    APELLIDO_1 = "",
+                    APELLIDO_2 = "",
+                    FECHA_NACIMIENTO = "",
+                    GUID_SEXO = "",
+                    TEL_NUMERO = "",
+                    P_PWD = c
+                };
+                var (exito, respuesta) = await bl.ActualizaInfoSocio(Id, pwd);
             }));
         }
     }
