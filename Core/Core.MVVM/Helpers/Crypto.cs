@@ -16,7 +16,7 @@ namespace Core.MVVM.Helpers
             return Convert.ToBase64String(hash); 
         }
 
-        private string Encrypt(string strText, string strEncrKey = "MrN_35712369") //Dos vías
+        public static string Encrypt(string strText, string strEncrKey = "MrN_35712369") //Dos vías
         { 
             byte[] IV = new byte[] { 0x00, 0x01, 0x02, 0x03, 0x04, 0x05, 0x06, 0x07 }; 
             try 
