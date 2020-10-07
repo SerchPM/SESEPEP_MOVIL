@@ -37,6 +37,9 @@ namespace MPS.Core.Lib.ViewModels.Clientes
         private NuevaTarjeta tarjeta = new NuevaTarjeta();
         public NuevaTarjeta Tarjeta { get => tarjeta; set => Set(ref tarjeta, value); }
 
+        private NuevaTarjeta tarjetaCrypto = new NuevaTarjeta();
+        public NuevaTarjeta TarjetaCrypto { get => tarjetaCrypto; set => Set(ref tarjetaCrypto, value); }
+
         private List<Tarjeta> tarjetas = new List<Tarjeta>();
         public List<Tarjeta> Tarjetas { get => tarjetas; set => Set(ref tarjetas, value); }
 

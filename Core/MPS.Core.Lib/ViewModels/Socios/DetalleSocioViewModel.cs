@@ -10,8 +10,6 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Security.Cryptography;
 using System.Text;
-using Xamarin.Forms;
-//using Xamarin.Forms;
 
 namespace MPS.Core.Lib.ViewModels.Socios
 {

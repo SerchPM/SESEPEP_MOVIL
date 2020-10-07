@@ -1,4 +1,4 @@
-﻿using Android.App;
+﻿//using Android.App;
 using MPS.AppSocio.Views.CV;
 using MPS.Core.Lib.ViewModels.Socios;
 using MPS.SharedAPIModel.Socios;

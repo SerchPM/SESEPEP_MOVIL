@@ -3,28 +3,25 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="MPS.AppCliente.Views.CV.HistoryItem">
   <ContentView.Content>
-        <Frame CornerRadius="10" IsClippedToBounds="True" Padding="10">
+        <Frame CornerRadius="10" IsClippedToBounds="True" Padding="10" Margin="5, 10">
             <Grid RowDefinitions="Auto,*,Auto">
-                <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand">
-                    <Label Text="Seguridad Intramuros" TextColor="CadetBlue" FontSize="Medium"/>
-                    <StackLayout x:Name="valueStar" Orientation="Horizontal" HorizontalOptions="FillAndExpand" VerticalOptions="Center"/>
-                </StackLayout>
-                <Grid Grid.Row="1" ColumnDefinitions="Auto,*,Auto" RowDefinitions="*,*">
-                    <Image/>
-                    <Label Grid.Column="1" Text="11/10/2020 05:00 (Solicitud)"/>
+                <Label Text="Seguridad Intramuros" TextColor="CadetBlue" FontSize="Medium"/>
+                <Grid Grid.Row="1" ColumnDefinitions="Auto,*,Auto" RowDefinitions="*, *">
+                    <Image Source="iniciosolicitud.png" Aspect="AspectFit"/>
+                    <Label x:Name="solicitud" Grid.Column="1" FontSize="Body" VerticalTextAlignment="Center"/>
                     <Frame Grid.Column="2" CornerRadius="10" BackgroundColor="Black" IsClippedToBounds="True" Padding="5">
-                        <Label Text="$2,456.00" FontSize="Small" TextColor="White"/>
+                        <Label x:Name="costo" FontSize="Small" TextColor="White" VerticalTextAlignment="Center"/>
                     </Frame>
-                    <Image Grid.Row="1"/>
-                    <Label Grid.Row="1" Grid.Column="1" Text="11/10/2020 03:00 (Inicio)"/>
+                    <Image Source="finsolicitud.png" Aspect="AspectFit" Grid.Row="1"/>
+                    <Label x:Name="inicio" Grid.Row="1" Grid.Column="1" FontSize="Body" VerticalTextAlignment="Center"/>
                     <Frame Grid.Row="1" Grid.Column="2" CornerRadius="10" BackgroundColor="LightGray" IsClippedToBounds="True" Padding="5">
                         <Grid ColumnDefinitions="Auto,*">
-                            <Image Aspect="AspectFit" HorizontalOptions="Center" VerticalOptions="Center"/>
-                            <Label Text="12 hrs" FontSize="Small" TextColor="White"/>
+                            <Image Source="reloj.png" Aspect="AspectFit" HorizontalOptions="Center" VerticalOptions="Center"/>
+                            <Label x:Name="tiempo" Grid.Column="1" FontSize="Small" TextColor="White" VerticalTextAlignment="Start"/>
                         </Grid>
                     </Frame>
                 </Grid>
-                <Button Grid.Row="2" HorizontalOptions="Start" VerticalOptions="Center" FontSize="Small" HeightRequest="30" Padding="10,0" Text="Enviar" BackgroundColor="ForestGreen" CornerRadius="10"/>
+                <Button x:Name="enviar" Grid.Row="2" HorizontalOptions="Start" VerticalOptions="Center" FontSize="Small" HeightRequest="30" Padding="10,0" Text="Enviar" BackgroundColor="ForestGreen" CornerRadius="10"/>
             </Grid>
         </Frame>
     </ContentView.Content>

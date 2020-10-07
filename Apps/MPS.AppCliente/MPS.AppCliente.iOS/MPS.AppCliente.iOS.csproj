@@ -625,4 +625,13 @@
   <ItemGroup>
     <BundleResource Include="Resources\iniciosolicitud%403x.png" />
   </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\reloj.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\reloj%402x.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\reloj%403x.png" />
+  </ItemGroup>
 </Project>
