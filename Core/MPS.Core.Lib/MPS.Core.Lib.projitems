@@ -14,7 +14,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)ViewModels\Clientes\FormaDePagoViewModel.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ViewModels\Clientes\HistorialViewModel.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ViewModels\Clientes\PerfilViewModel.cs" />
-    <Folder Include="$(MSBuildThisFileDirectory)ViewModels\Socios\" />
+    <Compile Include="$(MSBuildThisFileDirectory)ViewModels\Socios\PagoViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="$(MSBuildThisFileDirectory)ApiClient\GoogleReverseGeocodingService.cs" />
