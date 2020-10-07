@@ -2,7 +2,11 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:cv="clr-namespace:MPS.AppSocio.Views.CV"
-             x:Class="MPS.AppSocio.Views.Views.FormaDePago">
+             x:Class="MPS.AppSocio.Views.Views.FormaDePago"
+             xmlns:vm="clr-namespace:MPS.Core.Lib.ViewModels.Socios">
+    <ContentPage.BindingContext>
+        <vm:PagoViewModel/>
+    </ContentPage.BindingContext>
     <ContentPage.Content>
         <Grid RowDefinitions="Auto,*,Auto">
             <cv:Header ActivePage="FormaDePago"/>
@@ -14,15 +18,15 @@
                     </StackLayout>
                     <StackLayout Grid.Row="1" Grid.ColumnSpan="3" VerticalOptions="Center" HorizontalOptions="FillAndExpand">
                         <Grid RowDefinitions="Auto,Auto" VerticalOptions="Center">
-                            <Entry HorizontalOptions="FillAndExpand" VerticalOptions="Center" TextColor="Gray" FontSize="Body" HorizontalTextAlignment="Start" Text="{Binding NoCliente}"/>
+                            <Entry x:Name="Cuenta" HorizontalOptions="FillAndExpand" VerticalOptions="Center" TextColor="Gray" FontSize="Body" HorizontalTextAlignment="Start" Text="{Binding Cuenta}"/>
                             <Label Grid.Row="1" TextColor="Gray" FontSize="Small" HorizontalTextAlignment="Start" Text="No. de Cuenta/Tarjeta" Margin="0,0,0,5"/>
                         </Grid>
                         <Grid RowDefinitions="Auto,Auto" VerticalOptions="Center">
-                            <Entry HorizontalOptions="FillAndExpand" VerticalOptions="Center" TextColor="Gray" FontSize="Body" HorizontalTextAlignment="Start" Text="{Binding NoCliente}"/>
+                            <Entry x:Name="Banco" HorizontalOptions="FillAndExpand" VerticalOptions="Center" TextColor="Gray" FontSize="Body" HorizontalTextAlignment="Start" Text="{Binding Banco}"/>
                             <Label Grid.Row="1" TextColor="Gray" FontSize="Small" HorizontalTextAlignment="Start" Text="Banco" Margin="0,0,0,5"/>
                         </Grid>
                     </StackLayout>
-                    <Button Grid.Row="2" Grid.ColumnSpan="3" HorizontalOptions="EndAndExpand" HeightRequest="30" BackgroundColor="IndianRed" CornerRadius="10" FontSize="Small" VerticalOptions="Center" Text="Actualizar datos" Padding="10,0"/>
+                    <Button Clicked="Update_Info" Grid.Row="2" Grid.ColumnSpan="3" HorizontalOptions="EndAndExpand" HeightRequest="30" BackgroundColor="IndianRed" CornerRadius="10" FontSize="Small" VerticalOptions="Center" Text="Actualizar datos" Padding="10,0"/>
                 </Grid>
             </Grid>
             <cv:StatusBar Grid.Row="2" IsLinksVisible="False"/>
