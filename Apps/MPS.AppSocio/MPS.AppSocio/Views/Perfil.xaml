@@ -5,7 +5,6 @@
              xmlns:cv="clr-namespace:MPS.AppSocio.Views.CV"
              xmlns:vm="clr-namespace:MPS.Core.Lib.ViewModels.Socios"
              BackgroundColor="{StaticResource AlterColor}">
-    <ContentPage.Content/>
     <ContentPage.BindingContext>
         <vm:DetalleSocioViewModel/>
     </ContentPage.BindingContext>
