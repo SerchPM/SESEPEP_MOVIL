@@ -14,6 +14,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)ViewModels\Clientes\FormaDePagoViewModel.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ViewModels\Clientes\HistorialViewModel.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ViewModels\Clientes\PerfilViewModel.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)ViewModels\Socios\HistorialSolicitudesViewModel.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ViewModels\Socios\PagoViewModel.cs" />
   </ItemGroup>
   <ItemGroup>

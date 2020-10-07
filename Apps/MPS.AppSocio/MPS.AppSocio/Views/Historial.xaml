@@ -2,7 +2,11 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:cv="clr-namespace:MPS.AppSocio.Views.CV"
-             x:Class="MPS.AppSocio.Views.Views.Historial">
+             x:Class="MPS.AppSocio.Views.Views.Historial"
+             xmlns:vm="clr-namespace:MPS.Core.Lib.ViewModels.Socios">
+    <ContentPage.BindingContext>
+        <vm:HistorialSolicitudesViewModel/>
+    </ContentPage.BindingContext>
     <ContentPage.Content>
         <Grid RowDefinitions="Auto,*,Auto">
             <cv:Header ActivePage="Historial"/>
@@ -11,18 +15,18 @@
                     <Label Text="Historial" FontSize="Medium"/>
                     <StackLayout Orientation="Horizontal" Grid.Row="1" Grid.Column="1" VerticalOptions="Center" HorizontalOptions="FillAndExpand">
                         <Grid RowDefinitions="Auto,Auto" VerticalOptions="Center">
-                            <DatePicker TextColor="Black" VerticalOptions="Center"/>
+                            <DatePicker TextColor="Black" VerticalOptions="Center" x:Name="FechaInicial"/>
                             <Label Grid.Row="1" Text="Desde" FontSize="Small" TextColor="LightGray"/>
                         </Grid>
                         <Grid RowDefinitions="Auto,Auto" VerticalOptions="Center">
-                            <DatePicker TextColor="Black" VerticalOptions="Center"/>
+                            <DatePicker TextColor="Black" VerticalOptions="Center" x:Name="FechaFinal"/>
                             <Label Grid.Row="1" Text="Hasta" FontSize="Small" TextColor="LightGray"/>
                         </Grid>
-                        <ImageButton Source="botonBuscar.png" HorizontalOptions="Center" VerticalOptions="Center" Aspect="AspectFit"/>
+                        <ImageButton Source="botonBuscar.png" HorizontalOptions="Center" VerticalOptions="Center" Aspect="AspectFit" Clicked="Buscar"/>
                     </StackLayout>
                     <Button Grid.Row="2" Grid.ColumnSpan="3" HorizontalOptions="EndAndExpand" HeightRequest="30" BackgroundColor="CornflowerBlue" CornerRadius="10" FontSize="Small" VerticalOptions="Center" Text="Exportar resultados" Padding="10,0"/>
                 </Grid>
-                <CollectionView Grid.Row="1" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
+                <CollectionView Grid.Row="1" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" ItemsSource="{Binding Historial}">
                     <CollectionView.ItemTemplate>
                         <DataTemplate>
                             <cv:HistoryItem HorizontalOptions="FillAndExpand" VerticalOptions="Center" Margin="0,10"/>

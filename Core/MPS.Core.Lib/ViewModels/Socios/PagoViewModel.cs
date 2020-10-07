@@ -36,7 +36,7 @@ namespace MPS.Core.Lib.ViewModels.Socios
         RelayCommand<List<string>> updateInfoCommand = null;
         public RelayCommand<List<string>> UpdateInfoCommand
         {
-            get => updateInfoCommand ?? (updateInfoCommand = new RelayCommand<List<string>>(async (List<string>) =>
+            get => updateInfoCommand ?? (updateInfoCommand = new RelayCommand<List<string>>(async (List<string> info) =>
             {
 
             }));

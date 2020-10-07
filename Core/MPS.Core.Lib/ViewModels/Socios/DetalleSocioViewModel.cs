@@ -83,7 +83,7 @@ namespace MPS.Core.Lib.ViewModels.Socios
         RelayCommand<DetalleSocio> actualizaInfoCommand = null;
         public RelayCommand<DetalleSocio> ActualizaInfoCommand
         {
-            get => actualizaInfoCommand ?? (actualizaInfoCommand = new RelayCommand<DetalleSocio>(async (DetalleSocio info) =>
+            get => actualizaInfoCommand ?? (actualizaInfoCommand = new RelayCommand<DetalleSocio>(async (info) =>
             {
                 switch (Sexo)
                 {
@@ -111,7 +111,7 @@ namespace MPS.Core.Lib.ViewModels.Socios
         RelayCommand<string> updatePasswordCommand = null;
         public RelayCommand<string> UpdatePasswordCommand
         {
-            get => updatePasswordCommand ?? (updatePasswordCommand = new RelayCommand<string>(async (string password) =>
+            get => updatePasswordCommand ?? (updatePasswordCommand = new RelayCommand<string>(async (password) =>
             {
                 var c = Crypto.EncodePassword(password);
                 DetalleSocio pwd = new DetalleSocio

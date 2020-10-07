@@ -21,7 +21,7 @@ namespace MPS.AppSocio.Views.Views
 
         PagoViewModel ViewModel => BindingContext as PagoViewModel;
 
-        private void Update_Info()
+        private void Update_Info(object o, EventArgs e)
         {
             List<string> info = new List<string>();
             if (!(string.IsNullOrEmpty(Cuenta.Text)) && !(string.IsNullOrEmpty(Banco.Text)))
