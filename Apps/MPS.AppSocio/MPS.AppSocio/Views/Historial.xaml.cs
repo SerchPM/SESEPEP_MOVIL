@@ -18,7 +18,10 @@ namespace MPS.AppSocio.Views.Views
             InitializeComponent();
         }
 
-        HistorialSolicitudesViewModel ViewModel => BindingContext as HistorialSolicitudesViewModel;
+        HistorialSolicitudesViewModel ViewModel 
+        { 
+            get { return this.BindingContext as HistorialSolicitudesViewModel; } 
+        }
 
         public void Buscar(object o, EventArgs e)
         {

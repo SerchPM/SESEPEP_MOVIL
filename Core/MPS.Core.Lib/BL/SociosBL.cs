@@ -46,13 +46,13 @@ namespace MPS.Core.Lib.BL
         /// <param name="desde">Fecha de filtro inicial</param>
         /// <param name="hasta">Fecha de filtro final</param>
         /// <returns></returns>
-        public async Task<List<Historial>> GetHistoricoSolicitudesAsync(Guid idCliente, DateTime desde, DateTime hasta)
+        public async Task<List<HistorialSolicitudes>> GetHistoricoSolicitudesAsync(Guid idCliente, DateTime desde, DateTime hasta)
         {
             var (statusCode, resultado) = await SociosApi.GetHistoricoSolicitudesAsync(idCliente, desde, hasta);
             if (statusCode == HttpStatusCode.OK)
                 return resultado;
             else
-                return new List<Historial>();
+                return new List<HistorialSolicitudes>();
         }
     }
 }

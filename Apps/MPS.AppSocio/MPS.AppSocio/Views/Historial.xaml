@@ -29,7 +29,12 @@
                 <CollectionView Grid.Row="1" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" ItemsSource="{Binding Historial}">
                     <CollectionView.ItemTemplate>
                         <DataTemplate>
-                            <cv:HistoryItem HorizontalOptions="FillAndExpand" VerticalOptions="Center" Margin="0,10"/>
+                            <cv:HistoryItem x:Name="h" HorizontalOptions="FillAndExpand" VerticalOptions="Center" Margin="0,10"/>
+                                            <!--Tipo_Servicio="{Binding Historial.TIPO_SERVICIO}" 
+                                            Fecha_Solicitud="{Binding Historial.FECHA_SOLICITUD}" 
+                                            Fecha_Inicio="{Binding Historial.INICIO_SOLICITUD}"
+                                            Monto="{Binding Historial.TOTAL_PAG_SOCIO}"
+                                            Tiempo_Real="{Binding Historial.TIEMPO_REAL}"/>-->
                         </DataTemplate>
                     </CollectionView.ItemTemplate>
                 </CollectionView>

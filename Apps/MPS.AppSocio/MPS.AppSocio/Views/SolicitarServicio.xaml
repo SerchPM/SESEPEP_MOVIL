@@ -4,8 +4,11 @@
              x:Class="MPS.AppSocio.Views.Views.SolicitarServicio"
              xmlns:maps="clr-namespace:Xamarin.Forms.Maps;assembly=Xamarin.Forms.Maps"
              xmlns:cv="clr-namespace:MPS.AppSocio.Views.CV"
-             xmlns:vm="clr-namespace:MPS.Core.Lib.ViewModels"
+             xmlns:vm="clr-namespace:MPS.Core.Lib.ViewModels.Socios"
              xmlns:model="clr-namespace:MPS.Core.Lib.Model">
+    <ContentPage.BindingContext>
+        <vm:SolicitarServicioViewModel/>
+    </ContentPage.BindingContext>
     <ContentPage.Content>
         <Grid RowDefinitions="Auto, *, Auto">
             <cv:Header Margin="0"/>
@@ -19,7 +22,7 @@
                             <Frame IsClippedToBounds="True" Padding="5" CornerRadius="15" BackgroundColor="Black">
                                 <Grid ColumnDefinitions="Auto,Auto">
                                     <Image HorizontalOptions="Center" VerticalOptions="Center"/>
-                                    <Label Grid.Column="1" Text="{Binding}" FontSize="Small" TextColor="White" HorizontalOptions="End"/>
+                                    <Label Grid.Column="1" Text="5.0" FontSize="Small" TextColor="White" HorizontalOptions="End"/>
                                 </Grid>
                             </Frame>
                             <Label Text="Estatus" TextColor="White" FontSize="Small" HorizontalTextAlignment="End"/>

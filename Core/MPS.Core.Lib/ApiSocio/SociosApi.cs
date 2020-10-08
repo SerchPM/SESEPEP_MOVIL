@@ -111,8 +111,8 @@ namespace MPS.Core.Lib.ApiSocio
         /// <param name="desde">Fecha de filtro inicial</param>
         /// <param name="hasta">Fecha de filtro final</param>
         /// <returns></returns>
-        public async Task<(HttpStatusCode StatusCode, List<Historial> catalogo)> GetHistoricoSolicitudesAsync(Guid idCliente,DateTime desde, DateTime hasta) =>
-            await CallPostAsync<List<Historial>>("SocioSolicitudes", ("P_GUID_SOCIO", idCliente));
+        public async Task<(HttpStatusCode StatusCode, List<HistorialSolicitudes> catalogo)> GetHistoricoSolicitudesAsync(Guid idCliente,DateTime desde, DateTime hasta) =>
+            await CallPostAsync<List<HistorialSolicitudes>>("SocioSolicitudes", ("P_GUID_SOCIO", idCliente));
 
     }
     #endregion

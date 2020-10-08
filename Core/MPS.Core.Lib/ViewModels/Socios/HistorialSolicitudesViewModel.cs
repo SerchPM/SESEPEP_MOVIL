@@ -1,5 +1,6 @@
 ﻿using MPS.Core.Lib.BL;
 using MPS.Core.Lib.Helpers;
+using MPS.SharedAPIModel.Socios;
 using Sysne.Core.MVVM;
 using Sysne.Core.MVVM.Patterns;
 using System;
@@ -15,8 +16,8 @@ namespace MPS.Core.Lib.ViewModels.Socios
             Id = Settings.Current.LoginInfo.Usr.Id;
         }
 
-        List<SharedAPIModel.Clientes.Historial> historial;
-        public List<SharedAPIModel.Clientes.Historial> Historial { get => historial; set { Set(ref historial, value); } }
+        List<HistorialSolicitudes> historial;
+        public List<HistorialSolicitudes> Historial { get => historial; set { Set(ref historial, value); } }
 
         string id;
         public string Id { get => id; set { Set(ref id, value); } }
@@ -36,13 +37,22 @@ namespace MPS.Core.Lib.ViewModels.Socios
                 DateTime begin = DateTime.Parse(inicio);
                 DateTime end = DateTime.Parse(fin);
                 Historial = await bl.GetHistoricoSolicitudesAsync(Guid.Parse(Id), begin, end);
+                foreach(var a in Historial)
+                {
+                    if (string.IsNullOrEmpty(a.TIEMPO_REAL))
+                        a.TIEMPO_REAL = "0";
+                    if (string.IsNullOrEmpty(a.TOTAL_PAG_SOCIO))
+                        a.TOTAL_PAG_SOCIO = "$0.00";
+                    if (a.VALORACION_CLIENTE != null)
+                        a.VALORACION_CLIENTE = 0;
+                }
             }));
         }
 
-        private RelayCommand<SharedAPIModel.Clientes.Historial> enviarHistoricoCommand = null;
-        public RelayCommand<SharedAPIModel.Clientes.Historial> EnviarHistoricoCommand
+        private RelayCommand<HistorialSolicitudes> enviarHistoricoCommand = null;
+        public RelayCommand<HistorialSolicitudes> EnviarHistoricoCommand
         {
-            get => enviarHistoricoCommand ??= new RelayCommand<SharedAPIModel.Clientes.Historial>(async (param) =>
+            get => enviarHistoricoCommand ??= new RelayCommand<HistorialSolicitudes>(async (param) =>
             {
 
             });
