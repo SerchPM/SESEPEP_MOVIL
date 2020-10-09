@@ -55,13 +55,13 @@ namespace MPS.Core.Lib.Helpers
         /// <summary>
         /// Obtiene o asigna el país donde se encuentra el cliente.
         /// </summary>
-        public string Pais { get => GetValue<string>(); set => Set(ref paisMonitorista, value); }
+        public string Pais { get => GetValue<string>(); set => SetValue(ref paisMonitorista, value); }
 
         private string mapServiceToken;
         /// <summary>
         /// Obtiene o asigna el token del mapa de Bing.
         /// </summary>
-        public string MapServiceToken { get => GetValue<string>(mapServiceToken); set => Set(ref mapServiceToken, value); }
+        public string MapServiceToken { get => GetValue<string>(mapServiceToken); set => SetValue(ref mapServiceToken, value); }
 
   
     }

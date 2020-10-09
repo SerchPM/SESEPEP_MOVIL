@@ -3,7 +3,8 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:cv="clr-namespace:MPS.AppCliente.Views.CV"
              x:Class="MPS.AppCliente.Views.Views.FormaDePago"
-             xmlns:vm="clr-namespace:MPS.Core.Lib.ViewModels.Clientes">
+             xmlns:vm="clr-namespace:MPS.Core.Lib.ViewModels.Clientes"
+             xmlns:modelCliente="clr-namespace:MPS.SharedAPIModel.Clientes">
     
     <ContentPage.BindingContext>
         <vm:FormaDePagoViewModel x:Name="ViewModel"/>
@@ -16,10 +17,10 @@
                     <Label Text="Forma de pago" FontSize="Medium" TextColor="Black"/>
                     <Label Text="Tarjetas registradas" FontSize="Body" TextColor="LightGray"/>
                 </StackLayout>
-                <CollectionView  Grid.Row="1" HorizontalOptions="FillAndExpand" VerticalOptions="Center">
+                <CollectionView ItemsSource="{Binding TarjetasCliente}" Grid.Row="1" HorizontalOptions="FillAndExpand" VerticalOptions="Center">
                     <CollectionView.ItemTemplate>
-                        <DataTemplate>
-                            <cv:TarjetaItem HorizontalOptions="FillAndExpand" VerticalOptions="Center"/>
+                        <DataTemplate x:DataType="modelCliente:TarjetaCliente">
+                            <cv:TarjetaItem NoTarjeta="{Binding TARJETA}" TipoTarjeta="{Binding MARCA}" Orden="{Binding Orden}" HorizontalOptions="FillAndExpand" VerticalOptions="Center"/>
                         </DataTemplate>
                     </CollectionView.ItemTemplate>
                 </CollectionView>
@@ -34,10 +35,10 @@
                         <Label Text="Agregar forma de pago" Margin="0,0,0,0" TextColor="IndianRed" FontAttributes="Bold" FontSize="Medium"/>
                         <ScrollView Grid.Row="1">
                             <Grid RowDefinitions="Auto, Auto, Auto, Auto, Auto, Auto">
-                                <Entry Keyboard="Numeric" MaxLength="16" Text="{Binding Tarjeta.NoTarjeta, Mode=TwoWay}"/>
+                                <Entry Keyboard="Numeric" MaxLength="16" Text="{Binding Tarjeta.NoCuenta, Mode=TwoWay}"/>
                                 <Label Grid.Row="1" Text="No. Cuenta/Tarjeta" VerticalOptions="Start"/>
                                 <Grid Grid.Row="2" RowDefinitions="Auto, Auto" ColumnDefinitions="*,*">
-                                    <Picker VerticalOptions="Start" ItemsSource="{Binding Meses}" SelectedItem="{Binding MesSelected, Mode=TwoWay, UpdateSourceEventName=PropertyChanged}"/>
+                                    <Picker VerticalOptions="Center" ItemsSource="{Binding Meses}" SelectedItem="{Binding MesSelected, Mode=TwoWay, UpdateSourceEventName=PropertyChanged}"/>
                                     <Label Grid.Row="1" Text="Exp. Mes" VerticalOptions="Start"/>
                                     <Picker  Grid.Column="1" VerticalOptions="Start" ItemsSource="{Binding Años}" SelectedItem="{Binding AñoSelected, Mode=TwoWay, UpdateSourceEventName=PropertyChanged}"/>
                                     <Label Grid.Column="1" Grid.Row="1" Text="Exp. Año" VerticalOptions="Start"/>
@@ -47,8 +48,8 @@
                                 <Grid Grid.Row="5" RowDefinitions="Auto, Auto" ColumnDefinitions="*,*" VerticalOptions="Center">
                                     <Entry Keyboard="Numeric" IsPassword="True" MaxLength="3" Text="{Binding Tarjeta.CVV, Mode=TwoWay}"/>
                                     <Label Grid.Row="1" Text="CVV" VerticalOptions="Start"/>
-                                    <Entry Grid.Column="1"/>
-                                    <Label Grid.Column="1" Grid.Row="1" Text="Orden" VerticalOptions="Start"/>
+                                    <Picker Grid.Column="1" VerticalOptions="Start" ItemsSource="{Binding TiposTarjeta}" SelectedItem="{Binding TipoTarjetaSelected, Mode=TwoWay, UpdateSourceEventName=PropertyChanged}"/>
+                                    <Label Grid.Column="1" Grid.Row="1" Text="Tipo de tarjeta" VerticalOptions="Start"/>
                                 </Grid>
                             </Grid>
                         </ScrollView>

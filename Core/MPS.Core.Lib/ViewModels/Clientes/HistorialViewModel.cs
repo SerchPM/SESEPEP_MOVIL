@@ -35,7 +35,7 @@ namespace MPS.Core.Lib.ViewModels.Clientes
         {
             get => buscarHistorialCommand ??= new RelayCommand(async () =>
             {
-                Historial = await bl.GetHistoricoSolicitudesAsync(Guid.Parse(Settings.Current.LoginInfo.Usr.Id), Desde, Hasta);
+                var r = await bl.GetHistoricoSolicitudesAsync(Guid.Parse(Settings.Current.LoginInfo.Usr.Id), Desde, Hasta);
             });
         }
 

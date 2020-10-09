@@ -3,13 +3,10 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="MPS.AppCliente.Views.CV.TarjetaItem">
   <ContentView.Content>
-        <Frame IsClippedToBounds="True" Padding="5" CornerRadius="10">
+        <Frame IsClippedToBounds="True" Padding="5" CornerRadius="15" Margin="5,10">
             <Grid ColumnDefinitions="Auto, *, Auto">
                 <StackLayout Padding="10">
-                    <Frame CornerRadius="25" HeightRequest="50" WidthRequest="50" BackgroundColor="{StaticResource AlterColor}"
-                           HorizontalOptions="Center" Padding="0" IsClippedToBounds="True">
-                        <Image Source="tarjeta.png" HorizontalOptions="Center" VerticalOptions="Center" />
-                    </Frame>
+                    <Image Source="tarjeta.png" Aspect="AspectFit" HorizontalOptions="Center" VerticalOptions="Center" />
                 </StackLayout>
                 <StackLayout Grid.Column="1" VerticalOptions="Center" HorizontalOptions="FillAndExpand">
                     <Label x:Name="noTarjeta" TextColor="CornflowerBlue" FontSize="Body"/>
