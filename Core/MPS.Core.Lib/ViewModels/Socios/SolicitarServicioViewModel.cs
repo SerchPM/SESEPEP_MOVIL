@@ -88,8 +88,8 @@ namespace MPS.Core.Lib.ViewModels.Socios
         {
             get => solicitudActivaCommand ?? (solicitudActivaCommand = new RelayCommand(async () =>
             {
-                var respuesta = solicitudBL.SolicitudActiva(Settings.Current.LoginInfo.Usr.Id);
-                if (respuesta.Result.Item1)
+                var respuesta = await SolicitudBL.SolicitudActiva(Settings.Current.LoginInfo.Usr.Id);
+                if (respuesta.Item1)
                     EstatusSolicitud = true;
             }));
         }
@@ -126,7 +126,7 @@ namespace MPS.Core.Lib.ViewModels.Socios
                     IdSolicitud = Guid.Parse(solicitud),
                     Estatus = 1
                 };
-                var resultado = await solicitudBL.AsignarSocioAsync(asignarSocio);
+                var resultado = await SolicitudBL.AsignarSocioAsync(asignarSocio);
                 if (resultado)
                     EstatusSolicitud = true;
             }));
