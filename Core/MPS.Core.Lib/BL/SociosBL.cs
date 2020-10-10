@@ -2,6 +2,7 @@
 using MPS.SharedAPIModel.Clientes;
 using MPS.SharedAPIModel.Seguridad;
 using MPS.SharedAPIModel.Socios;
+using MPS.SharedAPIModel.Solicitud;
 using System;
 using System.Collections.Generic;
 using System.Net;
@@ -17,6 +18,11 @@ namespace MPS.Core.Lib.BL
         public SociosApi SociosApi => sociosApi ??= new SociosApi();
         #endregion
 
+        /// <summary>
+        /// Obtiene el detalle del socio
+        /// </summary>
+        /// <param name="Id"></param>
+        /// <returns></returns>
         public async Task<(bool Valido, DetalleSocio Detalles)> DetalleSocio(string Id)
         {
             var (StatusCode, Detalles) = await SociosApi.DetalleSocioAsync(Id);
@@ -29,7 +35,13 @@ namespace MPS.Core.Lib.BL
             }
         }
 
-        public async Task<(bool Valido, Respuesta Respuesta)> ActualizaInfoSocio(string Id, DetalleSocio Info)
+        /// <summary>
+        /// Actualiza la información del socio
+        /// </summary>
+        /// <param name="Id"></param>
+        /// <param name="Info"></param>
+        /// <returns></returns>
+        public async Task<(bool Valido, Respuesta Respuesta)> ActualizaInfoSocio(Guid Id, DetalleSocio Info)
         {
             var (StatusCode, Response) = await SociosApi.ActualizaSocioAsync(Id, Info);
             var valido = StatusCode == System.Net.HttpStatusCode.OK;
@@ -53,6 +65,22 @@ namespace MPS.Core.Lib.BL
                 return resultado;
             else
                 return new List<HistorialSolicitudes>();
+        }
+
+        /// <summary>
+        /// Actualiza el estatus de la solicitud
+        /// </summary>
+        /// <param name="socio"></param>
+        /// <param name="solicitud"></param>
+        /// <param name="status"></param>
+        /// <returns></returns>
+        public async Task<SolicitudResponse> ActualizaSolicitud(Guid socio, Guid solicitud, int status)
+        {
+            var (statusCode, resultado) = await SociosApi.ActualizarSolicitud(socio, solicitud, status);
+            if (statusCode == HttpStatusCode.OK)
+                return resultado;
+            else
+                return new SolicitudResponse();
         }
     }
 }

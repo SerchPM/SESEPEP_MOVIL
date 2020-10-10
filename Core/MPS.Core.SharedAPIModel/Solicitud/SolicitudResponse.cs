@@ -36,4 +36,22 @@ namespace MPS.SharedAPIModel.Solicitud
         public decimal Longitud2 { get; set; }
         public int NoElementos { get; set; }
     }
+
+    public class SolicitudActivaResponse
+    {
+        public string GUID_SOLICITUD { get; set; }
+        public string NOMBRE { get; set; }
+        public string SOLICITUD { get; set; }
+        public float VALORACION { get; set; }
+        public string NO_CLIENTE { get; set; }
+        public string NO_SOCIO { get; set; }
+        public DateTime FECHA_HORA_SOLICITUD { get; set; }
+        public DateTime FECHA_HORA_INICIO { get; set; }
+        public DateTime FECHA_HORA_FIN { get; set; }
+        public int HORAS_SOLICITADAS { get; set; }
+        public int HORAS_REALES { get; set; }
+        public string DIFERENCIA { get; set; }
+        public string C1RA_UBICACION { get; set; }
+        public string C2DA_UBICACION { get; set; }
+    }
 }

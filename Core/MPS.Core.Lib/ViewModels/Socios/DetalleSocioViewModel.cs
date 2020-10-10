@@ -96,7 +96,7 @@ namespace MPS.Core.Lib.ViewModels.Socios
                     default: break;
                 }
                 info.P_PWD = "";
-                var (exito, respuesta) = await bl.ActualizaInfoSocio(Id, info);
+                var (exito, respuesta) = await bl.ActualizaInfoSocio(Guid.Parse(Id), info);
                 if (exito)
                 {
                     Mensaje = "Registro exitoso.";
@@ -124,7 +124,7 @@ namespace MPS.Core.Lib.ViewModels.Socios
                     TEL_NUMERO = "",
                     P_PWD = c
                 };
-                var (exito, respuesta) = await bl.ActualizaInfoSocio(Id, pwd);
+                var (exito, respuesta) = await bl.ActualizaInfoSocio(Guid.Parse(Id), pwd);
             }));
         }
     }
