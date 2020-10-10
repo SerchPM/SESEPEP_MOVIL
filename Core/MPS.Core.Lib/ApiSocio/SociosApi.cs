@@ -2,6 +2,7 @@
 using MPS.SharedAPIModel.Clientes;
 using MPS.SharedAPIModel.Seguridad;
 using MPS.SharedAPIModel.Socios;
+using MPS.SharedAPIModel.Solicitud;
 using Sysne.Core.ApiClient;
 using System;
 using System.Collections.Generic;
@@ -53,27 +54,27 @@ namespace MPS.Core.Lib.ApiSocio
         /// <param name="info"></param>
         /// <param name="img"></param>
         /// <returns></returns>
-        public async Task<(HttpStatusCode StatusCode, Respuesta Respuesta)> ActualizaSocioAsync(string socio, DetalleSocio info)
-        {
-            var res = await CallFormUrlEncoded<Respuesta>("ActualizaInfoSocio", HttpMethod.Post,
-                ("P_GUID_SOCIO", socio),
-                ("P_NOMBRE", info.NOMBRE),
-                ("P_APELLIDO_1", info.APELLIDO_1),
-                ("P_APELLIDO_2", info.APELLIDO_2),
-                ("P_FECHA_NACIMIENTO", info.FECHA_NACIMIENTO),
-                ("P_SEXO", info.GUID_SEXO),
-                ("P_TEL_NUMERO", info.TEL_NUMERO),
-                ("P_PWD", info.P_PWD));
-        //await CallPostAsync<Respuesta>("ActualizaInfoSocio",
+        public async Task<(HttpStatusCode StatusCode, Respuesta Respuesta)> ActualizaSocioAsync(Guid socio, DetalleSocio info) =>
+        //{
+        //    var res = await CallFormUrlEncoded<Respuesta>("ActualizaInfoSocio", HttpMethod.Post,
         //        ("P_GUID_SOCIO", socio),
         //        ("P_NOMBRE", info.NOMBRE),
         //        ("P_APELLIDO_1", info.APELLIDO_1),
         //        ("P_APELLIDO_2", info.APELLIDO_2),
         //        ("P_FECHA_NACIMIENTO", info.FECHA_NACIMIENTO),
         //        ("P_SEXO", info.GUID_SEXO),
-        //        ("P_TEL_NUMERO", info.TEL_NUMERO));
-            return res;
-        }
+        //        ("P_TEL_NUMERO", info.TEL_NUMERO),
+        //        ("P_PWD", info.P_PWD));
+        await CallPostAsync<Respuesta>("ActualizaInfoSocio",
+                ("P_GUID_SOCIO", socio),
+                ("P_NOMBRE", info.NOMBRE),
+                ("P_APELLIDO_1", info.APELLIDO_1),
+                ("P_APELLIDO_2", info.APELLIDO_2),
+                ("P_FECHA_NACIMIENTO", info.FECHA_NACIMIENTO),
+                ("P_SEXO", info.GUID_SEXO),
+                ("P_TEL_NUMERO", info.TEL_NUMERO));
+        //    return res;
+        //}
 
         /// <summary>
         /// Devuelve los detalles de un socio en particular
@@ -93,6 +94,16 @@ namespace MPS.Core.Lib.ApiSocio
         /// <returns></returns>
         public async Task<(HttpStatusCode StatusCode, List<Socio> catalogo)> GetSociosAsync(Guid idTipoServicio, DateTime fecha, int horasSolicitadas, string filtro) =>
              await CallPostAsync<List<Socio>>("ConsultaSociosDisponibles", ("P_GUID_TIPO_SOLICITUD", idTipoServicio), ("P_FECHAHORA_SOLICITUD", fecha.ToDateTimeFormat24H()), ("P_HORAS_SOLICITADAS", horasSolicitadas), ("P_PARAMETRO_BUSQUEDA", filtro));
+
+        /// <summary>
+        /// Actualiza el estatus de la solicitud
+        /// </summary>
+        /// <param name="socio"></param>
+        /// <param name="solicitud"></param>
+        /// <param name="status"></param>
+        /// <returns></returns>
+        public async Task<(HttpStatusCode StatusCode, SolicitudResponse Respuesta)> ActualizarSolicitud(Guid socio, Guid solicitud, int status) =>
+            await CallPostAsync<SolicitudResponse>("ActualizarSolicitudEstatus", ("P_GUID_SOLICITUD", solicitud), ("P_GUID_SOCIO", socio), ("P_ESTATUS", status));
 
         /// <summary>
         /// Obtiene al personal que cuente con las carecteristicas del servico y que esten mas sercanos a la ubicacion establecidas

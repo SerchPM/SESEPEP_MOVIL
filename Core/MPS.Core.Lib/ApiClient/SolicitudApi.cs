@@ -55,6 +55,9 @@ namespace MPS.Core.Lib.ApiClient
         /// <returns></returns>
         public async Task<(HttpStatusCode StatusCode, AsignarSolicitudResponse asignarSolicitudInfo)> AsignarSocioAsync(SocioAsignado socioAsignado) =>
             await CallPostAsync<AsignarSolicitudResponse>("ActualizarSolicitudEstatus", ("P_GUID_SOLICITUD", socioAsignado.IdSolicitud), ("P_ESTATUS", socioAsignado.Estatus), ("P_GUID_SOCIO", socioAsignado.IdSocio));
+
+        public async Task<(HttpStatusCode StatusCode, SolicitudActivaResponse Respuesta)> SolicitudActiva(string noSocio) =>
+            await CallPostAsync<SolicitudActivaResponse>("ConsultaSolicitudesGeneral", ("P_PARAMETRO", noSocio));
         #endregion
     }
 }

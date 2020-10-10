@@ -179,6 +179,21 @@ namespace MPS.Core.Lib.BL
             else
                 return false;
         }
+
+        /// <summary>
+        /// Consulta si hay una solicitud activa
+        /// </summary>
+        /// <param name="noSocio"></param>
+        /// <returns></returns>
+        public async Task<(bool, SolicitudActivaResponse)> SolicitudActiva(string noSocio)
+        {
+            var (statusCode, resultado) = await SolicitudApi.SolicitudActiva(noSocio);
+            var valido = statusCode == System.Net.HttpStatusCode.OK;
+            if(valido)
+                return (valido, resultado);
+            else
+                return (false, new SolicitudActivaResponse());
+        }
         #endregion
     }
 }
