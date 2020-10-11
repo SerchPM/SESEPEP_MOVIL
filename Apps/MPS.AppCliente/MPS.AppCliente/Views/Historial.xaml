@@ -6,7 +6,7 @@
              xmlns:vm="clr-namespace:MPS.Core.Lib.ViewModels.Clientes"
              xmlns:modelHistorico="clr-namespace:MPS.SharedAPIModel.Clientes">
     <ContentPage.BindingContext>
-        <vm:HistorialViewModel/>
+        <vm:HistorialViewModel x:Name="ViewModel"/>
     </ContentPage.BindingContext>
     <ContentPage.Content>
         <Grid RowDefinitions="Auto,*,Auto">
@@ -14,7 +14,7 @@
             <Grid Grid.Row="1" RowDefinitions="Auto,*">
                 <Grid ColumnDefinitions="Auto,*,Auto" RowDefinitions="Auto, Auto, Auto" Margin="10,5">
                     <Label Text="Historial" FontSize="Medium"/>
-                    <StackLayout Orientation="Horizontal" Grid.Row="1" Grid.Column="1" VerticalOptions="Center" HorizontalOptions="FillAndExpand">
+                    <StackLayout Orientation="Horizontal" Grid.Row="1" Grid.ColumnSpan="3" VerticalOptions="CenterAndExpand" HorizontalOptions="CenterAndExpand">
                         <Grid RowDefinitions="Auto,Auto" VerticalOptions="Center">
                             <DatePicker TextColor="Black" Date="{Binding Desde}" VerticalOptions="Center"/>
                             <Label Grid.Row="1" Text="Desde" FontSize="Small" TextColor="LightGray"/>
@@ -27,13 +27,9 @@
                     </StackLayout>
                     <Button Grid.Row="2" Grid.ColumnSpan="3" HorizontalOptions="EndAndExpand" HeightRequest="30" BackgroundColor="CornflowerBlue" CornerRadius="10" FontSize="Small" VerticalOptions="Center" Text="Exportar resultados" Command="{Binding ExportarResultadosCommand}" Padding="10,0"/>
                 </Grid>
-                <CollectionView Grid.Row="1" ItemsSource="{Binding Historial}" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
-                    <CollectionView.ItemTemplate>
-                        <DataTemplate>
-                            <cv:HistoryItem Soli="{Binding Solicitud}" InicioSolicitud="{Binding Inicio}" Costo="{Binding Costo}" Horas="{Binding Tiempo}" EnviarCommand="{Binding EnviarHistoricoCommand}" EnviarCommandParameter="{Binding }"/>
-                        </DataTemplate>
-                    </CollectionView.ItemTemplate>
-                </CollectionView>
+                <StackLayout Grid.Row="1" x:Name="solicitudes" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" Spacing="10" Orientation="Vertical">
+
+                </StackLayout>
             </Grid>
             <cv:StatusBar Grid.Row="2" IsLinksVisible="False"/>
         </Grid>

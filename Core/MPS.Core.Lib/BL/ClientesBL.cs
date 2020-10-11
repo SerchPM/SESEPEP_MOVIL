@@ -59,6 +59,22 @@ namespace MPS.Core.Lib.BL
             else
                 return (false, "Ocurrio un error al agregar la tarjeta, intente mas tarde");
         }
+
+        /// <summary>
+        /// Obtiene los diferentes servicion solicitudados por cliente
+        /// </summary>
+        /// <param name="idCliente">Identificador del cliente</param>
+        /// <param name="desde">Fecha de inicio para filtrar las solicitudes</param>
+        /// <param name="hasta">Fecha final para filtrar las solicitudes</param>
+        /// <returns></returns>
+        public async Task<List<ClienteSolicitud>> GetSolicitudesAsync(Guid idCliente, DateTime desde, DateTime hasta)
+        {
+            var (statusCode, resultado) = await ClientesApi.GetSolicitudesAsync(idCliente, desde, hasta);
+            if (statusCode == HttpStatusCode.OK)
+                return resultado;            
+            else
+                return new List<ClienteSolicitud>();
+        }
         #endregion
     }
 }
