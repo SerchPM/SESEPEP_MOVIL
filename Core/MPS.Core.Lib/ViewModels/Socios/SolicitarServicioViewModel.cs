@@ -63,6 +63,28 @@ namespace MPS.Core.Lib.ViewModels.Socios
             });
         }
 
+        RelayCommand buscarUbicacionCommand = null;
+        public RelayCommand BuscarUbicacionCommand
+        {
+            get => buscarUbicacionCommand ??= new RelayCommand(async () =>
+            {
+                if (!string.IsNullOrEmpty(NombreUbicacion))
+                {
+                    var result = await MapaBL.ObtenerPoints(NombreUbicacion);
+                    if (ObteniendoUbicacion != null && result != null && result.Count > 1 && ServicioSeleccionado != null)
+                    {
+                        var geoposicion = new Geoposicion(result[0], result[1]);
+                        UbicacionActualEvent args = new UbicacionActualEvent
+                        {
+                            Geoposicion = geoposicion
+                        };
+                        ObteniendoUbicacion(this, args);
+                        UbicacionSolicitud = new Geoposicion(geoposicion.Latitud, geoposicion.Longitud);
+                    }
+                }
+            });
+        }
+
         RelayCommand<(double, double)> obtenerDireccionCommand = null;
         public RelayCommand<(double, double)> ObtenerDireccionCommand
         {
