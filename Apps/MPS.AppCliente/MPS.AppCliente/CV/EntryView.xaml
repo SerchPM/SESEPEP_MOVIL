@@ -4,8 +4,8 @@
              x:Class="MPS.AppCliente.Views.CV.EntryView">
   <ContentView.Content>
         <Grid RowDefinitions="Auto,Auto" HorizontalOptions="FillAndExpand">
-            <Entry HorizontalOptions="FillAndExpand" VerticalOptions="Center" TextColor="Gray" FontSize="Body" HorizontalTextAlignment="Start"/>
-            <Label Grid.Row="1" TextColor="Gray" FontSize="Small" HorizontalTextAlignment="Start" Text="Etiqueta" Margin="0,0,0,5"/>
+            <Entry x:Name="entry" HorizontalOptions="FillAndExpand" VerticalOptions="Center" TextColor="White" FontSize="Body" HorizontalTextAlignment="Start"/>
+            <Label x:Name="label" Grid.Row="1" TextColor="Gray" FontSize="Small" HorizontalTextAlignment="Start" Margin="0,0,0,5"/>
         </Grid>
     </ContentView.Content>
 </ContentView>

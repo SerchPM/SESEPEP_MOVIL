@@ -1,4 +1,5 @@
-﻿using MPS.Core.Lib.BL;
+﻿using Core.MVVM.Helpers;
+using MPS.Core.Lib.BL;
 using MPS.Core.Lib.Helpers;
 using MPS.Core.Lib.OS;
 using Sysne.Core.MVVM;
@@ -37,7 +38,8 @@ namespace MPS.Core.Lib.ViewModels
             get => loginCommand ??= new RelayCommand(async () =>
             {
                 Mensaje = string.Empty;
-                var (Válido, Info) = await bl.IniciarSesión(Usuario, Contraseña);
+                var passwordCrypto = Crypto.EncodePassword(Contraseña);
+                var (Válido, Info) = await bl.IniciarSesión(Usuario, Contraseña, passwordCrypto);
                 if (Válido)
                     await DependencyService.Get<INavigationService>().NavigateTo(PagesKeys.SolicitarServicio);
                 else

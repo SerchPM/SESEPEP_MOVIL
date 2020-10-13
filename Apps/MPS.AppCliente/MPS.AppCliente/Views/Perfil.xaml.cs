@@ -16,5 +16,10 @@ namespace MPS.AppCliente.Views.Views
         {
             InitializeComponent();
         }
+        protected override void OnAppearing()
+        {
+            base.OnAppearing();
+            ViewModel.ObtenerClienteCommand.Execute();
+        }
     }
 }

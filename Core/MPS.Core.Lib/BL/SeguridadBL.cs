@@ -10,9 +10,9 @@ namespace MPS.Core.Lib.BL
 {
     public class SeguridadBL
     {
-        public async Task<(bool Válido,LoginResponse Info)> IniciarSesión(string usuario, string contraseña, bool mantenerSesiónActiva = true)
+        public async Task<(bool Válido,LoginResponse Info)> IniciarSesión(string usuario, string contraseña, string contraseñaCrýpto, bool mantenerSesiónActiva = true)
         {
-            var (StatusCode, LoginInfo) = await (new SeguridadApi()).LoginAsync(usuario, contraseña);
+            var (StatusCode, LoginInfo) = await (new SeguridadApi()).LoginAsync(usuario, contraseñaCrýpto);
             var válido = StatusCode == System.Net.HttpStatusCode.OK;
             if (válido)
             {

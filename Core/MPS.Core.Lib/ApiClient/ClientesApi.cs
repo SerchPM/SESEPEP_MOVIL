@@ -1,5 +1,6 @@
 ﻿using MPS.Core.Lib.Helpers;
 using MPS.SharedAPIModel.Clientes;
+using MPS.SharedAPIModel.Seguridad;
 using Sysne.Core.ApiClient;
 using System;
 using System.Collections.Generic;
@@ -40,6 +41,46 @@ namespace MPS.Core.Lib.ApiClient
                 ("P_GUID_MARCA", tarjeta.IdMarca.ToString()),
                 ("P_CVV", tarjeta.CVV.ToString()),
                 ("P_TIPO", tarjeta.Tipo.ToString()));
+            return res;
+        }
+
+        /// <summary>
+        /// Obtiene los datos generales del cliente
+        /// </summary>
+        /// <param name="idCliente">Identificador del cliente</param>
+        /// <returns></returns>
+        public async Task<(HttpStatusCode StatusCode, Cliente tarjetas)> GetClienteAsync(Guid idCliente) =>
+            await CallPostAsync<Cliente>("ConsultaDetalle", ("P_GUID_CLIENTE", idCliente));
+
+        /// <summary>
+        /// Actualiza la informacion del cliente
+        /// </summary>
+        /// <param name="idCliente">Identificador del cliente</param>
+        /// <param name="cliente">Objeto con la informacion del cliente</param>
+        /// <returns></returns>
+        public async Task<(HttpStatusCode StatusCode, Respuesta operacionInfo)> ActualziarClienteAsync(Guid idCliente, Cliente cliente)
+        {
+            var res = await CallFormUrlEncoded<Respuesta>("ActualizaInfoCliente", HttpMethod.Post,
+                ("P_GUID_SOCIO", idCliente.ToString()),
+                ("P_FECHA_NACIMIENTO", cliente.FECHA_NACIMIENTO.ToString()),
+                ("P_NOMBRE", cliente.NOMBRE),
+                ("P_APELLIDO_1", cliente.APELLIDO_1),
+                ("P_APELLIDO_2", cliente.APELLIDO_2),
+                ("P_TEL_NUMERO", cliente.TELEFONO));
+            return res;
+        }
+
+        /// <summary>
+        /// Actualiza el password del cliente
+        /// </summary>
+        /// <param name="idCliente">Identificador del cliente</param>
+        /// <param name="password">Nuevo password del cliente</param>
+        /// <returns></returns>
+        public async Task<(HttpStatusCode StatusCode, Respuesta operacionInfo)> ActualziarPasswordAsync(Guid idCliente, string password)
+        {
+            var res = await CallFormUrlEncoded<Respuesta>("ActualizaInfoCliente", HttpMethod.Post,
+                           ("P_GUID_SOCIO", idCliente.ToString()),
+                           ("P_PWD", password));
             return res;
         }
         #endregion

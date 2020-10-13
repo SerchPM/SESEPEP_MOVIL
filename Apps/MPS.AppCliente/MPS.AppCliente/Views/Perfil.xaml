@@ -6,7 +6,7 @@
              x:Class="MPS.AppCliente.Views.Views.Perfil"
              xmlns:vm="clr-namespace:MPS.Core.Lib.ViewModels.Clientes">
     <ContentPage.BindingContext>
-        <vm:PerfilViewModel/>
+        <vm:PerfilViewModel x:Name="ViewModel"/>
     </ContentPage.BindingContext>
     <ContentPage.Content>
         <Grid RowDefinitions="Auto,Auto,*" ColumnDefinitions=".05*,*,.05*" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" Padding="0,5">
@@ -17,7 +17,7 @@
                         <Image Source="" HorizontalOptions="Center" VerticalOptions="Center" />
                     </Frame>
                 </StackLayout>
-                <Label Text="Nombre Completo de la Persona" TextColor="White" FontAttributes="Bold" HorizontalOptions="Center" HorizontalTextAlignment="Center"/>
+                <Label Text="{Binding NombreCopleto, Mode=TwoWay}" TextColor="White" FontAttributes="Bold" HorizontalOptions="Center" HorizontalTextAlignment="Center"/>
                 <StackLayout Orientation="Horizontal" HorizontalOptions="Center">
                     <Label Text="Online" FontSize="Small" TextColor="White"/>
                     <Image Source="" Aspect="AspectFit" HorizontalOptions="Center" VerticalOptions="Center"/>
@@ -29,25 +29,83 @@
                     <Grid RowDefinitions="Auto,*,Auto,Auto" VerticalOptions="StartAndExpand">
                         <Label Text="Datos generales" FontSize="Medium" FontAttributes="Bold" TextColor="White"/>
                         <StackLayout Grid.Row="1">
-                            <cv:EntryView/>
-                            <cv:EntryView/>
-                            <cv:EntryView/>
-                            <cv:EntryView/>
-                            <cv:EntryView/>
-                            <cv:EntryView/>
+                            <cv:EntryView Text="{Binding Cliente.NO_CLIENTE, Mode=TwoWay}" Etiqueta="No. Cuenta" IsEnabled="False" TextColor="Gray"/>
+                            <cv:EntryView Text="{Binding Cliente.NOMBRE, Mode=TwoWay}" Etiqueta="Nombre(s)" IsEnabled="False" TextColor="Gray"/>
+                            <cv:EntryView Text="{Binding Cliente.APELLIDO_1, Mode=TwoWay}" Etiqueta="Apellido Paterno" IsEnabled="False" TextColor="Gray"/>
+                            <cv:EntryView Text="{Binding Cliente.APELLIDO_2, Mode=TwoWay}" Etiqueta="Apellido Materno" IsEnabled="False" TextColor="Gray"/>
+                            <cv:EntryView Text="{Binding Cliente.FECHA_NACIMIENTO, Mode=TwoWay}" Etiqueta="Fecha de Nacimiento" IsEnabled="False" TextColor="Gray"/>
+                            <cv:EntryView Text="{Binding Cliente.SEXO, Mode=TwoWay}" Etiqueta="Sexo" IsEnabled="False" TextColor="Gray"/>
                         </StackLayout>
                         <Label Grid.Row="2" Text="Contacto" FontSize="Medium" FontAttributes="Bold" TextColor="White"/>
                         <StackLayout Grid.Row="3">
-                            <cv:EntryView/>
-                            <cv:EntryView/>
+                            <cv:EntryView Text="{Binding Cliente.CORREO_ELECTRONICO, Mode=TwoWay}" Etiqueta="Correo Elentronico" IsEnabled="False" TextColor="Gray"/>
+                            <cv:EntryView Text="{Binding Cliente.TELEFONO, Mode=TwoWay}" Keyboard="Numeric" Etiqueta="Telefono"/>
                         </StackLayout>
                     </Grid>
                 </ScrollView>
                 <StackLayout Grid.Column="1" Grid.Row="2" HorizontalOptions="End">
-                    <Button VerticalOptions="Center" HorizontalOptions="End" TextColor="White" CornerRadius="10" BackgroundColor="IndianRed" FontSize="Small" Padding="10,0" Text="Guardar"/>
-                    <Button VerticalOptions="Center" HorizontalOptions="End" TextColor="White" CornerRadius="10" BackgroundColor="LightGray" FontSize="Small" Padding="10,0" Text="Cambiar contraseña"/>
+                    <Button VerticalOptions="Center" HorizontalOptions="End" TextColor="White" CornerRadius="10" BackgroundColor="IndianRed" FontSize="Small" Padding="10,0" Text="Guardar" Command="{Binding ActualziarInfoClienteCommand}"/>
+                    <Button VerticalOptions="Center" HorizontalOptions="End" TextColor="White" CornerRadius="10" BackgroundColor="LightGray" FontSize="Small" Padding="10,0" Text="Cambiar contraseña" Command="{Binding ModalPasswordCommand}"/>
                 </StackLayout>
             </Grid>
+           
+            <!--Modal Agregar Forma de Pago-->
+            <Frame VerticalOptions="FillAndExpand" Grid.RowSpan="3" Grid.ColumnSpan="3" HorizontalOptions="FillAndExpand" BackgroundColor="Gray" Opacity=".5" IsVisible="{Binding ModalPassword}"/>
+            <Grid Grid.RowSpan="3" Grid.Column="1" RowDefinitions=".3*,Auto,.3*" ColumnDefinitions=".1*,*,.1*" IsVisible="{Binding ModalPassword}">
+                <Frame Grid.Column="1" Grid.Row="1" CornerRadius="10" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" BackgroundColor="White" IsClippedToBounds="True">
+                    <Grid RowDefinitions="Auto, *, Auto" Padding="5">
+                        <Label Text="Cambiar contraseña" Margin="0,0,0,0" TextColor="{StaticResource AlterColor}" FontAttributes="Bold" FontSize="Medium"/>
+                        <ScrollView Grid.Row="1">
+                            <StackLayout>
+                                <cv:EntryView Text="{Binding Password, Mode=TwoWay}" Etiqueta="Introduzca nueva contraseña" HorizontalOptions="FillAndExpand" IsPassword="True" TextColor="#000000"/>
+                                <Label Text="{Binding MensajePassword}" TextColor="Red" FontSize="Micro"/>
+                                <cv:EntryView Text="{Binding PasswordConfirm, Mode=TwoWay}" Etiqueta="Confirme nueva contraseña" HorizontalOptions="FillAndExpand" IsPassword="True" TextColor="#000000"/>
+                                <Label Text="{Binding MensajePasswordConfirm}" TextColor="Red" FontSize="Micro"/>
+                            </StackLayout>
+                        </ScrollView>
+                        <Grid Grid.Row="2" ColumnDefinitions="*,*" VerticalOptions="Center">
+                            <Button VerticalOptions="Center" HorizontalOptions="Center" CornerRadius="10" BackgroundColor="LightGray" FontSize="Small" Padding="10,0" Text="Cancelar" Command="{Binding OcultarModalPaswwordCommand}"/>
+                            <Button Grid.Column="1" VerticalOptions="Center" HorizontalOptions="Center" CornerRadius="10" BackgroundColor="IndianRed" FontSize="Small" Padding="10,0" Text="Guardar" IsEnabled="{Binding PasswordCorrect}" Command="{Binding ActualziarPasswordCommand}"/>
+                        </Grid>
+                    </Grid>
+                </Frame>
+            </Grid>
+            
+            <!--Modal Informativo-->
+            <Frame Grid.ColumnSpan="3" Grid.RowSpan="3" BackgroundColor="Gray" Opacity="0.5"  IsVisible="{Binding Modal}"/>
+            <Frame Grid.Column="1" Grid.RowSpan="3" VerticalOptions="Center" HorizontalOptions="Center" IsVisible="{Binding Modal}" BackgroundColor="White" CornerRadius="20">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width=".05*"/>
+                        <ColumnDefinition />
+                        <ColumnDefinition Width=".05*"/>
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height=".7*"/>
+                    </Grid.RowDefinitions>
+                    <Label Grid.Column="1" Text="{Binding Mensaje, Mode=TwoWay}" TextColor="Gray" FontSize="{OnPlatform Android=Body, iOS=Small}" VerticalTextAlignment="Center" VerticalOptions="Center" HorizontalTextAlignment="Center" HorizontalOptions="Center"/>
+                    <StackLayout  Grid.Row="1" Grid.Column="1">
+                        <Button CornerRadius="20" HorizontalOptions="CenterAndExpand" Padding="{OnPlatform Android='50,15', iOS='25,10'}" FontAttributes="None" Text="Aceptar" Command="{Binding OcultarModalCommand}" TextColor="White" FontSize="{OnPlatform Android=Body, iOS=Small}">
+                            <VisualStateManager.VisualStateGroups>
+                                <VisualStateGroup x:Name="Common">
+                                    <VisualState x:Name="Disabled">
+                                        <VisualState.Setters>
+                                            <Setter Property="BackgroundColor" Value="#F4F1F1"/>
+                                        </VisualState.Setters>
+                                    </VisualState>
+                                    <VisualState x:Name="Normal">
+                                        <VisualState.Setters>
+                                            <Setter Property="BackgroundColor" Value="IndianRed"/>
+                                        </VisualState.Setters>
+                                    </VisualState>
+                                </VisualStateGroup>
+                            </VisualStateManager.VisualStateGroups>
+                        </Button>
+                    </StackLayout>
+                </Grid>
+            </Frame>
+
         </Grid>
     </ContentPage.Content>
 </ContentPage>
