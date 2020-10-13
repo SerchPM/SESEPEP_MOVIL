@@ -83,6 +83,16 @@ namespace MPS.Core.Lib.ApiClient
                            ("P_PWD", password));
             return res;
         }
+
+        /// <summary>
+        /// Obtiene los diferentes servicion solicitudados por cliente
+        /// </summary>
+        /// <param name="idCliente">Identificador del cliente</param>
+        /// <param name="desde">Fecha de inicio para filtrar las solicitudes</param>
+        /// <param name="hasta">Fecha final para filtrar las solicitudes</param>
+        /// <returns></returns>
+        public async Task<(HttpStatusCode StatusCode, List<ClienteSolicitud> tarjetas)> GetSolicitudesAsync(Guid idCliente, DateTime desde, DateTime hasta) =>
+            await CallPostAsync<List<ClienteSolicitud>>("ConsultaClienteSolicitudes", ("P_GUID_CLIENTE", idCliente), ("P_FECHA_INICIO", desde.ToString("MM-dd-yyyy")), ("P_FECHA_FIN", hasta.ToString("MM-dd-yyyy")));
         #endregion
     }
 }
