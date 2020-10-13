@@ -52,6 +52,7 @@ namespace MPS.Core.Lib.ApiClient
         /// <returns></returns>
         public async Task<(HttpStatusCode StatusCode, List<ClienteSolicitud> tarjetas)> GetSolicitudesAsync(Guid idCliente, DateTime desde, DateTime hasta) =>
             await CallPostAsync<List<ClienteSolicitud>>("ConsultaClienteSolicitudes", ("P_GUID_CLIENTE", idCliente), ("P_FECHA_INICIO", desde.ToString("MM-dd-yyyy")), ("P_FECHA_FIN", hasta.ToString("MM-dd-yyyy")));
+
         #endregion
     }
 }

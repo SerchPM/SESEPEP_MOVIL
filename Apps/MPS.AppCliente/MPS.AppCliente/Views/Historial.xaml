@@ -31,6 +31,7 @@
 
                 </StackLayout>
             </Grid>
+            
             <cv:StatusBar Grid.Row="2" IsLinksVisible="False"/>
         </Grid>
     </ContentPage.Content>

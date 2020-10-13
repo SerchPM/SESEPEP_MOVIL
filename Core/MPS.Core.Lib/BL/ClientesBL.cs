@@ -75,6 +75,7 @@ namespace MPS.Core.Lib.BL
             else
                 return new List<ClienteSolicitud>();
         }
+
         #endregion
     }
 }

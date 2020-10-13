@@ -19,5 +19,6 @@ namespace MPS.SharedAPIModel.Clientes
         public string UBICACION_1 { get; set; }
         public string UBICACION_2 { get; set; }
         public decimal? TOTAL_PAGADO { get; set; }
+
     }
 }

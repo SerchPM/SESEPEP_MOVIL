@@ -40,6 +40,7 @@ namespace MPS.AppCliente.Views.Views
                             ViewModel.CargarSolicitudes = false;
                         }
                         break;
+
                     default:
                         break;
                 }
