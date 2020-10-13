@@ -9,7 +9,7 @@ using System.Text;
 
 namespace MPS.Core.Lib.ViewModels.Clientes
 {
-    public class HistorialViewModel :ViewModelWithBL<SociosBL>
+    public class HistorialViewModel :ViewModelWithBL<ClientesBL>
     {
         #region Constructor
         public HistorialViewModel()
@@ -18,14 +18,17 @@ namespace MPS.Core.Lib.ViewModels.Clientes
         #endregion
 
         #region Propeidades
-        private List<Historial> historial =  new List<Historial>();
-        public List<Historial> Historial { get => historial; set => Set(ref historial, value); }
+        private List<ClienteSolicitud> historial =  new List<ClienteSolicitud>();
+        public List<ClienteSolicitud> Historial { get => historial; set => Set(ref historial, value); }
 
         private DateTime desde = DateTime.Now;
         public DateTime Desde { get => desde; set => Set(ref desde, value); }
 
         private DateTime hasta = DateTime.Now;
         public DateTime Hasta { get => hasta; set => Set(ref hasta, value); }
+
+        private bool cargarSolicitudes;
+        public bool CargarSolicitudes { get => cargarSolicitudes; set => Set(ref cargarSolicitudes, value); }
         #endregion
 
         #region Comandos
@@ -35,14 +38,16 @@ namespace MPS.Core.Lib.ViewModels.Clientes
         {
             get => buscarHistorialCommand ??= new RelayCommand(async () =>
             {
-                var r = await bl.GetHistoricoSolicitudesAsync(Guid.Parse(Settings.Current.LoginInfo.Usr.Id), Desde, Hasta);
+                Historial.Clear();
+                Historial = await bl.GetSolicitudesAsync(Guid.Parse(Settings.Current.LoginInfo.Usr.Id), Desde, Hasta);
+                CargarSolicitudes = true;
             });
         }
 
-        private RelayCommand<Historial> enviarHistoricoCommand = null;
-        public RelayCommand<Historial> EnviarHistoricoCommand
+        private RelayCommand<ClienteSolicitud> enviarHistoricoCommand = null;
+        public RelayCommand<ClienteSolicitud> EnviarHistoricoCommand
         {
-            get => enviarHistoricoCommand ??= new RelayCommand<Historial>(async (param) =>
+            get => enviarHistoricoCommand ??= new RelayCommand<ClienteSolicitud>(async (param) =>
             {
 
             });
@@ -56,6 +61,7 @@ namespace MPS.Core.Lib.ViewModels.Clientes
 
             });
         }
+
         #endregion
     }
 }

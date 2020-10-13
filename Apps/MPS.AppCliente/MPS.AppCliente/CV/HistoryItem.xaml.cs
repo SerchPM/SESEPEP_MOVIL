@@ -31,18 +31,18 @@ namespace MPS.AppCliente.Views.CV
                 me.inicio.Text = me.InicioSolicitud.ToString("dd/MM/yyyy hh:mm:ss") + " (Inicio)";
             });
 
-        public decimal Costo
+        public decimal? Costo
         {
-            get => (decimal)GetValue(CostoProperty);
+            get => (decimal?)GetValue(CostoProperty);
             set => SetValue(CostoProperty, value);
         }
 
-        public static readonly BindableProperty CostoProperty = BindableProperty.Create(nameof(Costo), typeof(decimal), typeof(HistoryItem), default(decimal),
+        public static readonly BindableProperty CostoProperty = BindableProperty.Create(nameof(Costo), typeof(decimal?), typeof(HistoryItem), default(decimal?),
             propertyChanged: (bindable, oldValue, newValue) =>
             {
                 var me = (HistoryItem)bindable;
-                me.Costo = (decimal)newValue;
-                me.costo.Text = me.Costo.ToString("C2");
+                me.Costo = (decimal?)newValue;
+                me.costo.Text = me.Costo.HasValue ? me.Costo.Value.ToString("C2") : "$0.00";
             });
 
         public int Horas
@@ -89,11 +89,11 @@ namespace MPS.AppCliente.Views.CV
 
         public object EnviarCommandParameter
         {
-            get => (object)GetValue(EnviarCommandParameterProperty);
+            get => GetValue(EnviarCommandParameterProperty);
             set => SetValue(EnviarCommandParameterProperty, value);
         }
 
-        public static readonly BindableProperty EnviarCommandParameterProperty = BindableProperty.Create(nameof(EnviarCommandParameter), typeof(object), typeof(HistoryItem), default(object),
+        public static readonly BindableProperty EnviarCommandParameterProperty = BindableProperty.Create(nameof(EnviarCommandParameter), typeof(object), typeof(HistoryItem),
             propertyChanged: (bindable, oldValue, newValue) =>
             {
                 var me = (HistoryItem)bindable;

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using MPS.AppCliente.Views.CV;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -15,6 +16,44 @@ namespace MPS.AppCliente.Views.Views
         public Historial()
         {
             InitializeComponent();
+            ViewModel.PropertyChanged += (s, e) =>
+            {
+                switch (e.PropertyName)
+                {
+                    case "CargarSolicitudes":
+                        if (ViewModel.CargarSolicitudes)
+                        {
+                            solicitudes.Children.Clear();
+                            foreach (var solicitud in ViewModel.Historial)
+                            {
+                                HistoryItem history = new HistoryItem
+                                {
+                                    Soli = solicitud.FECHA_SOLICITUD,
+                                    InicioSolicitud = solicitud.INICIO_SOLICITUD,
+                                    Costo = solicitud.TOTAL_PAGADO ?? 0,
+                                    Horas = solicitud.TIEMPO_PACTADO,
+                                    EnviarCommand = ViewModel.EnviarHistoricoCommand,
+                                    EnviarCommandParameter = solicitud
+                                };
+                                solicitudes.Children.Add(history);
+                            }
+                            ViewModel.CargarSolicitudes = false;
+                        }
+                        break;
+
+                    default:
+                        break;
+                }
+            };
+        }
+
+        protected override void OnAppearing()
+        {
+            base.OnAppearing();
+            solicitudes.Children.Clear();
+            ViewModel.Historial.Clear();
+            ViewModel.Desde = DateTime.Now;
+            ViewModel.Hasta = DateTime.Now;
         }
     }
 }
