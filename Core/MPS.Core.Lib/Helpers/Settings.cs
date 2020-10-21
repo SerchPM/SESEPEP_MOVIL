@@ -34,6 +34,18 @@ namespace MPS.Core.Lib.Helpers
         /// </summary>
         public string ModeloDispositivo { get => GetValue<string>(); set => SetValue(ref modeloDispositivo, value); }
 
+        private string tipoDispositivo;
+        /// <summary>
+        /// Obtiene o asigna el tipo del dispositivo
+        /// </summary>
+        public string TipoDispositivo { get => GetValue<string>(); set => SetValue(ref tipoDispositivo, value); }
+
+        private string so;
+        /// <summary>
+        /// Obtiene o asigna el sistema operativo del dispositivo
+        /// </summary>
+        public string SO { get => GetValue<string>(); set => SetValue(ref so, value); }
+
         public LoginResponse LoginInfo { get; set; } = new LoginResponse();
 
         void SetValue<T>(ref T field, T newValue = default, [CallerMemberName] string propertyName = null)

@@ -1,4 +1,5 @@
 ﻿using MPS.Core.Lib.Helpers;
+using MPS.SharedAPIModel;
 using MPS.SharedAPIModel.Clientes;
 using MPS.SharedAPIModel.Operaciones;
 using MPS.SharedAPIModel.Seguridad;
@@ -33,6 +34,24 @@ namespace MPS.Core.Lib.ApiClient
         /// <returns></returns>
         public async Task<(HttpStatusCode StatusCode, List<Tarjeta> catalogo)> GetTarjetasAsync() =>
             await CallPostAsync<List<Tarjeta>>("ConsultaUnCatalogo", ("P_CATALOGO", "CAT_MARCAS_TARJETAS"));
+
+        /// <summary>
+        /// Registra un nuevo dispositivo en OneSignal
+        /// </summary>
+        /// <param name="dispositivo"></param>
+        /// <returns></returns>
+        public async Task<(HttpStatusCode StatusCode, SharedAPIModel.Clientes.Response response)> RegistrarDispostivoAsync(Dispositivo dispositivo)
+        {
+            var res = await CallFormUrlEncoded<SharedAPIModel.Clientes.Response>("AgregarNuevoDispositivo", HttpMethod.Post,
+                ("P_GUID_USUARIO", dispositivo.Id.ToString()),
+                ("P_TIPO_USUARIO", dispositivo.TipoUsuario.ToString()),
+                ("P_TIMEZONE", dispositivo.TimeZona),
+                ("P_GAME_VERSION", dispositivo.VercionApp),
+                ("P_DEVICE_TYPE", dispositivo.TipoDispositivo),
+                ("P_DEVICE_MODEL", dispositivo.Modelo),
+                ("P_DEVICE_OS", dispositivo.SO));
+            return res;
+        }
         #endregion
     }
 }

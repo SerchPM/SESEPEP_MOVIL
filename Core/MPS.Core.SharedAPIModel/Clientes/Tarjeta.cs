@@ -48,7 +48,7 @@ namespace MPS.SharedAPIModel.Clientes
         }
     }
 
-    public class TarjetaResponse
+    public class Response
     {
         public string ESTATUS { get; set; }
         public string DESCRIPCION { get; set; }

@@ -31,9 +31,9 @@ namespace MPS.Core.Lib.ApiClient
         /// </summary>
         /// <param name="tarjeta">Objeto con la informacion de la tarjeta</param>
         /// <returns></returns>
-        public async Task<(HttpStatusCode StatusCode, TarjetaResponse tarjetaInfo)> RegistrarTarjetaAsync(NuevaTarjeta tarjeta)
+        public async Task<(HttpStatusCode StatusCode, Response tarjetaInfo)> RegistrarTarjetaAsync(NuevaTarjeta tarjeta)
         {
-            var res = await CallFormUrlEncoded<TarjetaResponse>("CrearClienteTarjeta", HttpMethod.Post,
+            var res = await CallFormUrlEncoded<Response>("CrearClienteTarjeta", HttpMethod.Post,
                 ("P_GUID_CLIENTE", tarjeta.IdCliente.ToString()),
                 ("P_NUMERO", tarjeta.NoCuenta.ToString()),
                 ("P_ANIO", tarjeta.AñoExpira.ToString()),

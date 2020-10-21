@@ -13,6 +13,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)Clientes\ClienteSolicitud.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Clientes\Cliente.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Clientes\Tarjeta.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Dispositivo.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Geoposicion.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Operaciones\Servicio.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Seguridad\LoginResponse.cs" />

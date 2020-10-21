@@ -11,6 +11,7 @@ namespace MPS.AppSocio
 {
     public partial class App : Application
     {
+        public NotificationsWrapper NotificationsWrapper { get; private set; } = new NotificationsWrapper();
         public App()
         {
             InitializeComponent();

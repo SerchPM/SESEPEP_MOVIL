@@ -47,5 +47,21 @@ namespace MPS.Core.Lib.ViewModels
             }, () => Validate(this, false)
                 , dependencies: (this, new[] { nameof(Usuario), nameof(Contraseña) }));
         }
+
+        RelayCommand loginSocioCommand = null;
+        public RelayCommand LoginSocioCommand
+        {
+            get => loginSocioCommand ??= new RelayCommand(async () =>
+            {
+                Mensaje = string.Empty;
+                var passwordCrypto = Crypto.EncodePassword(Contraseña);
+                var (Válido, Info) = await bl.IniciarSesiónSocio(Usuario, Contraseña, passwordCrypto);
+                if (Válido)
+                    await DependencyService.Get<INavigationService>().NavigateTo(PagesKeys.SolicitarServicio);
+                else
+                    Mensaje = "Usuario y/o contraseña incorrectos";
+            }, () => Validate(this, false)
+                , dependencies: (this, new[] { nameof(Usuario), nameof(Contraseña) }));
+        }
     }
 }

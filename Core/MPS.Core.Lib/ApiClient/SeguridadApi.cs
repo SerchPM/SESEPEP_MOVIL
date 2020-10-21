@@ -1,4 +1,5 @@
 ﻿using MPS.Core.Lib.Helpers;
+using MPS.SharedAPIModel;
 using MPS.SharedAPIModel.Seguridad;
 using Sysne.Core.ApiClient;
 using System;

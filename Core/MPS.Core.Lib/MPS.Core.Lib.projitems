@@ -11,6 +11,8 @@
   <ItemGroup>
     <Compile Include="$(MSBuildThisFileDirectory)ApiClient\ClientesApi.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)BL\ClientesBL.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Helpers\AppSettingsManager.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Helpers\Enumeraciones.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ViewModels\Clientes\FormaDePagoViewModel.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ViewModels\Clientes\HistorialViewModel.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ViewModels\Clientes\PerfilViewModel.cs" />
