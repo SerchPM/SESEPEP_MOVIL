@@ -32,7 +32,7 @@ namespace MPS.Core.Lib.BL
 
         public async Task<(bool Válido, LoginResponse Info)> IniciarSesiónSocio(string usuario, string contraseña, string contraseñaCrýpto, bool mantenerSesiónActiva = true)
         {
-            var (StatusCode, LoginInfo) = await (new SeguridadApi()).LoginAsync("lambda.mardan@gmail.com", "vT2uX7kfiKTwl4Ii39WPWaEkJXywgUhjh8uunfEfuHk=");
+            var (StatusCode, LoginInfo) = await (new SeguridadApi()).LoginAsync(usuario, contraseñaCrýpto);
             var válido = StatusCode == System.Net.HttpStatusCode.OK;
             if (válido)
             {
