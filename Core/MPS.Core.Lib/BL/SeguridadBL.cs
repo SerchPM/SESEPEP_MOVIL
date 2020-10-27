@@ -42,19 +42,7 @@ namespace MPS.Core.Lib.BL
                     Settings.Current.Contraseña = contraseña;
                 }
                 Settings.Current.LoginInfo = LoginInfo;
-                var dispositivo = new Dispositivo
-                {
-                    Id = Guid.Parse(LoginInfo.Usr.Id),
-                    Modelo = Settings.Current.ModeloDispositivo,
-                    SO = Settings.Current.SO,
-                    TipoDispositivo = Settings.Current.TipoDispositivo,
-                    TipoUsuario = (int)TipoUsuarioEnum.Socio,
-                    VercionApp = "1.0.5",
-                    TimeZona = "-28800"
-                };
-                var (statusCode, response) = await new OperacionesApi().RegistrarDispostivoAsync(dispositivo);
-                if (statusCode == System.Net.HttpStatusCode.OK)
-                    Autentificado?.Invoke(this, new EventArgs());
+                Autentificado?.Invoke(this, new EventArgs());
             }
             return (válido, LoginInfo);
         }
