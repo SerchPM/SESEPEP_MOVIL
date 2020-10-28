@@ -4,8 +4,20 @@
 	<application android:label="Mobile Private Security" android:usesCleartextTraffic="true">
 		<meta-data android:name="com.google.android.maps.v2.API_KEY" android:value="AIzaSyBL9iOVNIGgLWdfpUnrHzR88rx3AuIOqzg"/>
 		<meta-data android:name="com.google.android.gms.version" android:value="@integer/google_play_services_version"/>
+    	<!--Receptor para OneSignal-->
+		<receiver android:name="com.onesignal.GcmBroadcastReceiver"	android:permission="com.google.android.c2dm.permission.SEND" >
+			<intent-filter>
+				<action android:name="com.google.android.c2dm.intent.RECEIVE" />
+				<category android:name="MPS MOVIL" />
+			</intent-filter>
+		</receiver>
+  	<!--Receptor para OneSignal-->
 		<uses-library android:name="org.apache.http.legacy" android:required="false"/>
 	</application>
+  	<!--Permisos para OneSignal-->
+	<permission android:name="MPS MOVIL.permission.C2D_MESSAGE" android:protectionLevel="signature" />
+	<uses-permission android:name="MPS MOVIL.permission.C2D_MESSAGE" />
+	<!--Permisos para OneSignal-->
 	<uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
 	<uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
 	<uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
