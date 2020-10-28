@@ -154,6 +154,11 @@
       <Project>{1D390EE2-2D4E-48B8-A604-CA9A573EC91E}</Project>
       <Name>MPS.AppSocio.Views</Name>
     </ProjectReference>
+    <ProjectReference Include="..\OneSignalServiceExtensionSocio\OneSignalServiceExtensionSocio.csproj">
+      <IsAppExtension>true</IsAppExtension>
+      <Project>{078AB40A-3DE1-4824-814A-0424EC80815D}</Project>
+      <Name>OneSignalServiceExtensionSocio</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <BundleResource Include="Resources\Default.png" />

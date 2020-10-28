@@ -151,6 +151,11 @@
       <Project>{26B0CAB1-AD0E-489E-96D4-167EDC941E5F}</Project>
       <Name>MPS.AppCliente.Views</Name>
     </ProjectReference>
+    <ProjectReference Include="..\OneSignalServiceExtension\OneSignalServiceExtension.csproj">
+      <IsAppExtension>true</IsAppExtension>
+      <Project>{2CDE2C37-975F-4853-B4E9-112EA9375497}</Project>
+      <Name>OneSignalServiceExtension</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <BundleResource Include="Resources\listonesBase.png" />
