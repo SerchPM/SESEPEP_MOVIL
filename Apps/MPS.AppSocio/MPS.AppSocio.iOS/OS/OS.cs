@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using Foundation;
 using MPS.SharedAPIModel;
 using UIKit;
+using Xamarin.Essentials;
 
 namespace MPS.AppSocio.iOS.OS
 {
@@ -53,9 +54,31 @@ namespace MPS.AppSocio.iOS.OS
             }
         }
 
-        public Task<Geoposicion> ObtenerGeoposicion(bool precision)
+        public async Task<Geoposicion> ObtenerGeoposicion(bool precision)
         {
-            throw new NotImplementedException();
+            try
+            {
+                var request = new GeolocationRequest(precision ? GeolocationAccuracy.Best : GeolocationAccuracy.Best, TimeSpan.FromSeconds(0));
+                var location = await Geolocation.GetLastKnownLocationAsync();
+                if (location != null)
+                {
+                    location = await Geolocation.GetLocationAsync(request);
+                    return new Geoposicion(location.Latitude, location.Longitude);
+                }
+                return new Geoposicion(0, 0);
+            }
+            catch (FeatureNotSupportedException)
+            {
+                return new Geoposicion(0, 0);
+            }
+            catch (PermissionException)
+            {
+                return new Geoposicion(0, 0);
+            }
+            catch (Exception)
+            {
+                return new Geoposicion(0, 0);
+            }
         }
     }
 }

@@ -2,19 +2,19 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="MPS.AppSocio.Views.Views.SolicitarServicio"
-             xmlns:maps="clr-namespace:Xamarin.Forms.Maps;assembly=Xamarin.Forms.Maps"
+             xmlns:MyMap="clr-namespace:MPS.AppSocio.Views.MyMap"
              xmlns:cv="clr-namespace:MPS.AppSocio.Views.CV"
              xmlns:vm="clr-namespace:MPS.Core.Lib.ViewModels.Socios"
              xmlns:model="clr-namespace:MPS.Core.Lib.Model">
     <ContentPage.BindingContext>
-        <vm:SolicitarServicioViewModel/>
+        <vm:SolicitarServicioViewModel x:Name="ViewModel"/>
     </ContentPage.BindingContext>
     <ContentPage.Content>
         <Grid RowDefinitions="Auto, *, Auto">
             <cv:Header Margin="0"/>
             <Grid Grid.Row="1" RowDefinitions="Auto,.7*, *,Auto" RowSpacing="0">
-                <maps:Map Grid.RowSpan="4" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" Margin="0"/>
-                <Grid Grid.Row="1" RowDefinitions="Auto, Auto,1.5*,Auto" VerticalOptions="Start" Padding="10,10,5,5" BackgroundColor="CornflowerBlue" Opacity=".8" Margin="0">
+                <MyMap:CustomMap x:Name="Map" Grid.RowSpan="4" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" Margin="0"/>
+                <Grid IsVisible="false" Grid.Row="1" RowDefinitions="Auto, Auto,1.5*,Auto" VerticalOptions="Start" Padding="10,10,5,5" BackgroundColor="CornflowerBlue" Opacity=".8" Margin="0">
                     <Label Text="Seguridad Escolta" FontAttributes="Italic" TextColor="Gray"  FontSize="Medium"/>
                     <Grid Grid.Row="1" ColumnDefinitions="*,.5*">
                         <Label Text="{Binding}" TextColor="White" FontSize="Body"/>

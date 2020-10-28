@@ -19,4 +19,6 @@
 	<permission android:name="MPS MOVIL.permission.C2D_MESSAGE" android:protectionLevel="signature" />
 	<uses-permission android:name="MPS MOVIL.permission.C2D_MESSAGE" />
 	<!--Permisos para OneSignal-->
+  <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+  <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
 </manifest>

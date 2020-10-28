@@ -7,6 +7,7 @@ using Android.Views;
 using Android.Widget;
 using Android.OS;
 using Sysne.Core.OS;
+using Android;
 
 namespace MPS.AppSocio.Droid
 {
@@ -19,7 +20,7 @@ namespace MPS.AppSocio.Droid
             ToolbarResource = Resource.Layout.Toolbar;
 
             base.OnCreate(savedInstanceState);
-
+            CheckAppPermissions();
             Rg.Plugins.Popup.Popup.Init(this, savedInstanceState);
 
             DependencyService.Register<OS.OS, IOS>();
@@ -35,6 +36,21 @@ namespace MPS.AppSocio.Droid
             Xamarin.Essentials.Platform.OnRequestPermissionsResult(requestCode, permissions, grantResults);
 
             base.OnRequestPermissionsResult(requestCode, permissions, grantResults);
+        }
+
+        private void CheckAppPermissions()
+        {
+            if ((int)Build.VERSION.SdkInt < 23)
+                return;
+            else
+            {
+                if (PackageManager.CheckPermission(Manifest.Permission.AccessCoarseLocation, PackageName) != Permission.Granted
+                    && PackageManager.CheckPermission(Manifest.Permission.AccessFineLocation, PackageName) != Permission.Granted)
+                {
+                    var permissions = new string[] { Manifest.Permission.AccessCoarseLocation, Manifest.Permission.AccessFineLocation };
+                    RequestPermissions(permissions, 100);
+                }
+            }
         }
     }
 }

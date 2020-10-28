@@ -29,6 +29,7 @@ namespace MPS.Core.Lib.ViewModels.Socios
         public event EventHandler<UbicacionActualEvent> ObteniendoUbicacion;
         #endregion
 
+        #region Propiedades
         string solicitud;
         public string Solicitud { get => solicitud; set { Set(ref solicitud, value); } }
 
@@ -52,7 +53,26 @@ namespace MPS.Core.Lib.ViewModels.Socios
 
         private Servicio servicioSeleccionado = new Servicio();
         public Servicio ServicioSeleccionado { get => servicioSeleccionado; set => Set(ref servicioSeleccionado, value); }
+        #endregion
 
+        #region Commandos
+
+        private RelayCommand obtenerComponentesCommand = null;
+        public RelayCommand ObtenerComponentesCommand
+        {
+            get => obtenerComponentesCommand ??= new RelayCommand(async () =>
+            {
+                var ubicacion = await Sysne.Core.OS.DependencyService.Get<Sysne.Core.OS.IOS>().ObtenerGeoposicion(false);
+                if (ObteniendoUbicacion != null && ubicacion != null)
+                {
+                    UbicacionActualEvent args = new UbicacionActualEvent
+                    {
+                        Geoposicion = ubicacion
+                    };
+                    ObteniendoUbicacion(this, args);
+                }
+            });
+        }
         private RelayCommand ocultarModalCommand = null;
         public RelayCommand OcultarModalCommand
         {
@@ -153,10 +173,10 @@ namespace MPS.Core.Lib.ViewModels.Socios
                     EstatusSolicitud = true;
             }));
         }
-
-        public class UbicacionActualEvent : EventArgs
-        {
-            public Geoposicion Geoposicion { get; set; }
-        }
+        #endregion
+    }
+    public class UbicacionActualEvent : EventArgs
+    {
+        public Geoposicion Geoposicion { get; set; }
     }
 }

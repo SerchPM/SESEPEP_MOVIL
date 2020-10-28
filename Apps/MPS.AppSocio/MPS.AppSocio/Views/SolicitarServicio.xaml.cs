@@ -17,6 +17,24 @@ namespace MPS.AppSocio.Views.Views
         public SolicitarServicio()
         {
             InitializeComponent();
+
+            ViewModel.ObteniendoUbicacion += async (s, e) =>
+            {
+                await Task.Run(() =>
+                {
+                    Device.BeginInvokeOnMainThread(() =>
+                    {
+                        Map.UbicacionActual = e.Geoposicion;
+                        Map.MoveToRegion(MapSpan.FromCenterAndRadius(new Position(e.Geoposicion.Latitud.Value, e.Geoposicion.Longitud.Value), Distance.FromMiles(0.2)));
+                    });
+                });
+            };
+        }
+
+        protected override void OnAppearing()
+        {
+            Map.MoveToRegion(MapSpan.FromCenterAndRadius(new Position(19.043455, -98.198686), Distance.FromMiles(0.2)));
+            ViewModel.ObtenerComponentesCommand.Execute();
         }
     }
 }
