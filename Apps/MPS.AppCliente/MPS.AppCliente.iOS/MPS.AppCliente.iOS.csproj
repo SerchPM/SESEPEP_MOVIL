@@ -155,6 +155,7 @@
       <IsAppExtension>true</IsAppExtension>
       <Project>{2CDE2C37-975F-4853-B4E9-112EA9375497}</Project>
       <Name>OneSignalServiceExtension</Name>
+      <IsWatchApp>false</IsWatchApp>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

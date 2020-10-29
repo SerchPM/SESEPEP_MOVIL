@@ -143,7 +143,7 @@
         <!--Modal Servicio Solicitado-->
         <Frame BackgroundColor="Gray" Opacity="0.5" Grid.RowSpan="3" IsVisible="{Binding ModalAgregarServicio}"/>
         <Grid IsVisible="{Binding ModalAgregarServicio}" Grid.RowSpan="3" RowDefinitions=".3*,*,.3*" ColumnDefinitions=".05*,*,.05*" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
-            <Frame Grid.Row="1" Grid.Column="1" IsClippedToBounds="True" Padding="15,20" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" CornerRadius="10">
+            <Frame BackgroundColor="White" Grid.Row="1" Grid.Column="1" IsClippedToBounds="True" Padding="15,20" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" CornerRadius="10">
                 <Grid RowDefinitions="Auto,*,Auto">
                     <StackLayout Orientation="Horizontal">
                         <Image x:Name="iconApp" Source="logoHeader.png" HorizontalOptions="Center" VerticalOptions="Center"/>

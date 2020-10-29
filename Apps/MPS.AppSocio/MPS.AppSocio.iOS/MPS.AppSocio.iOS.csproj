@@ -158,6 +158,7 @@
       <IsAppExtension>true</IsAppExtension>
       <Project>{078AB40A-3DE1-4824-814A-0424EC80815D}</Project>
       <Name>OneSignalServiceExtensionSocio</Name>
+      <IsWatchApp>false</IsWatchApp>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

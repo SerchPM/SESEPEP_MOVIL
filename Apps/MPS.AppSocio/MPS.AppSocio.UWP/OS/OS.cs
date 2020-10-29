@@ -1,12 +1,15 @@
-﻿using Sysne.Core.OS;
+﻿using MPS.SharedAPIModel;
+using Sysne.Core.OS;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Windows.Devices.Geolocation;
 using Windows.UI;
 using Windows.UI.ViewManagement;
 using Windows.UI.Xaml.Media;
+using Xamarin.Essentials;
 
 namespace MPS.AppSocio.UWP.OS
 {
@@ -15,6 +18,55 @@ namespace MPS.AppSocio.UWP.OS
         public void HideNavigation(bool show)
         {
             //UWP no tiene NavigationBar
+        }
+
+        public async Task<Geoposicion> ObtenerGeoposicion(bool precision)
+        {
+            try
+            {
+                var location = await Geolocation.GetLastKnownLocationAsync();
+                var accessStatus = await Geolocator.RequestAccessAsync();
+                if (accessStatus == GeolocationAccessStatus.Allowed)
+                {
+                    if (precision)
+                    {
+                        var request = new GeolocationRequest(precision ? GeolocationAccuracy.Best : GeolocationAccuracy.Best, TimeSpan.FromSeconds(0));
+                        if (location != null)
+                        {
+                            location = await Geolocation.GetLocationAsync(request);
+                            return new Geoposicion(location.Latitude, location.Longitude);
+                        }
+                        return new Geoposicion(0, 0);
+                    }
+                    else
+                    {
+                        location = await Geolocation.GetLocationAsync(new GeolocationRequest() { DesiredAccuracy = GeolocationAccuracy.Low });
+                        if (location != null)
+                            return new Geoposicion(location.Latitude, location.Longitude);
+                    }
+                }
+                else
+                {
+                    await Windows.System.Launcher.LaunchUriAsync(new Uri("ms-settings:privacy-location"));
+                }
+                return new Geoposicion(0, 0);
+            }
+            catch (FeatureNotSupportedException)
+            {
+                return new Geoposicion(0, 0);
+            }
+            catch (FeatureNotEnabledException)
+            {
+                return new Geoposicion(0, 0);
+            }
+            catch (PermissionException)
+            {
+                return new Geoposicion(0, 0);
+            }
+            catch (Exception)
+            {
+                return new Geoposicion(0, 0);
+            }
         }
 
         public void SetStatusBarColor(string color)
