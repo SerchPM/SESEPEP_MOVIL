@@ -3,6 +3,7 @@ using MPS.Core.Lib.BL;
 using MPS.Core.Lib.Helpers;
 using MPS.SharedAPIModel;
 using MPS.SharedAPIModel.Operaciones;
+using MPS.SharedAPIModel.Socios;
 using MPS.SharedAPIModel.Solicitud;
 using Sysne.Core.MVVM;
 using Sysne.Core.MVVM.Patterns;
@@ -53,6 +54,18 @@ namespace MPS.Core.Lib.ViewModels.Socios
 
         private Servicio servicioSeleccionado = new Servicio();
         public Servicio ServicioSeleccionado { get => servicioSeleccionado; set => Set(ref servicioSeleccionado, value); }
+
+        private SolicitudServicio solicitudDeServicio;
+        public SolicitudServicio SolicitudDeServicio { get => solicitudDeServicio; set => Set(ref solicitudDeServicio, value); }
+
+        private bool modalServicioAsignado;
+        public bool ModalServicioAsignado { get => modalServicioAsignado; set => Set(ref modalServicioAsignado, value); }
+
+        private bool express;
+        public bool Express { get => express; set => Set(ref express, value); }
+
+        private bool personalizada;
+        public bool Personalizada { get => personalizada; set => Set(ref personalizada, value); }
         #endregion
 
         #region Commandos
@@ -73,6 +86,7 @@ namespace MPS.Core.Lib.ViewModels.Socios
                 }
             });
         }
+
         private RelayCommand ocultarModalCommand = null;
         public RelayCommand OcultarModalCommand
         {
@@ -157,21 +171,80 @@ namespace MPS.Core.Lib.ViewModels.Socios
             }));
         }
 
-        RelayCommand tomarSolicitud = null;
-        public RelayCommand Tomarsolicitud
+        RelayCommand tomarSolicitudCommand = null;
+        public RelayCommand TomarsolicitudCommand
         {
-            get => tomarSolicitud ?? (tomarSolicitud = new RelayCommand(async () =>
+            get => tomarSolicitudCommand ??= new RelayCommand(async () =>
             {
                 var asignarSocio = new SocioAsignado
                 {
                     IdSocio = Guid.Parse(Id),
-                    IdSolicitud = Guid.Parse(solicitud),
+                    IdSolicitud = SolicitudDeServicio.IdSolicitud,
                     Estatus = 1
                 };
                 var resultado = await SolicitudBL.AsignarSocioAsync(asignarSocio);
                 if (resultado)
+                {
+                    var (Latitud, Longitud) = Utilidades.LimpiarCadenaUbicacion(SolicitudDeServicio.Ubicacion);
+                    var ubicacion = new Geoposicion(Latitud, Longitud);
+                    if (ObteniendoUbicacion != null && ubicacion != null)
+                    {
+                        UbicacionActualEvent args = new UbicacionActualEvent
+                        {
+                            Geoposicion = ubicacion
+                        };
+                        ObteniendoUbicacion(this, args);
+                    }
+                    ModalServicioAsignado = false;
+                    SolicitudDeServicio = new SolicitudServicio();
+                    Express = false;
+                    Personalizada = false;
                     EstatusSolicitud = true;
-            }));
+                }
+            });
+        }
+
+        private RelayCommand rechazarSolicitudCommand = null;
+        public RelayCommand RechazarSolicitudCommand
+        {
+            get => rechazarSolicitudCommand ??= new RelayCommand(async () =>
+            {
+                ModalServicioAsignado = false;
+                SolicitudDeServicio = new SolicitudServicio();
+                Express = false;
+                Personalizada = false;
+            });
+        }
+
+        private RelayCommand<SolicitudServicio> mostrarModalSolicitudCommand = null; 
+        public RelayCommand<SolicitudServicio> MostrarModalSolicitudCommand
+        {
+            get => mostrarModalSolicitudCommand ??= new RelayCommand<SolicitudServicio>(async (servicio) =>
+            {
+                if (servicio.ClaveTipoServicio.Equals(1))
+                    Express = true;
+                else
+                    Personalizada = true;
+                SolicitudDeServicio = servicio;
+                ModalServicioAsignado = true;
+            });
+        }
+
+        private RelayCommand verificarSolicitudCommand = null;
+        public RelayCommand VerificarSolicitudCommand
+        {
+            get => verificarSolicitudCommand ??= new RelayCommand(() =>
+            {
+                if (Settings.Current.Solicitud != null && !string.IsNullOrEmpty(Settings.Current.Solicitud.FolioSolicitud))
+                {
+                    SolicitudDeServicio = Settings.Current.Solicitud;
+                    if (SolicitudDeServicio.ClaveTipoServicio.Equals(1))
+                        Express = true;
+                    else
+                        Personalizada = true;
+                    ModalServicioAsignado = true;
+                }
+            });
         }
         #endregion
     }

@@ -42,6 +42,47 @@
                 </Grid>
                 <Image Grid.Row="3" Margin="10" Aspect="AspectFit" VerticalOptions="Center" HorizontalOptions="End"/>
             </Grid>
+            <!--Modal Solicitud de servicio-->
+            <Frame BackgroundColor="Gray" Opacity="0.5" Grid.RowSpan="3" IsVisible="{Binding ModalServicioAsignado}"/>
+            <Grid IsVisible="{Binding ModalServicioAsignado}" Grid.RowSpan="3" RowDefinitions=".3*,*,.3*" ColumnDefinitions=".05*,*,.05*" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
+                <Frame Grid.Row="1" Grid.Column="1" IsClippedToBounds="True" Padding="15,20" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" CornerRadius="10">
+                    <Grid RowDefinitions="Auto,*,Auto">
+                        <StackLayout Orientation="Horizontal">
+                            <Image x:Name="iconApp" Source="logoHeader.png" HorizontalOptions="Center" VerticalOptions="Center"/>
+                            <StackLayout HorizontalOptions="Start">
+                                <Label Text="Servicio solicitado" FontSize="Medium" TextColor="LightGray" Margin="10,0,0,0"/>
+                                <Label Text="{Binding SolicitudDeServicio.NombreServicio, Mode=TwoWay}" FontSize="Medium" TextColor="IndianRed" Margin="10,0,0,0"/>
+                                <Image IsVisible="{Binding Express}" Source="servicioExpressActivo.png" Margin="0,0,0,0"/>
+                                <Image IsVisible="{Binding Personalizada}" Source="servicioPersonalizadoActivo.png" Margin="0,0,0,0"/>
+                            </StackLayout>
+                        </StackLayout>
+                        <Grid Grid.Row="1">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width=".25*" x:Name="spacingIcon"/>
+                                <ColumnDefinition/>
+                            </Grid.ColumnDefinitions>
+                            <StackLayout Grid.Column="1" Margin="0,10,0,0">
+                                <StackLayout>
+                                    <Label Text="Nombre del cliente:" TextColor="LightGray"/>
+                                    <Label Text="{Binding SolicitudDeServicio.NombreCliente, Mode=TwoWay}"/>
+                                </StackLayout>
+                                <StackLayout Margin="0,10">
+                                    <Label Text="Folio de solicitud" TextColor="LightGray"/>
+                                    <Label Text="{Binding SolicitudDeServicio.FolioSolicitud, Mode=TwoWay}"/>
+                                </StackLayout>
+                                <StackLayout Margin="0,10">
+                                    <Label Text="Fecha de solicitud" TextColor="LightGray"/>
+                                    <Label Text="{Binding SolicitudDeServicio.FechaSolicitud, Mode=TwoWay}"/>
+                                </StackLayout>
+                            </StackLayout>
+                        </Grid>
+                        <StackLayout Grid.Row="2" HorizontalOptions="CenterAndExpand" Orientation="Horizontal">
+                            <Button Command="{Binding RechazarSolicitudCommand}" Text="Rechazar" HorizontalOptions="Start" Padding="30,0" TextColor="White" Background="Gray"/>
+                            <Button Command="{Binding TomarsolicitudCommand}" Text="Aceptar" HorizontalOptions="End" Padding="30,0" TextColor="White" Background="IndianRed"/>
+                        </StackLayout>
+                    </Grid>
+                </Frame>
+            </Grid>
             <cv:StatusBar Grid.Row="2" IsLinksVisible="False"/>
         </Grid>
     </ContentPage.Content>

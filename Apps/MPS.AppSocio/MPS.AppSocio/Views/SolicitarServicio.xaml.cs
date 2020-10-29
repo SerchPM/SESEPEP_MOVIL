@@ -34,6 +34,7 @@ namespace MPS.AppSocio.Views.Views
         protected override void OnAppearing()
         {
             Map.MoveToRegion(MapSpan.FromCenterAndRadius(new Position(19.043455, -98.198686), Distance.FromMiles(0.2)));
+            ViewModel.VerificarSolicitudCommand.Execute();
             ViewModel.ObtenerComponentesCommand.Execute();
         }
     }

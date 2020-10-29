@@ -1,5 +1,6 @@
 ﻿using Com.OneSignal;
 using MPS.SharedAPIModel;
+using MPS.SharedAPIModel.Notificaciones;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -16,7 +17,7 @@ namespace MPS.AppCliente.Views.OS
         /// <summary>
         /// Se lanza cuando se recibe una notificación, informa los datos adicionales de la notificación con el código de acción correspondiente
         /// </summary>
-        public event EventHandler<Mensaje> NotificationReceived;
+        public event EventHandler<MensajeCliente> NotificationReceived;
 
         /// <summary>
         /// Monitorea las notificaciones
@@ -34,12 +35,12 @@ namespace MPS.AppCliente.Views.OS
                .InFocusDisplaying(Com.OneSignal.Abstractions.OSInFocusDisplayOption.Notification)
                .HandleNotificationReceived((notification) =>
                {
-                   var mensaje = new Mensaje(notification.payload.additionalData);
+                   var mensaje = new MensajeCliente(notification.payload.additionalData);
                    DelegarAccionDeNotificacion(mensaje);
                }).EndInit();
         }
 
-        private async void DelegarAccionDeNotificacion(Mensaje mensaje)
+        private async void DelegarAccionDeNotificacion(MensajeCliente mensaje)
         {
             NotificationReceived?.Invoke(this, mensaje);
         }

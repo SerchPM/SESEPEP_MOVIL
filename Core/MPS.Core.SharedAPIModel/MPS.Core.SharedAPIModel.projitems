@@ -15,13 +15,15 @@
     <Compile Include="$(MSBuildThisFileDirectory)Clientes\Tarjeta.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Dispositivo.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Geoposicion.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Mensaje.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Notificaciones\MensajeSocio.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Notificaciones\MensajeCliente.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Operaciones\Servicio.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Seguridad\LoginResponse.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Socios\DetalleSocio.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Socios\HistorialSolicitudes.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Socios\Respuesta.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Socios\Socio.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Socios\SolicitudServicio.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Solicitud\AsignarSolicitudResponse.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Solicitud\SolicitudResponse.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Socios\NuevoSocio.cs" />
