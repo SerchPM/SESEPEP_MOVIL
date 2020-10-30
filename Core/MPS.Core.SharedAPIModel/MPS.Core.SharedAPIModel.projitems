@@ -12,6 +12,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)Address.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Clientes\ClienteSolicitud.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Clientes\Cliente.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Clientes\ServicioSolicitado.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Clientes\Tarjeta.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Dispositivo.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Geoposicion.cs" />

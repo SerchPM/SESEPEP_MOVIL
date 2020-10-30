@@ -17,7 +17,10 @@ namespace MPS.AppSocio.Views.Views
         public SolicitarServicio()
         {
             InitializeComponent();
-
+            iconApp.SizeChanged += (se, ee) =>
+            {
+                spacingIcon.Width = iconApp.Width;
+            };
             ViewModel.ObteniendoUbicacion += async (s, e) =>
             {
                 await Task.Run(() =>

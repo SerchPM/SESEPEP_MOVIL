@@ -156,7 +156,7 @@ namespace MPS.Core.Lib.ViewModels.Socios
         /// </summary>
         public RelayCommand ConsultaDetalleSolicitudCommand
         {
-            get => consultaDetalleSolicitudCommand ?? (consultaDetalleSolicitudCommand = new RelayCommand(async () =>
+            get => consultaDetalleSolicitudCommand ?? (consultaDetalleSolicitudCommand = new RelayCommand(() =>
             {
 
             }));
@@ -195,6 +195,7 @@ namespace MPS.Core.Lib.ViewModels.Socios
                         };
                         ObteniendoUbicacion(this, args);
                     }
+                    Settings.Current.Solicitud = new SolicitudServicio();
                     ModalServicioAsignado = false;
                     SolicitudDeServicio = new SolicitudServicio();
                     Express = false;
@@ -207,10 +208,11 @@ namespace MPS.Core.Lib.ViewModels.Socios
         private RelayCommand rechazarSolicitudCommand = null;
         public RelayCommand RechazarSolicitudCommand
         {
-            get => rechazarSolicitudCommand ??= new RelayCommand(async () =>
+            get => rechazarSolicitudCommand ??= new RelayCommand(() =>
             {
                 ModalServicioAsignado = false;
                 SolicitudDeServicio = new SolicitudServicio();
+                Settings.Current.Solicitud = new SolicitudServicio();
                 Express = false;
                 Personalizada = false;
             });
@@ -219,7 +221,7 @@ namespace MPS.Core.Lib.ViewModels.Socios
         private RelayCommand<SolicitudServicio> mostrarModalSolicitudCommand = null; 
         public RelayCommand<SolicitudServicio> MostrarModalSolicitudCommand
         {
-            get => mostrarModalSolicitudCommand ??= new RelayCommand<SolicitudServicio>(async (servicio) =>
+            get => mostrarModalSolicitudCommand ??= new RelayCommand<SolicitudServicio>((servicio) =>
             {
                 if (servicio.ClaveTipoServicio.Equals(1))
                     Express = true;

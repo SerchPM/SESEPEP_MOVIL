@@ -58,7 +58,7 @@
                         </StackLayout>
                         <Grid Grid.Row="1">
                             <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width=".25*" x:Name="spacingIcon"/>
+                                <ColumnDefinition x:Name="spacingIcon"/>
                                 <ColumnDefinition/>
                             </Grid.ColumnDefinitions>
                             <StackLayout Grid.Column="1" Margin="0,10,0,0">

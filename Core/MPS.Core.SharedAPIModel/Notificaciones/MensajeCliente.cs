@@ -18,7 +18,7 @@ namespace MPS.SharedAPIModel.Notificaciones
                 calificacionSocio = valores["CALIFICACION_SOCIO"].ToString();
 
             if (valores.ContainsKey("CLAVE_TIPO_SERVICIO"))
-                claveTipoServicio = valores["CLAVE_TIPO_SERVICIO"].ToString();
+                int.TryParse(valores["CLAVE_TIPO_SERVICIO"].ToString(), out claveTipoServicio);
 
             if (valores.ContainsKey("FECHA_SOLICITUD"))
                 fechaSolicitud = valores["FECHA_SOLICITUD"].ToString();
@@ -54,8 +54,8 @@ namespace MPS.SharedAPIModel.Notificaciones
         private string calificacionSocio;
         public string CalificacionSocio { get => calificacionSocio; set => calificacionSocio = value; }
 
-        private string claveTipoServicio;
-        public string ClaveTipoServicio { get => claveTipoServicio; set => claveTipoServicio = value; }
+        private int claveTipoServicio;
+        public int ClaveTipoServicio { get => claveTipoServicio; set => claveTipoServicio = value; }
 
         private string fechaSolicitud;
         public string FechaSolicitud { get => fechaSolicitud; set => fechaSolicitud = value; }

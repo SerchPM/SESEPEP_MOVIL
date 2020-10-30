@@ -26,6 +26,8 @@ namespace MPS.Core.Lib.BL
                     Settings.Current.Contraseña = contraseña;
                 }
                 Settings.Current.LoginInfo = LoginInfo;
+                if (Xamarin.Forms.Device.RuntimePlatform != Xamarin.Forms.Device.UWP)
+                    Autentificado?.Invoke(this, new EventArgs());
             }
             return (válido, LoginInfo);
         }
@@ -42,7 +44,8 @@ namespace MPS.Core.Lib.BL
                     Settings.Current.Contraseña = contraseña;
                 }
                 Settings.Current.LoginInfo = LoginInfo;
-                Autentificado?.Invoke(this, new EventArgs());
+                if (Xamarin.Forms.Device.RuntimePlatform != Xamarin.Forms.Device.UWP)
+                    Autentificado?.Invoke(this, new EventArgs());
             }
             return (válido, LoginInfo);
         }

@@ -34,7 +34,11 @@ namespace MPS.AppCliente
             iconApp.SizeChanged += (se, ee) => 
             {
                 spacingIcon.Width = iconApp.Width;
-            };           
+            };
+            iconAppSolicitud.SizeChanged += (se, ee) =>
+            {
+                spacingIconSolicitud.Width = iconAppSolicitud.Width;
+            };
             ViewModel.PropertyChanged += (s, e) =>
             {
                 switch (e.PropertyName)
@@ -146,6 +150,7 @@ namespace MPS.AppCliente
         protected override void OnAppearing()
         {
             Map.MoveToRegion(MapSpan.FromCenterAndRadius(new Position(19.043455, -98.198686), Distance.FromMiles(0.2)));
+            ViewModel.VerificarSolicitudCommand.Execute();
             ViewModel.ObtenerComponentesCommand.Execute();
             if (string.IsNullOrEmpty(Settings.Current.ModeloDispositivo))
                 Settings.Current.ModeloDispositivo = DeviceInfo.Model;

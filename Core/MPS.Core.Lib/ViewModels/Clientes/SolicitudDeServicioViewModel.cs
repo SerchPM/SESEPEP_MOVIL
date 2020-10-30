@@ -1,6 +1,7 @@
 ﻿using MPS.Core.Lib.BL;
 using MPS.Core.Lib.Helpers;
 using MPS.SharedAPIModel;
+using MPS.SharedAPIModel.Clientes;
 using MPS.SharedAPIModel.Operaciones;
 using MPS.SharedAPIModel.Socios;
 using MPS.SharedAPIModel.Solicitud;
@@ -104,6 +105,21 @@ namespace MPS.Core.Lib.ViewModels.Clientes
 
         private string filtroSocios = string.Empty;
         public string FiltroSocios { get => filtroSocios; set => Set(ref filtroSocios, value); }
+
+        private bool modalSolicitud;
+        public bool ModalSolicitud { get => modalSolicitud; set => Set(ref modalSolicitud, value); }
+
+        private ServicioSolicitado servicio;
+        public ServicioSolicitado Servicio { get => servicio; set => Set(ref servicio, value); }
+
+        private bool express;
+        public bool Express { get => express; set => Set(ref express, value); }
+
+        private bool personalizada;
+        public bool Personalizada { get => personalizada; set => Set(ref personalizada, value); }
+
+        private bool modalServicioAceptado;
+        public bool ModalServicioAceptado { get => modalServicioAceptado; set => Set(ref modalServicioAceptado, value); }
         #endregion
 
         #region Commands
@@ -125,7 +141,7 @@ namespace MPS.Core.Lib.ViewModels.Clientes
         RelayCommand cerrarModalRegistroCommand = null;
         public RelayCommand CerrarModalRegistroCommand
         {
-            get =>cerrarModalRegistroCommand ??= new RelayCommand(async () =>
+            get =>cerrarModalRegistroCommand ??= new RelayCommand(() =>
             {
                 if(EsPersonalizado && SolicitudServicio.HorasSolicidatas == 0)
                 {
@@ -339,6 +355,50 @@ namespace MPS.Core.Lib.ViewModels.Clientes
                         ObteniendoUbicacion(this, args);
                         UbicacionSolicitud = new Geoposicion(geoposicion.Latitud, geoposicion.Longitud);
                     }
+                }
+            });
+        }
+
+        private RelayCommand<ServicioSolicitado> mostrarModalSolicitudCommand = null;
+        public RelayCommand<ServicioSolicitado> MostrarModalSolicitudCommand
+        {
+            get => mostrarModalSolicitudCommand ??= new RelayCommand<ServicioSolicitado>((s) =>
+            {
+                if (s.ClaveTipoServicio.Equals(1))
+                    Express = true;
+                else
+                    Personalizada = true;
+                Servicio = s;
+                ModalServicioAceptado = true;
+            });
+        }
+
+        private RelayCommand ocultarModalSolicitudCommand = null;
+        public RelayCommand OcultarModalSolicitudCommand
+        {
+            get => ocultarModalSolicitudCommand ??= new RelayCommand(() =>
+            {
+                ModalServicioAceptado = false;
+                Servicio = new ServicioSolicitado();
+                Settings.Current.Solicitud = new SolicitudServicio();
+                Express = false;
+                Personalizada = false;
+            });
+        }
+
+        private RelayCommand verificarSolicitudCommand = null;
+        public RelayCommand VerificarSolicitudCommand
+        {
+            get => verificarSolicitudCommand ??= new RelayCommand(() =>
+            {
+                if (Settings.Current.ServicioSolicitado != null && !string.IsNullOrEmpty(Settings.Current.ServicioSolicitado.FolioSolicitud))
+                {
+                    Servicio = Settings.Current.ServicioSolicitado;
+                    if (Servicio.ClaveTipoServicio.Equals(1))
+                        Express = true;
+                    else
+                        Personalizada = true;
+                    ModalServicioAceptado = true;
                 }
             });
         }

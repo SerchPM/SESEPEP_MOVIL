@@ -1,4 +1,5 @@
 ﻿using MPS.Core.Lib.OS;
+using MPS.SharedAPIModel.Clientes;
 using MPS.SharedAPIModel.Seguridad;
 using MPS.SharedAPIModel.Socios;
 using Sysne.Core.MVVM;
@@ -77,6 +78,8 @@ namespace MPS.Core.Lib.Helpers
         public string MapServiceToken { get => GetValue<string>(mapServiceToken); set => SetValue(ref mapServiceToken, value); }
 
         public SolicitudServicio Solicitud { get; set; } = new SolicitudServicio();
+
+        public ServicioSolicitado ServicioSolicitado { get; set; } = new ServicioSolicitado();
 
     }
 }
