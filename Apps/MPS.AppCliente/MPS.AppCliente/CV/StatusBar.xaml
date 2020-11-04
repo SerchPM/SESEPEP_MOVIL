@@ -18,9 +18,21 @@
                         <Setter Property="TextColor" Value="{StaticResource BackgroundColor}"/>
                     </Style>
                 </StackLayout.Resources>
-                <Label Text="Sitio web"/>
-                <Label Text="Socios"/>
-                <Label Text="Privacidad"/>
+                <Label Text="Sitio web">
+                    <Label.GestureRecognizers>
+                        <TapGestureRecognizer Tapped="TapGestureRecognizer_SitioWeb"/>
+                    </Label.GestureRecognizers>
+                </Label>
+                <Label Text="Socios">
+                    <Label.GestureRecognizers>
+                        <TapGestureRecognizer Tapped="TapGestureRecognizer_Socios"/>
+                    </Label.GestureRecognizers>
+                </Label>
+                <Label Text="Privacidad">
+                    <Label.GestureRecognizers>
+                        <TapGestureRecognizer Tapped="TapGestureRecognizer_Privacidad"/>
+                    </Label.GestureRecognizers>
+                </Label>
                 <Label Text="Ayuda"/>
             </StackLayout>
         </Grid>

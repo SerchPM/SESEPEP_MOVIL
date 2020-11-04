@@ -8,15 +8,15 @@
 		<receiver android:name="com.onesignal.GcmBroadcastReceiver"	android:permission="com.google.android.c2dm.permission.SEND" >
 			<intent-filter>
 				<action android:name="com.google.android.c2dm.intent.RECEIVE" />
-				<category android:name="MPS MOVIL" />
+				<category android:name="MPS MOVIL CLIENTE" />
 			</intent-filter>
 		</receiver>
   	<!--Receptor para OneSignal-->
 		<uses-library android:name="org.apache.http.legacy" android:required="false"/>
 	</application>
   	<!--Permisos para OneSignal-->
-	<permission android:name="MPS MOVIL.permission.C2D_MESSAGE" android:protectionLevel="signature" />
-	<uses-permission android:name="MPS MOVIL.permission.C2D_MESSAGE" />
+	<permission android:name="MPS MOVIL CLIENTE.permission.C2D_MESSAGE" android:protectionLevel="signature" />
+	<uses-permission android:name="MPS MOVIL CLIENTE.permission.C2D_MESSAGE" />
 	<!--Permisos para OneSignal-->
 	<uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
 	<uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>

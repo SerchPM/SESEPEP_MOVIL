@@ -1,6 +1,9 @@
 ﻿using Com.OneSignal;
 using MPS.AppSocio.Views.Views;
+using MPS.Core.Lib.BL;
+using MPS.Core.Lib.Helpers;
 using MPS.Core.Lib.OS;
+using MPS.SharedAPIModel;
 using MPS.SharedAPIModel.Notificaciones;
 using MPS.SharedAPIModel.Socios;
 using Sysne.Core.OS;
@@ -12,15 +15,18 @@ namespace MPS.AppSocio.Views.OS
 {
     public class NotificationsWrapper
     {
-        public NotificationsWrapper()
-        {
-            Core.Lib.BL.SeguridadBL.Autentificado += (s, e) => Init();
-        }
-
         /// <summary>
         /// Se lanza cuando se recibe una notificación, informa los datos adicionales de la notificación con el código de acción correspondiente
         /// </summary>
         public event EventHandler<MensajeSocio> NotificationReceived;
+
+        private readonly OperacionesBL operacionesBL = null;
+
+        public NotificationsWrapper()
+        {
+            operacionesBL = new OperacionesBL();
+            Core.Lib.BL.SeguridadBL.Autentificado += (s, e) => Init();
+        }
 
         /// <summary>
         /// Monitorea las notificaciones
@@ -31,7 +37,17 @@ namespace MPS.AppSocio.Views.OS
             //Handle when your app starts
             OneSignal.Current.IdsAvailable(async (playerID, pushToken) =>
             {
-                var r = playerID;
+                await operacionesBL.RegistrarDispositivoAsync(new Dispositivo
+                {
+                    Id = Guid.Parse(Settings.Current.LoginInfo.Usr.Id),
+                    Modelo = Settings.Current.ModeloDispositivo,
+                    SO = Settings.Current.SO,
+                    TipoDispositivo = Settings.Current.TipoDispositivo,
+                    TipoUsuario = (int)TipoUsuarioEnum.Cliente,
+                    VercionApp = "1.0.5",
+                    TimeZona = "-28800",
+                    PlayerId = playerID
+                });
             });
 
             //Inicializa la subscripción
@@ -64,7 +80,7 @@ namespace MPS.AppSocio.Views.OS
                }).EndInit();
         }
 
-        private void DelegarAccionDeNotificacion(MensajeSocio mensaje)
+        public void DelegarAccionDeNotificacion(MensajeSocio mensaje)
         {
             NotificationReceived?.Invoke(this, mensaje);
             var paginaSolicitarServicio = typeof(SolicitarServicio);

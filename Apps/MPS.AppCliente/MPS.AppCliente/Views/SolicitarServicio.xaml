@@ -170,7 +170,14 @@
                             </StackLayout>
                             <StackLayout Margin="0,10" Orientation="Horizontal">
                                 <CheckBox Color="Gray" IsChecked="{Binding Terminos, Mode=TwoWay}"/>
-                                <Label Text="He leído y estoy de acuerdo con los términos y condiciones" LineBreakMode="WordWrap"/>
+                                <StackLayout Orientation="Vertical">
+                                    <Label Text="He leído y estoy de acuerdo con los" LineBreakMode="WordWrap"/>
+                                    <Label Text="términos y condiciones" TextDecorations="Underline" TextColor="Blue" LineBreakMode="WordWrap">
+                                        <Label.GestureRecognizers>
+                                            <TapGestureRecognizer Tapped="TapGestureRecognizer_Terminos"/>
+                                        </Label.GestureRecognizers>
+                                    </Label>
+                                </StackLayout>
                             </StackLayout>
                         </StackLayout>
                     </Grid>

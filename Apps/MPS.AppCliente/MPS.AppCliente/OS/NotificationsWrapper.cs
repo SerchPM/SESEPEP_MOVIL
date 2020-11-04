@@ -1,4 +1,6 @@
 ﻿using Com.OneSignal;
+using MPS.Core.Lib.BL;
+using MPS.Core.Lib.Helpers;
 using MPS.SharedAPIModel;
 using MPS.SharedAPIModel.Clientes;
 using MPS.SharedAPIModel.Notificaciones;
@@ -10,15 +12,18 @@ namespace MPS.AppCliente.Views.OS
 {
     public class NotificationsWrapper
     {
-        public NotificationsWrapper()
-        {
-            Core.Lib.BL.SeguridadBL.Autentificado += (s, e) => Init();
-        }
-
         /// <summary>
         /// Se lanza cuando se recibe una notificación, informa los datos adicionales de la notificación con el código de acción correspondiente
         /// </summary>
         public event EventHandler<MensajeCliente> NotificationReceived;
+
+        private readonly OperacionesBL operacionesBL = null;
+
+        public NotificationsWrapper()
+        {
+            operacionesBL = new OperacionesBL();
+            Core.Lib.BL.SeguridadBL.Autentificado += (s, e) => Init();
+        }
 
         /// <summary>
         /// Monitorea las notificaciones
@@ -29,6 +34,17 @@ namespace MPS.AppCliente.Views.OS
             //Handle when your app starts
             OneSignal.Current.IdsAvailable(async (playerID, pushToken) =>
             {
+                await operacionesBL.RegistrarDispositivoAsync(new Dispositivo
+                {
+                    Id = Guid.Parse(Settings.Current.LoginInfo.Usr.Id),
+                    Modelo = Settings.Current.ModeloDispositivo,
+                    SO = Settings.Current.SO,
+                    TipoDispositivo = Settings.Current.TipoDispositivo,
+                    TipoUsuario = (int)TipoUsuarioEnum.Cliente,
+                    VercionApp = "1.0.5",
+                    TimeZona = "-28800",
+                    PlayerId = playerID
+                });
             });
 
             //Inicializa la subscripción
@@ -61,7 +77,7 @@ namespace MPS.AppCliente.Views.OS
                }).EndInit();
         }
 
-        private void DelegarAccionDeNotificacion(MensajeCliente mensaje)
+        public void DelegarAccionDeNotificacion(MensajeCliente mensaje)
         {
             NotificationReceived?.Invoke(this, mensaje);
             var paginaSolicitarServicio = typeof(SolicitarServicio);

@@ -1,4 +1,5 @@
 ﻿using MPS.Core.Lib.ApiClient;
+using MPS.SharedAPIModel;
 using MPS.SharedAPIModel.Clientes;
 using MPS.SharedAPIModel.Operaciones;
 using System;
@@ -28,6 +29,20 @@ namespace MPS.Core.Lib.BL
                 return resultado;
             else
                 return new List<Tarjeta>();
+        }
+
+        /// <summary>
+        /// Registra o actualiza el dispositivo logeado
+        /// </summary>
+        /// <param name="dispositivo"></param>
+        /// <returns></returns>
+        public async Task<SharedAPIModel.Clientes.Response> RegistrarDispositivoAsync(Dispositivo dispositivo)
+        {
+            var (statusCode, resultado) = await OperacionesApi.RegistrarDispostivoAsync(dispositivo);
+            if (statusCode == HttpStatusCode.OK)
+                return resultado;
+            else
+                return new SharedAPIModel.Clientes.Response();
         }
         #endregion
     }

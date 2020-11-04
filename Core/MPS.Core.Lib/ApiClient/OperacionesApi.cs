@@ -49,7 +49,8 @@ namespace MPS.Core.Lib.ApiClient
                 ("P_GAME_VERSION", dispositivo.VercionApp),
                 ("P_DEVICE_TYPE", dispositivo.TipoDispositivo),
                 ("P_DEVICE_MODEL", dispositivo.Modelo),
-                ("P_DEVICE_OS", dispositivo.SO));
+                ("P_DEVICE_OS", dispositivo.SO),
+                ("P_KEY", dispositivo.PlayerId));
             return res;
         }
         #endregion

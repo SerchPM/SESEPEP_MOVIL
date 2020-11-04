@@ -13,5 +13,6 @@ namespace MPS.SharedAPIModel
         public string TipoDispositivo { get; set; }
         public string Modelo { get; set; }
         public string SO { get; set; }
+        public string PlayerId { get; set; }
     }
 }

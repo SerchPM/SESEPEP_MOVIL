@@ -74,4 +74,30 @@ namespace MPS.SharedAPIModel.Notificaciones
         private string ubicacion;
         public string Ubicacion { get => ubicacion; set => ubicacion = value; }
     }
+
+    public class AC
+    {
+        public string MensajePrincipal { get; set; }
+        public int ClaveTipoServicio { get; set; }
+        public string FechaSolicitud { get; set; }
+        public string FolioSolicitud { get; set; }
+        public Guid IdCliente { get; set; }
+        public Guid IdSolicitud { get; set; }
+        public Guid IdTipoSolicitud { get; set; }
+        public string NombreCliente { get; set; }
+        public string NombreServicio { get; set; }
+        public string TipoServicio { get; set; }
+        public string Ubicacion { get; set; }
+    }
+
+    public class CustomC
+    {
+        public string i { get; set; }
+        public AC a { get; set; }
+    }
+
+    public class RootC
+    {
+        public CustomC custom { get; set; }
+    }
 }

@@ -22,7 +22,17 @@ namespace MPS.AppSocio.Views.Views
             if (string.IsNullOrEmpty(Settings.Current.SO))
                 Settings.Current.SO = DeviceInfo.VersionString;
 
-            Settings.Current.TipoDispositivo = Device.RuntimePlatform == Device.iOS ? "0" : Device.RuntimePlatform == Device.Android ? "1" : "1";
+            Settings.Current.TipoDispositivo = Device.RuntimePlatform == Device.iOS ? "0" : Device.RuntimePlatform == Device.Android ? "1" : Device.RuntimePlatform == Device.UWP ? "6" : "1";
+        }
+
+        private void TapGestureRecognizer_OlvideDatos(object sender, EventArgs e)
+        {
+
+        }
+
+        private void TapGestureRecognizer_CrearCuenta(object sender, EventArgs e)
+        {
+
         }
     }
 }

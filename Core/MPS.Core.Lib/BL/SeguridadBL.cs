@@ -28,6 +28,8 @@ namespace MPS.Core.Lib.BL
                 Settings.Current.LoginInfo = LoginInfo;
                 if (Xamarin.Forms.Device.RuntimePlatform != Xamarin.Forms.Device.UWP)
                     Autentificado?.Invoke(this, new EventArgs());
+                else
+                    await RegistrarDispositivoUWP();
             }
             return (válido, LoginInfo);
         }
@@ -46,8 +48,15 @@ namespace MPS.Core.Lib.BL
                 Settings.Current.LoginInfo = LoginInfo;
                 if (Xamarin.Forms.Device.RuntimePlatform != Xamarin.Forms.Device.UWP)
                     Autentificado?.Invoke(this, new EventArgs());
+                else
+                    await RegistrarDispositivoUWP();
             }
             return (válido, LoginInfo);
+        }
+
+        public async Task<bool> RegistrarDispositivoUWP()
+        {
+            return true;
         }
     }
 }

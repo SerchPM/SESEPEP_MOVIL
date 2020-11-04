@@ -71,11 +71,11 @@ namespace MPS.Core.Lib.Helpers
         /// </summary>
         public string Pais { get => GetValue<string>(); set => SetValue(ref paisMonitorista, value); }
 
-        private string mapServiceToken;
+        private string channelUriUWP;
         /// <summary>
-        /// Obtiene o asigna el token del mapa de Bing.
+        /// Obtiene o asigna el canal de comunicacion de WNS
         /// </summary>
-        public string MapServiceToken { get => GetValue<string>(mapServiceToken); set => SetValue(ref mapServiceToken, value); }
+        public string ChannelUriUWP { get => GetValue<string>(); set => SetValue(ref channelUriUWP, value); }
 
         public SolicitudServicio Solicitud { get; set; } = new SolicitudServicio();
 

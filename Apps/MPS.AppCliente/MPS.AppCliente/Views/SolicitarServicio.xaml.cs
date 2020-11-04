@@ -151,10 +151,7 @@ namespace MPS.AppCliente
         {
             Map.MoveToRegion(MapSpan.FromCenterAndRadius(new Position(19.043455, -98.198686), Distance.FromMiles(0.2)));
             ViewModel.VerificarSolicitudCommand.Execute();
-            ViewModel.ObtenerComponentesCommand.Execute();
-            if (string.IsNullOrEmpty(Settings.Current.ModeloDispositivo))
-                Settings.Current.ModeloDispositivo = DeviceInfo.Model;
-            
+            ViewModel.ObtenerComponentesCommand.Execute();            
         }
 
         private void SolicitarServicio_Tapped(object sender, EventArgs e) => IsVisibleListaServicios = !IsVisibleListaServicios;
@@ -165,5 +162,8 @@ namespace MPS.AppCliente
         {
             ViewModel.ObtenerDireccionCommand.Execute((e.Position.Latitude, e.Position.Longitude));
         }
+
+        private async void TapGestureRecognizer_Terminos(object sender, EventArgs e) =>
+            await Browser.OpenAsync("https://dev.mpsmovil.com/terminos-condiciones.html", BrowserLaunchMode.SystemPreferred);
     }
 }
