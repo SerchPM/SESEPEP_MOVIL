@@ -20,7 +20,7 @@
 	<key>MinimumOSVersion</key>
 	<string>8.0</string>
 	<key>CFBundleDisplayName</key>
-	<string>Mobile Private Security</string>
+	<string>MPS</string>
 	<key>CFBundleIdentifier</key>
 	<string>mps.appcliente</string>
 	<key>UILaunchStoryboardName</key>
