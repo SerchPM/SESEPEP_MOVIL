@@ -37,5 +37,8 @@ namespace MPS.AppSocio.Views.CV
 
         private async void TapGestureRecognizer_SitioWeb(object sender, EventArgs e) =>
             await Browser.OpenAsync("https://dev.mpsmovil.com", BrowserLaunchMode.SystemPreferred);
+
+        private async void TapGestureRecognizer_Ayuda(object sender, EventArgs e) =>
+            await Browser.OpenAsync("https://dev.mpsmovil.com/ayuda.html", BrowserLaunchMode.SystemPreferred);
     }
 }
