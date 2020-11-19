@@ -39,7 +39,7 @@
     <Grid RowDefinitions="Auto,*,Auto">
         <cv:Header/>
         <ScrollView Grid.Row="1">
-            <Grid x:DataType="vm:SolicitudDeServicioViewModel"  RowDefinitions="Auto,Auto,Auto,Auto,Auto,Auto,Auto,Auto,Auto,Auto,Auto,Auto,Auto,Auto, *,Auto" Padding="10">
+            <Grid RowDefinitions="Auto,Auto,Auto,Auto,Auto,Auto,Auto,Auto,Auto,Auto,Auto,Auto,Auto,Auto, *,Auto" Padding="10">
 
                 <Label Text="Solicitar servicio"/>
                 <Frame Grid.Row="1" BackgroundColor="{StaticResource AccentColor}" CornerRadius="20" Padding="10" HorizontalOptions="StartAndExpand">
@@ -72,8 +72,13 @@
                 <Label Text="Unidades" Grid.Row="7" Grid.Column="1" VerticalOptions="Start"/>
 
                 <Label IsVisible="{Binding EsPersonalizado}" Text="Agregar personal" Grid.Row="8" VerticalOptions="End"/>
-                <StackLayout IsVisible="{Binding EsPersonalizado}" x:Name="personalSelected" Grid.Row="9" Grid.ColumnSpan="2" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" Spacing="10" Orientation="Vertical">
-
+                <StackLayout IsVisible="{Binding EsPersonalizado}" BindableLayout.ItemsSource="{Binding SociosSeleccionado}" Grid.Row="9" Grid.ColumnSpan="2" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" Spacing="10" Orientation="Vertical">
+                    <BindableLayout.ItemTemplate>
+                        <DataTemplate>
+                            <cv:PersonalRemove Nombre="{Binding NOMBRE_COMPLETO}" NombreEmpresa="{Binding NO_SOCIO}" Imagen="{Binding IMAGEN}" Edad="{Binding EDAD}"
+                                               RemoveCommand="{Binding Source={RelativeSource AncestorType={x:Type vm:SolicitudDeServicioViewModel}}, Path=RemovePersonalCommand}" RemoveCommandParameter="{Binding }"/>
+                        </DataTemplate>
+                    </BindableLayout.ItemTemplate>
                 </StackLayout>
                 <ImageButton IsVisible="{Binding EsPersonalizado}" Source="botonAgregar.png" Grid.Row="10" HorizontalOptions="Start" Command="{Binding CerrarModalRegistroCommand}"/>
                
@@ -119,18 +124,23 @@
         <cv:StatusBar Grid.Row="2" IsLinksVisible="False"/>
         <!--Modal Agregar Personal-->
         <BoxView Grid.RowSpan="3" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" Opacity=".6" BackgroundColor="CadetBlue" IsVisible="{Binding OpenModalRegistro}"/>
-        <Grid x:DataType="vm:SolicitudDeServicioViewModel" Grid.RowSpan="3" Margin="10,15" IsVisible="{Binding OpenModalRegistro}">
+        <Grid Grid.RowSpan="3" Margin="10,15" IsVisible="{Binding OpenModalRegistro}">
             <Frame CornerRadius="15" BackgroundColor="White" Padding="15">
                 <Grid RowDefinitions="Auto, Auto, *, Auto">
                     <Label Text="Agregar personal" FontSize="Medium" TextColor="DarkBlue" FontAttributes="Bold"/>
                     <Grid Grid.Row="1" RowDefinitions="Auto, Auto" ColumnDefinitions="*,Auto" Margin="0,0,0,15">
                         <Entry HorizontalOptions="FillAndExpand" VerticalOptions="Center" Text="{Binding FiltroSocios, Mode=TwoWay}"/>
                         <Label Grid.Row="1" Text="Buscar por partner, edad, perfil, ranking" Margin="10,0,0,0"/>
-                        <ImageButton Source="botonBuscar" CornerRadius="10" VerticalOptions="Center" HorizontalOptions="Center" Aspect="Fill" Grid.RowSpan="2" Grid.Column="1" Command="{Binding BuscarSociosCommand}"/>
+                        <ImageButton Source="botonBuscar.png" CornerRadius="10" VerticalOptions="Center" HorizontalOptions="Center" Aspect="Fill" Grid.Column="1" Command="{Binding BuscarSociosCommand}"/>
                     </Grid>
                     <ScrollView Grid.Row="2" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" Orientation="Vertical">
-                        <StackLayout x:Name="personales" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" Spacing="10" Orientation="Vertical">
-
+                        <StackLayout Orientation="Vertical" BindableLayout.ItemsSource="{Binding Socios}">
+                            <BindableLayout.ItemTemplate>
+                                <DataTemplate>
+                                    <cv:PersonalItem Nombre="{Binding NOMBRE_COMPLETO}" Edad="{Binding EDAD}" NombreEmpresa="{Binding NO_SOCIO}" Imagen="{Binding IMAGEN}" 
+                                                     Especialidades="{Binding SERVICIOS}" SourseSelected="{Binding Seleccionado}" SelectedCommand="{Binding Source={RelativeSource AncestorType={x:Type vm:SolicitudDeServicioViewModel}},Path=SeleccionarPersonalCommand}" SelectedCommandParameter="{Binding }"/>
+                                </DataTemplate>
+                            </BindableLayout.ItemTemplate>
                         </StackLayout>
                     </ScrollView>
                     <StackLayout Grid.Row="3" Orientation="Horizontal" HorizontalOptions="CenterAndExpand" Spacing="20" VerticalOptions="Fill">

@@ -71,7 +71,7 @@ namespace MPS.AppCliente.Views.CV
         {
             var me = (PersonalRemove)bindable;
             me.Edad = (string)newValue;
-            me.edad.Text = me.Edad;
+            me.edad.Text = $"{me.Edad} años";
         });
 
         public ICommand RemoveCommand

@@ -19,14 +19,14 @@
                         </StackLayout>
                         <ImageButton x:Name="remove" Grid.Column="2" Source="eliminar.png" Aspect="AspectFit" VerticalOptions="Start" HorizontalOptions="End"/>
                         <ScrollView Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="2" Orientation="Horizontal" HorizontalScrollBarVisibility="Never">
-                            <StackLayout Orientation="Horizontal" Spacing="15">
-                                <Frame BackgroundColor="SteelBlue" CornerRadius="5" IsClippedToBounds="True" Padding="5" HorizontalOptions="Fill" VerticalOptions="Center">
+                            <StackLayout Orientation="Horizontal" Spacing="15" Margin="0,0,5,0">
+                                <Frame BackgroundColor="SteelBlue" CornerRadius="15" IsClippedToBounds="True" Padding="5" HorizontalOptions="Fill" VerticalOptions="Center">
                                     <Grid ColumnDefinitions="Auto,*">
                                         <Image Aspect="AspectFit" Source="eventoSocialSel.png" HorizontalOptions="Center" VerticalOptions="Center"/>
                                         <Label x:Name="edad" Grid.Column="1" FontSize="Small" HorizontalOptions="FillAndExpand" HorizontalTextAlignment="Start" VerticalOptions="Center" VerticalTextAlignment="Center" TextColor="White"/>
                                     </Grid>
                                 </Frame>
-                                <Frame BackgroundColor="SteelBlue" CornerRadius="5" IsClippedToBounds="True" Padding="5" HorizontalOptions="FillAndExpand" VerticalOptions="Center">
+                                <Frame BackgroundColor="SteelBlue" CornerRadius="15" IsClippedToBounds="True" Padding="5" HorizontalOptions="FillAndExpand" VerticalOptions="Center">
                                     <Grid ColumnDefinitions="Auto,*">
                                         <Image Aspect="AspectFit" Source="especialidades.png" HorizontalOptions="Center" VerticalOptions="Center"/>
                                         <Label x:Name="especialidad" Grid.Column="1" Text="Especialidades" FontSize="Small" HorizontalOptions="FillAndExpand" HorizontalTextAlignment="Start" VerticalOptions="Center" VerticalTextAlignment="Center" TextColor="White"/>

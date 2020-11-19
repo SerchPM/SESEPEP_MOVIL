@@ -80,12 +80,11 @@ namespace MPS.AppCliente.Views.CV
             set => SetValue(SourseSelectedProperty, value);
         }
 
-        public static readonly BindableProperty SourseSelectedProperty = BindableProperty.Create(nameof(SourseSelected), typeof(string), typeof(PersonalItem), default(string),
-        propertyChanged: (bindable, oldValue, newValue) =>
+        public static readonly BindableProperty SourseSelectedProperty = BindableProperty.Create(nameof(SourseSelected), typeof(string), typeof(PersonalItem),
+        defaultBindingMode: BindingMode.TwoWay, propertyChanged: (bindable, oldValue, newValue) =>
         {
             var me = (PersonalItem)bindable;
-            me.SourseSelected = (string)newValue;
-            me.activo.Source = me.SourseSelected;
+            me.activo.Source = (string)newValue;
         });
 
         public string Edad
@@ -99,7 +98,7 @@ namespace MPS.AppCliente.Views.CV
         {
             var me = (PersonalItem)bindable;
             me.Edad = (string)newValue;
-            me.edad.Text = me.Edad;
+            me.edad.Text = $"{me.Edad} años";
         });
 
         public ICommand SelectedCommand
