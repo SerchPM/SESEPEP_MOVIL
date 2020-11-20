@@ -212,7 +212,7 @@ namespace MPS.Core.Lib.ViewModels.Clientes
                 @"(?(\[)(\[(\d{1,3}\.){3}\d{1,3}\])|(([0-9a-z][-0-9a-z]*[0-9a-z]*\.)+[a-z0-9][\-a-z0-9]{0,22}[a-z0-9]))$");
             var telefonoValido = System.Text.RegularExpressions.Regex.IsMatch(Cliente.TELEFONO, @"^\d{10}$");
             if (Cliente.Password.Length < 5)
-                return Mensaje = "La contraseña debe tener mas de 5 caracteres";
+                return Mensaje = "La contraseña debe tener mas de 4 caracteres";
             if (!formatoEmail)
                 return Mensaje = "Formato de correo incorrecto";
             if(!telefonoValido)

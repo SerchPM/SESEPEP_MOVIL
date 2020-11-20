@@ -86,22 +86,7 @@
                     </Grid.RowDefinitions>
                     <Label Grid.Column="1" Text="{Binding Mensaje, Mode=TwoWay}" TextColor="Gray" FontSize="{OnPlatform Android=Body, iOS=Small}" VerticalTextAlignment="Center" VerticalOptions="Center" HorizontalTextAlignment="Center" HorizontalOptions="Center"/>
                     <StackLayout  Grid.Row="1" Grid.Column="1">
-                        <Button CornerRadius="20" HorizontalOptions="CenterAndExpand" Padding="{OnPlatform Android='50,15', iOS='25,10'}" FontAttributes="None" Text="Aceptar" Command="{Binding OcultarModalCommand}" TextColor="White" FontSize="{OnPlatform Android=Body, iOS=Small}">
-                            <VisualStateManager.VisualStateGroups>
-                                <VisualStateGroup x:Name="Common">
-                                    <VisualState x:Name="Disabled">
-                                        <VisualState.Setters>
-                                            <Setter Property="BackgroundColor" Value="#F4F1F1"/>
-                                        </VisualState.Setters>
-                                    </VisualState>
-                                    <VisualState x:Name="Normal">
-                                        <VisualState.Setters>
-                                            <Setter Property="BackgroundColor" Value="IndianRed"/>
-                                        </VisualState.Setters>
-                                    </VisualState>
-                                </VisualStateGroup>
-                            </VisualStateManager.VisualStateGroups>
-                        </Button>
+                        <Button CornerRadius="{OnPlatform Android='20', iOS='20', UWP='10'}" HorizontalOptions="CenterAndExpand" Padding="{OnPlatform Android='50,15', iOS='25,10', UWP='10,0'}" FontAttributes="None" Text="Aceptar" Command="{Binding OcultarModalCommand}" TextColor="White" FontSize="{OnPlatform Android=Body, iOS=Small}"/>
                     </StackLayout>
                 </Grid>
             </Frame>
