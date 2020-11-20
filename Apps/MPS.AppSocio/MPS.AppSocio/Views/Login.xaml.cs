@@ -28,9 +28,7 @@ namespace MPS.AppSocio.Views.Views
         private async void TapGestureRecognizer_OlvideDatos(object sender, EventArgs e) =>
             await Browser.OpenAsync("https://dev.mpsmovil.com/usuarios/forgot-password.html", BrowserLaunchMode.SystemPreferred);
 
-        private void TapGestureRecognizer_CrearCuenta(object sender, EventArgs e)
-        {
-
-        }
+        private async void TapGestureRecognizer_CrearCuenta(object sender, EventArgs e) =>
+            await Browser.OpenAsync("https://dev.mpsmovil.com/socios/Socio.html", BrowserLaunchMode.SystemPreferred);
     }
 }

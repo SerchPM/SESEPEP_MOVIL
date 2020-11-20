@@ -37,9 +37,6 @@ namespace MPS.AppCliente.Views.CV
         private async void TapGestureRecognizer_SitioWeb(object sender, EventArgs e) =>
             await Browser.OpenAsync("https://dev.mpsmovil.com", BrowserLaunchMode.SystemPreferred);
 
-        private async void TapGestureRecognizer_Socios(object sender, EventArgs e) =>
-            await Browser.OpenAsync("https://dev.mpsmovil.com/socios/Socio.html", BrowserLaunchMode.SystemPreferred);
-
         private async void TapGestureRecognizer_Ayuda(object sender, EventArgs e) =>
             await Browser.OpenAsync("https://dev.mpsmovil.com/ayuda.html", BrowserLaunchMode.SystemPreferred);
 

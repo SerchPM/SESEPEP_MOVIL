@@ -19,6 +19,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)Notificaciones\MensajeSocio.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Notificaciones\MensajeCliente.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Operaciones\Servicio.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Operaciones\Sexo.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Seguridad\LoginResponse.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Socios\DetalleSocio.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Socios\HistorialSolicitudes.cs" />

@@ -28,9 +28,9 @@
                                     <TapGestureRecognizer Tapped="TapGestureRecognizer_OlvideDatos"/>
                                 </Label.GestureRecognizers>
                             </Label>
-                            <Label Text="Crear cuenta">
+                            <Label Text="Crear una cuenta">
                                 <Label.GestureRecognizers>
-                                    <TapGestureRecognizer Tapped="TapGestureRecognizer_CrearCuenta"/>
+                                    <TapGestureRecognizer Command="{Binding RegistrarClienteCommand}"/>
                                 </Label.GestureRecognizers>
                             </Label>
                         </StackLayout>

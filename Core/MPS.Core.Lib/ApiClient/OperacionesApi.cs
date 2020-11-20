@@ -53,6 +53,13 @@ namespace MPS.Core.Lib.ApiClient
                 ("P_KEY", dispositivo.PlayerId));
             return res;
         }
+
+        /// <summary>
+        /// Obtiene una lista de sexos
+        /// </summary>
+        /// <returns></returns>
+        public async Task<(HttpStatusCode StatusCode, List<Sexo> catalogo)> GetSexosAsync() =>
+             await CallPostAsync<List<Sexo>>("ConsultaUnCatalogo", ("P_CATALOGO", "CAT_SEXO"));
         #endregion
     }
 }

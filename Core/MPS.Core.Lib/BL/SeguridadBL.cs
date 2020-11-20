@@ -34,23 +34,12 @@ namespace MPS.Core.Lib.BL
             return (válido, LoginInfo);
         }
 
-        public async Task<(bool Válido, LoginResponse Info)> IniciarSesiónSocio(string usuario, string contraseña, string contraseñaCrýpto, bool mantenerSesiónActiva = true)
+        public async Task<(bool Válido, LoginResponse Info)> IniciarSesiónToken()
         {
-            var (StatusCode, LoginInfo) = await (new SeguridadApi()).LoginAsync(usuario, contraseñaCrýpto);
+            var (StatusCode, LoginInfo) = await (new SeguridadApi()).LoginAsync("uncorreo@undominio.com", "PASSWORD123");
             var válido = StatusCode == System.Net.HttpStatusCode.OK;
             if (válido)
-            {
-                if (mantenerSesiónActiva)
-                {
-                    Settings.Current.Usuario = usuario;
-                    Settings.Current.Contraseña = contraseña;
-                }
                 Settings.Current.LoginInfo = LoginInfo;
-                if (Xamarin.Forms.Device.RuntimePlatform != Xamarin.Forms.Device.UWP)
-                    Autentificado?.Invoke(this, new EventArgs());
-                else
-                    await RegistrarDispositivoUWP();
-            }
             return (válido, LoginInfo);
         }
 

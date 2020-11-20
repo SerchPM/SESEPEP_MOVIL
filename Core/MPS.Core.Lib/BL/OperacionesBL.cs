@@ -44,6 +44,20 @@ namespace MPS.Core.Lib.BL
             else
                 return new SharedAPIModel.Clientes.Response();
         }
+
+        /// <summary>
+        /// Obtiene una lista de sexos
+        /// </summary>
+        /// <returns></returns>
+        public async Task<List<Sexo>> GetSexosAsync()
+        {
+            var (statusCode, resultado) = await OperacionesApi.GetSexosAsync();
+            if (statusCode == HttpStatusCode.OK)
+                return resultado;
+            else
+                return new List<Sexo>();
+        }
+
         #endregion
     }
 }

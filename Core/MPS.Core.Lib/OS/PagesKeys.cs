@@ -11,5 +11,6 @@ namespace MPS.Core.Lib.OS
         public const string Historial = "HistorialPage";
         public const string FormaDePago = "FormaDePagoPage";
         public const string Perfil = "Perfil";
+        public const string Registro = "Registro";
     }
 }
