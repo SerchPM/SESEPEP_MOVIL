@@ -73,7 +73,7 @@ namespace MPS.Core.Lib.ViewModels.Clientes
                 var mesesList = new List<int>();
                 var añosList = new List<int>();
                 var tiposTarjetaList = new List<TipoTarjeta>();
-                for (int i = 1; i <= 31; i++)
+                for (int i = 1; i <= 12; i++)
                     mesesList.Add(i);
                 var año = DateTime.Now.Year;
                 for (int i = año; i <= (año + 10); i++)
@@ -93,8 +93,8 @@ namespace MPS.Core.Lib.ViewModels.Clientes
         {
             get => registrarFormaDePagoCommand ??= new RelayCommand(async () =>
             {
-                if(string.IsNullOrEmpty(Tarjeta.NoCuenta) || string.IsNullOrEmpty(Tarjeta.CVV) || MesSelected == 0 || AñoSelected == 0 
-                || TipoTarjetaSelected.Id == 0 ||Tarjetaselected.GUID == Guid.Empty )
+                if (string.IsNullOrEmpty(Tarjeta.NoCuenta) || string.IsNullOrEmpty(Tarjeta.CVV) || MesSelected == 0 || AñoSelected == 0
+                 || (TipoTarjetaSelected != null && TipoTarjetaSelected.Id == 0) || (Tarjetaselected != null && Tarjetaselected.GUID == Guid.Empty))
                 {
                     Mensaje = "Faltan campos por capturar,\nverifique informacion";
                     Modal = true;

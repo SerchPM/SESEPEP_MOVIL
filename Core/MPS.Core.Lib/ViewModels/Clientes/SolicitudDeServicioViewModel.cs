@@ -9,6 +9,7 @@ using Sysne.Core.MVVM;
 using Sysne.Core.MVVM.Patterns;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 
@@ -64,11 +65,11 @@ namespace MPS.Core.Lib.ViewModels.Clientes
         private TimeSpan hora = new TimeSpan(12, 0, 0);
         public TimeSpan Hora { get => hora; set => Set(ref hora, value); }
 
-        private List<Socio> socios = new List<Socio>();
-        public List<Socio> Socios { get => socios; set => Set(ref socios, value); }
+        private ObservableCollection<Socio> socios = new ObservableCollection<Socio>();
+        public ObservableCollection<Socio> Socios { get => socios; set => Set(ref socios, value); }
 
-        private List<Socio> sociosSeleccionado = new List<Socio>();
-        public List<Socio> SociosSeleccionado { get => sociosSeleccionado; set => Set(ref sociosSeleccionado, value); }
+        private ObservableCollection<Socio> sociosSeleccionado = new ObservableCollection<Socio>();
+        public ObservableCollection<Socio> SociosSeleccionado { get => sociosSeleccionado; set => Set(ref sociosSeleccionado, value); }
 
         private Socio socioRemove = new Socio();
         public Socio SocioRemove { get => socioRemove; set => Set(ref socioRemove, value); }
@@ -177,8 +178,6 @@ namespace MPS.Core.Lib.ViewModels.Clientes
                         Settings.Current.Pais = pais;
                         Settings.Current.Estado = estado;
                     }
-                    if (Socios.Count > 0)
-                        CargarPersonal = true;
                 }
             });
         }
@@ -275,8 +274,12 @@ namespace MPS.Core.Lib.ViewModels.Clientes
         {
             get => buscarSociosCommand ?? (buscarSociosCommand = new RelayCommand(async () =>
             {
-                Socios = await bl.ObtenerSociosAsync(ServicioSeleccionado.Guid, Fecha, SolicitudServicio.HorasSolicidatas, FiltroSocios);
-                SeleccionarPersonal = true;
+                Socios.Clear();
+                var socios = await bl.ObtenerSociosAsync(ServicioSeleccionado.Guid, Fecha, SolicitudServicio.HorasSolicidatas, FiltroSocios);
+                var so = socios.LastOrDefault();
+                socios.Remove(so);
+                if (socios.Count > 0)
+                    Socios = new ObservableCollection<Socio>(socios);
             }));
         }
 
@@ -289,8 +292,10 @@ namespace MPS.Core.Lib.ViewModels.Clientes
                     SociosSeleccionado.Remove(socio);
                 else
                     SociosSeleccionado.Add(socio);
-                if (SociosSeleccionado != null)
-                    SeleccionarPersonal = true;
+                var index = Socios.IndexOf(socio);
+                socio.Seleccionado = socio.Seleccionado.Equals("checkoff.png") ? "checkin.png" : "checkoff.png";
+                Socios.Remove(socio);
+                Socios.Insert(index, socio);
             });
         }
 
@@ -299,10 +304,9 @@ namespace MPS.Core.Lib.ViewModels.Clientes
         {
             get => mostrarPersonalSeleccionadoCommand ??= new RelayCommand(() =>
             {
-                CargarPersonalSeleccionado = true;
-                OpenModalRegistro = (OpenModalRegistro == true) ? false : true;
+                SociosSeleccionado = new ObservableCollection<Socio>(SociosSeleccionado);
+                OpenModalRegistro = OpenModalRegistro ? false : true;
                 Socios.Clear();
-                CargarPersonal = true;
             });
         }
 
@@ -312,8 +316,6 @@ namespace MPS.Core.Lib.ViewModels.Clientes
             get => removePersonalCommand ??= new RelayCommand<Socio>((socio) =>
             {
                 SociosSeleccionado.Remove(socio);
-                if (SocioRemove != null)
-                    RemovePersonal = true;
             });
         }
 

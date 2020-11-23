@@ -41,16 +41,9 @@
 	<array>
 		<string>remote-notification</string>
 	</array>
-	<key>CFBundleDocumentTypes</key>
-	<array>
-		<dict>
-			<key>CFBundleTypeName</key>
-			<string>MKDirectionsRequest</string>
-			<key>LSItemContentTypes</key>
-			<array>
-				<string>com.apple.maps.directionsrequest</string>
-			</array>
-		</dict>
-	</array>
+	<key>CFBundleShortVersionString</key>
+	<string>1.0</string>
+	<key>OneSignal_app_groups_key</key>
+	<string>group.mps.AppSocio.OneSignalServiceExtensionSocio</string>
 </dict>
 </plist>

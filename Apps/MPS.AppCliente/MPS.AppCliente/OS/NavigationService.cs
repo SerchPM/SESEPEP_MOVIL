@@ -13,7 +13,21 @@ namespace MPS.AppCliente.Views.OS
 
         public async Task GoBack() => await Navigation.PopAsync(true);
 
-        public async Task Home() => await Navigation.PopToRootAsync(true);
+        public async Task Home() 
+        {
+            if (Device.RuntimePlatform == Device.iOS)
+            {
+                await Navigation.PopToRootAsync();
+                await Navigation.PushAsync(new Login(), true);
+                return;
+            }
+            else
+            {
+                Navigation.InsertPageBefore(new Login(), Navigation.NavigationStack[0]);
+                await Navigation.PopToRootAsync(true);
+            }
+            return;
+        }
 
         public async void NavigatePop() => await Navigation.PopAsync();
 
@@ -34,6 +48,7 @@ namespace MPS.AppCliente.Views.OS
                 PagesKeys.Historial => typeof(Historial),
                 PagesKeys.FormaDePago => typeof(FormaDePago),
                 PagesKeys.Perfil => typeof(Perfil),
+                PagesKeys.Registro => typeof(RegistroPage),
                 _ => typeof(SolicitarServicio)
             };
 
@@ -52,6 +67,8 @@ namespace MPS.AppCliente.Views.OS
                         await Navigation.PushAsync(new FormaDePago(), false); break;
                     case PagesKeys.Perfil:
                         await Navigation.PushAsync(new Perfil(), false); break;
+                    case PagesKeys.Registro:
+                        await Navigation.PushAsync(new RegistroPage(), false); break;
                 }
             }
             else

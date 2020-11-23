@@ -23,8 +23,16 @@
                         </StackLayout>
                         <StackLayout Grid.Row="1" VerticalOptions="EndAndExpand" Padding="50,0">
                             <Label Text="{Binding Mensaje}" TextColor="{StaticResource AccentColor}" HorizontalOptions="EndAndExpand"/>
-                            <Label Text="¿Olvidé mis datos?"/>
-                            <Label Text="Crear cuenta"/>
+                            <Label Text="¿Olvidé mis datos?">
+                                <Label.GestureRecognizers>
+                                    <TapGestureRecognizer Tapped="TapGestureRecognizer_OlvideDatos"/>
+                                </Label.GestureRecognizers>
+                            </Label>
+                            <Label Text="Crear una cuenta">
+                                <Label.GestureRecognizers>
+                                    <TapGestureRecognizer Command="{Binding RegistrarClienteCommand}"/>
+                                </Label.GestureRecognizers>
+                            </Label>
                         </StackLayout>
                     </Grid>
                 </ScrollView>

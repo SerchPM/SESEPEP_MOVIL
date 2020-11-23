@@ -104,5 +104,19 @@ namespace MPS.AppCliente.Views.CV
             me.TextColor = (Color)newValue;
             me.entry.TextColor = me.TextColor;
         });
+
+        public int MaxLength
+        {
+            get => (int)GetValue(MaxLengthProperty);
+            set => SetValue(MaxLengthProperty, value);
+        }
+
+        public static readonly BindableProperty MaxLengthProperty = BindableProperty.Create(nameof(MaxLength), typeof(int), typeof(EntryView), default(int),
+        propertyChanged: (bindable, oldValue, newValue) =>
+        {
+            var me = (EntryView)bindable;
+            me.MaxLength = (int)newValue;
+            me.label.MaxLines = me.MaxLength;
+        });
     }
 }

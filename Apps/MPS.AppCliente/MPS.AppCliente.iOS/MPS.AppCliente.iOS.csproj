@@ -61,8 +61,9 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <MtouchArch>ARM64</MtouchArch>
-    <CodesignKey>iPhone Developer</CodesignKey>
+    <CodesignKey>iPhone Distribution</CodesignKey>
     <CodesignEntitlements>Entitlements.plist</CodesignEntitlements>
+    <CodesignProvision>ProfileMPSCliente</CodesignProvision>
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="CV\CustomMapRender.cs" />
@@ -642,5 +643,77 @@
   </ItemGroup>
   <ItemGroup>
     <BundleResource Include="Resources\reloj%403x.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\unoseleccionado.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\unoseleccionado%402x.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\unoseleccionado%403x.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\dos.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\dos%402x.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\dos%403x.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\dosseleccionado.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\dosseleccionado%402x.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\dosseleccionado%403x.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\tres.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\tres%402x.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\tres%403x.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\tresseleccionado.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\tresseleccionado%402x.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\tresseleccionado%403x.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\uno.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\uno%402x.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\uno%403x.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\logoRegistro%403x.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\logoRegistro.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\logoRegistro%402x.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\back%403x.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\back.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\back%402x.png" />
   </ItemGroup>
 </Project>

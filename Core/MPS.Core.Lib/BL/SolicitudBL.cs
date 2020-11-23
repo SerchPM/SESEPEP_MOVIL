@@ -159,6 +159,9 @@ namespace MPS.Core.Lib.BL
                             posicion++;
                         }
                     }
+                    if (string.IsNullOrEmpty(personal.IMAGEN))
+                        personal.IMAGEN = string.Empty;
+                    personal.Seleccionado = "checkoff.png";
                 }
                 return resultado;
             }

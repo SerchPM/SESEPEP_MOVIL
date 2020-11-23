@@ -55,9 +55,9 @@ namespace MPS.Core.Lib.BL
         {
             var (statusCode, resultado) = await ClientesApi.RegistrarTarjetaAsync(tarjeta);
             if (statusCode == HttpStatusCode.OK && !string.IsNullOrEmpty(resultado.ESTATUS) && resultado.ESTATUS.Equals("OK"))
-                return (true, "La tarjeta se registro correctamente");            
+                return (true, "La tarjeta se registro correctamente.");            
             else
-                return (false, "Ocurrio un error al agregar la tarjeta, intente mas tarde");
+                return (false, "Ocurrio un error al agregar la tarjeta, intente mas tarde.");
         }
 
         /// <summary>
@@ -120,6 +120,21 @@ namespace MPS.Core.Lib.BL
                 return new List<ClienteSolicitud>();
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="cliente"></param>
+        /// <returns></returns>
+        public async Task<(bool, (string, Guid))> RegistrarClienteAsync(Cliente cliente)
+        {
+            var (statusCode, resultado) = await ClientesApi.RegistrarClienteAsync(cliente);
+            if (statusCode == HttpStatusCode.OK && !string.IsNullOrEmpty(resultado.ESTATUS) && resultado.ESTATUS.Equals("OK"))
+                return (true, (string.Empty, resultado.GUID));
+            else if (statusCode == HttpStatusCode.OK && !string.IsNullOrEmpty(resultado.ESTATUS) && resultado.ESTATUS.Equals("ERROR"))
+                return (false, ("El correo que intenta registrar ya existe,\nintente con un nuevo correo.", Guid.Empty));
+            else
+                return (false, ("Error de registro intente más tarde.", Guid.Empty));
+        }
         #endregion
     }
 }

@@ -6,8 +6,6 @@
 	<string>OneSignalServiceExtensionSocio</string>
 	<key>CFBundleName</key>
 	<string>OneSignalServiceExtensionSocio</string>
-	<key>CFBundleIdentifier</key>
-	<string>mps.AppSocio.OneSignalServiceExtensionSocio</string>
 	<key>CFBundleDevelopmentRegion</key>
 	<string>en</string>
 	<key>CFBundleInfoDictionaryVersion</key>
@@ -27,5 +25,9 @@
 		<key>NSExtensionPrincipalClass</key>
 		<string>NotificationService</string>
 	</dict>
+	<key>CFBundleIdentifier</key>
+	<string>mps.AppSocio.OneSignalServiceExtensionSocio</string>
+	<key>OneSignal_app_groups_key</key>
+	<string>group.mps.AppSocio.OneSignalServiceExtensionSocio</string>
 </dict>
 </plist>

@@ -93,6 +93,29 @@ namespace MPS.Core.Lib.ApiClient
         /// <returns></returns>
         public async Task<(HttpStatusCode StatusCode, List<ClienteSolicitud> tarjetas)> GetSolicitudesAsync(Guid idCliente, DateTime desde, DateTime hasta) =>
             await CallPostAsync<List<ClienteSolicitud>>("ConsultaClienteSolicitudes", ("P_GUID_CLIENTE", idCliente), ("P_FECHA_INICIO", desde.ToString("MM-dd-yyyy")), ("P_FECHA_FIN", hasta.ToString("MM-dd-yyyy")));
+
+        /// <summary>
+        /// Registra 
+        /// </summary>
+        /// <param name="cliente"></param>
+        /// <returns></returns>
+        public async Task<(HttpStatusCode StatusCode, Response tarjetaInfo)> RegistrarClienteAsync(Cliente cliente)
+        {
+            var res = await CallFormUrlEncoded<Response>("CrearCliente", HttpMethod.Post,
+                ("P_NOMBRE", cliente.NOMBRE),
+                ("P_APELLIDO_1", cliente.APELLIDO_1),
+                ("P_APELLIDO_2", cliente.APELLIDO_2),
+                ("P_CORREO_ELECTRONICO", cliente.CORREO_ELECTRONICO),
+                ("P_PWD", cliente.Password),
+                ("P_TELEFONO", cliente.TELEFONO),
+                ("P_ALIAS", cliente.Alias),
+                ("P_VERSION_APP", cliente.VercionApp),
+                ("P_MODELO_CEL", cliente.ModeloDispositivo),
+                ("P_FECHA_NACIMIENTO", cliente.FECHA_NACIMIENTO.ToDateTimeFormat24H()),
+                ("P_GUID_SEXO", cliente.SEXO),
+                ("P_GUID_METODO_PAGO_PRED", cliente.IdMetodoPago.ToString()));
+            return res;
+        }
         #endregion
     }
 }

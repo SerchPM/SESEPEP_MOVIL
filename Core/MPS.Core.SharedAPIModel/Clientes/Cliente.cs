@@ -23,5 +23,11 @@ namespace MPS.SharedAPIModel.Clientes
         public Guid? GUID_ULTIMA_SOLICITUD { get; set; }
         public string TARJETA { get; set; }
         public string MARCA_TARJETA { get; set; }
+        public string Alias { get; set; }
+        public string ModeloDispositivo { get; set; }
+        public Guid IdMetodoPago { get; set; }
+        public string Password { get; set; }
+        public string VercionApp { get; set; }
+
     }
 }

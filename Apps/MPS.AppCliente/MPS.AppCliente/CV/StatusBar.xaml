@@ -23,17 +23,16 @@
                         <TapGestureRecognizer Tapped="TapGestureRecognizer_SitioWeb"/>
                     </Label.GestureRecognizers>
                 </Label>
-                <Label Text="Socios">
-                    <Label.GestureRecognizers>
-                        <TapGestureRecognizer Tapped="TapGestureRecognizer_Socios"/>
-                    </Label.GestureRecognizers>
-                </Label>
                 <Label Text="Privacidad">
                     <Label.GestureRecognizers>
                         <TapGestureRecognizer Tapped="TapGestureRecognizer_Privacidad"/>
                     </Label.GestureRecognizers>
                 </Label>
-                <Label Text="Ayuda"/>
+                <Label Text="Ayuda">
+                    <Label.GestureRecognizers>
+                        <TapGestureRecognizer Tapped="TapGestureRecognizer_Ayuda"/>
+                    </Label.GestureRecognizers>
+                </Label>
             </StackLayout>
         </Grid>
     </ContentView.Content>
