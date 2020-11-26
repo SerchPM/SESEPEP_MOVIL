@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
@@ -9,6 +9,8 @@
     <RootNamespace>OneSignalServiceExtensionSocio</RootNamespace>
     <AssemblyName>OneSignalServiceExtensionSocio</AssemblyName>
     <IPhoneResourcePrefix>Resources</IPhoneResourcePrefix>
+    <NuGetPackageImportStamp>
+    </NuGetPackageImportStamp>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|iPhoneSimulator' ">
     <DebugSymbols>true</DebugSymbols>
@@ -27,13 +29,15 @@
     <MtouchArch>x86_64</MtouchArch>
     <MtouchHttpClientHandler>NSUrlSessionHandler</MtouchHttpClientHandler>
     <DeviceSpecificBuild>false</DeviceSpecificBuild>
-    <MtouchVerbosity></MtouchVerbosity>
+    <MtouchVerbosity>
+    </MtouchVerbosity>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|iPhone' ">
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
     <OutputPath>bin\iPhone\Release</OutputPath>
-    <DefineConstants></DefineConstants>
+    <DefineConstants>
+    </DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <CodesignKey>iPhone Distribution</CodesignKey>
@@ -43,14 +47,16 @@
     <MtouchLink>SdkOnly</MtouchLink>
     <MtouchArch>ARM64</MtouchArch>
     <MtouchHttpClientHandler>NSUrlSessionHandler</MtouchHttpClientHandler>
-    <MtouchVerbosity></MtouchVerbosity>
+    <MtouchVerbosity>
+    </MtouchVerbosity>
     <CodesignProvision>ProfileMPSSocioOnesignal</CodesignProvision>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|iPhoneSimulator' ">
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
     <OutputPath>bin\iPhoneSimulator\Release</OutputPath>
-    <DefineConstants></DefineConstants>
+    <DefineConstants>
+    </DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <CodesignKey>iPhone Developer</CodesignKey>
@@ -58,7 +64,8 @@
     <MtouchLink>None</MtouchLink>
     <MtouchArch>x86_64</MtouchArch>
     <MtouchHttpClientHandler>NSUrlSessionHandler</MtouchHttpClientHandler>
-    <MtouchVerbosity></MtouchVerbosity>
+    <MtouchVerbosity>
+    </MtouchVerbosity>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|iPhone' ">
     <DebugSymbols>true</DebugSymbols>
@@ -79,24 +86,25 @@
     <MtouchLink>SdkOnly</MtouchLink>
     <MtouchArch>ARM64</MtouchArch>
     <MtouchHttpClientHandler>NSUrlSessionHandler</MtouchHttpClientHandler>
-    <MtouchVerbosity></MtouchVerbosity>
+    <MtouchVerbosity>
+    </MtouchVerbosity>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Com.OneSignal, Version=3.10.2.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\..\packages\Com.OneSignal.3.10.2\lib\Xamarin.iOS10\Com.OneSignal.dll</HintPath>
+    </Reference>
+    <Reference Include="Com.OneSignal.Abstractions, Version=3.10.2.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\..\packages\Com.OneSignal.3.10.2\lib\Xamarin.iOS10\Com.OneSignal.Abstractions.dll</HintPath>
+    </Reference>
+    <Reference Include="OneSignal.iOS.Binding, Version=3.10.2.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\..\packages\Com.OneSignal.3.10.2\lib\Xamarin.iOS10\OneSignal.iOS.Binding.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Xml" />
     <Reference Include="System.Core" />
     <Reference Include="Xamarin.iOS" />
     <Reference Include="System.IO.Compression" />
     <Reference Include="System.Net.Http" />
-    <Reference Include="Com.OneSignal.Abstractions">
-      <HintPath>..\..\..\packages\Com.OneSignal.3.9.0\lib\Xamarin.iOS10\Com.OneSignal.Abstractions.dll</HintPath>
-    </Reference>
-    <Reference Include="Com.OneSignal">
-      <HintPath>..\..\..\packages\Com.OneSignal.3.9.0\lib\Xamarin.iOS10\Com.OneSignal.dll</HintPath>
-    </Reference>
-    <Reference Include="OneSignal.iOS.Binding">
-      <HintPath>..\..\..\packages\Com.OneSignal.3.9.0\lib\Xamarin.iOS10\OneSignal.iOS.Binding.dll</HintPath>
-    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Resources\" />
@@ -110,4 +118,11 @@
     <Compile Include="NotificationService.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.iOS.AppExtension.CSharp.targets" />
+  <Import Project="..\..\..\packages\NETStandard.Library.2.0.3\build\netstandard2.0\NETStandard.Library.targets" Condition="Exists('..\..\..\packages\NETStandard.Library.2.0.3\build\netstandard2.0\NETStandard.Library.targets')" />
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('..\..\..\packages\NETStandard.Library.2.0.3\build\netstandard2.0\NETStandard.Library.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\..\..\packages\NETStandard.Library.2.0.3\build\netstandard2.0\NETStandard.Library.targets'))" />
+  </Target>
 </Project>
