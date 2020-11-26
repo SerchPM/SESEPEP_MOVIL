@@ -511,4 +511,9 @@
   <ItemGroup>
     <BundleResource Include="Resources\valoresSel%403x.png" />
   </ItemGroup>
+  <ProjectExtensions>
+    <VisualStudio>
+      <UserProperties TriggeredFromHotReload="False" />
+    </VisualStudio>
+  </ProjectExtensions>
 </Project>
