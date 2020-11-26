@@ -35,8 +35,8 @@ namespace MPS.AppSocio.UWP
         private async void CreateChannel()
         {
             channel = await PushNotificationChannelManager.CreatePushNotificationChannelForApplicationAsync();
-            if (!string.IsNullOrEmpty(channel.Uri)) { }
             Core.Lib.Helpers.Settings.Current.ChannelUriUWP = channel.Uri;
+            Core.Lib.Helpers.Settings.Current.AppId = MPS.Core.Lib.Helpers.AppSettingsManager.Settings["PushNotificationAppID"];
             channel.PushNotificationReceived += (s, e) =>
             {
                 Dictionary<string, object> dictionaryMessage = new Dictionary<string, object>();

@@ -81,5 +81,10 @@ namespace MPS.Core.Lib.Helpers
 
         public ServicioSolicitado ServicioSolicitado { get; set; } = new ServicioSolicitado();
 
+        private string appId;
+        /// <summary>
+        /// Obtiene o asigna el AppId del grupo de OneSignal
+        /// </summary>
+        public string AppId { get => GetValue<string>(); set => SetValue(ref appId, value); }
     }
 }

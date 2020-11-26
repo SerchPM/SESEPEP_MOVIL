@@ -45,6 +45,22 @@ namespace MPS.Core.Lib.BL
 
         public async Task<bool> RegistrarDispositivoUWP()
         {
+            var (result, playerId) = await (new OperacionesBL()).RegistrarDispositivoUWPAsync(Settings.Current.AppId, Settings.Current.ChannelUriUWP, Settings.Current.ModeloDispositivo);
+            if (result)
+            {
+                await (new OperacionesBL()).RegistrarDispositivoAsync(new Dispositivo
+                {
+                    Id = Guid.Parse(Settings.Current.LoginInfo.Usr.Id),
+                    Modelo = Settings.Current.ModeloDispositivo,
+                    SO = Settings.Current.SO,
+                    TipoDispositivo = Settings.Current.TipoDispositivo,
+                    TipoUsuario = Settings.Current.AppId.Equals("66758264-d740-4a12-b963-d3eec52e9e64") ? (int)TipoUsuarioEnum.Cliente : (int)TipoUsuarioEnum.Socio,
+                    VercionApp = "0",
+                    TimeZona = "-28800",
+                    PlayerId = playerId
+                });
+            }
+           
             return true;
         }
     }

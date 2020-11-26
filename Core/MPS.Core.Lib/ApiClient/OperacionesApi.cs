@@ -60,6 +60,16 @@ namespace MPS.Core.Lib.ApiClient
         /// <returns></returns>
         public async Task<(HttpStatusCode StatusCode, List<Sexo> catalogo)> GetSexosAsync() =>
              await CallPostAsync<List<Sexo>>("ConsultaUnCatalogo", ("P_CATALOGO", "CAT_SEXO"));
+
+        /// <summary>
+        /// Registra un nuevo dispositivo UWP en OneSignal
+        /// </summary>
+        /// <param name="appId">Identificadro del grupo den OneSignal</param>
+        /// <param name="uriChannel">Canal de comunicacion WNS</param>
+        /// <param name="modelo">Modelo del dispositivo</param>
+        /// <returns></returns>
+        public async Task<(HttpStatusCode StatusCode, OneSignalResponse catalogo)> RegistrarDispositivoUWPAsync(string appId, string uriChannel, string modelo) =>
+           await CallPostAsync<OneSignalResponse>("RegisterDeviceUWP", ("appId", appId), ("identificador", uriChannel), ("model", modelo));
         #endregion
     }
 }

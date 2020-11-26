@@ -58,6 +58,20 @@ namespace MPS.Core.Lib.BL
                 return new List<Sexo>();
         }
 
+        /// <summary>
+        /// Registra un nuevo dispositivo UWP en OneSignal
+        /// </summary>
+        /// <param name="appId">Identificadro del grupo den OneSignal</param>
+        /// <param name="uriChannel">Canal de comunicacion WNS</param>
+        /// <param name="modelo">Modelo del dispositivo</param>
+        public async Task<(bool, string)> RegistrarDispositivoUWPAsync(string appId, string uriChannel, string modelo)
+        {
+            var (statusCode, resultado) = await OperacionesApi.RegistrarDispositivoUWPAsync(appId, uriChannel, modelo);
+            if (statusCode == HttpStatusCode.OK && resultado != null && resultado.Item1.Equals(200) && !string.IsNullOrEmpty(resultado.Item2.Id))
+                return (true, resultado.Item2.Id);
+            else
+                return (false, string.Empty);
+        }
         #endregion
     }
 }
