@@ -19,8 +19,6 @@ namespace MPS.AppSocio.Views.Views
             ViewModel.GetInfoCommand.Execute(null);
         }
 
-        PagoViewModel ViewModel => BindingContext as PagoViewModel;
-
         private void Update_Info(object o, EventArgs e)
         {
             List<string> info = new List<string>();

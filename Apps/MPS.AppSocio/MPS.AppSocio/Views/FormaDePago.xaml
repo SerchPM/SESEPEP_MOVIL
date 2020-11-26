@@ -5,7 +5,7 @@
              x:Class="MPS.AppSocio.Views.Views.FormaDePago"
              xmlns:vm="clr-namespace:MPS.Core.Lib.ViewModels.Socios">
     <ContentPage.BindingContext>
-        <vm:PagoViewModel/>
+        <vm:PagoViewModel x:Name="ViewModel"/>
     </ContentPage.BindingContext>
     <ContentPage.Content>
         <Grid RowDefinitions="Auto,*,Auto">

@@ -10,7 +10,7 @@ namespace MPS.Core.Lib.ViewModels.Socios
 {
     public class PagoViewModel : ViewModelWithBL<SociosBL>
     {
-        PagoViewModel()
+        public PagoViewModel()
         {
             Id = Settings.Current.LoginInfo.Usr.Id;
         }
