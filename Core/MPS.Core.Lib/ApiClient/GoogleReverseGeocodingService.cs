@@ -22,7 +22,7 @@ namespace MPS.Core.Lib.ApiClient
         #endregion
 
         #region Propiedades
-        public static string UrlBaseWebApiBing { get; set; } = "http://dev.virtualearth.net/REST/v1/";
+        public static string UrlBaseWebApiBing { get; set; } = "https://dev.virtualearth.net/REST/v1/";
         #endregion
 
         /// <summary>
