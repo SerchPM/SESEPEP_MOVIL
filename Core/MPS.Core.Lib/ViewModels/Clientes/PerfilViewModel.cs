@@ -1,9 +1,11 @@
 ﻿using Core.MVVM.Helpers;
 using MPS.Core.Lib.BL;
 using MPS.Core.Lib.Helpers;
+using MPS.Core.Lib.OS;
 using MPS.SharedAPIModel.Clientes;
 using Sysne.Core.MVVM;
 using Sysne.Core.MVVM.Patterns;
+using Sysne.Core.OS;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -39,7 +41,7 @@ namespace MPS.Core.Lib.ViewModels.Clientes
                     if (validar && value.Length > 8)
                         MensajePassword = string.Empty;
                     else
-                        MensajePassword = "Password invalido";
+                        MensajePassword = "La contraseña debe tener más de 8 caracteres";
                 }
             }
         }
@@ -61,7 +63,7 @@ namespace MPS.Core.Lib.ViewModels.Clientes
                     }
                     else
                     {
-                        MensajePasswordConfirm = "El password no coincide";
+                        MensajePasswordConfirm = "La contraseña no coincide";
                         PasswordCorrect = false;
                     }
                 }
@@ -181,6 +183,15 @@ namespace MPS.Core.Lib.ViewModels.Clientes
             get => ocultarModalCommand ??= new RelayCommand(() =>
             {
                 Modal = false;
+            });
+        }
+
+        private RelayCommand regresarCommand = null;
+        public RelayCommand RegresarCommand
+        {
+            get => regresarCommand ??= new RelayCommand(async () =>
+            {
+                await DependencyService.Get<INavigationService>().GoBack();
             });
         }
         #endregion

@@ -5,6 +5,7 @@ using MPS.Core.Lib.OS;
 using MPS.SharedAPIModel.Socios;
 using Sysne.Core.MVVM;
 using Sysne.Core.MVVM.Patterns;
+using Sysne.Core.OS;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -126,6 +127,15 @@ namespace MPS.Core.Lib.ViewModels.Socios
                 };
                 var (exito, respuesta) = await bl.ActualizaInfoSocio(Guid.Parse(Id), pwd);
             }));
+        }
+
+        private RelayCommand regresarCommand = null;
+        public RelayCommand RegresarCommand
+        {
+            get => regresarCommand ??= new RelayCommand(async () =>
+            {
+                await DependencyService.Get<INavigationService>().GoBack();
+            });
         }
     }
 }

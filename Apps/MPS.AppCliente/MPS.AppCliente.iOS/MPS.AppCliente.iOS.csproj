@@ -717,6 +717,15 @@
   <ItemGroup>
     <BundleResource Include="Resources\back%402x.png" />
   </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\cerrar%403x.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\cerrar.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\cerrar%402x.png" />
+  </ItemGroup>
   <ProjectExtensions>
     <VisualStudio>
       <UserProperties TriggeredFromHotReload="False" />

@@ -23,7 +23,11 @@
                     <Image Source="" Aspect="AspectFit" HorizontalOptions="Center" VerticalOptions="Center"/>
                 </StackLayout>
             </StackLayout>
-            <Image Grid.Column="1" Source="" HorizontalOptions="End" VerticalOptions="Start"/>
+            <Image Grid.Column="1" Source="cerrar.png" HorizontalOptions="End" VerticalOptions="Start" Margin="{OnPlatform Android='5', UWP='5', iOS='10'}">
+                <Image.GestureRecognizers>
+                    <TapGestureRecognizer Command="{Binding RegresarCommand}"/>
+                </Image.GestureRecognizers>
+            </Image>
             <Grid Grid.Column="1" Grid.Row="1" RowDefinitions="Auto,*,Auto" ColumnDefinitions=".05*,*,.05*" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
                 <ScrollView Grid.Row="1" Grid.Column="1" HorizontalOptions="FillAndExpand" VerticalScrollBarVisibility="Never">
                     <Grid RowDefinitions="Auto,*,Auto,Auto" VerticalOptions="StartAndExpand">
@@ -39,14 +43,14 @@
                         <Label Grid.Row="2" Text="Contacto" FontSize="Medium" FontAttributes="Bold" TextColor="White"/>
                         <StackLayout Grid.Row="3">
                             <cv:EntryView Text="{Binding Cliente.CORREO_ELECTRONICO, Mode=TwoWay}" Etiqueta="Correo Elentronico" IsEnabled="False" TextColor="Gray"/>
-                            <cv:EntryView Text="{Binding Cliente.TELEFONO, Mode=TwoWay}" Keyboard="Numeric" Etiqueta="Telefono"/>
+                            <cv:EntryView Text="{Binding Cliente.TELEFONO, Mode=TwoWay}" Keyboard="Numeric" Etiqueta="Telefono" TextColor="{OnPlatform Android='White', iOS='#000', UWP='White'}"/>
                         </StackLayout>
                     </Grid>
                 </ScrollView>
-                <StackLayout Grid.Column="1" Grid.Row="2" HorizontalOptions="End">
-                    <Button VerticalOptions="Center" HorizontalOptions="End" TextColor="White" CornerRadius="10" BackgroundColor="IndianRed" FontSize="Small" Padding="10,0" Text="Guardar" Command="{Binding ActualziarInfoClienteCommand}"/>
-                    <Button VerticalOptions="Center" HorizontalOptions="End" TextColor="White" CornerRadius="10" BackgroundColor="LightGray" FontSize="Small" Padding="10,0" Text="Cambiar contraseña" Command="{Binding ModalPasswordCommand}"/>
-                </StackLayout>
+                <Grid Grid.Column="1" Grid.Row="2" ColumnDefinitions="*,*" HorizontalOptions="FillAndExpand">
+                    <Button VerticalOptions="Center" HorizontalOptions="Start" TextColor="White" CornerRadius="10" BackgroundColor="LightGray" FontSize="Small" Padding="10,0" Text="Cambiar contraseña" Command="{Binding ModalPasswordCommand}"/>
+                    <Button Grid.Column="1" VerticalOptions="Center" HorizontalOptions="End" TextColor="White" CornerRadius="10" BackgroundColor="IndianRed" FontSize="Small" Padding="10,0" Text="Guardar" Command="{Binding ActualziarInfoClienteCommand}"/>
+                </Grid>
             </Grid>
            
             <!--Modal Agregar Forma de Pago-->

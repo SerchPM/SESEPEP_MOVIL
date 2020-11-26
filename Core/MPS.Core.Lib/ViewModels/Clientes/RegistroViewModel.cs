@@ -211,8 +211,8 @@ namespace MPS.Core.Lib.ViewModels.Clientes
             var formatoEmail = System.Text.RegularExpressions.Regex.IsMatch(Cliente.CORREO_ELECTRONICO, @"^(?("")("".+?(?<!\\)""@)|(([a-zA-Z0-9a-zA-Z]((\.(?!\.))|[-!#\$%&'\*\+/=\?\^`\{\}\|~\w])*)(?<=[0-9a-z])@))" +
                 @"(?(\[)(\[(\d{1,3}\.){3}\d{1,3}\])|(([0-9a-z][-0-9a-z]*[0-9a-z]*\.)+[a-z0-9][\-a-z0-9]{0,22}[a-z0-9]))$");
             var telefonoValido = System.Text.RegularExpressions.Regex.IsMatch(Cliente.TELEFONO, @"^\d{10}$");
-            if (Cliente.Password.Length < 5)
-                return Mensaje = "La contraseña debe tener mas de 4 caracteres";
+            if (Cliente.Password.Length < 9)
+                return Mensaje = "La contraseña debe tener más de 8 caracteres";
             if (!formatoEmail)
                 return Mensaje = "Formato de correo incorrecto";
             if(!telefonoValido)

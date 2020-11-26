@@ -111,6 +111,7 @@
     <Content Include="Assets\botonBuscar.png" />
     <Content Include="Assets\botonPedirAhora.png" />
     <Content Include="Assets\botonSolicitar.png" />
+    <Content Include="Assets\cerrar.png" />
     <Content Include="Assets\checkin.png" />
     <Content Include="Assets\checkoff.png" />
     <Content Include="Assets\cibernetica.png" />

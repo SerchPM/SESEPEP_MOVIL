@@ -11,9 +11,9 @@
     <ContentPage.Content>
         <Grid RowDefinitions="*,Auto">
             <Grid RowDefinitions="*,Auto,Auto,Auto,*,Auto" ColumnDefinitions=".1*,*,.1*" >
-                <Grid Grid.ColumnSpan="3" RowDefinitions="Auto,*" ColumnDefinitions="*, Auto">
+                <Grid Grid.ColumnSpan="3" RowDefinitions="Auto,*" ColumnDefinitions="Auto, *">
                     <Image Grid.RowSpan="2" Grid.ColumnSpan="2" Source="logoRegistro.png" Aspect="AspectFit"/>
-                    <Image Grid.Column="1" Source="back.png" Aspect="AspectFit" Margin="20">
+                    <Image Source="back.png" Aspect="AspectFit" Margin="{OnPlatform Android='20',UWP='20',iOS='10,20,0,0'}">
                         <Image.GestureRecognizers>
                             <TapGestureRecognizer Command="{Binding NavegarLoginCommand}"/>
                         </Image.GestureRecognizers>
