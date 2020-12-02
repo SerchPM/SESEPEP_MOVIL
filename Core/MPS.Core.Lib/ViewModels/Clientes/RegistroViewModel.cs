@@ -29,7 +29,7 @@ namespace MPS.Core.Lib.ViewModels.Clientes
         private List<Sexo> sexos;
         public List<Sexo> Sexos { get => sexos; set => Set(ref sexos, value); }
 
-        private Sexo sexoSelected;
+        private Sexo sexoSelected = new Sexo();
         public Sexo SexoSelected { get => sexoSelected; set => Set(ref sexoSelected, value); }
 
         private List<Tarjeta> tarjetas = new List<Tarjeta>();
@@ -105,7 +105,7 @@ namespace MPS.Core.Lib.ViewModels.Clientes
                 if (Registro)
                 {
                     if(!string.IsNullOrEmpty(Cliente.NOMBRE) && !string.IsNullOrEmpty(Cliente.APELLIDO_1) && !string.IsNullOrEmpty(Cliente.APELLIDO_2) && !string.IsNullOrEmpty(Cliente.Alias) &&
-                    !string.IsNullOrEmpty(Cliente.Password) && !string.IsNullOrEmpty(Cliente.TELEFONO) && !string.IsNullOrEmpty(Cliente.CORREO_ELECTRONICO) && SexoSelected != null && SexoSelected.GUID != Guid.Empty)
+                    !string.IsNullOrEmpty(Cliente.Password) && !string.IsNullOrEmpty(Cliente.CORREO_ELECTRONICO))
                     {
                         if (string.IsNullOrEmpty(ValidarCliente()))
                         {
@@ -210,13 +210,16 @@ namespace MPS.Core.Lib.ViewModels.Clientes
             Cliente.CORREO_ELECTRONICO = Cliente.CORREO_ELECTRONICO.Trim();
             var formatoEmail = System.Text.RegularExpressions.Regex.IsMatch(Cliente.CORREO_ELECTRONICO, @"^(?("")("".+?(?<!\\)""@)|(([a-zA-Z0-9a-zA-Z]((\.(?!\.))|[-!#\$%&'\*\+/=\?\^`\{\}\|~\w])*)(?<=[0-9a-z])@))" +
                 @"(?(\[)(\[(\d{1,3}\.){3}\d{1,3}\])|(([0-9a-z][-0-9a-z]*[0-9a-z]*\.)+[a-z0-9][\-a-z0-9]{0,22}[a-z0-9]))$");
-            var telefonoValido = System.Text.RegularExpressions.Regex.IsMatch(Cliente.TELEFONO, @"^\d{10}$");
             if (Cliente.Password.Length < 9)
                 return Mensaje = "La contraseña debe tener más de 8 caracteres";
             if (!formatoEmail)
                 return Mensaje = "Formato de correo incorrecto";
-            if(!telefonoValido)
-                return Mensaje = "Teléfono inválido.";
+            if (!string.IsNullOrEmpty(Cliente.TELEFONO))
+            {
+                var telefonoValido = System.Text.RegularExpressions.Regex.IsMatch(Cliente.TELEFONO, @"^\d{10}$");
+                if (!telefonoValido)
+                    return Mensaje = "Teléfono inválido.";
+            }
 
             return Mensaje;
         }

@@ -9,8 +9,8 @@
         <vm:RegistroViewModel x:Name="ViewModel"/>
     </ContentPage.BindingContext>
     <ContentPage.Content>
-        <Grid RowDefinitions="*,Auto">
-            <Grid RowDefinitions="*,Auto,Auto,Auto,*,Auto" ColumnDefinitions=".1*,*,.1*" >
+        <Grid RowDefinitions="*,Auto" ColumnDefinitions=".5*,*,.5*">
+            <Grid Grid.ColumnSpan="3" RowDefinitions="*,Auto,Auto,Auto,*,Auto" ColumnDefinitions=".1*,*,.1*" >
                 <Grid Grid.ColumnSpan="3" RowDefinitions="Auto,*" ColumnDefinitions="Auto, *">
                     <Image Grid.RowSpan="2" Grid.ColumnSpan="2" Source="logoRegistro.png" Aspect="AspectFit"/>
                     <Image Source="back.png" Aspect="AspectFit" Margin="{OnPlatform Android='20',UWP='20',iOS='10,20,0,0'}">
@@ -31,17 +31,25 @@
                 <Label Grid.Column="1" Grid.Row="3" FontAttributes="Bold" FontSize="Subtitle" Text="Datos generales" TextColor="#A03335"/>
                 <ScrollView IsVisible="{Binding Registro}" Grid.Column="1" Grid.Row="4">
                     <StackLayout Orientation="Vertical">
-                        <cv:EntryView Etiqueta="Nombre(s)" Text="{Binding Cliente.NOMBRE}" TextColor="#000"/>
-                        <cv:EntryView Etiqueta="Apellido paterno" Text="{Binding Cliente.APELLIDO_1}" TextColor="#000"/>
-                        <cv:EntryView Etiqueta="Apellido materno" Text="{Binding Cliente.APELLIDO_2}" TextColor="#000"/>
+                        <cv:EntryView EtiquetaObligatorio="*" TextColorEtiquetaO="Red" Etiqueta="Nombre(s)" Text="{Binding Cliente.NOMBRE}" TextColor="#000"/>
+                        <cv:EntryView EtiquetaObligatorio="*" TextColorEtiquetaO="Red" Etiqueta="Apellido paterno" Text="{Binding Cliente.APELLIDO_1}" TextColor="#000"/>
+                        <cv:EntryView EtiquetaObligatorio="*" TextColorEtiquetaO="Red" Etiqueta="Apellido materno" Text="{Binding Cliente.APELLIDO_2}" TextColor="#000"/>
                         <Picker ItemsSource="{Binding Sexos}" SelectedItem="{Binding SexoSelected, Mode=TwoWay, UpdateSourceEventName=PropertyChanged}"/>
-                        <Label Text="Sexo" TextColor="Gray"/>
+                        <Grid ColumnDefinitions="Auto,*">
+                            <Label Text="*" TextColor="Gray"/>
+                            <Label Grid.Column="1" Text="Sexo" TextColor="Gray" FontSize="Small"/>
+                        </Grid>
+                        <Label IsVisible="{OnPlatform Android=false, iOS=true, UWP=false}" TextColor="Gray" Text="Por políticas de seguridad de iOS no es obligatorio que indiques este campo, para MPS Seguridad es importante darte esta información." FontSize="11"/>
                         <DatePicker Date="{Binding Cliente.FECHA_NACIMIENTO, Mode=TwoWay}"/>
-                        <Label Text="Fecha de nacimiento" TextColor="Gray"/>
-                        <cv:EntryView Etiqueta="Alias" Text="{Binding Cliente.Alias}" TextColor="#000"/>
-                        <cv:EntryView Etiqueta="Correo electrónico" Text="{Binding Cliente.CORREO_ELECTRONICO}" TextColor="#000"/>
-                        <cv:EntryView Etiqueta="Contraseña" Text="{Binding Cliente.Password}" TextColor="#000" IsPassword="True"/>
-                        <cv:EntryView Etiqueta="Número de telefono" Text="{Binding Cliente.TELEFONO}" TextColor="#000" Keyboard="Numeric"/>
+                        <Grid ColumnDefinitions="Auto,*">
+                            <Label Text="*" TextColor="Red"/>
+                            <Label Grid.Column="1" Text="Fecha de nacimiento" TextColor="Gray" FontSize="Small"/>
+                        </Grid>
+                        <cv:EntryView EtiquetaObligatorio="*" TextColorEtiquetaO="Red" Etiqueta="Alias" Text="{Binding Cliente.Alias}" TextColor="#000"/>
+                        <cv:EntryView EtiquetaObligatorio="*" TextColorEtiquetaO="Red" Etiqueta="Correo electrónico" Text="{Binding Cliente.CORREO_ELECTRONICO}" TextColor="#000"/>
+                        <cv:EntryView EtiquetaObligatorio="*" TextColorEtiquetaO="Red" Etiqueta="Contraseña" Text="{Binding Cliente.Password}" TextColor="#000" IsPassword="True"/>
+                        <cv:EntryView EtiquetaObligatorio="*" TextColorEtiquetaO="Gray" Etiqueta="Número de teléfono" Text="{Binding Cliente.TELEFONO}" TextColor="#000" Keyboard="Numeric"/>
+                        <Label IsVisible="{OnPlatform Android=false, iOS=true, UWP=false}" TextColor="Gray" Text="Por políticas de seguridad de iOS no es obligatorio que indiques este campo, para MPS Seguridad es importante darte esta información." FontSize="11"/>
                     </StackLayout>
                 </ScrollView>
                 <ScrollView IsVisible="{Binding RegistroTarjeta}" Grid.Column="1" Grid.Row="4">
@@ -66,23 +74,23 @@
                 </ScrollView>
                 <Button Grid.Column="1" Grid.Row="5" Text="Continuar" Command="{Binding RegistrarClienteCommand}" HorizontalOptions="End" Padding="30,0"/>
             </Grid>
-            <Grid Grid.Row="1" VerticalOptions="End" ColumnDefinitions="0.2*,*" RowDefinitions="5.48*, 27.51*">
+            <Grid Grid.ColumnSpan="3" Grid.Row="1" VerticalOptions="End" ColumnDefinitions="0.2*,*" RowDefinitions="5.48*, 27.51*">
                 <BoxView Background="Gray" Grid.Row="1" Grid.ColumnSpan="2"/>
                 <Image Source="listonesBase.png" Grid.RowSpan="2" Aspect="AspectFit" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand"/>
             </Grid>
             <!--Modal Informativo-->
-            <Frame BackgroundColor="Gray" Opacity="0.5" Grid.RowSpan="2" IsVisible="{Binding Modal}"/>
-            <Frame Grid.RowSpan="2" VerticalOptions="Center" HorizontalOptions="Center" IsVisible="{Binding Modal}" BackgroundColor="White" CornerRadius="20">
+            <Frame Grid.ColumnSpan="3" BackgroundColor="Gray" Opacity="0.5" Grid.RowSpan="2" IsVisible="{Binding Modal}"/>
+            <Frame Grid.Column="1" Grid.RowSpan="2" VerticalOptions="Center" HorizontalOptions="FillAndExpand" IsVisible="{Binding Modal}" BackgroundColor="White" CornerRadius="20">
                 <Grid ColumnDefinitions=".05*, *,.05*" RowDefinitions="Auto, .7*">
-                    <Label Grid.Column="1" Text="{Binding Mensaje, Mode=TwoWay}" TextColor="Gray" FontSize="{OnPlatform Android=Body, iOS=Small}" VerticalTextAlignment="Center" VerticalOptions="Center" HorizontalTextAlignment="Center" HorizontalOptions="Center"/>
+                    <Label Grid.Column="1" Text="{Binding Mensaje, Mode=TwoWay}" TextColor="Gray" FontSize="{OnPlatform Android=Body, iOS=Small}" VerticalTextAlignment="Center" VerticalOptions="Center" HorizontalTextAlignment="Center" HorizontalOptions="CenterAndExpand"/>
                     <StackLayout  Grid.Row="1" Grid.Column="1">
-                        <Button CornerRadius="{OnPlatform Android='20', iOS='20', UWP='10'}" HorizontalOptions="CenterAndExpand" Padding="{OnPlatform Android='50,15', iOS='25,10',UWP='10,0'}" FontAttributes="None" Text="Aceptar" Command="{Binding OcultarModalCommand}" TextColor="White" FontSize="{OnPlatform Android=Body, iOS=Small}"/>
+                        <Button CornerRadius="{OnPlatform Android='20', iOS='20', UWP='10'}" HorizontalOptions="CenterAndExpand" Padding="{OnPlatform Android='25,15', iOS='25,10',UWP='10,0'}" FontAttributes="None" Text="Aceptar" Command="{Binding OcultarModalCommand}" TextColor="White" FontSize="{OnPlatform Android=Body, iOS=Small}"/>
                     </StackLayout>
                 </Grid>
             </Frame>
             <!--Modal Registro Exitoso-->
-            <Frame BackgroundColor="Gray" Opacity="0.5" Grid.RowSpan="2" IsVisible="{Binding ModalRegistro}"/>
-            <Frame Grid.RowSpan="2" VerticalOptions="Center" HorizontalOptions="Center" IsVisible="{Binding ModalRegistro}" BackgroundColor="White" CornerRadius="20">
+            <Frame Grid.ColumnSpan="3" BackgroundColor="Gray" Opacity="0.5" Grid.RowSpan="2" IsVisible="{Binding ModalRegistro}"/>
+            <Frame Grid.RowSpan="2" Grid.Column="1" VerticalOptions="Center" HorizontalOptions="FillAndExpand" IsVisible="{Binding ModalRegistro}" BackgroundColor="White" CornerRadius="20">
                 <Grid ColumnDefinitions=".05*, *,.05*" RowDefinitions="Auto, Auto, .7*">
                     <Image Grid.ColumnSpan="3" Source="logoRegistro.png" Aspect="AspectFit"/>
                     <Label Grid.Column="1" Grid.Row="1" Text="¡Registro exitoso!" TextColor="Gray" FontSize="{OnPlatform Android=Body, iOS=Small}" VerticalTextAlignment="Center" VerticalOptions="Center" HorizontalTextAlignment="Center" HorizontalOptions="Center"/>

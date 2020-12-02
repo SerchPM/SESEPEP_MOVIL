@@ -42,8 +42,8 @@
                         </StackLayout>
                         <Label Grid.Row="2" Text="Contacto" FontSize="Medium" FontAttributes="Bold" TextColor="White"/>
                         <StackLayout Grid.Row="3">
-                            <cv:EntryView Text="{Binding Cliente.CORREO_ELECTRONICO, Mode=TwoWay}" Etiqueta="Correo Elentronico" IsEnabled="False" TextColor="Gray"/>
-                            <cv:EntryView Text="{Binding Cliente.TELEFONO, Mode=TwoWay}" Keyboard="Numeric" Etiqueta="Telefono" TextColor="{OnPlatform Android='White', iOS='#000', UWP='White'}"/>
+                            <cv:EntryView Text="{Binding Cliente.CORREO_ELECTRONICO, Mode=TwoWay}" Etiqueta="Correo Elentrónico" IsEnabled="False" TextColor="Gray"/>
+                            <cv:EntryView Text="{Binding Cliente.TELEFONO, Mode=TwoWay}" Keyboard="Numeric" Etiqueta="Teléfono" TextColor="{OnPlatform Android='White', iOS='#000', UWP='White'}"/>
                         </StackLayout>
                     </Grid>
                 </ScrollView>
