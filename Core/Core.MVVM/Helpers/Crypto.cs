@@ -9,11 +9,12 @@ namespace Core.MVVM.Helpers
     public class Crypto
     {
         public static string EncodePassword(string originalPassword) //Una vía
-        { 
-            SHA1 sha1 = new SHA1CryptoServiceProvider(); 
-            byte[] inputBytes = (new UnicodeEncoding()).GetBytes(originalPassword); 
-            byte[] hash = sha1.ComputeHash(inputBytes); 
-            return Convert.ToBase64String(hash); 
+        {
+            SHA256 sha256 = SHA256Managed.Create();
+            ASCIIEncoding encoding = new ASCIIEncoding();
+            byte[] stream = sha256.ComputeHash(encoding.GetBytes(originalPassword));
+
+            return Convert.ToBase64String(stream);
         }
 
         public static string Encrypt(string strText, string strEncrKey = "MrN_35712369") //Dos vías
