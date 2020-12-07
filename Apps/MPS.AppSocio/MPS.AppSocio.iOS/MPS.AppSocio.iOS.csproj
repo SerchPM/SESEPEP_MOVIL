@@ -29,6 +29,8 @@
     <MtouchLink>None</MtouchLink>
     <MtouchDebug>true</MtouchDebug>
     <MtouchExtraArgs>--registrar:static</MtouchExtraArgs>
+    <CodesignKey>Apple Development: Benjamin Romero (5XE47RU975)</CodesignKey>
+    <CodesignProvision>VS: mps.AppSocio Development</CodesignProvision>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|iPhoneSimulator' ">
     <DebugType>none</DebugType>
