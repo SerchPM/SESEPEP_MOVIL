@@ -219,7 +219,7 @@ namespace MPS.Core.Lib.ViewModels.Clientes
                 }
                 else
                 {
-                    Mensaje = "No a aceptado los terminos y condiciones";
+                    Mensaje = "No ha aceptado los terminos y condiciones";
                     Modal = true;
                 }
               
