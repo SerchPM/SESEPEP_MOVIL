@@ -25,7 +25,7 @@ namespace MPS.Core.Lib.ViewModels.Socios
         RelayCommand<List<string>> getSolicitudesCommand = null;
         public RelayCommand<List<string>> GetSolicitudesCommand
         {
-            get => getSolicitudesCommand ?? (getSolicitudesCommand = new RelayCommand<List<string>>(async (fechas) =>
+            get => getSolicitudesCommand ??= new RelayCommand<List<string>>(async (fechas) =>
             {
                 var inicio = "";
                 var fin = "";
@@ -43,16 +43,16 @@ namespace MPS.Core.Lib.ViewModels.Socios
                         a.TIEMPO_REAL = "0";
                     if (string.IsNullOrEmpty(a.TOTAL_PAG_SOCIO))
                         a.TOTAL_PAG_SOCIO = "$0.00";
-                    if (a.VALORACION_CLIENTE != null)
+                    //if (a.VALORACION_CLIENTE != null) //No tiene sentido la comparación pues es float y no float?
                         a.VALORACION_CLIENTE = 0;
                 }
-            }));
+            });
         }
 
         private RelayCommand<HistorialSolicitudes> enviarHistoricoCommand = null;
         public RelayCommand<HistorialSolicitudes> EnviarHistoricoCommand
         {
-            get => enviarHistoricoCommand ??= new RelayCommand<HistorialSolicitudes>(async (param) =>
+            get => enviarHistoricoCommand ??= new RelayCommand<HistorialSolicitudes>((param) =>
             {
 
             });
@@ -61,7 +61,7 @@ namespace MPS.Core.Lib.ViewModels.Socios
         private RelayCommand exportarResultadosCommand = null;
         public RelayCommand ExportarResultadosCommand
         {
-            get => exportarResultadosCommand ??= new RelayCommand(async () =>
+            get => exportarResultadosCommand ??= new RelayCommand(() =>
             {
 
             });

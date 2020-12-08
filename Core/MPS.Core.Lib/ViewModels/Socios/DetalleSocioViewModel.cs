@@ -52,7 +52,7 @@ namespace MPS.Core.Lib.ViewModels.Socios
         RelayCommand obtenerDetalleSocioCommand = null;
         public RelayCommand ObtenerDetalleSocioCommand
         {
-            get => obtenerDetalleSocioCommand ?? (obtenerDetalleSocioCommand = new RelayCommand(async () =>
+            get => obtenerDetalleSocioCommand ??= new RelayCommand(async () =>
             {
                 var (exito, detalles) = await bl.DetalleSocio(Id);
                 if (detalles == null)
@@ -75,16 +75,16 @@ namespace MPS.Core.Lib.ViewModels.Socios
                     Fecha_Nacimiento = Convert.ToDateTime(detalles.FECHA_NACIMIENTO);
                 if (!(string.IsNullOrEmpty(detalles.NO_CLIENTE)))
                     NoCliente = detalles.NO_CLIENTE;
-                if (detalles.RANKING != null)
+                //if (detalles.RANKING != null) //No tiene sentido comparar a nulo, porque es float y no float?
                     Ranking = detalles.RANKING.ToString("0.0");
                 NombreCompleto = $"{DetallesSocio.NOMBRE}{" "}{DetallesSocio.APELLIDO_1}{" "}{DetallesSocio.APELLIDO_2}";
-            }));
+            });
         }
 
         RelayCommand<DetalleSocio> actualizaInfoCommand = null;
         public RelayCommand<DetalleSocio> ActualizaInfoCommand
         {
-            get => actualizaInfoCommand ?? (actualizaInfoCommand = new RelayCommand<DetalleSocio>(async (info) =>
+            get => actualizaInfoCommand ??= new RelayCommand<DetalleSocio>(async (info) =>
             {
                 switch (Sexo)
                 {
@@ -106,13 +106,13 @@ namespace MPS.Core.Lib.ViewModels.Socios
                 {
                     Mensaje = "Problema interno del servidor.";
                 }
-            }));
+            });
         }
 
         RelayCommand<string> updatePasswordCommand = null;
         public RelayCommand<string> UpdatePasswordCommand
         {
-            get => updatePasswordCommand ?? (updatePasswordCommand = new RelayCommand<string>(async (password) =>
+            get => updatePasswordCommand ??= new RelayCommand<string>(async (password) =>
             {
                 var c = Crypto.EncodePassword(password);
                 DetalleSocio pwd = new DetalleSocio
@@ -126,7 +126,7 @@ namespace MPS.Core.Lib.ViewModels.Socios
                     P_PWD = c
                 };
                 var (exito, respuesta) = await bl.ActualizaInfoSocio(Guid.Parse(Id), pwd);
-            }));
+            });
         }
 
         private RelayCommand regresarCommand = null;

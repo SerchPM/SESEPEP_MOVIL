@@ -47,7 +47,7 @@ namespace MPS.Core.Lib.ViewModels.Clientes
         private RelayCommand<ClienteSolicitud> enviarHistoricoCommand = null;
         public RelayCommand<ClienteSolicitud> EnviarHistoricoCommand
         {
-            get => enviarHistoricoCommand ??= new RelayCommand<ClienteSolicitud>(async (param) =>
+            get => enviarHistoricoCommand ??= new RelayCommand<ClienteSolicitud>((param) =>
             {
 
             });
@@ -56,7 +56,7 @@ namespace MPS.Core.Lib.ViewModels.Clientes
         private RelayCommand exportarResultadosCommand = null;
         public RelayCommand ExportarResultadosCommand
         {
-            get => exportarResultadosCommand ??= new RelayCommand(async () =>
+            get => exportarResultadosCommand ??= new RelayCommand(() =>
             {
 
             });

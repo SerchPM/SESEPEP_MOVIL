@@ -23,7 +23,7 @@ namespace MPS.Core.Lib.ViewModels.Socios
         MapBL mapaBL;
         MapBL MapaBL => mapaBL ??= new MapBL();
 
-        SolicitudBL solicitudBL;
+        readonly SolicitudBL solicitudBL = null;
         SolicitudBL SolicitudBL => solicitudBL ?? new SolicitudBL();
 
         #region Eventos
@@ -38,7 +38,7 @@ namespace MPS.Core.Lib.ViewModels.Socios
         public string Id { get => id; set { Set(ref id, value); } }
 
         bool modal;
-        public bool Modal {get => modal; set{Set(ref modal, value); } }
+        public bool Modal { get => modal; set { Set(ref modal, value); } }
 
         string mensaje;
         public string Mensaje { get => mensaje; set { Set(ref mensaje, value); } }
@@ -142,33 +142,33 @@ namespace MPS.Core.Lib.ViewModels.Socios
         RelayCommand solicitudActivaCommand = null;
         public RelayCommand SolicitudActivaCommand
         {
-            get => solicitudActivaCommand ?? (solicitudActivaCommand = new RelayCommand(async () =>
+            get => solicitudActivaCommand ??= new RelayCommand(async () =>
             {
                 var respuesta = await SolicitudBL.SolicitudActiva(Settings.Current.LoginInfo.Usr.Id);
                 if (respuesta.Item1)
                     EstatusSolicitud = true;
-            }));
+            });
         }
 
-        RelayCommand consultaDetalleSolicitudCommand = null; 
+        RelayCommand consultaDetalleSolicitudCommand = null;
         /// <summary>
         /// Consulta el detalle de una solicitud al seleccionarla en el mapa
         /// </summary>
         public RelayCommand ConsultaDetalleSolicitudCommand
         {
-            get => consultaDetalleSolicitudCommand ?? (consultaDetalleSolicitudCommand = new RelayCommand(() =>
+            get => consultaDetalleSolicitudCommand ??= new RelayCommand(() =>
             {
 
-            }));
+            });
         }
 
         RelayCommand<int> finalizaSolicitudCommand = null;
         public RelayCommand<int> FinalizaSolicitud
         {
-            get => finalizaSolicitudCommand ?? (finalizaSolicitudCommand = new RelayCommand<int>(async (status) =>
+            get => finalizaSolicitudCommand ??= new RelayCommand<int>(async (status) =>
             {
                 var resultado = await bl.ActualizaSolicitud(Guid.Parse(Id), Guid.Parse(Solicitud), status);
-            }));
+            });
         }
 
         RelayCommand tomarSolicitudCommand = null;
@@ -218,7 +218,7 @@ namespace MPS.Core.Lib.ViewModels.Socios
             });
         }
 
-        private RelayCommand<SolicitudServicio> mostrarModalSolicitudCommand = null; 
+        private RelayCommand<SolicitudServicio> mostrarModalSolicitudCommand = null;
         public RelayCommand<SolicitudServicio> MostrarModalSolicitudCommand
         {
             get => mostrarModalSolicitudCommand ??= new RelayCommand<SolicitudServicio>((servicio) =>
