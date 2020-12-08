@@ -42,10 +42,10 @@
             <Grid RowDefinitions="Auto,Auto,Auto,Auto,Auto,Auto,Auto,Auto,Auto,Auto,Auto,Auto,Auto,Auto, *,Auto" Padding="10">
 
                 <Label Text="Solicitar servicio"/>
-                <Frame Grid.Row="1" BackgroundColor="{StaticResource AccentColor}" CornerRadius="20" Padding="10" HorizontalOptions="StartAndExpand">
+                <Frame Grid.ColumnSpan="2" Grid.Row="1" BackgroundColor="{StaticResource AccentColor}" CornerRadius="20" Padding="10" HorizontalOptions="FillAndExpand">
                     <Grid ColumnDefinitions="Auto,*,Auto">
                         <Image Source="{Binding ServicioSeleccionado.ImagenSeleccionada}"/>
-                        <Label Text="{Binding ServicioSeleccionado.NOMBRE}" Grid.Column="1" FontAttributes="Bold" Margin="10,0,25,0" VerticalOptions="CenterAndExpand" TextColor="{StaticResource BackgroundColor}"/>
+                        <Label Text="{Binding ServicioSeleccionado.NOMBRE}" Grid.Column="1" Grid.ColumnSpan="2" FontAttributes="Bold" Margin="10,0,25,0" VerticalOptions="CenterAndExpand" TextColor="{StaticResource BackgroundColor}"/>
                         <Image x:Name="expandIcon" Source="expand.png" Grid.Column="2"/>
                     </Grid>
                     <Frame.GestureRecognizers>
@@ -96,11 +96,11 @@
                 <ImageButton Source="botonPedirAhora.png" IsVisible="{Binding EsExpress}" VerticalOptions="Center" HorizontalOptions="Center" Margin="10" Grid.Row="15" Grid.ColumnSpan="2" Command="{Binding ModalRegistrarServiciosCommand}"/>
                 <ImageButton Source="botonSolicitar.png" IsVisible="{Binding EsPersonalizado}" VerticalOptions="Center" HorizontalOptions="Center" Margin="10" Grid.Row="15" Grid.ColumnSpan="2" Command="{Binding ModalRegistrarServiciosCommand}"/>
 
-                <Frame x:Name="serviciosListado" IsVisible="False" Grid.Row="2" Grid.RowSpan="13" VerticalOptions="Fill" HorizontalOptions="Start" CornerRadius="10" BackgroundColor="{StaticResource BackgroundColor}">
+                <Frame x:Name="serviciosListado" IsVisible="False" Grid.Row="2" Grid.RowSpan="13" Grid.ColumnSpan="2" VerticalOptions="Fill" HorizontalOptions="Start" CornerRadius="10" BackgroundColor="{StaticResource BackgroundColor}">
                     <CollectionView VerticalOptions="FillAndExpand" SelectionChanged="ServiciosListado_SelectionChanged" ItemsSource="{Binding Servicios}" SelectedItem="{Binding ServicioSeleccionado}" SelectionMode="Single">
                         <CollectionView.ItemTemplate>
                             <DataTemplate x:DataType="modelOperaciones:Servicio">
-                                <Grid ColumnDefinitions="0.1*,*" Padding="5">
+                                <Grid ColumnDefinitions="0.1*,*" Padding="5" Margin="10">
                                     <VisualStateManager.VisualStateGroups>
                                         <VisualStateGroup Name="CommonStates">
                                             <VisualState Name="Normal"/>
@@ -111,7 +111,7 @@
                                             </VisualState>
                                         </VisualStateGroup>
                                     </VisualStateManager.VisualStateGroups>
-                                    <Image Source="{Binding Imagen}"/>
+                                    <Image Source="{Binding Imagen}" HorizontalOptions="Center" VerticalOptions="Center"/>
                                     <Label Text="{Binding NOMBRE}" Grid.Column="1" VerticalOptions="Center"/>
                                 </Grid>
                             </DataTemplate>

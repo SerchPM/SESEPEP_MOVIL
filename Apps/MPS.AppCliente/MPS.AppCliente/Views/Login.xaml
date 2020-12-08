@@ -8,7 +8,7 @@
         <Grid RowDefinitions="*,Auto">
             <Grid RowDefinitions="*,Auto,*">
                 <Image Source="logoMain.png"/>
-                <Label Text="Tu mejor opción en seguiridad privada" HorizontalOptions="Center" Grid.Row="1"/>
+                <Label Text="Tu mejor opción en seguridad privada" HorizontalOptions="Center" Grid.Row="1"/>
                 <ScrollView Grid.Row="2">
                     <Grid RowDefinitions="*,Auto" x:DataType="vm:LoginViewModel">
                         <Grid.BindingContext>
