@@ -20,8 +20,12 @@ namespace MPS.Core.Lib.ViewModels.Clientes
         private BL.SeguridadBL seguridadBL;
         public BL.SeguridadBL SeguridadBL => seguridadBL ??= seguridadBL = new BL.SeguridadBL();
 
-        private Cliente cliente = new Cliente() { FECHA_NACIMIENTO = DateTime.UtcNow};
+        private Cliente cliente = new Cliente();// { FECHA_NACIMIENTO = DateTime.UtcNow};
         public Cliente Cliente { get => cliente; set => Set(ref cliente, value); }
+
+
+        private bool enviarFechaDeNacimiento = true;
+        public bool EnviarFechaDeNacimiento { get => enviarFechaDeNacimiento; set => Set(ref enviarFechaDeNacimiento, value); }
 
         private NuevaTarjeta tarjeta = new NuevaTarjeta();
         public NuevaTarjeta Tarjeta { get => tarjeta; set => Set(ref tarjeta, value); }
@@ -104,7 +108,7 @@ namespace MPS.Core.Lib.ViewModels.Clientes
             {
                 if (Registro)
                 {
-                    if(!string.IsNullOrEmpty(Cliente.NOMBRE) && !string.IsNullOrEmpty(Cliente.APELLIDO_1) && !string.IsNullOrEmpty(Cliente.APELLIDO_2) && !string.IsNullOrEmpty(Cliente.Alias) &&
+                    if (!string.IsNullOrEmpty(Cliente.NOMBRE) && !string.IsNullOrEmpty(Cliente.APELLIDO_1) && !string.IsNullOrEmpty(Cliente.APELLIDO_2) && !string.IsNullOrEmpty(Cliente.Alias) &&
                     !string.IsNullOrEmpty(Cliente.Password) && !string.IsNullOrEmpty(Cliente.CORREO_ELECTRONICO))
                     {
                         if (string.IsNullOrEmpty(ValidarCliente()))
@@ -148,6 +152,7 @@ namespace MPS.Core.Lib.ViewModels.Clientes
                     Cliente.Password = Crypto.EncodePassword(Cliente.Password);
                     Cliente.VercionApp = "0";
                     Cliente.SEXO = SexoSelected.GUID.ToString();
+                    if (!EnviarFechaDeNacimiento) Cliente.FECHA_NACIMIENTO = null;
                     Cliente.IdMetodoPago = Guid.Parse("4F717133-1F98-47CE-A874-DC902392E706");
                     var (result, (mensaje, idCliente)) = await bl.RegistrarClienteAsync(Cliente);
                     if (result)
@@ -176,7 +181,7 @@ namespace MPS.Core.Lib.ViewModels.Clientes
         {
             get => regresarPasoCommand ??= new RelayCommand<bool>((paso) =>
             {
-                if(!paso)
+                if (!paso)
                 {
                     Registro = true;
                     RegistroTarjeta = false;

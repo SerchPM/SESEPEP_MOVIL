@@ -36,20 +36,25 @@
                         <cv:EntryView EtiquetaObligatorio="*" TextColorEtiquetaO="Red" Etiqueta="Apellido materno" Text="{Binding Cliente.APELLIDO_2}" TextColor="#000"/>
                         <Picker ItemsSource="{Binding Sexos}" SelectedItem="{Binding SexoSelected, Mode=TwoWay, UpdateSourceEventName=PropertyChanged}"/>
                         <Grid ColumnDefinitions="Auto,*">
-                            <Label Text="*" TextColor="Gray"/>
+                            <Label Text="*" TextColor="{OnPlatform Android=Red,iOS=Gray,UWP=Red}"/>
                             <Label Grid.Column="1" Text="Sexo" TextColor="Gray" FontSize="Small"/>
                         </Grid>
-                        <Label IsVisible="{OnPlatform Android=false, iOS=true, UWP=false}" TextColor="Gray" Text="Por políticas de seguridad de iOS no es obligatorio que indiques este campo, para MPS Seguridad es importante darte esta información." FontSize="11"/>
-                        <DatePicker Date="{Binding Cliente.FECHA_NACIMIENTO, Mode=TwoWay}"/>
+                        <!--<Label IsVisible="{OnPlatform Android=false, iOS=true, UWP=false}" TextColor="Gray" Text="Por políticas de seguridad de Apple no es obligatorio que indiques este campo, para MPS Seguridad es importante darte esta información." FontSize="11"/>-->
+                        <StackLayout Orientation="Horizontal" IsVisible="{OnPlatform Android=false, iOS=true, UWP=false}">
+                            <CheckBox IsChecked="{Binding EnviarFechaDeNacimiento, Mode=TwoWay}"/>
+                            <Label Text="Deseo compartir mi fecha de nacimiento" TextColor="Gray" FontSize="Small" VerticalOptions="Center"/>
+                        </StackLayout>
+                        <DatePicker Date="{Binding Cliente.FECHA_NACIMIENTO, Mode=TwoWay}" IsVisible="{Binding EnviarFechaDeNacimiento}"/>
+
                         <Grid ColumnDefinitions="Auto,*">
-                            <Label Text="*" TextColor="Red"/>
+                            <Label Text="*" TextColor="{OnPlatform Android=Red,iOS=Gray,UWP=Red}"/>
                             <Label Grid.Column="1" Text="Fecha de nacimiento" TextColor="Gray" FontSize="Small"/>
                         </Grid>
                         <cv:EntryView EtiquetaObligatorio="*" TextColorEtiquetaO="Red" Etiqueta="Alias" Text="{Binding Cliente.Alias}" TextColor="#000"/>
                         <cv:EntryView EtiquetaObligatorio="*" TextColorEtiquetaO="Red" Etiqueta="Correo electrónico" Text="{Binding Cliente.CORREO_ELECTRONICO}" TextColor="#000"/>
                         <cv:EntryView EtiquetaObligatorio="*" TextColorEtiquetaO="Red" Etiqueta="Contraseña" Text="{Binding Cliente.Password}" TextColor="#000" IsPassword="True"/>
-                        <cv:EntryView EtiquetaObligatorio="*" TextColorEtiquetaO="Gray" Etiqueta="Número de teléfono" Text="{Binding Cliente.TELEFONO}" TextColor="#000" Keyboard="Numeric"/>
-                        <Label IsVisible="{OnPlatform Android=false, iOS=true, UWP=false}" TextColor="Gray" Text="Por políticas de seguridad de iOS no es obligatorio que indiques este campo, para MPS Seguridad es importante darte esta información." FontSize="11"/>
+                        <cv:EntryView EtiquetaObligatorio="*" TextColorEtiquetaO="{OnPlatform Android=Red,iOS=Gray,UWP=Red}" Etiqueta="Número de teléfono" Text="{Binding Cliente.TELEFONO}" TextColor="#000" Keyboard="Numeric"/>
+                        <Label IsVisible="{OnPlatform Android=false, iOS=true, UWP=false}" TextColor="Gray" Text="*por políticas de seguridad de Apple no es obligatorio que indiques estos campos, para MPS Seguridad es importante darte esta información." FontSize="11"/>
                     </StackLayout>
                 </ScrollView>
                 <ScrollView IsVisible="{Binding RegistroTarjeta}" Grid.Column="1" Grid.Row="4">

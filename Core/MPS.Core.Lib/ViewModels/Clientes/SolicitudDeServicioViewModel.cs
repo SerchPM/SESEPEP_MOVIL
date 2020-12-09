@@ -151,7 +151,7 @@ namespace MPS.Core.Lib.ViewModels.Clientes
                     return;
                 }
                 SeleccionarPersonal = true;
-                OpenModalRegistro = (OpenModalRegistro == true) ? false : true;
+                OpenModalRegistro = OpenModalRegistro != true;
             });
         }
 
@@ -272,7 +272,7 @@ namespace MPS.Core.Lib.ViewModels.Clientes
         private RelayCommand buscarSociosCommand = null;
         public RelayCommand BuscarSociosCommand
         {
-            get => buscarSociosCommand ?? (buscarSociosCommand = new RelayCommand(async () =>
+            get => buscarSociosCommand ??= new RelayCommand(async () =>
             {
                 Socios.Clear();
                 var socios = await bl.ObtenerSociosAsync(ServicioSeleccionado.Guid, Fecha, SolicitudServicio.HorasSolicidatas, FiltroSocios);
@@ -280,7 +280,7 @@ namespace MPS.Core.Lib.ViewModels.Clientes
                 socios.Remove(so);
                 if (socios.Count > 0)
                     Socios = new ObservableCollection<Socio>(socios);
-            }));
+            });
         }
 
         private RelayCommand<Socio> seleccionarPersonalCommand = null;
@@ -305,7 +305,7 @@ namespace MPS.Core.Lib.ViewModels.Clientes
             get => mostrarPersonalSeleccionadoCommand ??= new RelayCommand(() =>
             {
                 SociosSeleccionado = new ObservableCollection<Socio>(SociosSeleccionado);
-                OpenModalRegistro = OpenModalRegistro ? false : true;
+                OpenModalRegistro = !OpenModalRegistro;
                 Socios.Clear();
             });
         }

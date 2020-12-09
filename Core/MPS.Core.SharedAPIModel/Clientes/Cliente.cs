@@ -10,7 +10,7 @@ namespace MPS.SharedAPIModel.Clientes
         public string NOMBRE { get; set; }
         public string APELLIDO_1 { get; set; }
         public string APELLIDO_2 { get; set; }
-        public DateTime FECHA_NACIMIENTO { get; set; }
+        public DateTime? FECHA_NACIMIENTO { get; set; }
         public int EDAD { get; set; }
         public string CORREO_ELECTRONICO { get; set; }
         public string TELEFONO { get; set; }
