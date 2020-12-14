@@ -32,12 +32,6 @@
 	<string>MPS.AppSocio</string>
 	<key>XSAppIconAssets</key>
 	<string>Assets.xcassets/AppIcon.appiconset</string>
-	<key>NSLocationAlwaysUsageDescription</key>
-	<string>Can we use your location at all times?</string>
-	<key>NSLocationWhenInUseUsageDescription</key>
-	<string>Can we use your location when your application is being used?</string>
-	<key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
-	<string>Can we use your location at all times?</string>
 	<key>UIBackgroundModes</key>
 	<array>
 		<string>remote-notification</string>
@@ -46,5 +40,11 @@
 	<string>1.0</string>
 	<key>OneSignal_app_groups_key</key>
 	<string>group.mps.AppSocio.OneSignalServiceExtensionSocio</string>
+	<key>NSLocationWhenInUseUsageDescription</key>
+	<string>¿Podemos usar su ubicación para ubicar personal de seguridad cerca de usted?</string>
+	<key>NSLocationAlwaysUsageDescription</key>
+	<string>¿Podemos usar su ubicación para ubicar personal de seguridad cerca de usted?</string>
+	<key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
+	<string>¿Podemos usar su ubicación para ubicar personal de seguridad cerca de usted?</string>
 </dict>
 </plist>

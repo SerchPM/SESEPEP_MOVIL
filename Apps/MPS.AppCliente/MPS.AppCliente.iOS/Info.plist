@@ -32,8 +32,6 @@
 	<string>Assets.xcassets/AppIcon.appiconset</string>
 	<key>NSLocationAlwaysUsageDescription</key>
 	<string>¿Podemos usar su ubicación para localizar personal de seguridad cercanos?</string>
-	<key>NSLocationWhenInUseUsageDescription</key>
-	<string>Can we use your location when your application is being used?</string>
 	<key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
 	<string>¿Podemos usar su ubicación para ubicar personal de seguridad cerca de usted?</string>
 	<key>UIBackgroundModes</key>
@@ -46,5 +44,7 @@
 	<string>1</string>
 	<key>CFBundleVersion</key>
 	<string>1.0</string>
+	<key>NSLocationWhenInUseUsageDescription</key>
+	<string>¿Podemos usar su ubicación para ubicar personal de seguridad cerca de usted?</string>
 </dict>
 </plist>
