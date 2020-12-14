@@ -38,17 +38,17 @@
                 <Grid RowDefinitions="Auto,*,Auto,Auto" VerticalOptions="StartAndExpand">
                     <Label Text="Datos generales" FontSize="Medium" FontAttributes="Bold" TextColor="White"/>
                     <StackLayout Grid.Row="1">
-                        <Label HorizontalOptions="FillAndExpand" VerticalOptions="Center" TextColor="White" FontSize="Body" HorizontalTextAlignment="Start" Text="{Binding NoCliente}"/>
+                        <Label HorizontalOptions="FillAndExpand" VerticalOptions="Center" TextColor="{OnPlatform Android='White', iOS='#000', UWP='#000'}" FontSize="Body" HorizontalTextAlignment="Start" Text="{Binding NoCliente}"/>
                         <Label Grid.Row="1" TextColor="Gray" FontSize="Small" HorizontalTextAlignment="Start" Text="No. Socio" Margin="0,0,0,5"/>
-                        <Entry x:Name="Nombre" HorizontalOptions="FillAndExpand" VerticalOptions="Center" TextColor="White" FontSize="Body" HorizontalTextAlignment="Start" Text="{Binding DetallesSocio.NOMBRE}"/>
+                        <Entry x:Name="Nombre" HorizontalOptions="FillAndExpand" VerticalOptions="Center" TextColor="{OnPlatform Android='White', iOS='#000', UWP='#000'}" FontSize="Body" HorizontalTextAlignment="Start" Text="{Binding DetallesSocio.NOMBRE}"/>
                         <Label Grid.Row="1" TextColor="Gray" FontSize="Small" HorizontalTextAlignment="Start" Text="Nombre(s)" Margin="0,0,0,5"/>
-                        <Entry x:Name="Apellido_paterno" HorizontalOptions="FillAndExpand" VerticalOptions="Center" TextColor="White" FontSize="Body" HorizontalTextAlignment="Start" Text="{Binding DetallesSocio.APELLIDO_1}"/>
+                        <Entry x:Name="Apellido_paterno" HorizontalOptions="FillAndExpand" VerticalOptions="Center" TextColor="{OnPlatform Android='White', iOS='#000', UWP='#000'}" FontSize="Body" HorizontalTextAlignment="Start" Text="{Binding DetallesSocio.APELLIDO_1}"/>
                         <Label Grid.Row="1" TextColor="Gray" FontSize="Small" HorizontalTextAlignment="Start" Text="Apellido Paterno" Margin="0,0,0,5"/>
-                        <Entry x:Name="Apellido_materno" HorizontalOptions="FillAndExpand" VerticalOptions="Center" TextColor="White" FontSize="Body" HorizontalTextAlignment="Start" Text="{Binding DetallesSocio.APELLIDO_2}"/>
+                        <Entry x:Name="Apellido_materno" HorizontalOptions="FillAndExpand" VerticalOptions="Center" TextColor="{OnPlatform Android='White', iOS='#000', UWP='#000'}" FontSize="Body" HorizontalTextAlignment="Start" Text="{Binding DetallesSocio.APELLIDO_2}"/>
                         <Label Grid.Row="1" TextColor="Gray" FontSize="Small" HorizontalTextAlignment="Start" Text="Apellido Materno" Margin="0,0,0,5"/>
-                        <DatePicker x:Name="Fecha_nacimiento" HorizontalOptions="FillAndExpand" VerticalOptions="Center" TextColor="White" FontSize="Body" Date="{Binding DetallesSocio.FECHA_NACIMIENTO}"/>
+                        <DatePicker x:Name="Fecha_nacimiento" HorizontalOptions="FillAndExpand" VerticalOptions="Center" TextColor="{OnPlatform Android='White', iOS='#000', UWP='#000'}" FontSize="Body" Date="{Binding Fecha_Nacimiento}"/>
                         <Label Grid.Row="1" TextColor="Gray" FontSize="Small" HorizontalTextAlignment="Start" Text="Fecha de Nacimiento" Margin="0,0,0,5"/>
-                        <Label HorizontalOptions="FillAndExpand" VerticalOptions="Center" TextColor="White" FontSize="Body" HorizontalTextAlignment="Start" Text="{Binding Sexo}"/>
+                        <Label HorizontalOptions="FillAndExpand" VerticalOptions="Center" TextColor="{OnPlatform Android='White', iOS='White', UWP='White'}" FontSize="Body" HorizontalTextAlignment="Start" Text="{Binding Sexo}"/>
                         <Label Grid.Row="1" TextColor="Gray" FontSize="Small" HorizontalTextAlignment="Start" Text="Sexo" Margin="0,0,0,5"/>
                         <!--<cv:EntryView TextMenu="No. Socio" Info="{Binding NoCliente}"/>
                         <cv:EntryView TextMenu="Nombre(s)" Info="{Binding DetallesSocio.NOMBRE}"/>
@@ -59,9 +59,9 @@
                     </StackLayout>
                     <Label Grid.Row="2" Text="Contacto" FontSize="Medium" FontAttributes="Bold" TextColor="White"/>
                     <StackLayout Grid.Row="3">
-                        <Entry x:Name="Correo" HorizontalOptions="FillAndExpand" VerticalOptions="Center" TextColor="White" FontSize="Body" HorizontalTextAlignment="Start" Text="{Binding DetallesSocio.E_MAIL}"/>
+                        <Entry x:Name="Correo" HorizontalOptions="FillAndExpand" VerticalOptions="Center" TextColor="{OnPlatform Android='White', iOS='#000', UWP='#000'}" FontSize="Body" HorizontalTextAlignment="Start" Text="{Binding DetallesSocio.E_MAIL}"/>
                         <Label Grid.Row="1" TextColor="Gray" FontSize="Small" HorizontalTextAlignment="Start" Text="Correo Electrónico" Margin="0,0,0,5"/>
-                        <Entry x:Name="Telefono" HorizontalOptions="FillAndExpand" VerticalOptions="Center" TextColor="White" FontSize="Body" HorizontalTextAlignment="Start" Text="{Binding DetallesSocio.TEL_NUMERO}"/>
+                        <Entry x:Name="Telefono" HorizontalOptions="FillAndExpand" VerticalOptions="Center" TextColor="{OnPlatform Android='White', iOS='#000', UWP='#000'}" FontSize="Body" HorizontalTextAlignment="Start" Text="{Binding DetallesSocio.TEL_NUMERO}"/>
                         <Label Grid.Row="1" TextColor="Gray" FontSize="Small" HorizontalTextAlignment="Start" Text="Teléfono" Margin="0,0,0,5"/>
                         <!--<cv:EntryView TextMenu="Correo Electrónico" Info="{Binding DetallesSocio.E_MAIL}"/>
                         <cv:EntryView TextMenu="Teléfono" Info="{Binding DetallesSocio.TEL_NUMERO}"/>-->

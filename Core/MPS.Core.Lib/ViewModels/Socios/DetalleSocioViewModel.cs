@@ -62,22 +62,25 @@ namespace MPS.Core.Lib.ViewModels.Socios
                 else
                 {
                     DetallesSocio = detalles;
-                }
-                switch (detalles.GUID_SEXO)
-                {
-                    case "3cf6a15f-8692-4fe2-bb53-6b8d33ff4fce": Sexo = "Mujer/Femenino"; 
-                        break;
-                    case "ff32e57f-e1b7-4f03-a75a-c6af65f47e88": Sexo = "Hombre/Masculino";
-                        break;
-                    default: break;
-                }
-                if (!(string.IsNullOrEmpty(detalles.FECHA_NACIMIENTO)))
-                    Fecha_Nacimiento = Convert.ToDateTime(detalles.FECHA_NACIMIENTO);
-                if (!(string.IsNullOrEmpty(detalles.NO_CLIENTE)))
-                    NoCliente = detalles.NO_CLIENTE;
-                //if (detalles.RANKING != null) //No tiene sentido comparar a nulo, porque es float y no float?
+                    switch (DetallesSocio.GUID_SEXO)
+                    {
+                        case "3cf6a15f-8692-4fe2-bb53-6b8d33ff4fce":
+                            Sexo = "Mujer/Femenino";
+                            break;
+                        case "ff32e57f-e1b7-4f03-a75a-c6af65f47e88":
+                            Sexo = "Hombre/Masculino";
+                            break;
+                        default: break;
+                    }
+                    if (!(string.IsNullOrEmpty(DetallesSocio.FECHA_NACIMIENTO)))
+                        Fecha_Nacimiento = Convert.ToDateTime(DetallesSocio.FECHA_NACIMIENTO);
+                    if (!(string.IsNullOrEmpty(DetallesSocio.NO_CLIENTE)))
+                        NoCliente = DetallesSocio.NO_CLIENTE;
+                    //if (detalles.RANKING != null) //No tiene sentido comparar a nulo, porque es float y no float?
                     Ranking = detalles.RANKING.ToString("0.0");
-                NombreCompleto = $"{DetallesSocio.NOMBRE}{" "}{DetallesSocio.APELLIDO_1}{" "}{DetallesSocio.APELLIDO_2}";
+                    NombreCompleto = $"{DetallesSocio.NOMBRE} {DetallesSocio.APELLIDO_1} {DetallesSocio.APELLIDO_2}";
+                }
+               
             });
         }
 
