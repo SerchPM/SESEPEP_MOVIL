@@ -28,7 +28,7 @@
                 </Grid>
             </Frame>
         </StackLayout>
-        <Image Grid.Column="1" Source="Assets/cerrar.png" HorizontalOptions="End" VerticalOptions="Start" Margin="{OnPlatform Android='5', UWP='5', iOS='10'}">
+        <Image Grid.Column="1" Source="cerrar.png" HorizontalOptions="EndAndExpand" VerticalOptions="Start" Margin="{OnPlatform Android='5', UWP='5', iOS='10,30,10,1'}">
             <Image.GestureRecognizers>
                 <TapGestureRecognizer Command="{Binding RegresarCommand}"/>
             </Image.GestureRecognizers>

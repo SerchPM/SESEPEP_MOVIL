@@ -123,8 +123,34 @@ namespace MPS.Core.Lib.ApiSocio
         /// <param name="hasta">Fecha de filtro final</param>
         /// <returns></returns>
         public async Task<(HttpStatusCode StatusCode, List<HistorialSolicitudes> catalogo)> GetHistoricoSolicitudesAsync(Guid idCliente,DateTime desde, DateTime hasta) =>
-            await CallPostAsync<List<HistorialSolicitudes>>("SocioSolicitudes", ("P_GUID_SOCIO", idCliente));
+            await CallPostAsync<List<HistorialSolicitudes>>("SocioSolicitudes", ("P_GUID_SOCIO", idCliente), ("P_FECHA_INICIO", desde.ToString("MM-dd-yyyy")), ("P_FECHA_FIN", hasta.ToString("MM-dd-yyyy")));
 
+        /// <summary>
+        /// Obtiene los datos bancarios de un socio mediente su identificador
+        /// </summary>
+        /// <param name="idSocio">Identificador del socio</param>
+        /// <returns></returns>
+        public async Task<(HttpStatusCode StatusCode, List<DatoBancario> catalogo)> ObtenerDatosBancariosSociosAsync(Guid idSocio) =>
+            await CallPostAsync<List<DatoBancario>>("ConsultaDatosBancariosSocios", ("P_GUID_SOCIO", idSocio));
+
+        /// <summary>
+        /// Actualiza el numero de tarjeta del socio
+        /// </summary>
+        /// <param name="idTarjeta">Identificador de la tarjeta</param>
+        /// <param name="noTarjeta">No. de tarjeta a actualizar</param>
+        /// <returns></returns>
+        public async Task<(HttpStatusCode StatusCode, ActualizacionResponse result)> ActualizarTarjetaAsync(Guid idTarjeta, string noTarjeta) =>
+            await CallPostAsync<ActualizacionResponse>("ActualizaTarjetaSocio", ("P_GUID_TARJETA", idTarjeta), ("P_NUMERO_TARJETA", noTarjeta));
+
+        /// <summary>
+        /// Actualiza el numero de cuenta bancaria del socio
+        /// </summary>
+        /// <param name="idSocio">Odentificador del socio</param>
+        /// <param name="noCuenta">No. Cuenta a actualizar</param>
+        /// <returns></returns>
+        public async Task<(HttpStatusCode StatusCode, ActualizacionResponse result)> ActualizarBancoAsync(Guid idSocio, string noCuenta) =>
+            await CallPostAsync<ActualizacionResponse>("ActualizaBancoSocio", ("P_GUID_SOCIO", idSocio), ("P_CUENTA_BANCO", noCuenta));
+
+        #endregion
     }
-    #endregion
 }

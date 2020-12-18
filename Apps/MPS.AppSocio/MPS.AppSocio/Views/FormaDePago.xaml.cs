@@ -16,18 +16,11 @@ namespace MPS.AppSocio.Views.Views
         public FormaDePago()
         {
             InitializeComponent();
-            ViewModel.GetInfoCommand.Execute(null);
         }
 
-        private void Update_Info(object o, EventArgs e)
+        protected override void OnAppearing()
         {
-            List<string> info = new List<string>();
-            if (!(string.IsNullOrEmpty(Cuenta.Text)) && !(string.IsNullOrEmpty(Banco.Text)))
-            {
-                info.Add(Cuenta.Text);
-                info.Add(Banco.Text);
-                ViewModel.UpdateInfoCommand.Execute(info);
-            }
+            ViewModel.ObtenerDatosBancariosCommand.Execute();
         }
     }
 }

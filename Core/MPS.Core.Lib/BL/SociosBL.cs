@@ -82,5 +82,50 @@ namespace MPS.Core.Lib.BL
             else
                 return new SolicitudResponse();
         }
+
+        /// <summary>
+        /// Obtiene los datos bancarios de un socio mediente su identificador
+        /// </summary>
+        /// <param name="idSocio">Identificador del socio</param>
+        /// <returns></returns>
+        public async Task<(bool, DatoBancario)> ObtenerDatosBancariosSociosAsync(Guid idSocio)
+        {
+            var (statusCode, resultado) = await SociosApi.ObtenerDatosBancariosSociosAsync(idSocio);
+            if (statusCode == HttpStatusCode.OK && resultado.Count > 0)
+                return (true, resultado[0]);
+            else
+                return (false, new DatoBancario());
+        }
+
+        /// <summary>
+        /// Actualiza el numero de tarjeta del socio
+        /// </summary>
+        /// <param name="idTarjeta">Identificador de la tarjeta</param>
+        /// <param name="noTarjeta">No. de tarjeta a actualizar</param>
+        /// <returns></returns>
+        public async Task<bool> ActualizarTarjetaAsync(Guid idTarjeta, string noTarjeta)
+        {
+            var (statusCode, resultado) = await SociosApi.ActualizarTarjetaAsync(idTarjeta, noTarjeta);
+            if (statusCode == HttpStatusCode.OK && !string.IsNullOrEmpty(resultado.ESTATUS) && resultado.ESTATUS.Equals("OK"))
+                return true;
+            else
+                return false;
+        }
+
+        /// <summary>
+        /// Actualiza el numero de cuenta bancaria del socio
+        /// </summary>
+        /// <param name="idSocio">Odentificador del socio</param>
+        /// <param name="noCuenta">No. Cuenta a actualizar</param>
+        /// <returns></returns>
+        public async Task<bool> ActualizarBancoAsync(Guid idSocio, string noCuenta)
+        {
+            var (statusCode, resultado) = await SociosApi.ActualizarBancoAsync(idSocio, noCuenta);
+            if (statusCode == HttpStatusCode.OK && !string.IsNullOrEmpty(resultado.ESTATUS) && resultado.ESTATUS.Equals("OK"))
+                return true;
+            else
+                return false;
+        }
+
     }
 }

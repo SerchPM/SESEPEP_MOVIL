@@ -96,7 +96,7 @@ namespace MPS.Core.Lib.ViewModels.Clientes
                 if (string.IsNullOrEmpty(Tarjeta.NoCuenta) || string.IsNullOrEmpty(Tarjeta.CVV) || MesSelected == 0 || AñoSelected == 0
                  || (TipoTarjetaSelected != null && TipoTarjetaSelected.Id == 0) || (Tarjetaselected != null && Tarjetaselected.GUID == Guid.Empty))
                 {
-                    Mensaje = "Faltan campos por capturar,\nverifique informacion";
+                    Mensaje = "Faltan campos por capturar,\nverifique su información";
                     Modal = true;
                     return;
                 }

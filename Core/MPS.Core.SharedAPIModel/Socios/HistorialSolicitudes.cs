@@ -8,7 +8,7 @@ namespace MPS.SharedAPIModel.Socios
     {
         public string GUID_SOLICITUD { get; set; }
         public string FOLIO_SOLICITUD { get; set; }
-        public float VALORACION_CLIENTE { get; set; }
+        public decimal? VALORACION_CLIENTE { get; set; }
         public string TIPO_SERVICIO { get; set; }
         public string CLIENTE { get; set; }
         public DateTime FECHA_SOLICITUD { get; set; }
@@ -17,6 +17,6 @@ namespace MPS.SharedAPIModel.Socios
         public string TIEMPO_REAL { get; set; }
         public string UBICACION_1 { get; set; }
         public string UBICACION_2 { get; set; }
-        public string TOTAL_PAG_SOCIO { get; set; }
+        public decimal? TOTAL_PAG_SOCIO { get; set; }
     }
 }

@@ -522,6 +522,33 @@
   <ItemGroup>
     <BundleResource Include="Resources\cerrar%403x.png" />
   </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\reloj.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\reloj%402x.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\reloj%403x.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\finsolicitud.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\finsolicitud%402x.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\finsolicitud%403x.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\iniciosolicitud.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\iniciosolicitud%402x.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\iniciosolicitud%403x.png" />
+  </ItemGroup>
   <ProjectExtensions>
     <VisualStudio>
       <UserProperties TriggeredFromHotReload="False" />

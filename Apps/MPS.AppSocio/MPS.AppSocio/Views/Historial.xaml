@@ -5,7 +5,7 @@
              x:Class="MPS.AppSocio.Views.Views.Historial"
              xmlns:vm="clr-namespace:MPS.Core.Lib.ViewModels.Socios">
     <ContentPage.BindingContext>
-        <vm:HistorialSolicitudesViewModel/>
+        <vm:HistorialSolicitudesViewModel x:Name="ViewModel"/>
     </ContentPage.BindingContext>
     <ContentPage.Content>
         <Grid RowDefinitions="Auto,*,Auto">
@@ -13,32 +13,26 @@
             <Grid Grid.Row="1" RowDefinitions="Auto,*">
                 <Grid ColumnDefinitions="Auto,*,Auto" RowDefinitions="Auto, Auto, Auto" Margin="10,5">
                     <Label Text="Historial" FontSize="Medium"/>
-                    <StackLayout Orientation="Horizontal" Grid.Row="1" Grid.Column="1" VerticalOptions="Center" HorizontalOptions="FillAndExpand">
+                    <StackLayout Orientation="Horizontal" Grid.Row="1" Grid.ColumnSpan="3" VerticalOptions="CenterAndExpand" HorizontalOptions="CenterAndExpand">
                         <Grid RowDefinitions="Auto,Auto" VerticalOptions="Center">
-                            <DatePicker TextColor="Black" VerticalOptions="Center" x:Name="FechaInicial"/>
+                            <DatePicker TextColor="Black" Date="{Binding Desde}" VerticalOptions="Center"/>
                             <Label Grid.Row="1" Text="Desde" FontSize="Small" TextColor="LightGray"/>
                         </Grid>
                         <Grid RowDefinitions="Auto,Auto" VerticalOptions="Center">
-                            <DatePicker TextColor="Black" VerticalOptions="Center" x:Name="FechaFinal"/>
+                            <DatePicker TextColor="Black" Date="{Binding Hasta}" VerticalOptions="Center"/>
                             <Label Grid.Row="1" Text="Hasta" FontSize="Small" TextColor="LightGray"/>
                         </Grid>
-                        <ImageButton Source="botonBuscar.png" HorizontalOptions="Center" VerticalOptions="Center" Aspect="AspectFit" Clicked="Buscar"/>
+                        <ImageButton Source="botonBuscar.png" Command="{Binding GetSolicitudesCommand}" HorizontalOptions="Center" VerticalOptions="Center" Aspect="AspectFit"/>
                     </StackLayout>
-                    <Button Grid.Row="2" Grid.ColumnSpan="3" HorizontalOptions="EndAndExpand" HeightRequest="30" BackgroundColor="CornflowerBlue" CornerRadius="10" FontSize="Small" VerticalOptions="Center" Text="Exportar resultados" Padding="10,0"/>
+                    <Button Grid.Row="2" Grid.ColumnSpan="3" HorizontalOptions="EndAndExpand" HeightRequest="30" BackgroundColor="CornflowerBlue" CornerRadius="10" FontSize="Small" VerticalOptions="Center" Text="Exportar resultados" Command="{Binding ExportarResultadosCommand}" Padding="10,0"/>
                 </Grid>
-                <CollectionView Grid.Row="1" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" ItemsSource="{Binding Historial}">
-                    <CollectionView.ItemTemplate>
-                        <DataTemplate>
-                            <cv:HistoryItem x:Name="h" HorizontalOptions="FillAndExpand" VerticalOptions="Center" Margin="0,10"/>
-                                            <!--Tipo_Servicio="{Binding Historial.TIPO_SERVICIO}" 
-                                            Fecha_Solicitud="{Binding Historial.FECHA_SOLICITUD}" 
-                                            Fecha_Inicio="{Binding Historial.INICIO_SOLICITUD}"
-                                            Monto="{Binding Historial.TOTAL_PAG_SOCIO}"
-                                            Tiempo_Real="{Binding Historial.TIEMPO_REAL}"/>-->
-                        </DataTemplate>
-                    </CollectionView.ItemTemplate>
-                </CollectionView>
+                <ScrollView Grid.Row="1" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
+                    <StackLayout  x:Name="solicitudes" Spacing="10" Orientation="Vertical">
+
+                    </StackLayout>
+                </ScrollView>
             </Grid>
+
             <cv:StatusBar Grid.Row="2" IsLinksVisible="False"/>
         </Grid>
     </ContentPage.Content>

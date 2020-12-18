@@ -27,9 +27,11 @@
                     </StackLayout>
                     <Button Grid.Row="2" Grid.ColumnSpan="3" HorizontalOptions="EndAndExpand" HeightRequest="30" BackgroundColor="CornflowerBlue" CornerRadius="10" FontSize="Small" VerticalOptions="Center" Text="Exportar resultados" Command="{Binding ExportarResultadosCommand}" Padding="10,0"/>
                 </Grid>
-                <StackLayout Grid.Row="1" x:Name="solicitudes" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" Spacing="10" Orientation="Vertical">
+                <ScrollView Grid.Row="1"  HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" >
+                    <StackLayout  x:Name="solicitudes" Spacing="10" Orientation="Vertical">
 
-                </StackLayout>
+                    </StackLayout>
+                </ScrollView>
             </Grid>
             
             <cv:StatusBar Grid.Row="2" IsLinksVisible="False"/>
