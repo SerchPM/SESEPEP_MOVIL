@@ -43,7 +43,7 @@ namespace MPS.AppSocio.Views.OS
                     Modelo = Settings.Current.ModeloDispositivo,
                     SO = Settings.Current.SO,
                     TipoDispositivo = Settings.Current.TipoDispositivo,
-                    TipoUsuario = (int)TipoUsuarioEnum.Cliente,
+                    TipoUsuario = (int)TipoUsuarioEnum.Socio,
                     VercionApp = "1.0.5",
                     TimeZona = "-28800",
                     PlayerId = playerID

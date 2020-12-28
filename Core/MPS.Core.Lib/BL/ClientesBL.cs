@@ -129,7 +129,7 @@ namespace MPS.Core.Lib.BL
         {
             var (statusCode, resultado) = await ClientesApi.RegistrarClienteAsync(cliente);
             if (statusCode == HttpStatusCode.OK && !string.IsNullOrEmpty(resultado.ESTATUS) && resultado.ESTATUS.Equals("OK"))
-                return (true, (string.Empty, resultado.GUID));
+                return (true, (string.Empty, resultado.GUID.Value));
             else if (statusCode == HttpStatusCode.OK && !string.IsNullOrEmpty(resultado.ESTATUS) && resultado.ESTATUS.Equals("ERROR"))
                 return (false, ("El correo que intenta registrar ya existe,\nintente con un nuevo correo.", Guid.Empty));
             else

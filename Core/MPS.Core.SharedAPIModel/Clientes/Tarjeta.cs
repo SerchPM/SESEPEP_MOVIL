@@ -52,7 +52,7 @@ namespace MPS.SharedAPIModel.Clientes
     {
         public string ESTATUS { get; set; }
         public string DESCRIPCION { get; set; }
-        public Guid GUID { get; set; }
+        public Guid? GUID { get; set; }
         public string FOLIO { get; set; }
         public DateTime FECHA { get; set; }
         public string ATRIBUTO1 { get; set; }

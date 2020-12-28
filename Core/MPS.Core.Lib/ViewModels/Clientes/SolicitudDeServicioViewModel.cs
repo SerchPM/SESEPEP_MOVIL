@@ -209,6 +209,7 @@ namespace MPS.Core.Lib.ViewModels.Clientes
                         Mensaje = mensaje;
                         Terminos = false;
                         Modal = true;
+                        ModalAgregarServicio = false;
                     }
                     else
                     {
