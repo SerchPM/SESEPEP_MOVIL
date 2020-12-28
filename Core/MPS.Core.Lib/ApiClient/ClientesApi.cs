@@ -62,10 +62,11 @@ namespace MPS.Core.Lib.ApiClient
         {
             var res = await CallFormUrlEncoded<Respuesta>("ActualizaInfoCliente", HttpMethod.Post,
                 ("P_GUID_SOCIO", idCliente.ToString()),
-                ("P_FECHA_NACIMIENTO", cliente.FECHA_NACIMIENTO.ToString()),
+                ("P_FECHA_NACIMIENTO", cliente.FECHA_NACIMIENTO.Value.ToString("MM-dd-yyyy")),
                 ("P_NOMBRE", cliente.NOMBRE),
                 ("P_APELLIDO_1", cliente.APELLIDO_1),
                 ("P_APELLIDO_2", cliente.APELLIDO_2),
+                ("P_SEXO", cliente.GUID_SEXO.ToString()),
                 ("P_TEL_NUMERO", cliente.TELEFONO));
             return res;
         }

@@ -34,11 +34,13 @@
                         <Label Text="Datos generales" FontSize="Medium" FontAttributes="Bold" TextColor="White"/>
                         <StackLayout Grid.Row="1">
                             <cv:EntryView Text="{Binding Cliente.NO_CLIENTE, Mode=TwoWay}" Etiqueta="No. Cuenta" IsEnabled="False" TextColor="Gray"/>
-                            <cv:EntryView Text="{Binding Cliente.NOMBRE, Mode=TwoWay}" Etiqueta="Nombre(s)" IsEnabled="False" TextColor="Gray"/>
-                            <cv:EntryView Text="{Binding Cliente.APELLIDO_1, Mode=TwoWay}" Etiqueta="Apellido Paterno" IsEnabled="False" TextColor="Gray"/>
-                            <cv:EntryView Text="{Binding Cliente.APELLIDO_2, Mode=TwoWay}" Etiqueta="Apellido Materno" IsEnabled="False" TextColor="Gray"/>
-                            <cv:EntryView Text="{Binding Cliente.FECHA_NACIMIENTO, Mode=TwoWay}" Etiqueta="Fecha de Nacimiento" IsEnabled="False" TextColor="Gray"/>
-                            <cv:EntryView Text="{Binding Cliente.SEXO, Mode=TwoWay}" Etiqueta="Sexo" IsEnabled="False" TextColor="Gray"/>
+                            <cv:EntryView Text="{Binding Cliente.NOMBRE, Mode=TwoWay}" Etiqueta="Nombre(s)" TextColor="{OnPlatform Android='White', iOS='#000', UWP='#000'}"/>
+                            <cv:EntryView Text="{Binding Cliente.APELLIDO_1, Mode=TwoWay}" Etiqueta="Apellido Paterno" TextColor="{OnPlatform Android='White', iOS='#000', UWP='#000'}"/>
+                            <cv:EntryView Text="{Binding Cliente.APELLIDO_2, Mode=TwoWay}" Etiqueta="Apellido Materno" TextColor="{OnPlatform Android='White', iOS='#000', UWP='#000'}"/>
+                            <DatePicker Date="{Binding Cliente.FECHA_NACIMIENTO, Mode=TwoWay}" FontSize="Body" TextColor="{OnPlatform Android='White', iOS='#000', UWP='#000'}"/>
+                            <Label Text="Fecha de Nacimiento" TextColor="Gray" FontSize="Small"/>
+                            <Picker ItemsSource="{Binding Sexos}" SelectedItem="{Binding SexoSelected, Mode=TwoWay, UpdateSourceEventName=PropertyChanged}" FontSize="Body" TextColor="{OnPlatform Android='White', iOS='#000', UWP='#000'}"/>
+                            <Label Text="Sexo" TextColor="Gray" FontSize="Small"/>
                         </StackLayout>
                         <Label Grid.Row="2" Text="Contacto" FontSize="Medium" FontAttributes="Bold" TextColor="White"/>
                         <StackLayout Grid.Row="3">
@@ -53,7 +55,7 @@
                 </Grid>
             </Grid>
            
-            <!--Modal Agregar Forma de Pago-->
+            <!--Modal actualizar password-->
             <Frame VerticalOptions="FillAndExpand" Grid.RowSpan="3" Grid.ColumnSpan="3" HorizontalOptions="FillAndExpand" BackgroundColor="Gray" Opacity=".5" IsVisible="{Binding ModalPassword}"/>
             <Grid Grid.RowSpan="3" Grid.Column="1" RowDefinitions=".3*,Auto,.3*" ColumnDefinitions=".1*,*,.1*" IsVisible="{Binding ModalPassword}">
                 <Frame Grid.Column="1" Grid.Row="1" CornerRadius="10" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" BackgroundColor="White" IsClippedToBounds="True">

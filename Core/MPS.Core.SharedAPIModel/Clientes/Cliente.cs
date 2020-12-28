@@ -19,6 +19,7 @@ namespace MPS.SharedAPIModel.Clientes
         public DateTime? FECHA_ULTIMA_APERTURA_APP { get; set; }
         public string IMAGEN { get; set; }
         public string SEXO { get; set; }
+        public Guid GUID_SEXO { get; set; }
         public DateTime? ULTIMA_SOLICITUD { get; set; }
         public Guid? GUID_ULTIMA_SOLICITUD { get; set; }
         public string TARJETA { get; set; }

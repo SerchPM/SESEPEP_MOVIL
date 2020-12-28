@@ -10,6 +10,8 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 using System.Text.RegularExpressions;
+using MPS.SharedAPIModel.Operaciones;
+using System.Linq;
 
 namespace MPS.Core.Lib.ViewModels.Clientes
 {
@@ -87,6 +89,12 @@ namespace MPS.Core.Lib.ViewModels.Clientes
 
         private bool modalPassword;
         public bool ModalPassword { get => modalPassword; set => Set(ref modalPassword, value); }
+
+        private List<Sexo> sexos;
+        public List<Sexo> Sexos { get => sexos; set => Set(ref sexos, value); }
+
+        private Sexo sexoSelected = new Sexo();
+        public Sexo SexoSelected { get => sexoSelected; set => Set(ref sexoSelected, value); }
         #endregion
 
         #region Comandos
@@ -95,8 +103,19 @@ namespace MPS.Core.Lib.ViewModels.Clientes
         {
             get => obtenerClienteCommand ??= new RelayCommand(async () =>
             {
+                Sexos = await (new OperacionesBL()).GetSexosAsync();
                 Cliente = await bl.GetClienteAsync(Guid.Parse(Settings.Current.LoginInfo.Usr.Id));
                 NombreCopleto = $"{Cliente.NOMBRE} {Cliente.APELLIDO_1} {Cliente.APELLIDO_2}";
+                if (!Cliente.GUID_SEXO.Equals(Guid.Empty))
+                {
+                    if(Sexos.Count > 0)
+                        SexoSelected = Sexos.Where(w => w.GUID.Equals(Cliente.GUID_SEXO)).FirstOrDefault();
+                }
+                else
+                {
+                    if (Sexos.Count > 0)
+                        SexoSelected = Sexos.FirstOrDefault();
+                }
             });
         }
 
@@ -109,6 +128,7 @@ namespace MPS.Core.Lib.ViewModels.Clientes
                 var validar = ValidarNumeroTlefonico();
                 if (string.IsNullOrEmpty(validar))
                 {
+                    Cliente.GUID_SEXO = SexoSelected.GUID;
                     var (result, mensajeResult) = await bl.AtualziarClienteAsync(Guid.Parse(Settings.Current.LoginInfo.Usr.Id), Cliente);
                     if (result)
                     {
