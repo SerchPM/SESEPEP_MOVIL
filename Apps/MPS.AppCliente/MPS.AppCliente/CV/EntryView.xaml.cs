@@ -63,18 +63,23 @@ namespace MPS.AppCliente.Views.CV
             me.label.Text = me.Etiqueta;
         });
 
-        public bool IsEnableText
+        public string IsEnableText
         {
-            get => (bool)GetValue(IsEnableTextProperty);
+            get => (string)GetValue(IsEnableTextProperty);
             set => SetValue(IsEnableTextProperty, value);
         }
 
-        public static readonly BindableProperty IsEnableTextProperty = BindableProperty.Create(nameof(IsEnableText), typeof(bool), typeof(EntryView), default(bool),
+        public static readonly BindableProperty IsEnableTextProperty = BindableProperty.Create(nameof(IsEnableText), typeof(string), typeof(EntryView), default(string),
         propertyChanged: (bindable, oldValue, newValue) =>
         {
-            var me = (EntryView)bindable;
-            me.IsEnableText = (bool)newValue;
-            me.entry.IsEnabled = me.IsEnableText;
+            var isEnable = (string)newValue;
+            if (!string.IsNullOrEmpty(isEnable))
+            {
+                if (isEnable == "False") newValue = false;
+                else if (isEnable == "True") newValue = true;
+                var me = (EntryView)bindable;
+                me.entry.IsEnabled = (bool)newValue;
+            }
         });
 
         public bool IsPassword

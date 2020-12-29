@@ -15,6 +15,113 @@ namespace MPS.AppSocio.Views.CV
         public EntryView()
         {
             InitializeComponent();
+            entry.TextChanged += (s, e) =>
+            {
+                Text = entry.Text;
+            };
         }
+
+        public Keyboard Keyboard
+        {
+            get => (Keyboard)GetValue(KeyboardProperty);
+            set => SetValue(KeyboardProperty, value);
+        }
+
+        public static readonly BindableProperty KeyboardProperty = BindableProperty.Create(nameof(Keyboard), typeof(Keyboard), typeof(EntryView), default(Keyboard),
+        propertyChanged: (bindable, oldValue, newValue) =>
+        {
+            var me = (EntryView)bindable;
+            me.Keyboard = (Keyboard)newValue;
+            me.entry.Keyboard = me.Keyboard;
+        });
+
+        public string Text
+        {
+            get => (string)GetValue(TextProperty);
+            set => SetValue(TextProperty, value);
+        }
+
+        public static readonly BindableProperty TextProperty = BindableProperty.Create(nameof(Text), typeof(string), typeof(EntryView), default(string),
+        defaultBindingMode: BindingMode.TwoWay, propertyChanged: (bindable, oldValue, newValue) =>
+        {
+            var me = (EntryView)bindable;
+            me.Text = (string)newValue;
+            me.entry.Text = me.Text;
+        });
+
+        public string Etiqueta
+        {
+            get => (string)GetValue(EtiquetaProperty);
+            set => SetValue(EtiquetaProperty, value);
+        }
+
+        public static readonly BindableProperty EtiquetaProperty = BindableProperty.Create(nameof(Etiqueta), typeof(string), typeof(EntryView), default(string),
+        propertyChanged: (bindable, oldValue, newValue) =>
+        {
+            var me = (EntryView)bindable;
+            me.Etiqueta = (string)newValue;
+            me.label.Text = me.Etiqueta;
+        });
+
+        public string IsEnableText
+        {
+            get => (string)GetValue(IsEnableTextProperty);
+            set => SetValue(IsEnableTextProperty, value);
+        }
+
+        public static readonly BindableProperty IsEnableTextProperty = BindableProperty.Create(nameof(IsEnableText), typeof(string), typeof(EntryView), default(string),
+        propertyChanged: (bindable, oldValue, newValue) =>
+        {
+            var isEnable = (string)newValue;
+            if (!string.IsNullOrEmpty(isEnable))
+            {
+                if (isEnable == "False") newValue = false;
+                else if (isEnable == "True") newValue = true;
+                var me = (EntryView)bindable;
+                me.entry.IsEnabled = (bool)newValue;
+            }
+        });
+
+        public bool IsPassword
+        {
+            get => (bool)GetValue(IsPasswordProperty);
+            set => SetValue(IsPasswordProperty, value);
+        }
+
+        public static readonly BindableProperty IsPasswordProperty = BindableProperty.Create(nameof(IsPassword), typeof(bool), typeof(EntryView), default(bool),
+        propertyChanged: (bindable, oldValue, newValue) =>
+        {
+            var me = (EntryView)bindable;
+            me.IsPassword = (bool)newValue;
+            me.entry.IsPassword = me.IsPassword;
+        });
+
+        public Color TextColor
+        {
+            get => (Color)GetValue(TextColorTextProperty);
+            set => SetValue(TextColorTextProperty, value);
+        }
+
+        public static readonly BindableProperty TextColorTextProperty = BindableProperty.Create(nameof(TextColor), typeof(Color), typeof(EntryView), default(Color),
+        propertyChanged: (bindable, oldValue, newValue) =>
+        {
+            var me = (EntryView)bindable;
+            me.TextColor = (Color)newValue;
+            me.entry.TextColor = me.TextColor;
+        });
+
+        public int MaxLength
+        {
+            get => (int)GetValue(MaxLengthProperty);
+            set => SetValue(MaxLengthProperty, value);
+        }
+
+        public static readonly BindableProperty MaxLengthProperty = BindableProperty.Create(nameof(MaxLength), typeof(int), typeof(EntryView), default(int),
+        propertyChanged: (bindable, oldValue, newValue) =>
+        {
+            var me = (EntryView)bindable;
+            me.MaxLength = (int)newValue;
+            me.label.MaxLines = me.MaxLength;
+        });
     }
 }

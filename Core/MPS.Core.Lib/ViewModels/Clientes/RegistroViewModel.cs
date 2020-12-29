@@ -121,7 +121,7 @@ namespace MPS.Core.Lib.ViewModels.Clientes
                     }
                     else
                     {
-                        Mensaje = "Flatan campos por capturar";
+                        Mensaje = "Faltan campos por capturar";
                         Modal = true;
                     }
                 }
@@ -130,7 +130,7 @@ namespace MPS.Core.Lib.ViewModels.Clientes
                     if (string.IsNullOrEmpty(Tarjeta.NoCuenta) || string.IsNullOrEmpty(Tarjeta.CVV) || MesSelected == 0 || AñoSelected == 0
                         || (TipoTarjetaSelected != null && TipoTarjetaSelected.Id == 0) || (Tarjetaselected != null && Tarjetaselected.GUID == Guid.Empty))
                     {
-                        Mensaje = "Faltan campos por capturar,\nverifique informacion";
+                        Mensaje = "Faltan campos por capturar";
                         Modal = true;
                         return;
                     }

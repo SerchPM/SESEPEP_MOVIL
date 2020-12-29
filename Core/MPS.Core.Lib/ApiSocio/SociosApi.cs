@@ -54,27 +54,33 @@ namespace MPS.Core.Lib.ApiSocio
         /// <param name="info"></param>
         /// <param name="img"></param>
         /// <returns></returns>
-        public async Task<(HttpStatusCode StatusCode, Respuesta Respuesta)> ActualizaSocioAsync(Guid socio, DetalleSocio info) =>
-        //{
-        //    var res = await CallFormUrlEncoded<Respuesta>("ActualizaInfoSocio", HttpMethod.Post,
-        //        ("P_GUID_SOCIO", socio),
-        //        ("P_NOMBRE", info.NOMBRE),
-        //        ("P_APELLIDO_1", info.APELLIDO_1),
-        //        ("P_APELLIDO_2", info.APELLIDO_2),
-        //        ("P_FECHA_NACIMIENTO", info.FECHA_NACIMIENTO),
-        //        ("P_SEXO", info.GUID_SEXO),
-        //        ("P_TEL_NUMERO", info.TEL_NUMERO),
-        //        ("P_PWD", info.P_PWD));
-        await CallPostAsync<Respuesta>("ActualizaInfoSocio",
-                ("P_GUID_SOCIO", socio),
+        public async Task<(HttpStatusCode StatusCode, Respuesta Respuesta)> ActualizaSocioAsync(Guid socio, DetalleSocio info)
+        {
+            var res = await CallFormUrlEncoded<Respuesta>("ActualizaInfoSocio", HttpMethod.Post,
+                ("P_GUID_SOCIO", socio.ToString()),
+                ("P_FECHA_NACIMIENTO", info.FECHA_NACIMIENTO),
                 ("P_NOMBRE", info.NOMBRE),
                 ("P_APELLIDO_1", info.APELLIDO_1),
                 ("P_APELLIDO_2", info.APELLIDO_2),
-                ("P_FECHA_NACIMIENTO", info.FECHA_NACIMIENTO),
-                ("P_SEXO", info.GUID_SEXO),
+                ("P_SEXO", info.GUID_SEXO.ToString()),
                 ("P_TEL_NUMERO", info.TEL_NUMERO));
-        //    return res;
-        //}
+            return res;
+        }
+
+        /// <summary>
+        /// Actualiza el password del socio
+        /// </summary>
+        /// <param name="idSocio">Identoficador del socio</param>
+        /// <param name="password">Passowrd a actualizar</param>
+        /// <returns></returns>
+        public async Task<(HttpStatusCode StatusCode, Respuesta Respuesta)> ActualizarPasswordSocioAsync(Guid idSocio, string password)
+        {
+            var res = await CallFormUrlEncoded<Respuesta>("ActualizaInfoSocio", HttpMethod.Post,
+                ("P_GUID_SOCIO", idSocio.ToString()),
+                ("P_PWD", password));
+            return res;
+        }
+
 
         /// <summary>
         /// Devuelve los detalles de un socio en particular

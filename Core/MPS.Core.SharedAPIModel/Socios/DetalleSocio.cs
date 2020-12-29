@@ -33,7 +33,7 @@ namespace MPS.SharedAPIModel.Socios
         public object FECHA_INICIO_SOLICITUD { get; set; }
         public object FECHA_FIN_SOLICITUD { get; set; }
         public object ESTATUS_SOLICITUD { get; set; }
-        public string GUID_SEXO { get; set; }
+        public Guid GUID_SEXO { get; set; }
         public string P_PWD { get; set; }
     }
 }

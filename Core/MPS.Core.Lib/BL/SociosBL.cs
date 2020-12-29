@@ -23,16 +23,14 @@ namespace MPS.Core.Lib.BL
         /// </summary>
         /// <param name="Id"></param>
         /// <returns></returns>
-        public async Task<(bool Valido, DetalleSocio Detalles)> DetalleSocio(string Id)
+        public async Task<DetalleSocio> DetalleSocio(string Id)
         {
             var (StatusCode, Detalles) = await SociosApi.DetalleSocioAsync(Id);
             var valido = StatusCode == System.Net.HttpStatusCode.OK;
             if (valido)
-                return (valido, Detalles);
+                return Detalles;
             else
-            {
-                return (false, new DetalleSocio());
-            }
+                return new DetalleSocio();
         }
 
         /// <summary>
@@ -41,14 +39,28 @@ namespace MPS.Core.Lib.BL
         /// <param name="Id"></param>
         /// <param name="Info"></param>
         /// <returns></returns>
-        public async Task<(bool Valido, Respuesta Respuesta)> ActualizaInfoSocio(Guid Id, DetalleSocio Info)
+        public async Task<(bool Valido, string Respuesta)> ActualizaInfoSocio(Guid Id, DetalleSocio Info)
         {
-            var (StatusCode, Response) = await SociosApi.ActualizaSocioAsync(Id, Info);
-            var valido = StatusCode == System.Net.HttpStatusCode.OK;
-            if (valido)
-                return (valido, Response);
+            var (StatusCode, resultado) = await SociosApi.ActualizaSocioAsync(Id, Info);
+            if (StatusCode == HttpStatusCode.OK && !string.IsNullOrEmpty(resultado.ESTATUS) && resultado.ESTATUS.Equals("OK"))
+                return (true, "Datos actualizados correctamente");
             else
-                return (false, new Respuesta());
+                return (false, "Ocurrio un problema al actualizar la informacion, intente más tarde");
+        }
+
+        /// <summary>
+        /// Actualiza el password del socio
+        /// </summary>
+        /// <param name="idSocio">Identoficador del socio</param>
+        /// <param name="password">Passowrd a actualizar</param>
+        /// <returns></returns>
+        public async Task<(bool Valido, string Respuesta)> ActualizarPasswordSocioAsync(Guid idSocio, string password)
+        {
+            var (StatusCode, resultado) = await SociosApi.ActualizarPasswordSocioAsync(idSocio, password);
+            if (StatusCode == HttpStatusCode.OK && !string.IsNullOrEmpty(resultado.ESTATUS) && resultado.ESTATUS.Equals("OK"))
+                return (true, "Password actualizados correctamente");
+            else
+                return (false, "Ocurrio un problema al actualizar el password, intente mas tarde");
         }
 
         /// <summary>

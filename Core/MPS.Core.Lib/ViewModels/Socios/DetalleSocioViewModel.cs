@@ -2,6 +2,7 @@
 using MPS.Core.Lib.BL;
 using MPS.Core.Lib.Helpers;
 using MPS.Core.Lib.OS;
+using MPS.SharedAPIModel.Operaciones;
 using MPS.SharedAPIModel.Socios;
 using Sysne.Core.MVVM;
 using Sysne.Core.MVVM.Patterns;
@@ -9,8 +10,10 @@ using Sysne.Core.OS;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Linq;
 using System.Security.Cryptography;
 using System.Text;
+using System.Text.RegularExpressions;
 
 namespace MPS.Core.Lib.ViewModels.Socios
 {
@@ -18,21 +21,17 @@ namespace MPS.Core.Lib.ViewModels.Socios
     {
         public DetalleSocioViewModel()
         {
-            Id = Settings.Current.LoginInfo.Usr.Id;
-            NoCliente = "";
+            Id = Guid.Parse(Settings.Current.LoginInfo.Usr.Id);
             Ranking = "0.0";
-            Sexo = "";
-            Fecha_Nacimiento = DateTime.Now;
             Mensaje = "";
         }
+
+        #region Propiedades
         string mensaje;
         public string Mensaje { get => mensaje; set { Set(ref mensaje, value); } }
 
-        DateTime fecha_Nacimiento;
-        public DateTime Fecha_Nacimiento { get => fecha_Nacimiento; set { Set(ref fecha_Nacimiento, value); } }
-
-        string id;
-        public string Id { get => id; set { Set(ref id, value); } }
+        private Guid id;
+        public Guid Id { get => id; set { Set(ref id, value); } }
 
         DetalleSocio detallesSocio;
         public DetalleSocio DetallesSocio { get => detallesSocio; set { Set(ref detallesSocio, value); } }
@@ -43,92 +42,155 @@ namespace MPS.Core.Lib.ViewModels.Socios
         string ranking;
         public string Ranking { get => ranking; set { Set(ref ranking, value); } }
 
-        string noCliente;
-        public string NoCliente { get => noCliente; set { Set(ref noCliente, value); } }
+        private List<Sexo> sexos;
+        public List<Sexo> Sexos { get => sexos; set => Set(ref sexos, value); }
 
-        string sexo;
-        public string Sexo { get => sexo; set { Set(ref sexo, value); } }
+        private Sexo sexoSelected = new Sexo();
+        public Sexo SexoSelected { get => sexoSelected; set => Set(ref sexoSelected, value); }
 
+        private string password;
+        public string Password
+        {
+            get => password;
+            set
+            {
+                Set(ref password, value);
+                if (!string.IsNullOrEmpty(value))
+                {
+                    var validar = LetrasYNumeros(value);
+                    if (validar && value.Length > 8)
+                        MensajePassword = string.Empty;
+                    else
+                        MensajePassword = "La contraseña debe tener más de 8 caracteres";
+                }
+            }
+        }
+
+        private string passwordConfirm;
+        public string PasswordConfirm
+        {
+            get => passwordConfirm;
+            set
+            {
+                Set(ref passwordConfirm, value);
+                if (!string.IsNullOrEmpty(value))
+                {
+                    var validar = LetrasYNumeros(value);
+                    if (value.Equals(Password) && validar && value.Length > 8)
+                    {
+                        MensajePasswordConfirm = string.Empty;
+                        PasswordCorrect = true;
+                    }
+                    else
+                    {
+                        MensajePasswordConfirm = "La contraseña no coincide";
+                        PasswordCorrect = false;
+                    }
+                }
+            }
+        }
+
+        private bool modal;
+        public bool Modal { get => modal; set => Set(ref modal, value); }
+
+        private string mensajePassword;
+        public string MensajePassword { get => mensajePassword; set => Set(ref mensajePassword, value); }
+
+        private string mensajePasswordConfirm;
+        public string MensajePasswordConfirm { get => mensajePasswordConfirm; set => Set(ref mensajePasswordConfirm, value); }
+
+        private bool passwordCorrect;
+        public bool PasswordCorrect { get => passwordCorrect; set => Set(ref passwordCorrect, value); }
+
+        private bool modalPassword;
+        public bool ModalPassword { get => modalPassword; set => Set(ref modalPassword, value); }
+        #endregion
+
+        #region Comandos
         RelayCommand obtenerDetalleSocioCommand = null;
         public RelayCommand ObtenerDetalleSocioCommand
         {
             get => obtenerDetalleSocioCommand ??= new RelayCommand(async () =>
             {
-                var (exito, detalles) = await bl.DetalleSocio(Id);
-                if (detalles == null)
+                Sexos = await (new OperacionesBL()).GetSexosAsync();
+                DetallesSocio = await bl.DetalleSocio(Id.ToString());
+                Ranking = DetallesSocio.RANKING.ToString("0.0");
+                NombreCompleto = $"{DetallesSocio.NOMBRE} {DetallesSocio.APELLIDO_1} {DetallesSocio.APELLIDO_2}";
+                if (!DetallesSocio.GUID_SEXO.Equals(Guid.Empty))
                 {
-                    DetallesSocio = new DetalleSocio();
+                    if (Sexos.Count > 0)
+                        SexoSelected = Sexos.Where(w => w.GUID.Equals(DetallesSocio.GUID_SEXO)).FirstOrDefault();
                 }
                 else
                 {
-                    DetallesSocio = detalles;
-                    switch (DetallesSocio.GUID_SEXO)
+                    if (Sexos.Count > 0)
+                        SexoSelected = Sexos.FirstOrDefault();
+                }
+            });
+        }
+
+        RelayCommand actualizaInfoCommand = null;
+        public RelayCommand ActualizaInfoCommand
+        {
+            get => actualizaInfoCommand ??= new RelayCommand(async () =>
+            {
+                if(DetallesSocio != null && !string.IsNullOrEmpty(DetallesSocio.NOMBRE) && !string.IsNullOrEmpty(DetallesSocio.APELLIDO_1) && !string.IsNullOrEmpty(DetallesSocio.APELLIDO_2)
+                && !string.IsNullOrEmpty(DetallesSocio.TEL_NUMERO) && !string.IsNullOrEmpty(DetallesSocio.E_MAIL) && SexoSelected != null && SexoSelected.GUID != Guid.Empty)
+                {
+                    var validar = ValidarNumeroTlefonico();
+                    if (string.IsNullOrEmpty(validar))
                     {
-                        case "3cf6a15f-8692-4fe2-bb53-6b8d33ff4fce":
-                            Sexo = "Mujer/Femenino";
-                            break;
-                        case "ff32e57f-e1b7-4f03-a75a-c6af65f47e88":
-                            Sexo = "Hombre/Masculino";
-                            break;
-                        default: break;
+                        DetallesSocio.GUID_SEXO = SexoSelected.GUID;
+                        var (exito, respuesta) = await bl.ActualizaInfoSocio(Id, DetallesSocio);
+                        if (exito)
+                        {
+                            Mensaje = respuesta;
+                            Modal = true;
+                        }
+                        else
+                        {
+                            Mensaje = respuesta;
+                            Modal = true;
+                            DetallesSocio = await bl.DetalleSocio(Id.ToString());
+                            Ranking = DetallesSocio.RANKING.ToString("0.0");
+                            NombreCompleto = $"{DetallesSocio.NOMBRE} {DetallesSocio.APELLIDO_1} {DetallesSocio.APELLIDO_2}";
+                        }
                     }
-                    if (!(string.IsNullOrEmpty(DetallesSocio.FECHA_NACIMIENTO)))
-                        Fecha_Nacimiento = Convert.ToDateTime(DetallesSocio.FECHA_NACIMIENTO);
-                    if (!(string.IsNullOrEmpty(DetallesSocio.NO_CLIENTE)))
-                        NoCliente = DetallesSocio.NO_CLIENTE;
-                    //if (detalles.RANKING != null) //No tiene sentido comparar a nulo, porque es float y no float?
-                    Ranking = detalles.RANKING.ToString("0.0");
-                    NombreCompleto = $"{DetallesSocio.NOMBRE} {DetallesSocio.APELLIDO_1} {DetallesSocio.APELLIDO_2}";
+                    else
+                        Modal = true;
+                }
+                else
+                {
+                    Mensaje = "Faltan campos por capturar";
+                    Modal = true;
                 }
                
             });
         }
 
-        RelayCommand<DetalleSocio> actualizaInfoCommand = null;
-        public RelayCommand<DetalleSocio> ActualizaInfoCommand
+        RelayCommand actualizarPasswordCommand = null;
+        public RelayCommand ActualizarPasswordCommand
         {
-            get => actualizaInfoCommand ??= new RelayCommand<DetalleSocio>(async (info) =>
+            get => actualizarPasswordCommand ??= new RelayCommand(async () =>
             {
-                switch (Sexo)
+                var passwordCrypto = Crypto.EncodePassword(PasswordConfirm);
+                var (result, mensajeResult) = await bl.ActualizarPasswordSocioAsync(Id, passwordCrypto);
+                if (result)
                 {
-                    case "Mujer/Femenino":
-                        info.GUID_SEXO = "3cf6a15f-8692-4fe2-bb53-6b8d33ff4fce";
-                        break;
-                    case "Hombre/Masculino":
-                        info.GUID_SEXO = "ff32e57f-e1b7-4f03-a75a-c6af65f47e88";
-                        break;
-                    default: break;
-                }
-                info.P_PWD = "";
-                var (exito, respuesta) = await bl.ActualizaInfoSocio(Guid.Parse(Id), info);
-                if (exito)
-                {
-                    Mensaje = "Registro exitoso.";
+                    MensajePassword = string.Empty;
+                    MensajePasswordConfirm = string.Empty;
+                    PasswordConfirm = string.Empty;
+                    Password = string.Empty;
+                    PasswordCorrect = false;
+                    ModalPassword = false;
+                    Mensaje = mensajeResult;
+                    Modal = true;
                 }
                 else
                 {
-                    Mensaje = "Problema interno del servidor.";
+                    Mensaje = mensajeResult;
+                    Modal = true;
                 }
-            });
-        }
-
-        RelayCommand<string> updatePasswordCommand = null;
-        public RelayCommand<string> UpdatePasswordCommand
-        {
-            get => updatePasswordCommand ??= new RelayCommand<string>(async (password) =>
-            {
-                var c = Crypto.EncodePassword(password);
-                DetalleSocio pwd = new DetalleSocio
-                {
-                    NOMBRE = "",
-                    APELLIDO_1 = "",
-                    APELLIDO_2 = "",
-                    FECHA_NACIMIENTO = "",
-                    GUID_SEXO = "",
-                    TEL_NUMERO = "",
-                    P_PWD = c
-                };
-                var (exito, respuesta) = await bl.ActualizaInfoSocio(Guid.Parse(Id), pwd);
             });
         }
 
@@ -140,5 +202,59 @@ namespace MPS.Core.Lib.ViewModels.Socios
                 await DependencyService.Get<INavigationService>().GoBack();
             });
         }
+
+        private RelayCommand modalPasswordCommand = null;
+        public RelayCommand ModalPasswordCommand
+        {
+            get => modalPasswordCommand ??= new RelayCommand(() =>
+            {
+                PasswordCorrect = false;
+                Password = string.Empty;
+                PasswordConfirm = string.Empty;
+                ModalPassword = true;
+            });
+        }
+
+        private RelayCommand ocultarModalPaswwordCommand = null;
+        public RelayCommand OcultarModalPaswwordCommand
+        {
+            get => ocultarModalPaswwordCommand ??= new RelayCommand(() =>
+            {
+                MensajePassword = string.Empty;
+                MensajePasswordConfirm = string.Empty;
+                ModalPassword = false;
+            });
+        }
+
+        private RelayCommand ocultarModalCommand = null;
+        public RelayCommand OcultarModalCommand
+        {
+            get => ocultarModalCommand ??= new RelayCommand(() =>
+            {
+                Modal = false;
+            });
+        }
+        #endregion
+
+        #region Metodos
+        string ValidarNumeroTlefonico()
+        {
+            Mensaje = string.Empty;
+            var telefonoValido = Regex.IsMatch(DetallesSocio.TEL_NUMERO, @"^\d{10}$");
+            if (!telefonoValido)
+                return Mensaje = "Teléfono inválido";
+            return Mensaje;
+        }
+
+        /// <summary>
+        /// Método que valida letras y números a partir de una cadena.
+        /// </summary>
+        /// <param name="s"></param>
+        /// <returns></returns>
+        public static bool LetrasYNumeros(string s)
+        {
+            return Regex.IsMatch(s, "^[a-zA-Z0-9]+");
+        }
+        #endregion
     }
 }
