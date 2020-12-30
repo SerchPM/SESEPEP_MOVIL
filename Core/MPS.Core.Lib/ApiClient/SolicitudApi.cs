@@ -58,6 +58,16 @@ namespace MPS.Core.Lib.ApiClient
 
         public async Task<(HttpStatusCode StatusCode, SolicitudActivaResponse Respuesta)> SolicitudActiva(string noSocio) =>
             await CallPostAsync<SolicitudActivaResponse>("ConsultaSolicitudesGeneral", ("P_PARAMETRO", noSocio));
+
+        /// <summary>
+        /// Calcula el costo del servicio mediante las horas de trabajo y tipo de servicio
+        /// </summary>
+        /// <param name="idTipoServicio">Identificador del servicio</param>
+        /// <param name="horas">Horas estimadas de trabajo</param>
+        /// <param name="tipoSolicitud">Tipo de solicitud(1=Express, 2=Personalizada)</param>
+        /// <returns></returns>
+        public async Task<(HttpStatusCode statusCode, List<ResponseCosto> response)> CalcularCostoServicioAsync(Guid idTipoServicio, int horas, int tipoSolicitud) =>
+            await CallPostAsync<List<ResponseCosto>>("GenerarTotalPorPagar", ("P_GUID_TIPO_SOLICITUD", idTipoServicio), ("P_HORAS_SOLICITADAS", horas), ("P_TIPO_SOLICITUD", tipoSolicitud));
         #endregion
     }
 }

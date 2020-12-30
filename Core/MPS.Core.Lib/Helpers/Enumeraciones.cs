@@ -9,4 +9,10 @@ namespace MPS.Core.Lib.Helpers
         Cliente = 1,
         Socio = 2
     }
+
+    public enum TipoSolicitudEnum
+    {
+        Express = 1,
+        Personalizada = 2
+    }
 }

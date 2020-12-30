@@ -54,4 +54,16 @@ namespace MPS.SharedAPIModel.Solicitud
         public string C1RA_UBICACION { get; set; }
         public string C2DA_UBICACION { get; set; }
     }
+
+    public class ResponseCosto 
+    {
+        public string ESTATUS { get; set; }
+        public string DESCRIPCION { get; set; }
+        public int COSTO_TOTAL { get; set; }
+        public Guid GUID_TIPO_SOLICITUD { get; set; }
+        public int TIEMPO_LLEGADA_MIN { get; set; }
+        public DateTime FECHA { get; set; }
+        public int HORAS_SOLICITADAS { get; set; }
+    }
+
 }

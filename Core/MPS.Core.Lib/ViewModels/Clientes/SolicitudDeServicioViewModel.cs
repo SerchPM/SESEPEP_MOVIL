@@ -56,10 +56,10 @@ namespace MPS.Core.Lib.ViewModels.Clientes
         bool openModalRegitsro;
         public bool OpenModalRegistro { get => openModalRegitsro; set => Set(ref openModalRegitsro, value); }
 
-        private Solicitud solicitudServicio = new Solicitud() { TotalPago = 1000, TiempoGenerarSolicitud = 5};
+        private Solicitud solicitudServicio = new Solicitud();
         public Solicitud SolicitudServicio { get => solicitudServicio; set => Set(ref solicitudServicio, value); }
 
-        private DateTime fecha = DateTime.Now;
+        private DateTime fecha = DateTime.UtcNow;
         public DateTime Fecha { get => fecha; set => Set(ref fecha, value); }
 
         private TimeSpan hora = new TimeSpan(12, 0, 0);
@@ -121,6 +121,23 @@ namespace MPS.Core.Lib.ViewModels.Clientes
 
         private bool modalServicioAceptado;
         public bool ModalServicioAceptado { get => modalServicioAceptado; set => Set(ref modalServicioAceptado, value); }
+
+        private List<int> horas;
+        public List<int> Horas { get => horas; set => Set(ref horas, value); }
+
+        private int horasSelected;
+        public int HorasSelected
+        {
+            get => horasSelected;
+            set
+            {
+                Set(ref horasSelected, value);
+                SolicitudServicio.HorasSolicidatas = value;
+            }
+        }
+
+        private string cosotoServicio;
+        public string CosotoServicio { get => cosotoServicio; set => Set(ref cosotoServicio, value); }
         #endregion
 
         #region Commands
@@ -160,6 +177,12 @@ namespace MPS.Core.Lib.ViewModels.Clientes
         {
             get => obtenerComponentesCommand ??= new RelayCommand(async () =>
             {
+                var horasAux = new List<int>();
+                for (int i = 1; i < 10; i++)
+                    horasAux.Add(8 * i);
+                Horas = new List<int>(horasAux);
+                HorasSelected = Horas.FirstOrDefault();
+                
                 Servicios = await bl.ObtenerServiciosAsync();
                 if(Servicios.Count > 0)
                     ServicioSeleccionado = Servicios.FirstOrDefault(s => s.NOMBRE.Contains("INTRAMUROS"));
@@ -190,8 +213,8 @@ namespace MPS.Core.Lib.ViewModels.Clientes
                 if (Terminos)
                 {
                     SolicitudServicio.IdTipoSolicitud = ServicioSeleccionado.Guid;
-                    SolicitudServicio.IdTipoServicio = EsExpress ? 1 : 2;
-                    SolicitudServicio.FechaSolicitud = new DateTime(Fecha.Year, Fecha.Month, Fecha.Day, Hora.Hours, Hora.Minutes, Hora.Seconds);
+                    SolicitudServicio.IdTipoServicio = EsExpress ? (int)TipoSolicitudEnum.Express : (int)TipoSolicitudEnum.Personalizada;
+                    SolicitudServicio.FechaSolicitud = EsExpress ? DateTime.UtcNow : new DateTime(Fecha.Year, Fecha.Month, Fecha.Day, Hora.Hours, Hora.Minutes, Hora.Seconds);
                     SolicitudServicio.IdCliente = Guid.Parse(Settings.Current.LoginInfo.Usr.Id);
                     SolicitudServicio.IdMoneda = Guid.Parse("f913e4ac-24b9-48e1-817d-ae4deb73c555");
                     SolicitudServicio.VersionApp = "VERSION";
@@ -231,11 +254,11 @@ namespace MPS.Core.Lib.ViewModels.Clientes
         private RelayCommand modalRegistrarServiciosCommand = null;
         public RelayCommand ModalRegistrarServiciosCommand
         {
-            get => modalRegistrarServiciosCommand ??= new RelayCommand(() =>
+            get => modalRegistrarServiciosCommand ??= new RelayCommand(async () =>
             {
-                if (SolicitudServicio.NoElementos == 0 && SolicitudServicio.HorasSolicidatas == 0)
+                if (SolicitudServicio.NoElementos == 0 || SolicitudServicio.HorasSolicidatas == 0)
                 {
-                    Mensaje = "Faltan campos por capturar,\nverifique informacion";
+                    Mensaje = "Faltan campos por capturar";
                     Modal = true;
                     return;
                 }
@@ -246,7 +269,9 @@ namespace MPS.Core.Lib.ViewModels.Clientes
                         Modal = true;
                         return;
                     }
-
+                var costo = await bl.CalcularCostoServicioAsync(ServicioSeleccionado.Guid, HorasSelected, EsExpress ? (int)TipoSolicitudEnum.Express : (int)TipoSolicitudEnum.Personalizada);
+                CosotoServicio = costo.ToString("C2");
+                SolicitudServicio.TotalPago = costo;
                 ModalAgregarServicio = true;
             });
         }
@@ -277,8 +302,6 @@ namespace MPS.Core.Lib.ViewModels.Clientes
             {
                 Socios.Clear();
                 var socios = await bl.ObtenerSociosAsync(ServicioSeleccionado.Guid, Fecha, SolicitudServicio.HorasSolicidatas, FiltroSocios);
-                var so = socios.LastOrDefault();
-                socios.Remove(so);
                 if (socios.Count > 0)
                     Socios = new ObservableCollection<Socio>(socios);
             });

@@ -197,6 +197,21 @@ namespace MPS.Core.Lib.BL
             else
                 return (false, new SolicitudActivaResponse());
         }
+
+        /// <summary>
+        /// Calcula el costo del servicio mediante las horas de trabajo y tipo de servicio
+        /// </summary>
+        /// <param name="idTipoServicio">Identificador del servicio</param>
+        /// <param name="horas">Horas estimadas de trabajo</param>
+        /// <param name="tipoSolicitud">Tipo de solicitud(1=Express, 2=Personalizada)</param>
+        public async Task<int> CalcularCostoServicioAsync(Guid idTipoServicio, int horas, int tipoSolicitud)
+        {
+            var (statusCode, resultado) = await SolicitudApi.CalcularCostoServicioAsync(idTipoServicio, horas, tipoSolicitud);
+            if (statusCode == HttpStatusCode.OK && resultado.Count > 0)
+                return resultado[0].COSTO_TOTAL;
+            else
+                return 0;
+        }
         #endregion
     }
 }
