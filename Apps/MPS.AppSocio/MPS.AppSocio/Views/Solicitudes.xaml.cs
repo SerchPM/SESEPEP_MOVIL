@@ -28,7 +28,7 @@ namespace MPS.AppSocio.Views.Views
                                 servicios.Children.Add(new SolicitudItem
                                 {
                                     TipoServicio = solicitud.TIPO_SOLICITUD,
-                                    SourseTipoServicio = solicitud.TIPO_SERVICIO.Equals("EXPRESS") ? "servicioExpressActivo.png" : "servicioPersonalizadoActivo.png",
+                                    SourseTipoServicio = solicitud.TIPO_SERVICIO.Equals((int)Core.Lib.Helpers.TipoSolicitudEnum.Express) ? "servicioExpressActivo.png" : "servicioPersonalizadoActivo.png",
                                     Cliente = solicitud.NOMBRE_COMPLETO,
                                     AceptacionServicio = solicitud.FECHA_SOLICITUD,
                                     Costo = solicitud.COSTO_SOCIO ?? 0,

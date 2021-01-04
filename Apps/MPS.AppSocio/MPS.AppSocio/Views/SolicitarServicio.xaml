@@ -17,7 +17,7 @@
                 <Grid IsVisible="false" Grid.Row="1" RowDefinitions="Auto, Auto,1.5*,Auto" VerticalOptions="Start" Padding="10,10,5,5" BackgroundColor="CornflowerBlue" Opacity=".8" Margin="0">
                     <Label Text="Seguridad Escolta" FontAttributes="Italic" TextColor="Gray"  FontSize="Medium"/>
                     <Grid Grid.Row="1" ColumnDefinitions="*,.5*">
-                        <Label Text="{Binding}" TextColor="White" FontSize="Body"/>
+                        <Label Text="" TextColor="White" FontSize="Body"/>
                         <StackLayout Grid.Column="1" HorizontalOptions="End">
                             <Frame IsClippedToBounds="True" Padding="5" CornerRadius="15" BackgroundColor="Black">
                                 <Grid ColumnDefinitions="Auto,Auto">
@@ -31,16 +31,16 @@
                     <StackLayout Grid.Row="2">
                         <StackLayout Orientation="Horizontal">
                             <Image HorizontalOptions="Start" VerticalOptions="Center" Aspect="AspectFit"/>
-                            <Label Text="{Binding}" FontSize="Body" TextColor="Gray"/>
+                            <Label Text="" FontSize="Body" TextColor="Gray"/>
                         </StackLayout>
                         <StackLayout Orientation="Horizontal">
                             <Image HorizontalOptions="Start" VerticalOptions="Center" Aspect="AspectFit"/>
-                            <Label Text="{Binding}" FontSize="Body" TextColor="Gray"/>
+                            <Label Text="" FontSize="Body" TextColor="Gray"/>
                         </StackLayout>
                     </StackLayout>
                     <Button Grid.Row="3" HorizontalOptions="End" VerticalOptions="Center" BorderColor="White" BorderWidth="1" CornerRadius="20" BackgroundColor="Transparent" Text="Finalizar" FontSize="Small" Padding="10,15" HeightRequest="45"/>
                 </Grid>
-                <Image Grid.Row="3" Margin="10" Aspect="AspectFit" VerticalOptions="Center" HorizontalOptions="End"/>
+                <Image Grid.Row="3" IsVisible="false" Source="sosoff.png" Margin="10" Aspect="AspectFit" VerticalOptions="Center" HorizontalOptions="End"/>
             </Grid>
             <!--Modal Solicitud de servicio-->
             <Frame BackgroundColor="Gray" Opacity="0.5" Grid.RowSpan="3" IsVisible="{Binding ModalServicioAsignado}"/>

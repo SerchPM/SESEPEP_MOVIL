@@ -159,6 +159,10 @@
     <Content Include="Assets\SmallTile.scale-400.png" />
     <Content Include="Assets\solicitarServicio.png" />
     <Content Include="Assets\solicitarServicioSel.png" />
+    <Content Include="Assets\solicitudes.png" />
+    <Content Include="Assets\solicitudesactivo.png" />
+    <Content Include="Assets\sosoff.png" />
+    <Content Include="Assets\soson.png" />
     <Content Include="Assets\SplashScreen.scale-100.png" />
     <Content Include="Assets\SplashScreen.scale-200.png" />
     <Content Include="Assets\SplashScreen.scale-400.png" />

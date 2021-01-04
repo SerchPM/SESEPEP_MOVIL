@@ -549,6 +549,42 @@
   <ItemGroup>
     <BundleResource Include="Resources\iniciosolicitud%403x.png" />
   </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\sosoff%403x.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\soson.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\soson%402x.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\soson%403x.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\sosoff.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\sosoff%402x.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\solicitudes%403x.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\solicitudesactivo.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\solicitudesactivo%402x.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\solicitudesactivo%403x.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\solicitudes.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\solicitudes%402x.png" />
+  </ItemGroup>
   <ProjectExtensions>
     <VisualStudio>
       <UserProperties TriggeredFromHotReload="False" />

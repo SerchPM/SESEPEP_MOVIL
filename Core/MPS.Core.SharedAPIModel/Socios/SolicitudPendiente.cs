@@ -15,8 +15,8 @@ namespace MPS.SharedAPIModel.Socios
         public DateTime FECHA_SOLICITUD { get; set; }
         public decimal? COSTO_SOCIO { get; set; }
         public int HORAS_PACTADAS { get; set; }
-        public string TIPO_SERVICIO { get; set; }
-        public string ESTATUS_SOLICITUD { get; set; }
+        public int TIPO_SERVICIO { get; set; }
+        public int ESTATUS_SOLICITUD { get; set; }
         public string UBICACION_SERVICIO { get; set; }
         public string NOMBRE_COMPLETO { get; set; }
         public double RANKING { get; set; }

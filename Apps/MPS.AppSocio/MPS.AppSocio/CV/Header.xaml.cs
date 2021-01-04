@@ -29,7 +29,7 @@ namespace MPS.AppSocio.Views.CV
             me.ActivePage = (HeaderPages)newValue;
             me.solicitarServicio.Source = me.ActivePage == HeaderPages.SolicitarServicio ? "solicitarServicioSel.png" : "solicitarServicio.png";
             me.historial.Source = me.ActivePage == HeaderPages.Historial ? "historialSel.png" : "historial.png";
-            me.solicitudes.Source = me.ActivePage == HeaderPages.Solicitudes ? "historialSel.png" : "historial.png";
+            me.solicitudes.Source = me.ActivePage == HeaderPages.Solicitudes ? "solicitudesactivo.png" : "solicitudes.png";
             me.formaDePago.Source = me.ActivePage == HeaderPages.FormaDePago ? "formaDePagoSel.png" : "formaDePago.png";
             me.perfil.Source = me.ActivePage == HeaderPages.Perfil ? "perfilSel.png" : "perfil.png";
         });
