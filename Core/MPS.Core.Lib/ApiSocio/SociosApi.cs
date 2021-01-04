@@ -157,6 +157,13 @@ namespace MPS.Core.Lib.ApiSocio
         public async Task<(HttpStatusCode StatusCode, ActualizacionResponse result)> ActualizarBancoAsync(Guid idSocio, string noCuenta) =>
             await CallPostAsync<ActualizacionResponse>("ActualizaBancoSocio", ("P_GUID_SOCIO", idSocio), ("P_CUENTA_BANCO", noCuenta));
 
+        /// <summary>
+        /// Obtiene los servicios pendientes por identificador dado
+        /// </summary>
+        /// <param name="idSocio">Identificador del socio</param>
+        /// <returns></returns>
+        public async Task<(HttpStatusCode statusCode, List<SolicitudPendiente> solicitudes)> ObtenerSolicitudesPendientesAsync(Guid idSocio) =>
+            await CallPostAsync<List<SolicitudPendiente>>("ConsultaSolicitudesEncoladas", ("P_GUID_SOCIO", idSocio));
         #endregion
     }
 }

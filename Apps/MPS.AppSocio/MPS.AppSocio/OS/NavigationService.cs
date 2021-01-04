@@ -33,6 +33,7 @@ namespace MPS.AppSocio.Views.OS
             var paginaPorNavegar = pageKey switch
             {
                 PagesKeys.SolicitarServicio => typeof(SolicitarServicio),
+                PagesKeys.Solicitudes => typeof(Solicitudes),
                 PagesKeys.Historial => typeof(Historial),
                 PagesKeys.FormaDePago => typeof(FormaDePago),
                 PagesKeys.Perfil => typeof(Perfil),
@@ -48,6 +49,8 @@ namespace MPS.AppSocio.Views.OS
                         await Navigation.PopToRootAsync(true); break;
                     case PagesKeys.SolicitarServicio:
                         await Navigation.PushAsync(new SolicitarServicio(), vieneDelLogin); break;
+                    case PagesKeys.Solicitudes:
+                        await Navigation.PushAsync(new Solicitudes(), false); break;
                     case PagesKeys.Historial:
                         await Navigation.PushAsync(new Historial(), false); break;
                     case PagesKeys.FormaDePago:

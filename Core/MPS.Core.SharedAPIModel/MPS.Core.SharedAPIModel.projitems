@@ -27,6 +27,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)Socios\HistorialSolicitudes.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Socios\Respuesta.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Socios\Socio.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Socios\SolicitudPendiente.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Socios\SolicitudServicio.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Solicitud\AsignarSolicitudResponse.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Solicitud\SolicitudResponse.cs" />

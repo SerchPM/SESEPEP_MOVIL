@@ -1,0 +1,26 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="MPS.AppSocio.Views.Views.Solicitudes"
+             xmlns:cv="clr-namespace:MPS.AppSocio.Views.CV"
+             xmlns:vm="clr-namespace:MPS.Core.Lib.ViewModels.Socios">
+    <ContentPage.BindingContext>
+        <vm:SolicitudesViewModel x:Name="ViewModel"/>
+    </ContentPage.BindingContext>
+    <ContentPage.Content>
+        <Grid RowDefinitions="Auto,*,Auto">
+            <cv:Header ActivePage="Solicitudes"/>
+            <Grid Grid.Row="1" RowDefinitions="Auto,*">
+                <Grid ColumnDefinitions="Auto,*,Auto" RowDefinitions="Auto, Auto, Auto" Margin="10,5">
+                    <Label Text="Servicios Pendientes" FontSize="Medium"/>
+                </Grid>
+                <ScrollView Grid.Row="1" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
+                    <StackLayout x:Name="servicios" Orientation="Vertical">
+
+                    </StackLayout>
+                </ScrollView>
+            </Grid>
+            <cv:StatusBar Grid.Row="2" IsLinksVisible="False"/>
+        </Grid>
+    </ContentPage.Content>
+</ContentPage>

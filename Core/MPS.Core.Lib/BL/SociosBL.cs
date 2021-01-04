@@ -5,6 +5,7 @@ using MPS.SharedAPIModel.Socios;
 using MPS.SharedAPIModel.Solicitud;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Net;
 using System.Text;
 using System.Threading.Tasks;
@@ -137,6 +138,20 @@ namespace MPS.Core.Lib.BL
                 return true;
             else
                 return false;
+        }
+
+        /// <summary>
+        /// Obtiene los servicios pendientes por identificador dado
+        /// </summary>
+        /// <param name="idSocio">Identificador del socio</param>
+        /// <returns></returns>
+        public async Task<List<SolicitudPendiente>> ObtenerSolicitudesPendientesAsync(Guid idSocio)
+        {
+            var (statusCode, resultado) = await SociosApi.ObtenerSolicitudesPendientesAsync(idSocio);
+            if (statusCode == HttpStatusCode.OK)
+                return resultado;
+            else
+                return new List<SolicitudPendiente>();
         }
 
     }

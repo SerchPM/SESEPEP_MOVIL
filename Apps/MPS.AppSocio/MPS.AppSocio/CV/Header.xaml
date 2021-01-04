@@ -20,6 +20,7 @@
             <Label Text="{Binding NombreSocio}" Margin="0,0,0,10" FontSize="Medium" Grid.Column="1" Grid.Row="1" VerticalOptions="Start"/>
             <StackLayout Orientation="Horizontal" Grid.Row="2" Grid.Column="1" HorizontalOptions="EndAndExpand">
                 <ImageButton Command="{Binding NavegarACommand}" CommandParameter="SolicitarServicioPage" x:Name="solicitarServicio" Source="solicitarServicioSel.png"/>
+                <ImageButton Command="{Binding NavegarACommand}" CommandParameter="SolicitudesPage" x:Name="solicitudes" Source="historial.png"/>
                 <ImageButton Command="{Binding NavegarACommand}" CommandParameter="HistorialPage" x:Name="historial" Source="historial.png"/>
                 <ImageButton Command="{Binding NavegarACommand}" CommandParameter="FormaDePagoPage" x:Name="formaDePago" Source="formaDePago.png"/>
                 <ImageButton Command="{Binding NavegarACommand}" CommandParameter="Perfil" x:Name="perfil" Source="perfil.png"/>
