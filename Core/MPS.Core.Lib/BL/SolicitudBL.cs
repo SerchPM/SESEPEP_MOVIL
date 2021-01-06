@@ -177,7 +177,7 @@ namespace MPS.Core.Lib.BL
         public async Task<bool> AsignarSocioAsync(SocioAsignado socioAsignado)
         {
             var (statusCode, resultado) = await SolicitudApi.AsignarSocioAsync(socioAsignado);
-            if (statusCode == HttpStatusCode.OK && !string.IsNullOrEmpty(resultado.ESTATUS) && resultado.ESTATUS.Equals("OK"))
+            if (statusCode == HttpStatusCode.OK && resultado.Count > 0 && !string.IsNullOrEmpty(resultado[0].ESTATUS) && resultado[0].ESTATUS.Equals("OK"))
                 return true;
             else
                 return false;
@@ -211,6 +211,24 @@ namespace MPS.Core.Lib.BL
                 return resultado[0].COSTO_TOTAL;
             else
                 return 0;
+        }
+
+        /// <summary>
+        /// Registra la ubicacion actual del cliente/socio por solicitud.
+        /// </summary>
+        /// <param name="idSolicitud">Identificador de la solicitud.</param>
+        /// <param name="latitud">Latitud del socio.</param>
+        /// <param name="longitud">Longitud del socio.</param>
+        /// <param name="latitudC">Latitud del cliente.</param>
+        /// <param name="longitudC">Longitud del cliente.</param>
+        /// <returns></returns>
+        public async Task<bool> MandarUbicacionAsync(Guid idSolicitud, string latitud, string longitud, string latitudC, string longitudC)
+        {
+            var (statusCode, response) = await SolicitudApi.MandarUbicacionAsync(idSolicitud, latitud, longitud, latitudC, longitudC);
+            if (statusCode == HttpStatusCode.OK && response.Count > 0 && !string.IsNullOrEmpty(response[0].ESTATUS) && response[0].ESTATUS.Equals("OK"))
+                return true;
+            else
+                return false;
         }
         #endregion
     }

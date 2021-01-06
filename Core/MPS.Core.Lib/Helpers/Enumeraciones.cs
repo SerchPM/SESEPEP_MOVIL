@@ -15,4 +15,14 @@ namespace MPS.Core.Lib.Helpers
         Express = 1,
         Personalizada = 2
     }
+
+    public enum EstatusSolicitudEnum
+    {
+       Inicial,
+       Aceptado,
+       EnCurso,
+       Atendiendo,
+       Finalizado,
+       Alerta
+    }
 }

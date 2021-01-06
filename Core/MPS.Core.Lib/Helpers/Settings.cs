@@ -86,8 +86,5 @@ namespace MPS.Core.Lib.Helpers
         /// Obtiene o asigna el AppId del grupo de OneSignal
         /// </summary>
         public string AppId { get => GetValue<string>(); set => SetValue(ref appId, value); }
-
-        public SolicitudPendiente Servicio { get; set; } = new SolicitudPendiente();
-
     }
 }

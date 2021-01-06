@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Text;
+using MPS.Core.Lib.Helpers;
 using MPS.Core.Lib.OS;
 using MPS.SharedAPIModel.Socios;
 using Sysne.Core.MVVM;
@@ -25,6 +26,12 @@ namespace MPS.Core.Lib.ViewModels.Socios
 
         private bool cargarServicios;
         public bool CargarServicios { get => cargarServicios; set => Set(ref cargarServicios, value); }
+
+        bool modal;
+        public bool Modal { get => modal; set { Set(ref modal, value); } }
+
+        string mensaje;
+        public string Mensaje { get => mensaje; set { Set(ref mensaje, value); } }
         #endregion
 
         #region Comandos
@@ -45,8 +52,24 @@ namespace MPS.Core.Lib.ViewModels.Socios
         {
             get => iniciarServicioCommand ??= new RelayCommand<SolicitudPendiente>(async (servicio) =>
             {
-                Helpers.Settings.Current.Servicio = servicio;
-                await DependencyService.Get<INavigationService>().NavigateTo(PagesKeys.SolicitarServicio);
+                var result = await (new BL.SolicitudBL()).AsignarSocioAsync(new SharedAPIModel.Solicitud.SocioAsignado { IdSocio=Guid.Parse(Settings.Current.LoginInfo.Usr.Id), IdSolicitud = servicio.GUID_SOLICITUD, Estatus = (int)EstatusSolicitudEnum.EnCurso});
+                if (result)
+                    await DependencyService.Get<INavigationService>().NavigateTo(PagesKeys.SolicitarServicio);
+                else
+                {
+                    Mensaje = "Ya tienes un servicio en atencion";
+                    Modal = true;
+                }
+            });
+        }
+
+        private RelayCommand ocultarModalCommand = null;
+        public RelayCommand OcultarModalCommand
+        {
+            get => ocultarModalCommand ??= new RelayCommand(() =>
+            {
+                Modal = false;
+                Mensaje = string.Empty;
             });
         }
         #endregion

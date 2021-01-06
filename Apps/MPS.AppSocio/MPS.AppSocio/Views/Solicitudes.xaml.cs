@@ -30,9 +30,9 @@ namespace MPS.AppSocio.Views.Views
                                     TipoServicio = solicitud.TIPO_SOLICITUD,
                                     SourseTipoServicio = solicitud.TIPO_SERVICIO.Equals((int)Core.Lib.Helpers.TipoSolicitudEnum.Express) ? "servicioExpressActivo.png" : "servicioPersonalizadoActivo.png",
                                     Cliente = solicitud.NOMBRE_COMPLETO,
-                                    AceptacionServicio = solicitud.FECHA_SOLICITUD,
+                                    AceptacionServicio = solicitud.FECHA_SOLICITUD ?? DateTime.UtcNow,
                                     Costo = solicitud.COSTO_SOCIO ?? 0,
-                                    Horas = solicitud.HORAS_PACTADAS,
+                                    Horas = solicitud.HORAS_PACTADAS ?? 0,
                                     IniciarServicioCommand = ViewModel.IniciarServicioCommand,
                                     IniciarServicioCommandParameter = solicitud
                                 });

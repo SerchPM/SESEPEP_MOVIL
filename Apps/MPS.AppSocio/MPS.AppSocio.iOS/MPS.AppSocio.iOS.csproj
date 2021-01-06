@@ -585,6 +585,15 @@
   <ItemGroup>
     <BundleResource Include="Resources\solicitudes%402x.png" />
   </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\estrella%403x.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\estrella.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\estrella%402x.png" />
+  </ItemGroup>
   <ProjectExtensions>
     <VisualStudio>
       <UserProperties TriggeredFromHotReload="False" />

@@ -81,22 +81,6 @@ namespace MPS.Core.Lib.BL
         }
 
         /// <summary>
-        /// Actualiza el estatus de la solicitud
-        /// </summary>
-        /// <param name="socio"></param>
-        /// <param name="solicitud"></param>
-        /// <param name="status"></param>
-        /// <returns></returns>
-        public async Task<SolicitudResponse> ActualizaSolicitud(Guid socio, Guid solicitud, int status)
-        {
-            var (statusCode, resultado) = await SociosApi.ActualizarSolicitud(socio, solicitud, status);
-            if (statusCode == HttpStatusCode.OK)
-                return resultado;
-            else
-                return new SolicitudResponse();
-        }
-
-        /// <summary>
         /// Obtiene los datos bancarios de un socio mediente su identificador
         /// </summary>
         /// <param name="idSocio">Identificador del socio</param>
@@ -152,6 +136,20 @@ namespace MPS.Core.Lib.BL
                 return resultado;
             else
                 return new List<SolicitudPendiente>();
+        }
+
+        /// <summary>
+        /// Verifica si el socio cuanta con la atencion de un servicio activo
+        /// </summary>
+        /// <param name="idSocio">Identificador del socio</param>
+        /// <returns></returns>
+        public async Task<(bool, SolicitudPendiente)> ServicioEnAtencionAysnc(Guid idSocio)
+        {
+            var (statusCode, resultado) = await SociosApi.ServicioEnAtencionAysnc(idSocio);
+            if (statusCode == HttpStatusCode.OK && resultado != null && resultado.GUID_SOLICITUD != Guid.Empty)
+                return (true, resultado);
+            else
+                return (false ,new SolicitudPendiente());
         }
 
     }

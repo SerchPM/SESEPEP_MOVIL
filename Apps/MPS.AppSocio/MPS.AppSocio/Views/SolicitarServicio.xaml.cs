@@ -32,13 +32,38 @@ namespace MPS.AppSocio.Views.Views
                     });
                 });
             };
+
+            ViewModel.PropertyChanged += (s, e) =>
+            {
+                switch (e.PropertyName)
+                {
+                    case "EnAtencion":
+                        if (ViewModel.EnAtencion)
+                        {
+                            Device.StartTimer(new TimeSpan(0, 2, 0), () =>
+                            {
+                                if (ViewModel.EnAtencion)
+                                {
+                                    ViewModel.RegistrarUbicacionCommand.Execute();
+                                    return true;
+                                }
+                                else
+                                    return false;
+                            });
+                        }
+                        break;
+                    default:
+                        break;
+                }
+            };
         }
 
         protected override void OnAppearing()
         {
             Map.MoveToRegion(MapSpan.FromCenterAndRadius(new Position(19.043455, -98.198686), Distance.FromMiles(0.2)));
-            ViewModel.VerificarSolicitudCommand.Execute();
             ViewModel.ObtenerComponentesCommand.Execute();
+            ViewModel.VerificarSolicitudCommand.Execute();
         }
+
     }
 }

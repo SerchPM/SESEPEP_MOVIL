@@ -53,8 +53,8 @@ namespace MPS.Core.Lib.ApiClient
         /// </summary>
         /// <param name="socioAsignado">Objero con la informacion del socio y solicitud</param>
         /// <returns></returns>
-        public async Task<(HttpStatusCode StatusCode, AsignarSolicitudResponse asignarSolicitudInfo)> AsignarSocioAsync(SocioAsignado socioAsignado) =>
-            await CallPostAsync<AsignarSolicitudResponse>("ActualizarSolicitudEstatus", ("P_GUID_SOLICITUD", socioAsignado.IdSolicitud), ("P_ESTATUS", socioAsignado.Estatus), ("P_GUID_SOCIO", socioAsignado.IdSocio));
+        public async Task<(HttpStatusCode StatusCode, List<AsignarSolicitudResponse> asignarSolicitudInfo)> AsignarSocioAsync(SocioAsignado socioAsignado) =>
+            await CallPostAsync<List<AsignarSolicitudResponse>>("ActualizarSolicitudEstatus", ("P_GUID_SOLICITUD", socioAsignado.IdSolicitud), ("P_ESTATUS", socioAsignado.Estatus), ("P_GUID_SOCIO", socioAsignado.IdSocio));
 
         public async Task<(HttpStatusCode StatusCode, SolicitudActivaResponse Respuesta)> SolicitudActiva(string noSocio) =>
             await CallPostAsync<SolicitudActivaResponse>("ConsultaSolicitudesGeneral", ("P_PARAMETRO", noSocio));
@@ -68,6 +68,18 @@ namespace MPS.Core.Lib.ApiClient
         /// <returns></returns>
         public async Task<(HttpStatusCode statusCode, List<ResponseCosto> response)> CalcularCostoServicioAsync(Guid idTipoServicio, int horas, int tipoSolicitud) =>
             await CallPostAsync<List<ResponseCosto>>("GenerarTotalPorPagar", ("P_GUID_TIPO_SOLICITUD", idTipoServicio), ("P_HORAS_SOLICITADAS", horas), ("P_TIPO_SOLICITUD", tipoSolicitud));
+
+        /// <summary>
+        /// Registra la ubicacion actual del cliente/socio por solicitud.
+        /// </summary>
+        /// <param name="idSolicitud">Identificador de la solicitud.</param>
+        /// <param name="latitud">Latitud del socio.</param>
+        /// <param name="longitud">Longitud del socio.</param>
+        /// <param name="latitudC">Latitud del cliente.</param>
+        /// <param name="longitudC">Longitud del cliente.</param>
+        /// <returns></returns>
+        public async Task<(HttpStatusCode statusCode, List<AsignarSolicitudResponse> response)> MandarUbicacionAsync(Guid idSolicitud, string latitud, string longitud, string latitudC, string longitudC) =>
+            await CallPostAsync<List<AsignarSolicitudResponse>>("InsertarGeolocalizacion", ("P_GUID_SOLICITUD", idSolicitud), ("P_UBICACION_SOCIO_LAT", latitud), ("P_UBICACION_SOCIO_LON", longitud), ("P_UBICACION_CLIENTE_LAt", latitudC), ("P_UBICACION_CLIENTE_LON", longitudC));
         #endregion
     }
 }

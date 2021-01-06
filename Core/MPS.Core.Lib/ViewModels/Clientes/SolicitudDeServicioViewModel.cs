@@ -225,8 +225,8 @@ namespace MPS.Core.Lib.ViewModels.Clientes
                     if (result)
                     {
                         foreach (var socio in SociosSeleccionado)
-                            await bl.AsignarSocioAsync(new SocioAsignado { IdSolicitud = idSolicitud, IdSocio = socio.GUID_SOCIO, Estatus = 0});
-                        SolicitudServicio = new Solicitud() { TotalPago = 1000, TiempoGenerarSolicitud = 5 };
+                            await bl.AsignarSocioAsync(new SocioAsignado { IdSolicitud = idSolicitud, IdSocio = socio.GUID_SOCIO, Estatus = (int)EstatusSolicitudEnum.Inicial});
+                        SolicitudServicio = new Solicitud() { TotalPago = 0, TiempoGenerarSolicitud = 0 };
                         SociosSeleccionado.Clear();
                         CargarPersonalSeleccionado = true;
                         Mensaje = mensaje;

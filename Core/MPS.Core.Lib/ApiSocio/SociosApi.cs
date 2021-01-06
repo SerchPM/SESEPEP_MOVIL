@@ -102,16 +102,6 @@ namespace MPS.Core.Lib.ApiSocio
              await CallPostAsync<List<Socio>>("ConsultaSociosDisponibles", ("P_GUID_TIPO_SOLICITUD", idTipoServicio), ("P_FECHAHORA_SOLICITUD", fecha.ToDateTimeFormat24H()), ("P_HORAS_SOLICITADAS", horasSolicitadas), ("P_PARAMETRO_BUSQUEDA", filtro));
 
         /// <summary>
-        /// Actualiza el estatus de la solicitud
-        /// </summary>
-        /// <param name="socio"></param>
-        /// <param name="solicitud"></param>
-        /// <param name="status"></param>
-        /// <returns></returns>
-        public async Task<(HttpStatusCode StatusCode, SolicitudResponse Respuesta)> ActualizarSolicitud(Guid socio, Guid solicitud, int status) =>
-            await CallPostAsync<SolicitudResponse>("ActualizarSolicitudEstatus", ("P_GUID_SOLICITUD", solicitud), ("P_GUID_SOCIO", socio), ("P_ESTATUS", status));
-
-        /// <summary>
         /// Obtiene al personal que cuente con las carecteristicas del servico y que esten mas sercanos a la ubicacion establecidas
         /// </summary>
         /// <param name="latitud">Latitud de la ubicacion establecida</param>
@@ -164,6 +154,14 @@ namespace MPS.Core.Lib.ApiSocio
         /// <returns></returns>
         public async Task<(HttpStatusCode statusCode, List<SolicitudPendiente> solicitudes)> ObtenerSolicitudesPendientesAsync(Guid idSocio) =>
             await CallPostAsync<List<SolicitudPendiente>>("ConsultaSolicitudesEncoladas", ("P_GUID_SOCIO", idSocio));
+
+        /// <summary>
+        /// Verifica si el socio cuanta con la atencion de un servicio activo
+        /// </summary>
+        /// <param name="idSocio">Identificador del socio</param>
+        /// <returns></returns>
+        public async Task<(HttpStatusCode statusCode, SolicitudPendiente solicitud)> ServicioEnAtencionAysnc(Guid idSocio) =>
+            await CallPostAsync<SolicitudPendiente>("ConsultaSolicitudActualSocio", ("P_GUID_SOCIO", idSocio));
         #endregion
     }
 }
