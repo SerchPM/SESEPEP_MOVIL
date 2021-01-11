@@ -101,5 +101,26 @@ namespace MPS.AppCliente.Views.CV
                 me.RemoveCommandParameter = (object)newValue;
                 me.remove.CommandParameter = me.RemoveCommandParameter;
             });
+
+        public double Ranking
+        {
+            get => (double)GetValue(RankingProperty);
+            set => SetValue(RankingProperty, value);
+        }
+
+        public static readonly BindableProperty RankingProperty = BindableProperty.Create(nameof(Ranking), typeof(double), typeof(PersonalRemove), default(double),
+        propertyChanged: (bindable, oldValue, newValue) =>
+        {
+            var me = (PersonalRemove)bindable;
+            me.Ranking = (double)newValue;
+            var ranking = Math.Round(me.Ranking);
+            for (int i = 1; i <= 5; i++)
+            {
+                if (i <= ranking)
+                    me.ranking.Children.Add(new Image { Source = "estrellaon.png", Aspect = Aspect.AspectFit });
+                else
+                    me.ranking.Children.Add(new Image { Source = "estrellaoff.png", Aspect = Aspect.AspectFit });
+            }
+        });
     }
 }

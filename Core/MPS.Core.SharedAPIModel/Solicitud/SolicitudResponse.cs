@@ -35,6 +35,7 @@ namespace MPS.SharedAPIModel.Solicitud
         public decimal Latitud2 { get; set; }
         public decimal Longitud2 { get; set; }
         public int NoElementos { get; set; }
+        public string SociosSelected { get; set; }
     }
 
     public class SolicitudActivaResponse

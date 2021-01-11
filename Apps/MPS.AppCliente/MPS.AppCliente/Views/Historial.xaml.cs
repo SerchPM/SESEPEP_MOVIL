@@ -28,6 +28,8 @@ namespace MPS.AppCliente.Views.Views
                             {
                                 HistoryItem history = new HistoryItem
                                 {
+                                    Servicio = solicitud.TIPO_SERVICIO,
+                                    Ranking = solicitud.VALORACION_CLIENTE ?? 0,
                                     Soli = solicitud.FECHA_SOLICITUD,
                                     InicioSolicitud = solicitud.INICIO_SOLICITUD,
                                     Costo = solicitud.TOTAL_PAGADO ?? 0,

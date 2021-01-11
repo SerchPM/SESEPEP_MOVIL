@@ -23,7 +23,7 @@
                             <DatePicker TextColor="Black" Date="{Binding Hasta}" VerticalOptions="Center"/>
                             <Label Grid.Row="1" Text="Hasta" FontSize="Small" TextColor="LightGray"/>
                         </Grid>
-                        <ImageButton Source="botonBuscar.png" Command="{Binding BuscarHistorialCommand}" HorizontalOptions="Center" VerticalOptions="Center" Aspect="AspectFit"/>
+                        <ImageButton Source="botonBuscar.png" Command="{Binding BuscarHistorialCommand}" HorizontalOptions="Center" VerticalOptions="{OnPlatform UWP=Start, Android=Center, iOS=Center}" Aspect="AspectFit"/>
                     </StackLayout>
                     <Button Grid.Row="2" Grid.ColumnSpan="3" HorizontalOptions="EndAndExpand" HeightRequest="30" BackgroundColor="CornflowerBlue" CornerRadius="10" FontSize="Small" VerticalOptions="Center" Text="Exportar resultados" Command="{Binding ExportarResultadosCommand}" Padding="10,0"/>
                 </Grid>

@@ -594,6 +594,24 @@
   <ItemGroup>
     <BundleResource Include="Resources\estrella%402x.png" />
   </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\estrellaoff%403x.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\estrellaon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\estrellaon%402x.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\estrellaon%403x.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\estrellaoff.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\estrellaoff%402x.png" />
+  </ItemGroup>
   <ProjectExtensions>
     <VisualStudio>
       <UserProperties TriggeredFromHotReload="False" />

@@ -74,7 +74,7 @@ namespace MPS.Core.Lib.BL
         public async Task<List<HistorialSolicitudes>> GetHistoricoSolicitudesAsync(Guid idCliente, DateTime desde, DateTime hasta)
         {
             var (statusCode, resultado) = await SociosApi.GetHistoricoSolicitudesAsync(idCliente, desde, hasta);
-            if (statusCode == HttpStatusCode.OK)
+            if (statusCode == HttpStatusCode.OK && resultado.Count > 0)
                 return resultado;
             else
                 return new List<HistorialSolicitudes>();
@@ -150,6 +150,22 @@ namespace MPS.Core.Lib.BL
                 return (true, resultado);
             else
                 return (false ,new SolicitudPendiente());
+        }
+
+        /// <summary>
+        /// Registra la calificacion que realiza el socio hacia el cliente al finalizar el servicio
+        /// </summary>
+        /// <param name="idSoicitud">Identificador de la solicitud a finalizar</param>
+        /// <param name="calificacion">Calificacion asignada</param>
+        /// <param name="observaciones">Observaciones del socio</param>
+        /// <returns></returns>
+        public async Task<bool> CalificarClienteAysnc(Guid idSoicitud, int calificacion, string observaciones)
+        {
+            var (statusCode, resultado) = await SociosApi.CalificarClienteAysnc(idSoicitud, calificacion, observaciones);
+            if (statusCode == HttpStatusCode.OK && !string.IsNullOrEmpty(resultado.ESTATUS) && resultado.ESTATUS.Equals("OK"))
+                return true;
+            else
+                return false;
         }
 
     }

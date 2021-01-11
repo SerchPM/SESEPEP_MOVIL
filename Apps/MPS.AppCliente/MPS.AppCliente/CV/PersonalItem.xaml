@@ -14,6 +14,8 @@
                 <StackLayout Grid.Column="1" Spacing="0">
                     <Label x:Name="nombrePersonal"/>
                     <Label x:Name="nombreEmpresa"/>
+                    <StackLayout x:Name="ranking" Orientation="Horizontal">
+                    </StackLayout>
                 </StackLayout>
                 <ImageButton x:Name="activo" Grid.Column="2"  Aspect="AspectFit" VerticalOptions="Start" HorizontalOptions="End"/>
                 <StackLayout  Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="2"  Orientation="Horizontal" Spacing="15" Margin="0,0,5,0">

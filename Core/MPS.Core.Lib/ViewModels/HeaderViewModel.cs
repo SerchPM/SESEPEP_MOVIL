@@ -14,10 +14,15 @@ namespace MPS.Core.Lib.ViewModels
         {
             if (!string.IsNullOrEmpty(Settings.Current.LoginInfo.details.nameid))
                 NombreSocio = Settings.Current.LoginInfo.details.nameid;
+
+            Ranking = Settings.Current.LoginInfo.Usr.Ranking;
         }
 
         private string nombreSocio;
         public string NombreSocio { get => nombreSocio; set { Set(ref nombreSocio, value); } }
+
+        private double ranking;
+        public double Ranking { get => ranking; set => Set(ref ranking, value); }
 
         RelayCommand<string> navegarACommand = null;
         public RelayCommand<string> NavegarACommand

@@ -8,7 +8,7 @@ namespace MPS.SharedAPIModel.Clientes
     {
         public Guid GUID_SOLICITUD { get; set; }
         public string FOLIO_SOLICITUD { get; set; }
-        public decimal? VALORACION_CLIENTE { get; set; }
+        public double? VALORACION_CLIENTE { get; set; }
         public string TIPO_SERVICIO { get; set; }
         public string NO_SOCIO { get; set; }
         public string SOCIO { get; set; }

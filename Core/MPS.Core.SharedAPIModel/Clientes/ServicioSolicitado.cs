@@ -17,5 +17,6 @@ namespace MPS.SharedAPIModel.Clientes
         public string NombreSocio { get; set; }
         public string NombreServicio { get; set; }
         public string TipoServicio { get; set; }
+        public int TipoNotificacion { get; set; }
     }
 }

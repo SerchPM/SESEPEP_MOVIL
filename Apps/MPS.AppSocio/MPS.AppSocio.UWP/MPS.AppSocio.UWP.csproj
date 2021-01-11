@@ -122,6 +122,8 @@
     <Content Include="Assets\eliminar.png" />
     <Content Include="Assets\especialidades.png" />
     <Content Include="Assets\estrella.png" />
+    <Content Include="Assets\estrellaoff.png" />
+    <Content Include="Assets\estrellaon.png" />
     <Content Include="Assets\eventoSocial.png" />
     <Content Include="Assets\eventoSocialSel.png" />
     <Content Include="Assets\expand.png" />

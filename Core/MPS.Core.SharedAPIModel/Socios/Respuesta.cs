@@ -13,4 +13,13 @@ namespace MPS.SharedAPIModel.Seguridad
         public string FOLIO { get; set; }
         public DateTime FECHA { get; set; }
     }
+
+    public class ResponseCalificacion
+    {
+        public string ESTATUS { get; set; }
+        public string DESCRIPCION { get; set; }
+        public Guid GUID_REGISTRO { get; set; }
+        public double? FOLIO { get; set; }
+        public DateTime FECHA { get; set; }
+    }
 }

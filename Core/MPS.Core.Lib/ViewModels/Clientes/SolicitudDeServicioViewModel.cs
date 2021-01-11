@@ -138,6 +138,18 @@ namespace MPS.Core.Lib.ViewModels.Clientes
 
         private string cosotoServicio;
         public string CosotoServicio { get => cosotoServicio; set => Set(ref cosotoServicio, value); }
+
+        private ObservableCollection<Ranking> rankings;
+        public ObservableCollection<Ranking> Rankings { get => rankings; set => Set(ref rankings, value); }
+
+        private string observaciones;
+        public string Observaciones { get => observaciones; set => Set(ref observaciones, value); }
+
+        private bool modalCalificar;
+        public bool ModalCalificar { get => modalCalificar; set => Set(ref modalCalificar, value); }
+
+        private Guid idSolcitud;
+        public Guid IdSolcitud { get => idSolcitud; set => Set(ref idSolcitud, value); }
         #endregion
 
         #region Commands
@@ -177,6 +189,16 @@ namespace MPS.Core.Lib.ViewModels.Clientes
         {
             get => obtenerComponentesCommand ??= new RelayCommand(async () =>
             {
+                var rank = new List<Ranking>();
+                for (int i = 1; i <= 5; i++)
+                {
+                    if (i.Equals(1))
+                        rank.Add(new Ranking { Rank = i, Imagen = "estrellaon.png", Selected = false });
+                    else
+                        rank.Add(new Ranking { Rank = i, Imagen = "estrellaoff.png", Selected = false });
+                }
+                Rankings = new ObservableCollection<Ranking>(rank);
+
                 var horasAux = new List<int>();
                 for (int i = 1; i < 10; i++)
                     horasAux.Add(8 * i);
@@ -221,18 +243,48 @@ namespace MPS.Core.Lib.ViewModels.Clientes
                     SolicitudServicio.Movil = Settings.Current.ModeloDispositivo;
                     SolicitudServicio.Latitud = UbicacionSolicitud.Latitud.Value;
                     SolicitudServicio.Longitud = UbicacionSolicitud.Longitud.Value;
+                    SolicitudServicio.SociosSelected = string.Empty;
+                    if (EsPersonalizado)
+                    {
+                        var so = SociosSeleccionado.LastOrDefault();
+                        foreach (var socio in SociosSeleccionado)
+                        {
+                            if (socio.Equals(so))
+                                SolicitudServicio.SociosSelected += $"{socio.GUID_SOCIO}";
+                            else
+                                SolicitudServicio.SociosSelected += $"{socio.GUID_SOCIO},";
+                        }
+                    }
                     var (idSolicitud,(result, mensaje)) = await bl.RegistrarSolicitudAsync(SolicitudServicio);
                     if (result)
                     {
                         foreach (var socio in SociosSeleccionado)
                             await bl.AsignarSocioAsync(new SocioAsignado { IdSolicitud = idSolicitud, IdSocio = socio.GUID_SOCIO, Estatus = (int)EstatusSolicitudEnum.Inicial});
                         SolicitudServicio = new Solicitud() { TotalPago = 0, TiempoGenerarSolicitud = 0 };
+                        HorasSelected = Horas.FirstOrDefault();
                         SociosSeleccionado.Clear();
                         CargarPersonalSeleccionado = true;
                         Mensaje = mensaje;
                         Terminos = false;
                         Modal = true;
                         ModalAgregarServicio = false;
+                        NombreUbicacion = string.Empty;
+                        var ubicacion = await Sysne.Core.OS.DependencyService.Get<Sysne.Core.OS.IOS>().ObtenerGeoposicion(false);
+                        if (ObteniendoUbicacion != null && ubicacion != null && ServicioSeleccionado != null)
+                        {
+                            UbicacionActualEvent args = new UbicacionActualEvent
+                            {
+                                Geoposicion = ubicacion
+                            };
+                            ObteniendoUbicacion(this, args);
+                            UbicacionSolicitud = new Geoposicion(ubicacion.Latitud, ubicacion.Longitud);
+                            if (string.IsNullOrEmpty(Settings.Current.Pais) && string.IsNullOrEmpty(Settings.Current.Estado))
+                            {
+                                var (estado, pais) = await MapaBL.ObtenerEstadoPais(ubicacion.Latitud.Value, ubicacion.Longitud.Value);
+                                Settings.Current.Pais = pais;
+                                Settings.Current.Estado = estado;
+                            }
+                        }
                     }
                     else
                     {
@@ -390,7 +442,7 @@ namespace MPS.Core.Lib.ViewModels.Clientes
         {
             get => mostrarModalSolicitudCommand ??= new RelayCommand<ServicioSolicitado>((s) =>
             {
-                if (s.ClaveTipoServicio.Equals(1))
+                if (s.ClaveTipoServicio.Equals((int)TipoSolicitudEnum.Express))
                     Express = true;
                 else
                     Personalizada = true;
@@ -406,9 +458,10 @@ namespace MPS.Core.Lib.ViewModels.Clientes
             {
                 ModalServicioAceptado = false;
                 Servicio = new ServicioSolicitado();
-                Settings.Current.Solicitud = new SolicitudServicio();
+                Settings.Current.ServicioSolicitado = new ServicioSolicitado();
                 Express = false;
                 Personalizada = false;
+                SelectRankingCommand.Execute(new Ranking { Rank = 1 });
             });
         }
 
@@ -419,12 +472,79 @@ namespace MPS.Core.Lib.ViewModels.Clientes
             {
                 if (Settings.Current.ServicioSolicitado != null && !string.IsNullOrEmpty(Settings.Current.ServicioSolicitado.FolioSolicitud))
                 {
-                    Servicio = Settings.Current.ServicioSolicitado;
-                    if (Servicio.ClaveTipoServicio.Equals(1))
-                        Express = true;
+                    if (Settings.Current.ServicioSolicitado.TipoNotificacion.Equals((int)TipoNotificacionEnum.SocioAcepta))
+                    {
+                        Servicio = Settings.Current.ServicioSolicitado;
+                        if (Servicio.ClaveTipoServicio.Equals(1))
+                            Express = true;
+                        else
+                            Personalizada = true;
+                        ModalServicioAceptado = true;
+                    }
+                    else if (Settings.Current.ServicioSolicitado.TipoNotificacion.Equals((int)TipoNotificacionEnum.Finalizado))
+                        ModalCalificar = true;
+                }
+            });
+        }
+
+        private RelayCommand enviarCalificacionCommand = null;
+        public RelayCommand EnviarCalificacionCommand
+        {
+            get => enviarCalificacionCommand ??= new RelayCommand(async () =>
+            {
+                var result = await (new ClientesBL()).CalificarSocioAysnc(IdSolcitud, Rankings.Where(w => w.Selected).Count(), Observaciones);
+                if(result)
+                {
+                    IdSolcitud = Guid.Empty;
+                    ModalCalificar = false;
+                }
+                else
+                {
+                    ModalCalificar = false;
+                    Mensaje = "Ocurrio un problema al finalizar el servicio";
+                    Modal = true;
+                }
+            });
+        }
+
+        private RelayCommand<Guid> abrirModalCalificarCommand = null;
+        public RelayCommand<Guid> AbrirModalCalificarCommand
+        {
+            get => abrirModalCalificarCommand ??= new RelayCommand<Guid>((id) =>
+            {
+                IdSolcitud = id;
+                ModalCalificar = true;
+            });
+        }
+
+        private RelayCommand<Ranking> selectRankingCommand = null;
+        public RelayCommand<Ranking> SelectRankingCommand
+        {
+            get => selectRankingCommand ??= new RelayCommand<Ranking>((ranking) =>
+            {
+
+                var rank = new List<Ranking>();
+                for (int i = 1; i <= 5; i++)
+                {
+                    if (i <= ranking.Rank)
+                        rank.Add(new Ranking { Rank = i, Imagen = "estrellaon.png", Selected = true });
                     else
-                        Personalizada = true;
-                    ModalServicioAceptado = true;
+                        rank.Add(new Ranking { Rank = i, Imagen = "estrellaoff.png", Selected = false });
+                }
+                Rankings.Clear();
+                Rankings = new ObservableCollection<Ranking>(rank);
+            });
+        }
+
+        private RelayCommand verificarCalificacionCommand = null;
+        public RelayCommand VerificarCalificacionCommand
+        {
+            get => verificarCalificacionCommand ??= new RelayCommand(() =>
+            {
+                if (Settings.Current.ServicioSolicitado != null && !string.IsNullOrEmpty(Settings.Current.ServicioSolicitado.FolioSolicitud))
+                {
+                    if (Settings.Current.ServicioSolicitado.TipoNotificacion.Equals((int)TipoNotificacionEnum.Finalizado))
+                        AbrirModalCalificarCommand.Execute(Settings.Current.ServicioSolicitado.IdSolicitud);
                 }
             });
         }

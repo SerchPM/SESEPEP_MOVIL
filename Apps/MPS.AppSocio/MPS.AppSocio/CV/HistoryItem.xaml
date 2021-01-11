@@ -5,7 +5,11 @@
     <ContentView.Content>
         <Frame CornerRadius="10" IsClippedToBounds="True" Padding="10" Margin="5, 10" BorderColor="{OnPlatform UWP=Gray}">
             <Grid RowDefinitions="Auto,*,Auto">
-                <Label Text="Seguridad Intramuros" TextColor="CadetBlue" FontSize="Medium"/>
+                <StackLayout Orientation="Horizontal" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand">
+                    <Label x:Name="tipoServicio" HorizontalOptions="StartAndExpand" TextColor="CadetBlue" FontSize="Medium"/>
+                    <StackLayout x:Name="ranking" HorizontalOptions="EndAndExpand" Grid.Column="1" Orientation="Horizontal">
+                    </StackLayout>
+                </StackLayout>
                 <Grid Grid.Row="1" ColumnDefinitions="Auto,*,Auto" RowDefinitions="*, *">
                     <Image Source="iniciosolicitud.png" Aspect="AspectFit"/>
                     <Label x:Name="solicitud" Grid.Column="1" FontSize="Body" VerticalTextAlignment="Center"/>

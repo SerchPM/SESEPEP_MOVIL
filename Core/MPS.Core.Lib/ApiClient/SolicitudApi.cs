@@ -44,7 +44,8 @@ namespace MPS.Core.Lib.ApiClient
                 ("P_UBICACION_1_LON", solicitud.Longitud.ToString()),
                 ("P_UBICACION_2_LAT", solicitud.Latitud2.ToString()),
                 ("P_UBICACION_2_LON", solicitud.Longitud2.ToString()),
-                ("P_NO_ELEMENTOS", solicitud.NoElementos.ToString()));
+                ("P_NO_ELEMENTOS", solicitud.NoElementos.ToString()),
+                ("P_GUID_SOCIOS_SELECCIONADOS", solicitud.SociosSelected));
             return res;
         }
 

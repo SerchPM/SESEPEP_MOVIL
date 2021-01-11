@@ -21,6 +21,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)Operaciones\OneSignalResponse.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Operaciones\Servicio.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Operaciones\Sexo.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Ranking.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Seguridad\LoginResponse.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Socios\DatoBancario.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Socios\DetalleSocio.cs" />

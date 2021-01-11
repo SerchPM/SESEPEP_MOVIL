@@ -24,8 +24,8 @@
                 </StackLayout>
                 <Frame IsClippedToBounds="True" Padding="5" CornerRadius="15" BackgroundColor="LightGray" HorizontalOptions="Center">
                     <Grid ColumnDefinitions="Auto,Auto">
-                        <Image HorizontalOptions="Center" VerticalOptions="Center"/>
-                        <Label Grid.Column="1" Text="{Binding Ranking}" FontSize="Small" TextColor="Black" HorizontalOptions="End"/>
+                        <Image Source="estrella.png" HorizontalOptions="Center" VerticalOptions="Center"/>
+                        <Label Grid.Column="1" Text="{Binding Ranking}" FontSize="Small" TextColor="White" HorizontalOptions="End"/>
                     </Grid>
                 </Frame>
             </StackLayout>

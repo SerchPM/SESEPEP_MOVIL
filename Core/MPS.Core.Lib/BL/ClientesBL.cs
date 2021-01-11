@@ -113,8 +113,8 @@ namespace MPS.Core.Lib.BL
         /// <returns></returns>
         public async Task<List<ClienteSolicitud>> GetSolicitudesAsync(Guid idCliente, DateTime desde, DateTime hasta)
         {
-            var (statusCode, resultado) = await ClientesApi.GetSolicitudesAsync(idCliente, desde, hasta);
-            if (statusCode == HttpStatusCode.OK)
+          var (statusCode, resultado) = await ClientesApi.GetSolicitudesAsync(idCliente, desde, hasta);
+            if (statusCode == HttpStatusCode.OK && resultado.Count > 0)
                 return resultado;            
             else
                 return new List<ClienteSolicitud>();
@@ -134,6 +134,22 @@ namespace MPS.Core.Lib.BL
                 return (false, ("El correo que intenta registrar ya existe,\nintente con un nuevo correo.", Guid.Empty));
             else
                 return (false, ("Error de registro intente más tarde.", Guid.Empty));
+        }
+
+        /// <summary>
+        /// Registra la calificacion que realiza el cliente hacia el socio al finalizar el servicio
+        /// </summary>
+        /// <param name="idSoicitud">Identificador de la solicitud a finalizar</param>
+        /// <param name="calificacion">Calificacion asignada</param>
+        /// <param name="observaciones">Observaciones del socio</param>
+        /// <returns></returns>
+        public async Task<bool> CalificarSocioAysnc(Guid idSoicitud, int calificacion, string observaciones)
+        {
+            var (statusCode, resultado) = await ClientesApi.CalificarSocioAysnc(idSoicitud, calificacion, observaciones);
+            if (statusCode == HttpStatusCode.OK && !string.IsNullOrEmpty(resultado.ESTATUS) && resultado.ESTATUS.Equals("OK"))
+                return true;
+            else
+                return false;
         }
         #endregion
     }

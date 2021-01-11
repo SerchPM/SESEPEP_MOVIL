@@ -43,6 +43,9 @@ namespace MPS.SharedAPIModel.Notificaciones
 
             if (valores.ContainsKey("TIPO_SERVICIO"))
                 tipoServicio = valores["TIPO_SERVICIO"].ToString();
+
+            if (valores.ContainsKey("TIPO_NOTIFICACION"))
+                int.TryParse(valores["TIPO_NOTIFICACION"].ToString(), out tipoNotificacion);
         }
 
         string mensajePrincipal;
@@ -80,6 +83,9 @@ namespace MPS.SharedAPIModel.Notificaciones
 
         private string tipoServicio;
         public string TipoServicio { get => tipoServicio; set => tipoServicio = value; }
+
+        private int tipoNotificacion;
+        public int TipoNotificacion { get => tipoNotificacion; set => tipoNotificacion = value; }
     }
 
     public class A

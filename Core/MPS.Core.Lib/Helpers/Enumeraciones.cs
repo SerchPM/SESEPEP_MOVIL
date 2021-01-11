@@ -25,4 +25,12 @@ namespace MPS.Core.Lib.Helpers
        Finalizado,
        Alerta
     }
+
+    public enum TipoNotificacionEnum
+    {
+       ClienteSolicita = 1,
+       SocioAcepta = 2,
+       TiempoLlegada = 3,
+       Finalizado = 4
+    }
 }

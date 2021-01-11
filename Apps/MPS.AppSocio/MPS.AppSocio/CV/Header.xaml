@@ -16,7 +16,15 @@
     <ContentView.Content>
         <Grid RowDefinitions="*,Auto,Auto" ColumnDefinitions="Auto,*" Padding="10" BackgroundColor="{StaticResource AlterColor}">
             <Image Source="logoHeader.png" Grid.RowSpan="3" Margin="-5,0,10,0"/>
-            <Label Text="Móvil Private Security" Margin="0,10,0,0" FontAttributes="Bold" FontSize="Subtitle" Grid.Column="1" VerticalOptions="End"/>
+            <Grid Grid.Column="1" HorizontalOptions="FillAndExpand">
+                <Label Text="Móvil Private Security" Margin="0,10,0,0" FontAttributes="Bold" FontSize="Subtitle" VerticalOptions="End" HorizontalOptions="Start"/>
+                <Frame IsClippedToBounds="True" Padding="5" CornerRadius="15" BackgroundColor="LightGray" HorizontalOptions="End">
+                    <StackLayout Orientation="Horizontal">
+                        <Image Source="estrella.png" HorizontalOptions="Center" VerticalOptions="Center"/>
+                        <Label Text="{Binding Ranking, StringFormat='{0:F1}'}" FontSize="Small" TextColor="White" HorizontalOptions="End" Margin="0,0,5,0"/>
+                    </StackLayout>
+                </Frame>
+            </Grid>
             <Label Text="{Binding NombreSocio}" Margin="0,0,0,10" FontSize="Medium" Grid.Column="1" Grid.Row="1" VerticalOptions="Start"/>
             <StackLayout Orientation="Horizontal" Grid.Row="2" Grid.Column="1" HorizontalOptions="EndAndExpand">
                 <ImageButton Command="{Binding NavegarACommand}" CommandParameter="SolicitarServicioPage" x:Name="solicitarServicio" Source="solicitarServicioSel.png"/>

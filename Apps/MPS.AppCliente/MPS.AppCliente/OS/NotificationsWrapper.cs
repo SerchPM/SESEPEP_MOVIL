@@ -69,7 +69,8 @@ namespace MPS.AppCliente.Views.OS
                        IdTipoSolicitud = mensaje.IdTipoSolicitud,
                        NombreServicio = mensaje.NombreServicio,
                        NombreSocio = mensaje.NombreSocio,
-                       TipoServicio = mensaje.TipoServicio
+                       TipoServicio = mensaje.TipoServicio,
+                       TipoNotificacion = mensaje.TipoNotificacion
                    };
                })
                .HandleInAppMessageClicked((notification) =>
@@ -86,21 +87,27 @@ namespace MPS.AppCliente.Views.OS
             if (paginaActual.GetType() == paginaSolicitarServicio)
             {
                 var dtx = paginaActual.BindingContext as Core.Lib.ViewModels.Clientes.SolicitudDeServicioViewModel;
-                var solicitudAceptada = new ServicioSolicitado
+                if (mensaje.TipoNotificacion.Equals((int)TipoNotificacionEnum.SocioAcepta))
                 {
-                    ActualLat = mensaje.ActualLat,
-                    CalificacionSocio = mensaje.CalificacionSocio,
-                    ClaveTipoServicio = mensaje.ClaveTipoServicio,
-                    FechaSolicitud = mensaje.FechaSolicitud,
-                    FolioSolicitud = mensaje.FolioSolicitud,
-                    IdSocio = mensaje.IdSocio,
-                    IdSolicitud = mensaje.IdSolicitud,
-                    IdTipoSolicitud = mensaje.IdTipoSolicitud,
-                    NombreServicio = mensaje.NombreServicio,
-                    NombreSocio = mensaje.NombreSocio,
-                    TipoServicio = mensaje.TipoServicio
-                };
-                dtx.MostrarModalSolicitudCommand.Execute(solicitudAceptada);
+                    var solicitudAceptada = new ServicioSolicitado
+                    {
+                        ActualLat = mensaje.ActualLat,
+                        CalificacionSocio = mensaje.CalificacionSocio,
+                        ClaveTipoServicio = mensaje.ClaveTipoServicio,
+                        FechaSolicitud = mensaje.FechaSolicitud,
+                        FolioSolicitud = mensaje.FolioSolicitud,
+                        IdSocio = mensaje.IdSocio,
+                        IdSolicitud = mensaje.IdSolicitud,
+                        IdTipoSolicitud = mensaje.IdTipoSolicitud,
+                        NombreServicio = mensaje.NombreServicio,
+                        NombreSocio = mensaje.NombreSocio,
+                        TipoServicio = mensaje.TipoServicio
+                    };
+                    dtx.MostrarModalSolicitudCommand.Execute(solicitudAceptada);
+                }
+                else if (mensaje.TipoNotificacion.Equals((int)TipoNotificacionEnum.Finalizado))
+                    dtx.AbrirModalCalificarCommand.Execute(mensaje.IdSolicitud);
+                
             }
             else
             {

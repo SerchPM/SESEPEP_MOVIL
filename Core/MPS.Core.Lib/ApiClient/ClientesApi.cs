@@ -1,6 +1,7 @@
 ﻿using MPS.Core.Lib.Helpers;
 using MPS.SharedAPIModel.Clientes;
 using MPS.SharedAPIModel.Seguridad;
+using MPS.SharedAPIModel.Solicitud;
 using Sysne.Core.ApiClient;
 using System;
 using System.Collections.Generic;
@@ -117,6 +118,16 @@ namespace MPS.Core.Lib.ApiClient
                 ("P_GUID_METODO_PAGO_PRED", cliente.IdMetodoPago.ToString()));
             return res;
         }
+
+        /// <summary>
+        /// Registra la calificacion que realiza el cliente hacia el socio al finalizar el servicio
+        /// </summary>
+        /// <param name="idSoicitud">Identificador de la solicitud a finalizar</param>
+        /// <param name="calificacion">Calificacion asignada</param>
+        /// <param name="observaciones">Observaciones del socio</param>
+        /// <returns></returns>
+        public async Task<(HttpStatusCode statusCode, AsignarSolicitudResponse solicitud)> CalificarSocioAysnc(Guid idSoicitud, int calificacion, string observaciones) =>
+            await CallPostAsync<AsignarSolicitudResponse>("ClienteCalificaSolicitud", ("P_GUID_SOLICITUD", idSoicitud), ("P_CALIFICACION", calificacion), ("P_OBSERVACIONES", observaciones));
         #endregion
     }
 }

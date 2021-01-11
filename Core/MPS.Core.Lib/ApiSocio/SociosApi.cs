@@ -162,6 +162,16 @@ namespace MPS.Core.Lib.ApiSocio
         /// <returns></returns>
         public async Task<(HttpStatusCode statusCode, SolicitudPendiente solicitud)> ServicioEnAtencionAysnc(Guid idSocio) =>
             await CallPostAsync<SolicitudPendiente>("ConsultaSolicitudActualSocio", ("P_GUID_SOCIO", idSocio));
+
+        /// <summary>
+        /// Registra la calificacion que realiza el socio hacia el cliente al finalizar el servicio
+        /// </summary>
+        /// <param name="idSoicitud">Identificador de la solicitud a finalizar</param>
+        /// <param name="calificacion">Calificacion asignada</param>
+        /// <param name="observaciones">Observaciones del socio</param>
+        /// <returns></returns>
+        public async Task<(HttpStatusCode statusCode, ResponseCalificacion solicitud)> CalificarClienteAysnc(Guid idSoicitud, int calificacion, string observaciones) =>
+            await CallPostAsync<ResponseCalificacion>("SocioCalificaSolicitud", ("P_GUID_SOLICITUD", idSoicitud), ("P_CALIFICACION", calificacion), ("P_OBSERVACIONES", observaciones));
         #endregion
     }
 }

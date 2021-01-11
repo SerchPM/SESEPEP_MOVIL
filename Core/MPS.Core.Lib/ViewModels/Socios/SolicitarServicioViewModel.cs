@@ -9,6 +9,8 @@ using Sysne.Core.MVVM;
 using Sysne.Core.MVVM.Patterns;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.Linq;
 using System.Text;
 
 namespace MPS.Core.Lib.ViewModels.Socios
@@ -69,6 +71,15 @@ namespace MPS.Core.Lib.ViewModels.Socios
 
         private bool alertaActiva;
         public bool AlertaActiva { get => alertaActiva; set => Set(ref alertaActiva, value); }
+
+        private ObservableCollection<Ranking> rankings;
+        public ObservableCollection<Ranking> Rankings { get => rankings; set => Set(ref rankings, value); }
+
+        private string observaciones;
+        public string Observaciones { get => observaciones; set => Set(ref observaciones, value); }
+
+        private bool modalCalificar;
+        public bool ModalCalificar { get => modalCalificar; set => Set(ref modalCalificar, value); }
         #endregion
 
         #region Commandos
@@ -77,6 +88,16 @@ namespace MPS.Core.Lib.ViewModels.Socios
         {
             get => obtenerComponentesCommand ??= new RelayCommand(async () =>
             {
+                var rank = new List<Ranking>();
+                for (int i = 1; i <= 5; i++)
+                {
+                    if (i.Equals(1))
+                        rank.Add(new Ranking { Rank = i, Imagen = "estrellaon.png", Selected = false });
+                    else
+                        rank.Add(new Ranking { Rank = i, Imagen = "estrellaoff.png", Selected = false });
+                }
+                Rankings = new ObservableCollection<Ranking>(rank);
+
                 var (estatus, result) = await bl.ServicioEnAtencionAysnc(Id);
                 if (estatus)
                 {
@@ -100,6 +121,7 @@ namespace MPS.Core.Lib.ViewModels.Socios
                         ObteniendoUbicacion(this, args);
                     }
                 }
+               
             });
         }
 
@@ -137,31 +159,16 @@ namespace MPS.Core.Lib.ViewModels.Socios
         {
             get => finalizaOrIniciarServicioCommand ??= new RelayCommand(async () =>
             {
-                await (new SolicitudBL()).AsignarSocioAsync(new SocioAsignado
-                {
-                    IdSocio = Id,
-                    IdSolicitud = ServicioAtencion.GUID_SOLICITUD,
-                    Estatus = ServicioAtencion.ESTATUS_SOLICITUD.Equals((int)EstatusSolicitudEnum.EnCurso) ? (int)EstatusSolicitudEnum.Atendiendo : (int)EstatusSolicitudEnum.Finalizado
-                });
-
                 if (ServicioAtencion.ESTATUS_SOLICITUD.Equals((int)EstatusSolicitudEnum.Atendiendo) || ServicioAtencion.ESTATUS_SOLICITUD.Equals((int)EstatusSolicitudEnum.Alerta))
-                {
-                    var ubicacion = await Sysne.Core.OS.DependencyService.Get<Sysne.Core.OS.IOS>().ObtenerGeoposicion(false);
-                    if (ObteniendoUbicacion != null && ubicacion != null)
-                    {
-                        UbicacionActualEvent args = new UbicacionActualEvent
-                        {
-                            Geoposicion = ubicacion
-                        };
-                        ObteniendoUbicacion(this, args);
-                    }
-                    EnAtencion = false;
-                    AlertaActiva = false;
-                    ServicioAtencion = new SolicitudPendiente();
-                    NombreUbicacion = string.Empty;
-                }
+                    ModalCalificar = true;
                 else
                 {
+                    await (new SolicitudBL()).AsignarSocioAsync(new SocioAsignado
+                    {
+                        IdSocio = Id,
+                        IdSolicitud = ServicioAtencion.GUID_SOLICITUD,
+                        Estatus = ServicioAtencion.ESTATUS_SOLICITUD.Equals((int)EstatusSolicitudEnum.EnCurso) ? (int)EstatusSolicitudEnum.Atendiendo : (int)EstatusSolicitudEnum.Finalizado
+                    });
                     ServicioAtencion.ESTATUS_SOLICITUD = (int)EstatusSolicitudEnum.Atendiendo;
                     Solicitud = ServicioAtencion.ESTATUS_SOLICITUD.Equals((int)EstatusSolicitudEnum.EnCurso) ? "Iniciar" : "Finalizar";
                     AlertaActiva = !ServicioAtencion.ESTATUS_SOLICITUD.Equals((int)EstatusSolicitudEnum.EnCurso);
@@ -288,6 +295,77 @@ namespace MPS.Core.Lib.ViewModels.Socios
                 var ubicacion = await Sysne.Core.OS.DependencyService.Get<Sysne.Core.OS.IOS>().ObtenerGeoposicion(false);
                 if(ubicacion != null && ServicioAtencion != null && ServicioAtencion.GUID_SOLICITUD != Guid.Empty)
                     await (new SolicitudBL()).MandarUbicacionAsync(ServicioAtencion.GUID_SOLICITUD, ubicacion.Latitud.ToString(), ubicacion.Longitud.ToString(), ubicacion.Latitud.ToString(), ubicacion.Longitud.ToString());
+            });
+        }
+
+        private RelayCommand enviarCalificacionCommand = null;
+        public RelayCommand EnviarCalificacionCommand
+        {
+            get => enviarCalificacionCommand ??= new RelayCommand(async () =>
+            {
+                Observaciones ??= string.Empty;
+                var result = await bl.CalificarClienteAysnc(ServicioAtencion.GUID_SOLICITUD, Rankings.Where(w => w.Selected).Count(), Observaciones);
+                if (result)
+                {
+                    await (new SolicitudBL()).AsignarSocioAsync(new SocioAsignado
+                    {
+                        IdSocio = Id,
+                        IdSolicitud = ServicioAtencion.GUID_SOLICITUD,
+                        Estatus = ServicioAtencion.ESTATUS_SOLICITUD.Equals((int)EstatusSolicitudEnum.EnCurso) ? (int)EstatusSolicitudEnum.Atendiendo : (int)EstatusSolicitudEnum.Finalizado
+                    });
+                    var ubicacion = await Sysne.Core.OS.DependencyService.Get<Sysne.Core.OS.IOS>().ObtenerGeoposicion(false);
+                    if (ObteniendoUbicacion != null && ubicacion != null)
+                    {
+                        UbicacionActualEvent args = new UbicacionActualEvent
+                        {
+                            Geoposicion = ubicacion
+                        };
+                        ObteniendoUbicacion(this, args);
+                    }
+                    EnAtencion = false;
+                    AlertaActiva = false;
+                    ServicioAtencion = new SolicitudPendiente();
+                    NombreUbicacion = string.Empty;
+                    ModalCalificar = false;
+                }
+                else
+                {
+                    ModalCalificar = false;
+                    Mensaje = "Ocurrio un problema al finalizar el servicio";
+                    Modal = true;
+                }
+                Observaciones = string.Empty;
+                SelectRankingCommand.Execute(new Ranking { Rank = 1 });
+            });
+        }
+
+        private RelayCommand ocultarModalCalificarCommand = null;
+        public RelayCommand OcultarModalCalificarCommand
+        {
+            get => ocultarModalCalificarCommand ??= new RelayCommand(() =>
+            {
+                ModalCalificar = false;
+                Observaciones = string.Empty;
+                SelectRankingCommand.Execute(new Ranking { Rank = 1});
+            });
+        }
+
+        private RelayCommand<Ranking> selectRankingCommand = null;
+        public RelayCommand<Ranking> SelectRankingCommand
+        {
+            get => selectRankingCommand ??= new RelayCommand<Ranking>((ranking) =>
+            {
+
+                var rank = new List<Ranking>();
+                for (int i = 1; i <= 5; i++)
+                {
+                    if (i <= ranking.Rank)
+                        rank.Add(new Ranking { Rank = i, Imagen = "estrellaon.png", Selected = true });
+                    else
+                        rank.Add(new Ranking { Rank = i, Imagen = "estrellaoff.png", Selected = false });
+                }
+                Rankings.Clear();
+                Rankings = new ObservableCollection<Ranking>(rank);
             });
         }
         #endregion
