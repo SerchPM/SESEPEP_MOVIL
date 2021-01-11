@@ -13,7 +13,7 @@ namespace MPS.SharedAPIModel.Clientes
         public string NO_SOCIO { get; set; }
         public string SOCIO { get; set; }
         public DateTime FECHA_SOLICITUD { get; set; }
-        public DateTime INICIO_SOLICITUD { get; set; }
+        public DateTime? INICIO_SOLICITUD { get; set; }
         public int TIEMPO_PACTADO { get; set; }
         public int? TIEMPO_REAL { get; set; }
         public string UBICACION_1 { get; set; }

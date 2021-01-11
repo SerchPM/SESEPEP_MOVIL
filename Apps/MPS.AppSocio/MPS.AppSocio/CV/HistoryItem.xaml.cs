@@ -17,18 +17,18 @@ namespace MPS.AppSocio.Views.CV
             InitializeComponent();
         }
 
-        public DateTime InicioSolicitud
+        public DateTime? InicioSolicitud
         {
-            get => (DateTime)GetValue(InicioSolicitudProperty);
+            get => (DateTime?)GetValue(InicioSolicitudProperty);
             set => SetValue(InicioSolicitudProperty, value);
         }
 
-        public static readonly BindableProperty InicioSolicitudProperty = BindableProperty.Create(nameof(InicioSolicitud), typeof(DateTime), typeof(HistoryItem), default(DateTime),
+        public static readonly BindableProperty InicioSolicitudProperty = BindableProperty.Create(nameof(InicioSolicitud), typeof(DateTime?), typeof(HistoryItem), default(DateTime?),
             propertyChanged: (bindable, oldValue, newValue) =>
             {
                 var me = (HistoryItem)bindable;
-                me.InicioSolicitud = (DateTime)newValue;
-                me.inicio.Text = me.InicioSolicitud.ToString("dd/MM/yyyy hh:mm:ss") + " (Inicio)";
+                me.InicioSolicitud = (DateTime?)newValue;
+                me.inicio.Text = me.InicioSolicitud != null ? me.InicioSolicitud.Value.ToString("dd/MM/yyyy hh:mm:ss") + " (Inicio)" : string.Empty;
             });
 
         public decimal? Costo
