@@ -23,7 +23,6 @@ namespace MPS.AppSocio.iOS
         //
         public override bool FinishedLaunching(UIApplication app, NSDictionary options)
         {
-            Rg.Plugins.Popup.Popup.Init();
             DependencyService.Register<OS.OS, IOS>();
             global::Xamarin.Forms.Forms.Init();
             Xamarin.FormsMaps.Init();

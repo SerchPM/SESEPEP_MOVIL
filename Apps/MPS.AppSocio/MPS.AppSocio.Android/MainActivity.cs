@@ -21,7 +21,6 @@ namespace MPS.AppSocio.Droid
 
             base.OnCreate(savedInstanceState);
             CheckAppPermissions();
-            Rg.Plugins.Popup.Popup.Init(this, savedInstanceState);
 
             DependencyService.Register<OS.OS, IOS>();
             OS.OS.Activity = this;
