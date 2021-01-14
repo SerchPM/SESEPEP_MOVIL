@@ -18,7 +18,6 @@ namespace MPS.AppCliente.Views.Views
             uno.Source = "unoseleccionado.png";
             dos.Source = "dos.png";
             ViewModel.ObtenerComponentesCommand.Execute();
-
             ViewModel.PropertyChanged += (s, e) =>
             {
                 switch (e.PropertyName)
@@ -26,6 +25,7 @@ namespace MPS.AppCliente.Views.Views
                     case "Registro":
                         if(ViewModel.Registro)
                         {
+                            ViewModel.Subtitulo = "Datos generales";
                             uno.Source = "unoseleccionado.png";
                             dos.Source = "dos.png";
                         }
@@ -33,7 +33,7 @@ namespace MPS.AppCliente.Views.Views
                     case "RegistroTarjeta":
                         if (ViewModel.RegistroTarjeta)
                         {
-
+                            ViewModel.Subtitulo = "Datos bancarios";
                             uno.Source = "uno.png";
                             dos.Source = "dosseleccionado.png";
                         }
@@ -42,6 +42,11 @@ namespace MPS.AppCliente.Views.Views
                         break;
                 }
             };
+        }
+
+        protected override void OnAppearing()
+        {
+            ViewModel.IOS = Device.RuntimePlatform.Equals(Device.iOS);
         }
     }
 }

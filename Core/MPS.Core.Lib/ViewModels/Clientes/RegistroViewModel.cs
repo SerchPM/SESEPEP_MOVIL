@@ -74,6 +74,15 @@ namespace MPS.Core.Lib.ViewModels.Clientes
 
         private bool modalRegistro;
         public bool ModalRegistro { get => modalRegistro; set => Set(ref modalRegistro, value); }
+
+        private string subtitulo = "Datos generales";
+        public string Subtitulo { get => subtitulo; set => Set(ref subtitulo, value); }
+
+        private bool enviarDatosVancarios = true;
+        public bool EnviarDatosVancarios { get => enviarDatosVancarios; set => Set(ref enviarDatosVancarios, value); }
+
+        private bool iOS;
+        public bool IOS { get => iOS; set => Set(ref iOS, value); }
         #endregion
 
         #region Commandos
@@ -108,54 +117,82 @@ namespace MPS.Core.Lib.ViewModels.Clientes
             {
                 if (Registro)
                 {
-                    if (!string.IsNullOrEmpty(Cliente.NOMBRE) && !string.IsNullOrEmpty(Cliente.APELLIDO_1) && !string.IsNullOrEmpty(Cliente.APELLIDO_2) && !string.IsNullOrEmpty(Cliente.Alias) &&
-                    !string.IsNullOrEmpty(Cliente.Password) && !string.IsNullOrEmpty(Cliente.CORREO_ELECTRONICO))
+                    if (IOS)
                     {
-                        if (string.IsNullOrEmpty(ValidarCliente()))
+                        if (!string.IsNullOrEmpty(Cliente.NOMBRE) && !string.IsNullOrEmpty(Cliente.APELLIDO_1) && !string.IsNullOrEmpty(Cliente.APELLIDO_2) && !string.IsNullOrEmpty(Cliente.Alias) &&
+                   !string.IsNullOrEmpty(Cliente.Password) && !string.IsNullOrEmpty(Cliente.CORREO_ELECTRONICO))
                         {
-                            Registro = false;
-                            RegistroTarjeta = true;
+                            if (string.IsNullOrEmpty(ValidarCliente()))
+                            {
+                                Subtitulo = "Datos bancarios";
+                                Registro = false;
+                                RegistroTarjeta = true;
+                            }
+                            else
+                                Modal = true;
                         }
                         else
+                        {
+                            Mensaje = "Faltan campos por capturar";
                             Modal = true;
+                        }
                     }
                     else
                     {
-                        Mensaje = "Faltan campos por capturar";
-                        Modal = true;
+                        if (!string.IsNullOrEmpty(Cliente.NOMBRE) && !string.IsNullOrEmpty(Cliente.APELLIDO_1) && !string.IsNullOrEmpty(Cliente.APELLIDO_2) && !string.IsNullOrEmpty(Cliente.Alias) &&
+                            SexoSelected != null && SexoSelected.GUID != Guid.Empty && !string.IsNullOrEmpty(Cliente.Password) && !string.IsNullOrEmpty(Cliente.CORREO_ELECTRONICO))
+                        {
+                            if (string.IsNullOrEmpty(ValidarCliente()))
+                            {
+                                Subtitulo = "Datos bancarios";
+                                Registro = false;
+                                RegistroTarjeta = true;
+                            }
+                            else
+                                Modal = true;
+                        }
+                        else
+                        {
+                            Mensaje = "Faltan campos por capturar";
+                            Modal = true;
+                        }
                     }
+                   
                 }
                 else
                 {
-                    if (string.IsNullOrEmpty(Tarjeta.NoCuenta) || string.IsNullOrEmpty(Tarjeta.CVV) || MesSelected == 0 || AñoSelected == 0
-                        || (TipoTarjetaSelected != null && TipoTarjetaSelected.Id == 0) || (Tarjetaselected != null && Tarjetaselected.GUID == Guid.Empty))
+                    if (EnviarDatosVancarios)
                     {
-                        Mensaje = "Faltan campos por capturar";
-                        Modal = true;
-                        return;
-                    }
+                        if (string.IsNullOrEmpty(Tarjeta.NoCuenta) || string.IsNullOrEmpty(Tarjeta.CVV) || MesSelected == 0 || AñoSelected == 0
+                                                || (TipoTarjetaSelected != null && TipoTarjetaSelected.Id == 0) || (Tarjetaselected != null && Tarjetaselected.GUID == Guid.Empty))
+                        {
+                            Mensaje = "Faltan campos por capturar";
+                            Modal = true;
+                            return;
+                        }
 
-                    if (Tarjeta.CVV.Length < 3)
-                    {
-                        Mensaje = "El campo CVV no es valido";
-                        Modal = true;
-                        return;
+                        if (Tarjeta.CVV.Length < 3)
+                        {
+                            Mensaje = "El campo CVV no es valido";
+                            Modal = true;
+                            return;
+                        }
+                        if (Tarjeta.NoCuenta.Length < 10)
+                        {
+                            Mensaje = "El campo No.Cuenta/Tarjeta no es valido";
+                            Modal = true;
+                            return;
+                        }
                     }
-                    if (Tarjeta.NoCuenta.Length < 10)
-                    {
-                        Mensaje = "El campo No.Cuenta/Tarjeta no es valido";
-                        Modal = true;
-                        return;
-                    }
-
+                    
                     Cliente.ModeloDispositivo = Helpers.Settings.Current.ModeloDispositivo;
                     Cliente.Password = Crypto.EncodePassword(Cliente.Password);
                     Cliente.VercionApp = "0";
-                    Cliente.SEXO = SexoSelected.GUID.ToString();
+                    Cliente.SEXO = SexoSelected?.GUID.ToString();
                     if (!EnviarFechaDeNacimiento) Cliente.FECHA_NACIMIENTO = null;
                     Cliente.IdMetodoPago = Guid.Parse("4F717133-1F98-47CE-A874-DC902392E706");
                     var (result, (mensaje, idCliente)) = await bl.RegistrarClienteAsync(Cliente);
-                    if (result)
+                    if (result && EnviarDatosVancarios)
                     {
                         Tarjeta.MesExpira = MesSelected;
                         Tarjeta.AñoExpira = AñoSelected;

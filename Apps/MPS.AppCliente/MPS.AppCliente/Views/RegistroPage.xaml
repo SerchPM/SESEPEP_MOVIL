@@ -28,7 +28,7 @@
                     </Image>
                     <Image x:Name="dos" Aspect="AspectFit"/>
                 </StackLayout>
-                <Label Grid.Column="1" Grid.Row="3" FontAttributes="Bold" FontSize="Subtitle" Text="Datos generales" TextColor="#A03335"/>
+                <Label Grid.Column="1" Grid.Row="3" FontAttributes="Bold" FontSize="Subtitle" Text="{Binding Subtitulo, Mode=TwoWay}" TextColor="#A03335"/>
                 <ScrollView IsVisible="{Binding Registro}" Grid.Column="1" Grid.Row="4">
                     <StackLayout Orientation="Vertical">
                         <cv:EntryView EtiquetaObligatorio="*" TextColorEtiquetaO="Red" Etiqueta="Nombre(s)" Text="{Binding Cliente.NOMBRE}" TextColor="#000"/>
@@ -36,46 +36,115 @@
                         <cv:EntryView EtiquetaObligatorio="*" TextColorEtiquetaO="Red" Etiqueta="Apellido materno" Text="{Binding Cliente.APELLIDO_2}" TextColor="#000"/>
                         <Picker ItemsSource="{Binding Sexos}" SelectedItem="{Binding SexoSelected, Mode=TwoWay, UpdateSourceEventName=PropertyChanged}"/>
                         <Grid ColumnDefinitions="Auto,*">
-                            <Label Text="*" TextColor="{OnPlatform Android=Red,iOS=Gray,UWP=Red}"/>
+                            <Label Text="*" IsVisible="{OnPlatform Android=false, iOS=false, UWP=true}" TextColor="{OnPlatform Android=Red,iOS=Gray,UWP=Red}"/>
                             <Label Grid.Column="1" Text="Sexo" TextColor="Gray" FontSize="Small"/>
                         </Grid>
                         <!--<Label IsVisible="{OnPlatform Android=false, iOS=true, UWP=false}" TextColor="Gray" Text="Por políticas de seguridad de Apple no es obligatorio que indiques este campo, para MPS Seguridad es importante darte esta información." FontSize="11"/>-->
-                        <StackLayout Orientation="Horizontal" IsVisible="{OnPlatform Android=false, iOS=true, UWP=false}">
-                            <CheckBox IsChecked="{Binding EnviarFechaDeNacimiento, Mode=TwoWay}"/>
-                            <Label Text="Deseo compartir mi fecha de nacimiento" TextColor="Gray" FontSize="Small" VerticalOptions="Center"/>
+                        <StackLayout Orientation="Vertical" IsVisible="{OnPlatform Android=true, iOS=true, UWP=false}">
+                            <StackLayout Orientation="Horizontal">
+                                <CheckBox IsChecked="{Binding EnviarFechaDeNacimiento, Mode=TwoWay}"/>
+                                <Label Text="Deseo compartir mi fecha de nacimiento" TextColor="Gray" FontSize="Small" VerticalOptions="Center"/>
+                            </StackLayout>
+                            <StackLayout Orientation="Vertical" IsVisible="{Binding EnviarFechaDeNacimiento}">
+                                <DatePicker Date="{Binding Cliente.FECHA_NACIMIENTO, Mode=TwoWay}" />
+                                <Label Text="Fecha de nacimiento" TextColor="Gray" FontSize="Small" />
+                            </StackLayout>
                         </StackLayout>
-                        <DatePicker Date="{Binding Cliente.FECHA_NACIMIENTO, Mode=TwoWay}" IsVisible="{Binding EnviarFechaDeNacimiento}"/>
-
-                        <Grid ColumnDefinitions="Auto,*">
-                            <Label Text="*" TextColor="{OnPlatform Android=Red,iOS=Gray,UWP=Red}"/>
-                            <Label Grid.Column="1" Text="Fecha de nacimiento" TextColor="Gray" FontSize="Small"/>
-                        </Grid>
+                        <StackLayout Orientation="Vertical" IsVisible="{OnPlatform Android=false, iOS=false, UWP=true}">
+                            <DatePicker Date="{Binding Cliente.FECHA_NACIMIENTO, Mode=TwoWay}"/>
+                            <Grid ColumnDefinitions="Auto,*">
+                                <Label Text="*" TextColor="{OnPlatform Android=Red,iOS=Gray,UWP=Red}"/>
+                                <Label Grid.Column="1" Text="Fecha de nacimiento" TextColor="Gray" FontSize="Small"/>
+                            </Grid>
+                        </StackLayout>
                         <cv:EntryView EtiquetaObligatorio="*" TextColorEtiquetaO="Red" Etiqueta="Alias" Text="{Binding Cliente.Alias}" TextColor="#000"/>
                         <cv:EntryView EtiquetaObligatorio="*" TextColorEtiquetaO="Red" Etiqueta="Correo electrónico" Text="{Binding Cliente.CORREO_ELECTRONICO}" TextColor="#000"/>
                         <cv:EntryView EtiquetaObligatorio="*" TextColorEtiquetaO="Red" Etiqueta="Contraseña" Text="{Binding Cliente.Password}" TextColor="#000" IsPassword="True"/>
                         <cv:EntryView EtiquetaObligatorio="*" TextColorEtiquetaO="{OnPlatform Android=Red,iOS=Gray,UWP=Red}" Etiqueta="Número de teléfono" Text="{Binding Cliente.TELEFONO}" TextColor="#000" Keyboard="Numeric"/>
-                        <Label IsVisible="{OnPlatform Android=false, iOS=true, UWP=false}" TextColor="Gray" Text="*por políticas de seguridad de Apple no es obligatorio que indiques estos campos, para MPS Seguridad es importante darte esta información." FontSize="11"/>
+                        <!--<Label IsVisible="{OnPlatform Android=true, iOS=true, UWP=false}" TextColor="Gray" Text="*por políticas de seguridad de Apple no es obligatorio que indiques estos campos, para MPS Seguridad es importante darte esta información." FontSize="11"/>-->
                     </StackLayout>
                 </ScrollView>
                 <ScrollView IsVisible="{Binding RegistroTarjeta}" Grid.Column="1" Grid.Row="4">
-                    <StackLayout Orientation="Vertical">
-                        <Entry Keyboard="Numeric" MaxLength="16" FontSize="Body" Text="{Binding Tarjeta.NoCuenta, Mode=TwoWay}"/>
-                        <Label Grid.Row="1" Text="No. Cuenta/Tarjeta" VerticalOptions="Start" FontSize="Small"/>
-                        <Grid Grid.Row="2" RowDefinitions="Auto, Auto" ColumnDefinitions="*,*">
-                            <Picker VerticalOptions="Center" FontSize="Body" ItemsSource="{Binding Meses}" SelectedItem="{Binding MesSelected, Mode=TwoWay, UpdateSourceEventName=PropertyChanged}"/>
-                            <Label Grid.Row="1" Text="Exp. Mes" VerticalOptions="Start" FontSize="Small"/>
-                            <Picker  Grid.Column="1" VerticalOptions="Start" FontSize="Body" ItemsSource="{Binding Años}" SelectedItem="{Binding AñoSelected, Mode=TwoWay, UpdateSourceEventName=PropertyChanged}"/>
-                            <Label Grid.Column="1" Grid.Row="1" Text="Exp. Año" VerticalOptions="Start" FontSize="Small"/>
-                        </Grid>
-                        <Picker  Grid.Row="3" VerticalOptions="Start" FontSize="Body" ItemsSource="{Binding Tarjetas}" SelectedItem="{Binding Tarjetaselected, Mode=TwoWay, UpdateSourceEventName=PropertyChanged}"/>
-                        <Label Grid.Row="4" Text="Marca" VerticalOptions="Start" FontSize="Small"/>
-                        <Grid Grid.Row="5" RowDefinitions="Auto, Auto" ColumnDefinitions="*,*" VerticalOptions="Center">
-                            <Entry Keyboard="Numeric" IsPassword="True" FontSize="Body" MaxLength="3" Text="{Binding Tarjeta.CVV, Mode=TwoWay}"/>
-                            <Label Grid.Row="1" Text="CVV" VerticalOptions="Start" FontSize="Small"/>
-                            <Picker Grid.Column="1" VerticalOptions="Start" FontSize="Body" ItemsSource="{Binding TiposTarjeta}" SelectedItem="{Binding TipoTarjetaSelected, Mode=TwoWay, UpdateSourceEventName=PropertyChanged}"/>
-                            <Label Grid.Column="1" Grid.Row="1" Text="Tipo de tarjeta" FontSize="Small" VerticalOptions="Start"/>
-                        </Grid>
-                    </StackLayout>
+                    <Grid RowDefinitions="Auto,Auto">
+                        <StackLayout Orientation="Vertical" IsVisible="{OnPlatform Android=false, iOS=true, UWP=false}">
+                            <StackLayout Orientation="Horizontal">
+                                <CheckBox IsChecked="{Binding EnviarDatosVancarios, Mode=TwoWay}"/>
+                                <Label Text="Deseo compartir mi informacion vancaria" TextColor="Gray" FontSize="Small" VerticalOptions="Center"/>
+                            </StackLayout>
+                            <StackLayout Orientation="Vertical" IsVisible="{Binding EnviarDatosVancarios}">
+                                <Entry Keyboard="Numeric" MaxLength="16" FontSize="Body" Text="{Binding Tarjeta.NoCuenta, Mode=TwoWay}"/>
+                                <StackLayout Orientation="Horizontal">
+                                    <Label Text="*" VerticalOptions="Start" FontSize="Small" TextColor="Red"/>
+                                    <Label Text="No. Cuenta/Tarjeta" VerticalOptions="Start" FontSize="Small"/>
+                                </StackLayout>
+                                <Grid Grid.Row="2" RowDefinitions="Auto, Auto" ColumnDefinitions="*,*">
+                                    <Picker VerticalOptions="Center" FontSize="Body" ItemsSource="{Binding Meses}" SelectedItem="{Binding MesSelected, Mode=TwoWay, UpdateSourceEventName=PropertyChanged}"/>
+                                    <StackLayout Grid.Row="1" Orientation="Horizontal">
+                                        <Label Text="*" VerticalOptions="Start" FontSize="Small" TextColor="Red"/>
+                                        <Label Text="Exp. Mes" VerticalOptions="Start" FontSize="Small"/>
+                                    </StackLayout>
+                                    <Picker  Grid.Column="1" VerticalOptions="Start" FontSize="Body" ItemsSource="{Binding Años}" SelectedItem="{Binding AñoSelected, Mode=TwoWay, UpdateSourceEventName=PropertyChanged}"/>
+                                    <StackLayout Grid.Column="1" Grid.Row="1" Orientation="Horizontal">
+                                        <Label Text="*" VerticalOptions="Start" FontSize="Small" TextColor="Red"/>
+                                        <Label Text="Exp. Año" VerticalOptions="Start" FontSize="Small"/>
+                                    </StackLayout>
+                                </Grid>
+                                <Picker  Grid.Row="3" VerticalOptions="Start" FontSize="Body" ItemsSource="{Binding Tarjetas}" SelectedItem="{Binding Tarjetaselected, Mode=TwoWay, UpdateSourceEventName=PropertyChanged}"/>
+                                <StackLayout Grid.Row="4" Orientation="Horizontal">
+                                    <Label Text="*" VerticalOptions="Start" FontSize="Small" TextColor="Red"/>
+                                    <Label Text="Marca" VerticalOptions="Start" FontSize="Small"/>
+                                </StackLayout>
+                                <Grid Grid.Row="5" RowDefinitions="Auto, Auto" ColumnDefinitions="*,*" VerticalOptions="Center">
+                                    <Entry Keyboard="Numeric" IsPassword="True" FontSize="Body" MaxLength="3" Text="{Binding Tarjeta.CVV, Mode=TwoWay}"/>
+                                    <StackLayout Grid.Row="1" Orientation="Horizontal">
+                                        <Label Text="*" VerticalOptions="Start" FontSize="Small" TextColor="Red"/>
+                                        <Label Text="CVV" VerticalOptions="Start" FontSize="Small"/>
+                                    </StackLayout>
+                                    <Picker Grid.Column="1" VerticalOptions="Start" FontSize="Body" ItemsSource="{Binding TiposTarjeta}" SelectedItem="{Binding TipoTarjetaSelected, Mode=TwoWay, UpdateSourceEventName=PropertyChanged}"/>
+                                    <StackLayout Grid.Column="1" Grid.Row="1" Orientation="Horizontal">
+                                        <Label Text="*" VerticalOptions="Start" FontSize="Small" TextColor="Red"/>
+                                        <Label Text="Tipo de tarjeta" VerticalOptions="Start" FontSize="Small"/>
+                                    </StackLayout>
+                                </Grid>
+                            </StackLayout>
+                        </StackLayout>
+                        <StackLayout Grid.Row="1" Orientation="Vertical" IsVisible="{OnPlatform Android=true, iOS=false, UWP=true}">
+                            <Entry Keyboard="Numeric" MaxLength="16" FontSize="Body" Text="{Binding Tarjeta.NoCuenta, Mode=TwoWay}"/>
+                            <StackLayout Orientation="Horizontal">
+                                <Label Text="*" VerticalOptions="Start" FontSize="Small" TextColor="Red"/>
+                                <Label Text="No. Cuenta/Tarjeta" VerticalOptions="Start" FontSize="Small"/>
+                            </StackLayout>
+                            <Grid Grid.Row="2" RowDefinitions="Auto, Auto" ColumnDefinitions="*,*">
+                                <Picker VerticalOptions="Center" FontSize="Body" ItemsSource="{Binding Meses}" SelectedItem="{Binding MesSelected, Mode=TwoWay, UpdateSourceEventName=PropertyChanged}"/>
+                                <StackLayout Grid.Row="1" Orientation="Horizontal">
+                                    <Label Text="*" VerticalOptions="Start" FontSize="Small" TextColor="Red"/>
+                                    <Label Text="Exp. Mes" VerticalOptions="Start" FontSize="Small"/>
+                                </StackLayout>
+                                <Picker  Grid.Column="1" VerticalOptions="Start" FontSize="Body" ItemsSource="{Binding Años}" SelectedItem="{Binding AñoSelected, Mode=TwoWay, UpdateSourceEventName=PropertyChanged}"/>
+                                <StackLayout Grid.Column="1" Grid.Row="1" Orientation="Horizontal">
+                                    <Label Text="*" VerticalOptions="Start" FontSize="Small" TextColor="Red"/>
+                                    <Label Text="Exp. Año" VerticalOptions="Start" FontSize="Small"/>
+                                </StackLayout>
+                            </Grid>
+                            <Picker  Grid.Row="3" VerticalOptions="Start" FontSize="Body" ItemsSource="{Binding Tarjetas}" SelectedItem="{Binding Tarjetaselected, Mode=TwoWay, UpdateSourceEventName=PropertyChanged}"/>
+                            <StackLayout Grid.Row="4" Orientation="Horizontal">
+                                <Label Text="*" VerticalOptions="Start" FontSize="Small" TextColor="Red"/>
+                                <Label Text="Marca" VerticalOptions="Start" FontSize="Small"/>
+                            </StackLayout>
+                            <Grid Grid.Row="5" RowDefinitions="Auto, Auto" ColumnDefinitions="*,*" VerticalOptions="Center">
+                                <Entry Keyboard="Numeric" IsPassword="True" FontSize="Body" MaxLength="3" Text="{Binding Tarjeta.CVV, Mode=TwoWay}"/>
+                                <StackLayout Grid.Row="1" Orientation="Horizontal">
+                                    <Label Text="*" VerticalOptions="Start" FontSize="Small" TextColor="Red"/>
+                                    <Label Text="CVV" VerticalOptions="Start" FontSize="Small"/>
+                                </StackLayout>
+                                <Picker Grid.Column="1" VerticalOptions="Start" FontSize="Body" ItemsSource="{Binding TiposTarjeta}" SelectedItem="{Binding TipoTarjetaSelected, Mode=TwoWay, UpdateSourceEventName=PropertyChanged}"/>
+                                <StackLayout Grid.Column="1" Grid.Row="1" Orientation="Horizontal">
+                                    <Label Text="*" VerticalOptions="Start" FontSize="Small" TextColor="Red"/>
+                                    <Label Text="Tipo de tarjeta" VerticalOptions="Start" FontSize="Small"/>
+                                </StackLayout>
+                            </Grid>
+                        </StackLayout>
+                    </Grid>
                 </ScrollView>
                 <Button Grid.Column="1" Grid.Row="5" Text="Continuar" Command="{Binding RegistrarClienteCommand}" HorizontalOptions="End" Padding="30,0"/>
             </Grid>
@@ -95,7 +164,7 @@
             </Frame>
             <!--Modal Registro Exitoso-->
             <Frame Grid.ColumnSpan="3" BackgroundColor="Gray" Opacity="0.5" Grid.RowSpan="2" IsVisible="{Binding ModalRegistro}"/>
-            <Frame Grid.RowSpan="2" Grid.Column="1" VerticalOptions="Center" HorizontalOptions="FillAndExpand" IsVisible="{Binding ModalRegistro}" BackgroundColor="White" CornerRadius="20">
+            <Frame Grid.RowSpan="2" Grid.ColumnSpan="3" VerticalOptions="Center" HorizontalOptions="FillAndExpand" IsVisible="{Binding ModalRegistro}" BackgroundColor="White" CornerRadius="20" Margin="{OnPlatform Android'20', iOS='20',UWP='100'}">
                 <Grid ColumnDefinitions=".05*, *,.05*" RowDefinitions="Auto, Auto, .7*">
                     <Image Grid.ColumnSpan="3" Source="logoRegistro.png" Aspect="AspectFit"/>
                     <Label Grid.Column="1" Grid.Row="1" Text="¡Registro exitoso!" TextColor="Gray" FontSize="{OnPlatform Android=Body, iOS=Small}" VerticalTextAlignment="Center" VerticalOptions="Center" HorizontalTextAlignment="Center" HorizontalOptions="Center"/>
