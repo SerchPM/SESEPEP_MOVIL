@@ -15,7 +15,6 @@ namespace MPS.AppCliente
 
         public App()
         {
-            Device.SetFlags(new string[] { "Expander_Experimental" });
             InitializeComponent();
 
             OS.DependencyService.Register<NavigationService, INavigationService>(OS.DependencyService.ServiceLifetime.Singleton);

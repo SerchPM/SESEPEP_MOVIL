@@ -23,7 +23,6 @@ namespace MPS.AppCliente.Droid
             CheckAppPermissions();
             DependencyService.Register<OS.OS, IOS>();
             OS.OS.Activity = this;
-            Xamarin.Forms.Forms.SetFlags("Expander_Experimental");
             Xamarin.Essentials.Platform.Init(this, savedInstanceState);
             global::Xamarin.Forms.Forms.Init(this, savedInstanceState);           
             Xamarin.FormsMaps.Init(this, savedInstanceState);

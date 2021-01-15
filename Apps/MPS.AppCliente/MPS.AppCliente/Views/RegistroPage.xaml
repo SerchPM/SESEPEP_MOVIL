@@ -36,11 +36,11 @@
                         <cv:EntryView EtiquetaObligatorio="*" TextColorEtiquetaO="Red" Etiqueta="Apellido materno" Text="{Binding Cliente.APELLIDO_2}" TextColor="#000"/>
                         <Picker ItemsSource="{Binding Sexos}" SelectedItem="{Binding SexoSelected, Mode=TwoWay, UpdateSourceEventName=PropertyChanged}"/>
                         <Grid ColumnDefinitions="Auto,*">
-                            <Label Text="*" IsVisible="{OnPlatform Android=false, iOS=false, UWP=true}" TextColor="{OnPlatform Android=Red,iOS=Gray,UWP=Red}"/>
+                            <Label Text="*" IsVisible="{OnPlatform Android=true, iOS=false, UWP=true}" TextColor="{OnPlatform Android=Red,iOS=Gray,UWP=Red}"/>
                             <Label Grid.Column="1" Text="Sexo" TextColor="Gray" FontSize="Small"/>
                         </Grid>
                         <!--<Label IsVisible="{OnPlatform Android=false, iOS=true, UWP=false}" TextColor="Gray" Text="Por políticas de seguridad de Apple no es obligatorio que indiques este campo, para MPS Seguridad es importante darte esta información." FontSize="11"/>-->
-                        <StackLayout Orientation="Vertical" IsVisible="{OnPlatform Android=true, iOS=true, UWP=false}">
+                        <StackLayout Orientation="Vertical" IsVisible="{OnPlatform Android=false, iOS=true, UWP=false}">
                             <StackLayout Orientation="Horizontal">
                                 <CheckBox IsChecked="{Binding EnviarFechaDeNacimiento, Mode=TwoWay}"/>
                                 <Label Text="Deseo compartir mi fecha de nacimiento" TextColor="Gray" FontSize="Small" VerticalOptions="Center"/>
@@ -50,7 +50,7 @@
                                 <Label Text="Fecha de nacimiento" TextColor="Gray" FontSize="Small" />
                             </StackLayout>
                         </StackLayout>
-                        <StackLayout Orientation="Vertical" IsVisible="{OnPlatform Android=false, iOS=false, UWP=true}">
+                        <StackLayout Orientation="Vertical" IsVisible="{OnPlatform Android=true, iOS=false, UWP=true}">
                             <DatePicker Date="{Binding Cliente.FECHA_NACIMIENTO, Mode=TwoWay}"/>
                             <Grid ColumnDefinitions="Auto,*">
                                 <Label Text="*" TextColor="{OnPlatform Android=Red,iOS=Gray,UWP=Red}"/>
@@ -164,7 +164,7 @@
             </Frame>
             <!--Modal Registro Exitoso-->
             <Frame Grid.ColumnSpan="3" BackgroundColor="Gray" Opacity="0.5" Grid.RowSpan="2" IsVisible="{Binding ModalRegistro}"/>
-            <Frame Grid.RowSpan="2" Grid.ColumnSpan="3" VerticalOptions="Center" HorizontalOptions="FillAndExpand" IsVisible="{Binding ModalRegistro}" BackgroundColor="White" CornerRadius="20" Margin="{OnPlatform Android'20', iOS='20',UWP='100'}">
+            <Frame Grid.RowSpan="2" Grid.ColumnSpan="3" VerticalOptions="Center" HorizontalOptions="FillAndExpand" IsVisible="{Binding ModalRegistro}" BackgroundColor="White" CornerRadius="20" Margin="{OnPlatform Android='20', iOS='20',UWP='100'}">
                 <Grid ColumnDefinitions=".05*, *,.05*" RowDefinitions="Auto, Auto, .7*">
                     <Image Grid.ColumnSpan="3" Source="logoRegistro.png" Aspect="AspectFit"/>
                     <Label Grid.Column="1" Grid.Row="1" Text="¡Registro exitoso!" TextColor="Gray" FontSize="{OnPlatform Android=Body, iOS=Small}" VerticalTextAlignment="Center" VerticalOptions="Center" HorizontalTextAlignment="Center" HorizontalOptions="Center"/>
