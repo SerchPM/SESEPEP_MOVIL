@@ -40,6 +40,9 @@ namespace MPS.SharedAPIModel.Notificaciones
 
             if (valores.ContainsKey("UBICACION_1"))
                 ubicacion = valores["UBICACION_1"].ToString();
+
+            if (valores.ContainsKey("TIPO_NOTIFICACION"))
+                int.TryParse(valores["TIPO_NOTIFICACION"].ToString(), out tipoNotificacion);
         }
         string mensajePrincipal;
         public string MensajePrincipal { get => mensajePrincipal; set => mensajePrincipal = value; }
@@ -73,6 +76,9 @@ namespace MPS.SharedAPIModel.Notificaciones
 
         private string ubicacion;
         public string Ubicacion { get => ubicacion; set => ubicacion = value; }
+
+        private int tipoNotificacion;
+        public int TipoNotificacion { get => tipoNotificacion; set => tipoNotificacion = value; }
     }
 
     public class AC
@@ -88,6 +94,7 @@ namespace MPS.SharedAPIModel.Notificaciones
         public string NombreServicio { get; set; }
         public string TipoServicio { get; set; }
         public string Ubicacion { get; set; }
+        public int TipoNotificacion { get; set; }
     }
 
     public class CustomC

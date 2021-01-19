@@ -56,6 +56,7 @@ namespace MPS.AppCliente.UWP
                 dictionaryMessage.Add("NOMBRE_SERVICIO", mensaje.custom.a.NombreServicio);
                 dictionaryMessage.Add("NOMBRE_SOCIO", mensaje.custom.a.NombreSocio);
                 dictionaryMessage.Add("TIPO_SERVICIO", mensaje.custom.a.TipoServicio);
+                dictionaryMessage.Add("TIPO_NOTIFICACION", mensaje.custom.a.TipoNotificacion);
                 Notificaciones.DelegarAccionDeNotificacion(new MensajeCliente(dictionaryMessage));
             };
         }

@@ -18,19 +18,21 @@ namespace MPS.Core.Lib.Helpers
 
     public enum EstatusSolicitudEnum
     {
-       Inicial,
-       Aceptado,
-       EnCurso,
-       Atendiendo,
-       Finalizado,
-       Alerta
+        Inicial,
+        Aceptado,
+        EnCurso,
+        Atendiendo,
+        Finalizado,
+        Alerta
     }
 
     public enum TipoNotificacionEnum
     {
-       ClienteSolicita = 1,
-       SocioAcepta = 2,
-       TiempoLlegada = 3,
-       Finalizado = 4
+        ClienteSolicita = 1,
+        SocioAcepta = 2,
+        TiempoLlegada = 3,
+        Atendiendo = 4,
+        Finalizado = 5,
+        Alerta = 6
     }
 }

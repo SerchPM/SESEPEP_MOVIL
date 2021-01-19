@@ -6,6 +6,7 @@ namespace MPS.SharedAPIModel.Socios
 {
     public class SolicitudServicio
     {
+        public string Mensaje { get; set; }
         public int ClaveTipoServicio { get; set; }
         public string FechaSolicitud { get; set; }
         public string FolioSolicitud { get; set; }
@@ -16,5 +17,6 @@ namespace MPS.SharedAPIModel.Socios
         public string NombreServicio { get; set; }
         public string TipoServicio { get; set; }
         public string Ubicacion { get; set; }
+        public int TipoNotificacion { get; set; }
     }
 }

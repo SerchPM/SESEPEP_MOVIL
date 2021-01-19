@@ -80,6 +80,12 @@ namespace MPS.Core.Lib.ViewModels.Socios
 
         private bool modalCalificar;
         public bool ModalCalificar { get => modalCalificar; set => Set(ref modalCalificar, value); }
+
+        private bool modalAlerta;
+        public bool ModalAlerta { get => modalAlerta; set => Set(ref modalAlerta, value); }
+
+        private string mensajeAlerta;
+        public string MensajeAlerta { get => mensajeAlerta; set => Set(ref mensajeAlerta, value); }
         #endregion
 
         #region Commandos
@@ -258,12 +264,10 @@ namespace MPS.Core.Lib.ViewModels.Socios
             {
                 if (Settings.Current.Solicitud != null && !string.IsNullOrEmpty(Settings.Current.Solicitud.FolioSolicitud))
                 {
-                    SolicitudDeServicio = Settings.Current.Solicitud;
-                    if (SolicitudDeServicio.ClaveTipoServicio.Equals(1))
-                        Express = true;
-                    else
-                        Personalizada = true;
-                    ModalServicioAsignado = true;
+                    if (SolicitudDeServicio.TipoNotificacion.Equals((int)TipoNotificacionEnum.ClienteSolicita))
+                        MostrarModalSolicitudCommand.Execute(Settings.Current.Solicitud);
+                    else if (SolicitudDeServicio.TipoNotificacion.Equals((int)TipoNotificacionEnum.Alerta))
+                        AbrirModalAlertaCommand.Execute(Settings.Current.Solicitud.Mensaje);
                 }
             });
         }
@@ -282,6 +286,7 @@ namespace MPS.Core.Lib.ViewModels.Socios
                         IdSolicitud = ServicioAtencion.GUID_SOLICITUD,
                         Estatus = (int)EstatusSolicitudEnum.Alerta
                     });
+                    ServicioAtencion.ESTATUS_SOLICITUD = (int)EstatusSolicitudEnum.Alerta;
                     EstatusServicio = "soson.png";
                 }
             });
@@ -366,6 +371,26 @@ namespace MPS.Core.Lib.ViewModels.Socios
                 }
                 Rankings.Clear();
                 Rankings = new ObservableCollection<Ranking>(rank);
+            });
+        }
+
+        private RelayCommand<string> abrirModalAlertaCommand = null;
+        public RelayCommand<string> AbrirModalAlertaCommand
+        {
+            get => abrirModalAlertaCommand ??= new RelayCommand<string>((sms) =>
+            {
+                MensajeAlerta = sms;
+                ModalAlerta = true;
+            });
+        }
+
+        private RelayCommand ocultarModalAlertaCommand = null;
+        public RelayCommand OcultarModalAlertaCommand
+        {
+            get => ocultarModalAlertaCommand ??= new RelayCommand(() =>
+            {
+                ModalAlerta = false;
+                MensajeAlerta = string.Empty;
             });
         }
         #endregion

@@ -146,6 +146,7 @@
     <Content Include="Assets\listonesBase.png" />
     <Content Include="Assets\logoHeader.png" />
     <Content Include="Assets\logoMain.png" />
+    <Content Include="Assets\logo_formulario.png" />
     <Content Include="Assets\lupa.png" />
     <Content Include="Assets\mercancias.png" />
     <Content Include="Assets\mercanciasSel.png" />

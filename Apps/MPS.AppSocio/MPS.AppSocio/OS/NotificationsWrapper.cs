@@ -63,6 +63,7 @@ namespace MPS.AppSocio.Views.OS
                    var mensaje = new MensajeSocio(notification.notification.payload.additionalData);
                    MPS.Core.Lib.Helpers.Settings.Current.Solicitud = new SharedAPIModel.Socios.SolicitudServicio 
                    {
+                       Mensaje = mensaje.MensajePrincipal,
                        ClaveTipoServicio = mensaje.ClaveTipoServicio,
                        FechaSolicitud = mensaje.FechaSolicitud,
                        FolioSolicitud = mensaje.FolioSolicitud,
@@ -72,7 +73,8 @@ namespace MPS.AppSocio.Views.OS
                        NombreCliente = mensaje.NombreCliente,
                        NombreServicio = mensaje.NombreServicio,
                        TipoServicio = mensaje.TipoServicio,
-                       Ubicacion = mensaje.Ubicacion
+                       Ubicacion = mensaje.Ubicacion,
+                       TipoNotificacion = mensaje.TipoNotificacion
                    };
                })
                .HandleInAppMessageClicked((notification) =>
@@ -91,6 +93,7 @@ namespace MPS.AppSocio.Views.OS
                 var dtx = paginaActual.BindingContext as Core.Lib.ViewModels.Socios.SolicitarServicioViewModel;
                 var servicio = new SolicitudServicio
                 {
+                    Mensaje = mensaje.MensajePrincipal,
                     ClaveTipoServicio = mensaje.ClaveTipoServicio,
                     FechaSolicitud = mensaje.FechaSolicitud,
                     FolioSolicitud = mensaje.FolioSolicitud,
@@ -100,14 +103,19 @@ namespace MPS.AppSocio.Views.OS
                     NombreCliente = mensaje.NombreCliente,
                     NombreServicio = mensaje.NombreServicio,
                     TipoServicio = mensaje.TipoServicio,
-                    Ubicacion = mensaje.Ubicacion
+                    Ubicacion = mensaje.Ubicacion,
+                    TipoNotificacion = mensaje.TipoNotificacion
                 };
-                dtx.MostrarModalSolicitudCommand.Execute(servicio);
+                if (mensaje.TipoNotificacion.Equals((int)TipoNotificacionEnum.ClienteSolicita))
+                    dtx.MostrarModalSolicitudCommand.Execute(servicio);
+                else if (mensaje.TipoNotificacion.Equals((int)TipoNotificacionEnum.Alerta))
+                    dtx.AbrirModalAlertaCommand.Execute(mensaje.MensajePrincipal);
             }
             else
             {
                 MPS.Core.Lib.Helpers.Settings.Current.Solicitud = new SharedAPIModel.Socios.SolicitudServicio
                 {
+                    Mensaje = mensaje.MensajePrincipal,
                     ClaveTipoServicio = mensaje.ClaveTipoServicio,
                     FechaSolicitud = mensaje.FechaSolicitud,
                     FolioSolicitud = mensaje.FolioSolicitud,
@@ -117,7 +125,8 @@ namespace MPS.AppSocio.Views.OS
                     NombreCliente = mensaje.NombreCliente,
                     NombreServicio = mensaje.NombreServicio,
                     TipoServicio = mensaje.TipoServicio,
-                    Ubicacion = mensaje.Ubicacion
+                    Ubicacion = mensaje.Ubicacion,
+                    TipoNotificacion = mensaje.TipoNotificacion
                 };
             }
         }
