@@ -23,6 +23,7 @@ namespace MPS.AppSocio.Views.Views
 
         protected override async void OnAppearing()
         {
+            ViewModel.IOS = Device.RuntimePlatform.Equals(Device.iOS);
             await ViewModel.ObtenerDetalleSocioCommand.ExecuteAsync();
         }
     }

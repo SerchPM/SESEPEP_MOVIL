@@ -24,8 +24,8 @@ namespace MPS.Core.Lib.ViewModels.Clientes
         #endregion
 
         #region Propeidades
-        private Cliente cliente = new Cliente();
-        public Cliente Cliente { get => cliente; set => Set(ref cliente, value); }
+        private ClienteDetalle cliente = new ClienteDetalle();
+        public ClienteDetalle Cliente { get => cliente; set => Set(ref cliente, value); }
 
         private string nombreCopleto;
         public string NombreCopleto { get => nombreCopleto; set => Set(ref nombreCopleto, value); }
@@ -95,6 +95,12 @@ namespace MPS.Core.Lib.ViewModels.Clientes
 
         private Sexo sexoSelected = new Sexo();
         public Sexo SexoSelected { get => sexoSelected; set => Set(ref sexoSelected, value); }
+
+        private bool enviarFechaDeNacimiento = true;
+        public bool EnviarFechaDeNacimiento { get => enviarFechaDeNacimiento; set => Set(ref enviarFechaDeNacimiento, value); }
+
+        private bool iOS;
+        public bool IOS { get => iOS; set => Set(ref iOS, value); }
         #endregion
 
         #region Comandos
@@ -106,16 +112,13 @@ namespace MPS.Core.Lib.ViewModels.Clientes
                 Sexos = await (new OperacionesBL()).GetSexosAsync();
                 Cliente = await bl.GetClienteAsync(Guid.Parse(Settings.Current.LoginInfo.Usr.Id));
                 NombreCopleto = $"{Cliente.NOMBRE} {Cliente.APELLIDO_1} {Cliente.APELLIDO_2}";
-                if (!Cliente.GUID_SEXO.Equals(Guid.Empty))
+                if (Cliente.GUID_SEXO != null && !Cliente.GUID_SEXO.Equals(Guid.Empty))
                 {
                     if(Sexos.Count > 0)
                         SexoSelected = Sexos.Where(w => w.GUID.Equals(Cliente.GUID_SEXO)).FirstOrDefault();
                 }
-                else
-                {
-                    if (Sexos.Count > 0)
-                        SexoSelected = Sexos.FirstOrDefault();
-                }
+                if (Cliente.FECHA_NACIMIENTO.Equals(null))
+                    Cliente.FECHA_NACIMIENTO = DateTime.UtcNow;
             });
         }
 
@@ -125,10 +128,31 @@ namespace MPS.Core.Lib.ViewModels.Clientes
             get => actualziarInfoClienteCommand ??= new RelayCommand(async () =>
             {
                 Mensaje = string.Empty;
-                var validar = ValidarNumeroTlefonico();
-                if (string.IsNullOrEmpty(validar))
+                if (IOS)
                 {
-                    Cliente.GUID_SEXO = SexoSelected.GUID;
+                    if (Cliente != null && (string.IsNullOrEmpty(Cliente.NOMBRE) || string.IsNullOrEmpty(Cliente.APELLIDO_1) || string.IsNullOrEmpty(Cliente.APELLIDO_2)
+                                                  || string.IsNullOrEmpty(Cliente.TELEFONO) || string.IsNullOrEmpty(Cliente.CORREO_ELECTRONICO)))
+                    {
+                        Mensaje = "Faltan campos por capturar";
+                        Modal = true;
+                        return;
+                    }
+                }
+                else
+                {
+                    if (Cliente != null && (string.IsNullOrEmpty(Cliente.NOMBRE) || string.IsNullOrEmpty(Cliente.APELLIDO_1) || string.IsNullOrEmpty(Cliente.APELLIDO_2)
+                                                  || string.IsNullOrEmpty(Cliente.TELEFONO) || string.IsNullOrEmpty(Cliente.CORREO_ELECTRONICO) || SexoSelected == null || SexoSelected.GUID == Guid.Empty))
+                    {
+                        Mensaje = "Faltan campos por capturar";
+                        Modal = true;
+                        return;
+                    }
+                }
+
+                if (string.IsNullOrEmpty(ValidarNumeroTlefonico()))
+                {
+                    Cliente.GUID_SEXO = SexoSelected?.GUID;
+                    if (!EnviarFechaDeNacimiento) Cliente.FECHA_NACIMIENTO = null;
                     var (result, mensajeResult) = await bl.AtualziarClienteAsync(Guid.Parse(Settings.Current.LoginInfo.Usr.Id), Cliente);
                     if (result)
                     {
@@ -141,6 +165,13 @@ namespace MPS.Core.Lib.ViewModels.Clientes
                         Modal = true;
                         Cliente = await bl.GetClienteAsync(Guid.Parse(Settings.Current.LoginInfo.Usr.Id));
                         NombreCopleto = $"{Cliente.NOMBRE} {Cliente.APELLIDO_1} {Cliente.APELLIDO_2}";
+                        if (Cliente.GUID_SEXO != null && !Cliente.GUID_SEXO.Equals(Guid.Empty))
+                        {
+                            if (Sexos.Count > 0)
+                                SexoSelected = Sexos.Where(w => w.GUID.Equals(Cliente.GUID_SEXO)).FirstOrDefault();
+                        }
+                        if (Cliente.FECHA_NACIMIENTO.Equals(null))
+                            Cliente.FECHA_NACIMIENTO = DateTime.UtcNow;
                     }
                 }
                 else

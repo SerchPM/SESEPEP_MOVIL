@@ -34,18 +34,36 @@
                         <Label Text="Datos generales" FontSize="Medium" FontAttributes="Bold" TextColor="White"/>
                         <StackLayout Grid.Row="1">
                             <cv:EntryView Text="{Binding Cliente.NO_CLIENTE, Mode=TwoWay}" Etiqueta="No. Cuenta" IsEnabled="False" IsEnableText="{OnPlatform UWP=False}" TextColor="Gray"/>
-                            <cv:EntryView Text="{Binding Cliente.NOMBRE, Mode=TwoWay}" Etiqueta="Nombre(s)" TextColor="{OnPlatform Android='White', iOS='#000', UWP='#000'}"/>
-                            <cv:EntryView Text="{Binding Cliente.APELLIDO_1, Mode=TwoWay}" Etiqueta="Apellido Paterno" TextColor="{OnPlatform Android='White', iOS='#000', UWP='#000'}"/>
-                            <cv:EntryView Text="{Binding Cliente.APELLIDO_2, Mode=TwoWay}" Etiqueta="Apellido Materno" TextColor="{OnPlatform Android='White', iOS='#000', UWP='#000'}"/>
-                            <DatePicker Date="{Binding Cliente.FECHA_NACIMIENTO, Mode=TwoWay}" FontSize="Body" TextColor="{OnPlatform Android='White', iOS='#000', UWP='#000'}"/>
-                            <Label Text="Fecha de Nacimiento" TextColor="Gray" FontSize="Small"/>
+                            <cv:EntryView EtiquetaObligatorio="*" TextColorEtiquetaO="Red" Text="{Binding Cliente.NOMBRE, Mode=TwoWay}" Etiqueta="Nombre(s)" TextColor="{OnPlatform Android='White', iOS='#000', UWP='#000'}"/>
+                            <cv:EntryView EtiquetaObligatorio="*" TextColorEtiquetaO="Red" Text="{Binding Cliente.APELLIDO_1, Mode=TwoWay}" Etiqueta="Apellido Paterno" TextColor="{OnPlatform Android='White', iOS='#000', UWP='#000'}"/>
+                            <cv:EntryView EtiquetaObligatorio="*" TextColorEtiquetaO="Red" Text="{Binding Cliente.APELLIDO_2, Mode=TwoWay}" Etiqueta="Apellido Materno" TextColor="{OnPlatform Android='White', iOS='#000', UWP='#000'}"/>
+                            <StackLayout Orientation="Vertical" IsVisible="{OnPlatform Android=false, iOS=true, UWP=false}">
+                                <StackLayout Orientation="Horizontal">
+                                    <CheckBox IsChecked="{Binding EnviarFechaDeNacimiento, Mode=TwoWay}"/>
+                                    <Label Text="Deseo compartir mi fecha de nacimiento" TextColor="Gray" FontSize="Small" VerticalOptions="Center"/>
+                                </StackLayout>
+                                <StackLayout Orientation="Vertical" IsVisible="{Binding EnviarFechaDeNacimiento}">
+                                    <DatePicker Date="{Binding Cliente.FECHA_NACIMIENTO, Mode=TwoWay}" TextColor="{OnPlatform Android='White',iOS='White',UWP='#000'}"/>
+                                    <Label Text="Fecha de nacimiento" TextColor="Gray" FontSize="Small" />
+                                </StackLayout>
+                            </StackLayout>
+                            <StackLayout Orientation="Vertical" IsVisible="{OnPlatform Android=true, iOS=false, UWP=true}">
+                                <DatePicker Date="{Binding Cliente.FECHA_NACIMIENTO, Mode=TwoWay}" TextColor="{OnPlatform Android='White',iOS='White',UWP='#000'}"/>
+                                <Grid ColumnDefinitions="Auto,*">
+                                    <Label Text="*" TextColor="Red"/>
+                                    <Label Grid.Column="1" Text="Fecha de nacimiento" TextColor="Gray" FontSize="Small"/>
+                                </Grid>
+                            </StackLayout>
                             <Picker ItemsSource="{Binding Sexos}" SelectedItem="{Binding SexoSelected, Mode=TwoWay, UpdateSourceEventName=PropertyChanged}" FontSize="Body" TextColor="{OnPlatform Android='White', iOS='#000', UWP='#000'}"/>
-                            <Label Text="Sexo" TextColor="Gray" FontSize="Small"/>
+                            <Grid ColumnDefinitions="Auto,*">
+                                <Label Text="*" IsVisible="{OnPlatform Android=true, iOS=false, UWP=true}" TextColor="Red"/>
+                                <Label Grid.Column="1" Text="Sexo" TextColor="Gray" FontSize="Small"/>
+                            </Grid>
                         </StackLayout>
                         <Label Grid.Row="2" Text="Contacto" FontSize="Medium" FontAttributes="Bold" TextColor="White"/>
                         <StackLayout Grid.Row="3">
-                            <cv:EntryView Text="{Binding Cliente.CORREO_ELECTRONICO, Mode=TwoWay}" Etiqueta="Correo Elentrónico" IsEnabled="False" IsEnableText="{OnPlatform UWP=False}" TextColor="Gray"/>
-                            <cv:EntryView Text="{Binding Cliente.TELEFONO, Mode=TwoWay}" Keyboard="Numeric" Etiqueta="Teléfono" TextColor="{OnPlatform Android='White', iOS='#000', UWP='#000'}"/>
+                            <cv:EntryView EtiquetaObligatorio="*" TextColorEtiquetaO="Red" Text="{Binding Cliente.CORREO_ELECTRONICO, Mode=TwoWay}" Etiqueta="Correo Elentrónico" IsEnabled="False" IsEnableText="{OnPlatform UWP=False}" TextColor="Gray"/>
+                            <cv:EntryView EtiquetaObligatorio="*" TextColorEtiquetaO="Red" Text="{Binding Cliente.TELEFONO, Mode=TwoWay}" Keyboard="Numeric" Etiqueta="Teléfono" TextColor="{OnPlatform Android='White', iOS='#000', UWP='#000'}"/>
                         </StackLayout>
                     </Grid>
                 </ScrollView>
@@ -78,25 +96,15 @@
             </Grid>
             
             <!--Modal Informativo-->
-            <Frame Grid.ColumnSpan="3" Grid.RowSpan="3" BackgroundColor="Gray" Opacity="0.5"  IsVisible="{Binding Modal}"/>
-            <Frame Grid.Column="1" Grid.RowSpan="3" VerticalOptions="Center" HorizontalOptions="Center" IsVisible="{Binding Modal}" BackgroundColor="White" CornerRadius="20">
-                <Grid>
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width=".05*"/>
-                        <ColumnDefinition />
-                        <ColumnDefinition Width=".05*"/>
-                    </Grid.ColumnDefinitions>
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="Auto"/>
-                        <RowDefinition Height=".7*"/>
-                    </Grid.RowDefinitions>
-                    <Label Grid.Column="1" Text="{Binding Mensaje, Mode=TwoWay}" TextColor="Gray" FontSize="{OnPlatform Android=Body, iOS=Small}" VerticalTextAlignment="Center" VerticalOptions="Center" HorizontalTextAlignment="Center" HorizontalOptions="Center"/>
+            <Frame BackgroundColor="Gray" Opacity="0.5" Grid.RowSpan="3" Grid.ColumnSpan="3" IsVisible="{Binding Modal}"/>
+            <Frame Grid.RowSpan="3" Grid.ColumnSpan="3" VerticalOptions="Center" HorizontalOptions="FillAndExpand" Margin="15" IsVisible="{Binding Modal}" BackgroundColor="White" CornerRadius="20">
+                <Grid ColumnDefinitions=".05*, *,.05*" RowDefinitions="Auto, .6*">
+                    <Label Grid.Column="1" Text="{Binding Mensaje, Mode=TwoWay}" TextColor="Gray" FontSize="{OnPlatform Android=Body, iOS=Small}" VerticalTextAlignment="Center" VerticalOptions="Center" HorizontalTextAlignment="Center" HorizontalOptions="CenterAndExpand" LineBreakMode="WordWrap"/>
                     <StackLayout  Grid.Row="1" Grid.Column="1">
-                        <Button CornerRadius="{OnPlatform Android='20', iOS='20', UWP='10'}" HorizontalOptions="CenterAndExpand" Padding="{OnPlatform Android='50,15', iOS='25,10', UWP='10,0'}" FontAttributes="None" Text="Aceptar" Command="{Binding OcultarModalCommand}" TextColor="White" FontSize="{OnPlatform Android=Body, iOS=Small}"/>
+                        <Button Margin="0,5,0,0" CornerRadius="{OnPlatform Android='20', iOS='20', UWP='10'}" HorizontalOptions="CenterAndExpand" Padding="{OnPlatform Android='25,15', iOS='25,10',UWP='10,0'}" FontAttributes="None" Text="Aceptar" Command="{Binding OcultarModalCommand}" TextColor="White" FontSize="{OnPlatform Android=Body, iOS=Small}"/>
                     </StackLayout>
                 </Grid>
             </Frame>
-
         </Grid>
     </ContentPage.Content>
 </ContentPage>

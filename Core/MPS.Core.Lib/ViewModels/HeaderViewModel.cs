@@ -29,7 +29,12 @@ namespace MPS.Core.Lib.ViewModels
         {
             get => navegarACommand ??= new RelayCommand<string>(async (string p) =>
             {
-                await DependencyService.Get<INavigationService>().NavigateTo(p);
+                if (!string.IsNullOrEmpty(p) && !string.IsNullOrEmpty(Settings.Current.PaginaActual) && !Settings.Current.PaginaActual.Equals(p))
+                {
+                    await DependencyService.Get<INavigationService>().NavigateTo(p);
+                    if (!p.Equals("Perfil"))
+                        Settings.Current.PaginaActual = p;
+                }
             }, (string p) => true);
         }
     }

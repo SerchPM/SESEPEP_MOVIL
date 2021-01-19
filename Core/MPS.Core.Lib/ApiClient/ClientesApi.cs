@@ -50,8 +50,8 @@ namespace MPS.Core.Lib.ApiClient
         /// </summary>
         /// <param name="idCliente">Identificador del cliente</param>
         /// <returns></returns>
-        public async Task<(HttpStatusCode StatusCode, Cliente tarjetas)> GetClienteAsync(Guid idCliente) =>
-            await CallPostAsync<Cliente>("ConsultaDetalle", ("P_GUID_CLIENTE", idCliente));
+        public async Task<(HttpStatusCode StatusCode, ClienteDetalle tarjetas)> GetClienteAsync(Guid idCliente) =>
+            await CallPostAsync<ClienteDetalle>("ConsultaDetalle", ("P_GUID_CLIENTE", idCliente));
 
         /// <summary>
         /// Actualiza la informacion del cliente
@@ -59,16 +59,49 @@ namespace MPS.Core.Lib.ApiClient
         /// <param name="idCliente">Identificador del cliente</param>
         /// <param name="cliente">Objeto con la informacion del cliente</param>
         /// <returns></returns>
-        public async Task<(HttpStatusCode StatusCode, Respuesta operacionInfo)> ActualziarClienteAsync(Guid idCliente, Cliente cliente)
+        public async Task<(HttpStatusCode StatusCode, Respuesta operacionInfo)> ActualziarClienteAsync(Guid idCliente, ClienteDetalle cliente)
         {
-            var res = await CallFormUrlEncoded<Respuesta>("ActualizaInfoCliente", HttpMethod.Post,
-                ("P_GUID_SOCIO", idCliente.ToString()),
-                ("P_FECHA_NACIMIENTO", cliente.FECHA_NACIMIENTO.Value.ToString("MM-dd-yyyy")),
-                ("P_NOMBRE", cliente.NOMBRE),
-                ("P_APELLIDO_1", cliente.APELLIDO_1),
-                ("P_APELLIDO_2", cliente.APELLIDO_2),
-                ("P_SEXO", cliente.GUID_SEXO.ToString()),
-                ("P_TEL_NUMERO", cliente.TELEFONO));
+            var res = (HttpStatusCode.InternalServerError, new Respuesta());
+            if (cliente.GUID_SEXO.Equals(null) && cliente.FECHA_NACIMIENTO.Equals(null))
+            {
+                res = await CallFormUrlEncoded<Respuesta>("ActualizaInfoCliente", HttpMethod.Post,
+                              ("P_GUID_SOCIO", idCliente.ToString()),
+                              ("P_NOMBRE", cliente.NOMBRE),
+                              ("P_APELLIDO_1", cliente.APELLIDO_1),
+                              ("P_APELLIDO_2", cliente.APELLIDO_2),
+                              ("P_TEL_NUMERO", cliente.TELEFONO));
+            }
+            else if (cliente.GUID_SEXO.Equals(null))
+            {
+                res = await CallFormUrlEncoded<Respuesta>("ActualizaInfoCliente", HttpMethod.Post,
+                             ("P_GUID_SOCIO", idCliente.ToString()),
+                             ("P_FECHA_NACIMIENTO", cliente.FECHA_NACIMIENTO.Value.ToString("MM-dd-yyyy")),
+                             ("P_NOMBRE", cliente.NOMBRE),
+                             ("P_APELLIDO_1", cliente.APELLIDO_1),
+                             ("P_APELLIDO_2", cliente.APELLIDO_2),
+                             ("P_TEL_NUMERO", cliente.TELEFONO));
+            }
+            else if (cliente.FECHA_NACIMIENTO.Equals(null))
+            {
+                res = await CallFormUrlEncoded<Respuesta>("ActualizaInfoCliente", HttpMethod.Post,
+                            ("P_GUID_SOCIO", idCliente.ToString()),
+                            ("P_NOMBRE", cliente.NOMBRE),
+                            ("P_APELLIDO_1", cliente.APELLIDO_1),
+                            ("P_APELLIDO_2", cliente.APELLIDO_2),
+                            ("P_SEXO", cliente.GUID_SEXO.ToString()),
+                            ("P_TEL_NUMERO", cliente.TELEFONO));
+            }
+            else
+            {
+                res = await CallFormUrlEncoded<Respuesta>("ActualizaInfoCliente", HttpMethod.Post,
+                             ("P_GUID_SOCIO", idCliente.ToString()),
+                             ("P_FECHA_NACIMIENTO", cliente.FECHA_NACIMIENTO.Value.ToString("MM-dd-yyyy")),
+                             ("P_NOMBRE", cliente.NOMBRE),
+                             ("P_APELLIDO_1", cliente.APELLIDO_1),
+                             ("P_APELLIDO_2", cliente.APELLIDO_2),
+                             ("P_SEXO", cliente.GUID_SEXO.ToString()),
+                             ("P_TEL_NUMERO", cliente.TELEFONO));
+            }
             return res;
         }
 

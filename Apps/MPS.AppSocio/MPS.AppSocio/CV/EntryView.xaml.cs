@@ -123,5 +123,33 @@ namespace MPS.AppSocio.Views.CV
             me.MaxLength = (int)newValue;
             me.label.MaxLines = me.MaxLength;
         });
+
+        public string EtiquetaObligatorio
+        {
+            get => (string)GetValue(EtiquetaObligatorioProperty);
+            set => SetValue(EtiquetaObligatorioProperty, value);
+        }
+
+        public static readonly BindableProperty EtiquetaObligatorioProperty = BindableProperty.Create(nameof(EtiquetaObligatorio), typeof(string), typeof(EntryView), default(string),
+        defaultBindingMode: BindingMode.TwoWay, propertyChanged: (bindable, oldValue, newValue) =>
+        {
+            var me = (EntryView)bindable;
+            me.EtiquetaObligatorio = (string)newValue;
+            me.labelObligatorio.Text = me.EtiquetaObligatorio;
+        });
+
+        public Color TextColorEtiquetaO
+        {
+            get => (Color)GetValue(TextColorEtiquetaOProperty);
+            set => SetValue(TextColorEtiquetaOProperty, value);
+        }
+
+        public static readonly BindableProperty TextColorEtiquetaOProperty = BindableProperty.Create(nameof(TextColorEtiquetaO), typeof(Color), typeof(EntryView), default(Color),
+        propertyChanged: (bindable, oldValue, newValue) =>
+        {
+            var me = (EntryView)bindable;
+            me.TextColorEtiquetaO = (Color)newValue;
+            me.labelObligatorio.TextColor = me.TextColorEtiquetaO;
+        });
     }
 }

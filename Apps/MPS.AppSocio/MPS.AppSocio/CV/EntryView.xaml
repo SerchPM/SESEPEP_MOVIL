@@ -3,9 +3,10 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="MPS.AppSocio.Views.CV.EntryView">
   <ContentView.Content>
-        <Grid RowDefinitions="Auto,Auto" HorizontalOptions="FillAndExpand">
-            <Entry x:Name="entry" HorizontalOptions="FillAndExpand" VerticalOptions="Center" TextColor="Gray" FontSize="Body" HorizontalTextAlignment="Start"/>
-            <Label x:Name="label" Grid.Row="1" TextColor="Gray" FontSize="Small" HorizontalTextAlignment="Start" Text="Etiqueta" Margin="0,0,0,5"/>
+        <Grid RowDefinitions="Auto,Auto" ColumnDefinitions="Auto,*" HorizontalOptions="FillAndExpand">
+            <Entry x:Name="entry" Grid.ColumnSpan="2" HorizontalOptions="FillAndExpand" VerticalOptions="Center" TextColor="White" FontSize="Body" HorizontalTextAlignment="Start"/>
+            <Label x:Name="label" Grid.Row="1" Grid.Column="1" TextColor="Gray" FontSize="Small" HorizontalTextAlignment="Start" Margin="0,0,0,5"/>
+            <Label x:Name="labelObligatorio" Grid.Row="1" FontSize="Small" HorizontalTextAlignment="Start" Margin="0"/>
         </Grid>
     </ContentView.Content>
 </ContentView>

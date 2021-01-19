@@ -65,13 +65,13 @@ namespace MPS.Core.Lib.BL
         /// </summary>
         /// <param name="idCliente">Identificador del cliente</param>
         /// <returns></returns>
-        public async Task<Cliente> GetClienteAsync(Guid idCliente)
+        public async Task<ClienteDetalle> GetClienteAsync(Guid idCliente)
         {
             var (statusCode, resultado) = await ClientesApi.GetClienteAsync(idCliente);
             if (statusCode == HttpStatusCode.OK)
                 return resultado;
             else
-                return new Cliente();
+                return new ClienteDetalle();
         }
 
         /// <summary>
@@ -80,7 +80,7 @@ namespace MPS.Core.Lib.BL
         /// <param name="idCliente">Identificador del cliente</param>
         /// <param name="cliente">Objeto con la informacion del cliente</param>
         /// <returns></returns>
-        public async Task<(bool, string)> AtualziarClienteAsync(Guid idCliente, Cliente cliente)
+        public async Task<(bool, string)> AtualziarClienteAsync(Guid idCliente, ClienteDetalle cliente)
         {
             var (statusCode, resultado) = await ClientesApi.ActualziarClienteAsync(idCliente, cliente);
             if (statusCode == HttpStatusCode.OK && !string.IsNullOrEmpty(resultado.ESTATUS) && resultado.ESTATUS.Equals("OK"))

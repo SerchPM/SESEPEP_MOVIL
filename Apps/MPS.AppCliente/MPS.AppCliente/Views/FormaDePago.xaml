@@ -36,20 +36,38 @@
                         <ScrollView Grid.Row="1">
                             <Grid RowDefinitions="Auto, Auto, Auto, Auto, Auto, Auto">
                                 <Entry Keyboard="Numeric" MaxLength="16" Text="{Binding Tarjeta.NoCuenta, Mode=TwoWay}"/>
-                                <Label Grid.Row="1" Text="No. Cuenta/Tarjeta" VerticalOptions="Start"/>
+                                <StackLayout Grid.Row="1" Orientation="Horizontal">
+                                    <Label Text="*" VerticalOptions="Start" FontSize="Small" TextColor="Red"/>
+                                    <Label Text="No. Cuenta/Tarjeta" VerticalOptions="Start" FontSize="Small"/>
+                                </StackLayout>
                                 <Grid Grid.Row="2" RowDefinitions="Auto, Auto" ColumnDefinitions="*,*">
                                     <Picker VerticalOptions="Center" ItemsSource="{Binding Meses}" SelectedItem="{Binding MesSelected, Mode=TwoWay, UpdateSourceEventName=PropertyChanged}"/>
-                                    <Label Grid.Row="1" Text="Exp. Mes" VerticalOptions="Start"/>
+                                    <StackLayout Grid.Row="1" Orientation="Horizontal">
+                                        <Label Text="*" VerticalOptions="Start" FontSize="Small" TextColor="Red"/>
+                                        <Label Text="Exp. Mes" VerticalOptions="Start" FontSize="Small"/>
+                                    </StackLayout>
                                     <Picker  Grid.Column="1" VerticalOptions="Start" ItemsSource="{Binding Años}" SelectedItem="{Binding AñoSelected, Mode=TwoWay, UpdateSourceEventName=PropertyChanged}"/>
-                                    <Label Grid.Column="1" Grid.Row="1" Text="Exp. Año" VerticalOptions="Start"/>
+                                    <StackLayout Grid.Column="1" Grid.Row="1" Orientation="Horizontal">
+                                        <Label Text="*" VerticalOptions="Start" FontSize="Small" TextColor="Red"/>
+                                        <Label Text="Exp. Año" VerticalOptions="Start" FontSize="Small"/>
+                                    </StackLayout>
                                 </Grid>
                                 <Picker  Grid.Row="3" VerticalOptions="Start" ItemsSource="{Binding Tarjetas}" SelectedItem="{Binding Tarjetaselected, Mode=TwoWay, UpdateSourceEventName=PropertyChanged}"/>
-                                <Label Grid.Row="4" Text="Marca" VerticalOptions="Start"/>
+                                <StackLayout Grid.Row="4" Orientation="Horizontal">
+                                    <Label Text="*" VerticalOptions="Start" FontSize="Small" TextColor="Red"/>
+                                    <Label Text="Marca" VerticalOptions="Start" FontSize="Small"/>
+                                </StackLayout>
                                 <Grid Grid.Row="5" RowDefinitions="Auto, Auto" ColumnDefinitions="*,*" VerticalOptions="Center">
                                     <Entry Keyboard="Numeric" IsPassword="True" MaxLength="3" Text="{Binding Tarjeta.CVV, Mode=TwoWay}"/>
-                                    <Label Grid.Row="1" Text="CVV" VerticalOptions="Start"/>
+                                    <StackLayout Grid.Row="1" Orientation="Horizontal">
+                                        <Label Text="*" VerticalOptions="Start" FontSize="Small" TextColor="Red"/>
+                                        <Label Text="CVV" VerticalOptions="Start" FontSize="Small"/>
+                                    </StackLayout>
                                     <Picker Grid.Column="1" VerticalOptions="Start" ItemsSource="{Binding TiposTarjeta}" SelectedItem="{Binding TipoTarjetaSelected, Mode=TwoWay, UpdateSourceEventName=PropertyChanged}"/>
-                                    <Label Grid.Column="1" Grid.Row="1" Text="Tipo de tarjeta" VerticalOptions="Start"/>
+                                    <StackLayout Grid.Column="1" Grid.Row="1" Orientation="Horizontal">
+                                        <Label Text="*" VerticalOptions="Start" FontSize="Small" TextColor="Red"/>
+                                        <Label Text="Tipo de Tarjeta" VerticalOptions="Start" FontSize="Small"/>
+                                    </StackLayout>
                                 </Grid>
                             </Grid>
                         </ScrollView>

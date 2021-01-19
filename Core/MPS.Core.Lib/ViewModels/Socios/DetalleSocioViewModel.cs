@@ -104,6 +104,12 @@ namespace MPS.Core.Lib.ViewModels.Socios
 
         private bool modalPassword;
         public bool ModalPassword { get => modalPassword; set => Set(ref modalPassword, value); }
+
+        private bool enviarFechaDeNacimiento = true;
+        public bool EnviarFechaDeNacimiento { get => enviarFechaDeNacimiento; set => Set(ref enviarFechaDeNacimiento, value); }
+
+        private bool iOS;
+        public bool IOS { get => iOS; set => Set(ref iOS, value); }
         #endregion
 
         #region Comandos
@@ -116,16 +122,13 @@ namespace MPS.Core.Lib.ViewModels.Socios
                 DetallesSocio = await bl.DetalleSocio(Id.ToString());
                 Ranking = DetallesSocio.RANKING.ToString("0.0");
                 NombreCompleto = $"{DetallesSocio.NOMBRE} {DetallesSocio.APELLIDO_1} {DetallesSocio.APELLIDO_2}";
-                if (!DetallesSocio.GUID_SEXO.Equals(Guid.Empty))
+                if (DetallesSocio.GUID_SEXO != null && !DetallesSocio.GUID_SEXO.Equals(Guid.Empty))
                 {
                     if (Sexos.Count > 0)
                         SexoSelected = Sexos.Where(w => w.GUID.Equals(DetallesSocio.GUID_SEXO)).FirstOrDefault();
                 }
-                else
-                {
-                    if (Sexos.Count > 0)
-                        SexoSelected = Sexos.FirstOrDefault();
-                }
+                if (string.IsNullOrEmpty(DetallesSocio.FECHA_NACIMIENTO))
+                    DetallesSocio.FECHA_NACIMIENTO = DateTime.UtcNow.ToString();
             });
         }
 
@@ -134,37 +137,49 @@ namespace MPS.Core.Lib.ViewModels.Socios
         {
             get => actualizaInfoCommand ??= new RelayCommand(async () =>
             {
-                if(DetallesSocio != null && !string.IsNullOrEmpty(DetallesSocio.NOMBRE) && !string.IsNullOrEmpty(DetallesSocio.APELLIDO_1) && !string.IsNullOrEmpty(DetallesSocio.APELLIDO_2)
-                && !string.IsNullOrEmpty(DetallesSocio.TEL_NUMERO) && !string.IsNullOrEmpty(DetallesSocio.E_MAIL) && SexoSelected != null && SexoSelected.GUID != Guid.Empty)
+                if (IOS)
                 {
-                    var validar = ValidarNumeroTlefonico();
-                    if (string.IsNullOrEmpty(validar))
+                    if (DetallesSocio != null && (string.IsNullOrEmpty(DetallesSocio.NOMBRE) || string.IsNullOrEmpty(DetallesSocio.APELLIDO_1) || string.IsNullOrEmpty(DetallesSocio.APELLIDO_2)
+                                                  || string.IsNullOrEmpty(DetallesSocio.TEL_NUMERO) || string.IsNullOrEmpty(DetallesSocio.E_MAIL)))
                     {
-                        DetallesSocio.GUID_SEXO = SexoSelected.GUID;
-                        var (exito, respuesta) = await bl.ActualizaInfoSocio(Id, DetallesSocio);
-                        if (exito)
-                        {
-                            Mensaje = respuesta;
-                            Modal = true;
-                        }
-                        else
-                        {
-                            Mensaje = respuesta;
-                            Modal = true;
-                            DetallesSocio = await bl.DetalleSocio(Id.ToString());
-                            Ranking = DetallesSocio.RANKING.ToString("0.0");
-                            NombreCompleto = $"{DetallesSocio.NOMBRE} {DetallesSocio.APELLIDO_1} {DetallesSocio.APELLIDO_2}";
-                        }
-                    }
-                    else
+                        Mensaje = "Faltan campos por capturar";
                         Modal = true;
+                        return;
+                    }
                 }
                 else
                 {
-                    Mensaje = "Faltan campos por capturar";
-                    Modal = true;
+                    if (DetallesSocio != null && (string.IsNullOrEmpty(DetallesSocio.NOMBRE) || string.IsNullOrEmpty(DetallesSocio.APELLIDO_1) || string.IsNullOrEmpty(DetallesSocio.APELLIDO_2)
+                                                  || string.IsNullOrEmpty(DetallesSocio.TEL_NUMERO) || string.IsNullOrEmpty(DetallesSocio.E_MAIL) || SexoSelected == null || SexoSelected.GUID == Guid.Empty))
+                    {
+                        Mensaje = "Faltan campos por capturar";
+                        Modal = true;
+                        return;
+                    }
                 }
-               
+
+                if (string.IsNullOrEmpty(ValidarNumeroTlefonico()))
+                {
+                    DetallesSocio.GUID_SEXO = SexoSelected?.GUID;
+                    if (!EnviarFechaDeNacimiento) DetallesSocio.FECHA_NACIMIENTO = null;
+                    else DetallesSocio.FechaNacimiento = DateTime.Parse(DetallesSocio.FECHA_NACIMIENTO);
+                    var (exito, respuesta) = await bl.ActualizaInfoSocio(Id, DetallesSocio);
+                    if (exito)
+                    {
+                        Mensaje = respuesta;
+                        Modal = true;
+                    }
+                    else
+                    {
+                        Mensaje = respuesta;
+                        Modal = true;
+                        DetallesSocio = await bl.DetalleSocio(Id.ToString());
+                        Ranking = DetallesSocio.RANKING.ToString("0.0");
+                        NombreCompleto = $"{DetallesSocio.NOMBRE} {DetallesSocio.APELLIDO_1} {DetallesSocio.APELLIDO_2}";
+                    }
+                }
+                else
+                    Modal = true;
             });
         }
 

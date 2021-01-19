@@ -18,7 +18,7 @@ namespace MPS.AppCliente.Views.Views
         }
         protected override async void OnAppearing()
         {
-            base.OnAppearing();
+            ViewModel.IOS = Device.RuntimePlatform.Equals(Device.iOS);
             await ViewModel.ObtenerClienteCommand.ExecuteAsync();
         }
     }

@@ -16,6 +16,7 @@ namespace MPS.Core.Lib.ViewModels
     {
         public LoginViewModel()
         {
+            Settings.Current.PaginaActual = "SolicitarServicioPage";
             if (!string.IsNullOrEmpty(Settings.Current.Usuario) && !string.IsNullOrEmpty(Settings.Current.Contraseña))
             {
                 Usuario = Settings.Current.Usuario;

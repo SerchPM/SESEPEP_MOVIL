@@ -56,14 +56,47 @@ namespace MPS.Core.Lib.ApiSocio
         /// <returns></returns>
         public async Task<(HttpStatusCode StatusCode, Respuesta Respuesta)> ActualizaSocioAsync(Guid socio, DetalleSocio info)
         {
-            var res = await CallFormUrlEncoded<Respuesta>("ActualizaInfoSocio", HttpMethod.Post,
-                ("P_GUID_SOCIO", socio.ToString()),
-                ("P_FECHA_NACIMIENTO", info.FECHA_NACIMIENTO),
-                ("P_NOMBRE", info.NOMBRE),
-                ("P_APELLIDO_1", info.APELLIDO_1),
-                ("P_APELLIDO_2", info.APELLIDO_2),
-                ("P_SEXO", info.GUID_SEXO.ToString()),
-                ("P_TEL_NUMERO", info.TEL_NUMERO));
+            var res = (HttpStatusCode.InternalServerError, new Respuesta());
+            if (info.FechaNacimiento.Equals(null) && info.GUID_SEXO.Equals(null))
+            {
+                res = await CallFormUrlEncoded<Respuesta>("ActualizaInfoSocio", HttpMethod.Post,
+                   ("P_GUID_SOCIO", socio.ToString()),
+                   ("P_NOMBRE", info.NOMBRE),
+                   ("P_APELLIDO_1", info.APELLIDO_1),
+                   ("P_APELLIDO_2", info.APELLIDO_2),
+                   ("P_TEL_NUMERO", info.TEL_NUMERO));
+            }
+            else if (info.FechaNacimiento.Equals(null))
+            {
+                res = await CallFormUrlEncoded<Respuesta>("ActualizaInfoSocio", HttpMethod.Post,
+                   ("P_GUID_SOCIO", socio.ToString()),
+                   ("P_NOMBRE", info.NOMBRE),
+                   ("P_APELLIDO_1", info.APELLIDO_1),
+                   ("P_APELLIDO_2", info.APELLIDO_2),
+                   ("P_SEXO", info.GUID_SEXO.ToString()),
+                   ("P_TEL_NUMERO", info.TEL_NUMERO));
+            }
+            else if (info.GUID_SEXO.Equals(null))
+            {
+                res = await CallFormUrlEncoded<Respuesta>("ActualizaInfoSocio", HttpMethod.Post,
+                   ("P_GUID_SOCIO", socio.ToString()),
+                   ("P_FECHA_NACIMIENTO", info.FechaNacimiento.Value.ToString("MM-dd-yyyy")),
+                   ("P_NOMBRE", info.NOMBRE),
+                   ("P_APELLIDO_1", info.APELLIDO_1),
+                   ("P_APELLIDO_2", info.APELLIDO_2),
+                   ("P_TEL_NUMERO", info.TEL_NUMERO));
+            }
+            else
+            {
+                res = await CallFormUrlEncoded<Respuesta>("ActualizaInfoSocio", HttpMethod.Post,
+                   ("P_GUID_SOCIO", socio.ToString()),
+                   ("P_FECHA_NACIMIENTO", info.FechaNacimiento.Value.ToString("MM-dd-yyyy")),
+                   ("P_NOMBRE", info.NOMBRE),
+                   ("P_APELLIDO_1", info.APELLIDO_1),
+                   ("P_APELLIDO_2", info.APELLIDO_2),
+                   ("P_SEXO", info.GUID_SEXO.ToString()),
+                   ("P_TEL_NUMERO", info.TEL_NUMERO));
+            }
             return res;
         }
 
