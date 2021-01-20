@@ -9,35 +9,35 @@
         <vm:RegistroViewModel x:Name="ViewModel"/>
     </ContentPage.BindingContext>
     <ContentPage.Content>
-        <Grid RowDefinitions="*,Auto" ColumnDefinitions=".5*,*,.5*">
-            <Grid Grid.ColumnSpan="3" RowDefinitions="*,Auto,Auto,Auto,*,Auto" ColumnDefinitions=".1*,*,.1*" >
-                <Grid Grid.ColumnSpan="3" RowDefinitions="Auto,*" ColumnDefinitions="Auto, *">
-                    <Image Grid.RowSpan="2" Grid.ColumnSpan="2" Source="logoRegistro.png" Aspect="AspectFit"/>
-                    <Image Source="back.png" Aspect="AspectFit" Margin="{OnPlatform Android='20',UWP='20',iOS='10,20,0,0'}">
-                        <Image.GestureRecognizers>
-                            <TapGestureRecognizer Command="{Binding NavegarLoginCommand}"/>
-                        </Image.GestureRecognizers>
-                    </Image>
-                </Grid>
-                <Label Grid.ColumnSpan="3" Text="Capture la información que se solicita" HorizontalOptions="Center" Grid.Row="1"/>
-                <StackLayout Grid.ColumnSpan="3" Grid.Row="2" Orientation="Horizontal" HorizontalOptions="End" Margin="0,10,20,10">
-                    <Image x:Name="uno" Aspect="AspectFit">
-                        <Image.GestureRecognizers>
-                            <TapGestureRecognizer Command="{Binding RegresarPasoCommand}" CommandParameter="{Binding Registro}"/>
-                        </Image.GestureRecognizers>
-                    </Image>
-                    <Image x:Name="dos" Aspect="AspectFit"/>
-                </StackLayout>
-                <Label Grid.Column="1" Grid.Row="3" FontAttributes="Bold" FontSize="Subtitle" Text="{Binding Subtitulo, Mode=TwoWay}" TextColor="#A03335"/>
-                <ScrollView IsVisible="{Binding Registro}" Grid.Column="1" Grid.Row="4">
-                    <StackLayout Orientation="Vertical">
+        <Grid RowDefinitions="*,Auto" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand">
+            <ScrollView VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand">
+                <Grid VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand" RowDefinitions="Auto,Auto,Auto,Auto,*,Auto" ColumnDefinitions=".1*,*,.1*" >
+                    <Grid Grid.ColumnSpan="3" RowDefinitions="Auto,*" ColumnDefinitions="Auto, *">
+                        <Image Grid.RowSpan="2" Grid.ColumnSpan="2" Source="logoRegistro.png" Aspect="AspectFit" />
+                        <Image Source="back.png" Aspect="AspectFit" Margin="{OnPlatform Android='20',UWP='20',iOS='10,30,0,0'}">
+                            <Image.GestureRecognizers>
+                                <TapGestureRecognizer Command="{Binding NavegarLoginCommand}"/>
+                            </Image.GestureRecognizers>
+                        </Image>
+                    </Grid>
+                    <Label Grid.ColumnSpan="3" Text="Capture la información que se solicita" HorizontalOptions="Center" Grid.Row="1"/>
+                    <StackLayout Grid.ColumnSpan="3" Grid.Row="2" Orientation="Horizontal" HorizontalOptions="End" Margin="0,10,20,10">
+                        <Image x:Name="uno" Aspect="AspectFit">
+                            <Image.GestureRecognizers>
+                                <TapGestureRecognizer Command="{Binding RegresarPasoCommand}" CommandParameter="{Binding Registro}"/>
+                            </Image.GestureRecognizers>
+                        </Image>
+                        <Image x:Name="dos" Aspect="AspectFit"/>
+                    </StackLayout>
+                    <Label Grid.Column="1" Grid.Row="3" FontAttributes="Bold" FontSize="Subtitle" Text="{Binding Subtitulo, Mode=TwoWay}" TextColor="#A03335"/>
+                    <StackLayout IsVisible="{Binding Registro}" Grid.Column="1" Grid.Row="4" Orientation="Vertical">
                         <cv:EntryView EtiquetaObligatorio="*" TextColorEtiquetaO="Red" Etiqueta="Nombre(s)" Text="{Binding Cliente.NOMBRE}" TextColor="#000"/>
                         <cv:EntryView EtiquetaObligatorio="*" TextColorEtiquetaO="Red" Etiqueta="Apellido paterno" Text="{Binding Cliente.APELLIDO_1}" TextColor="#000"/>
                         <cv:EntryView EtiquetaObligatorio="*" TextColorEtiquetaO="Red" Etiqueta="Apellido materno" Text="{Binding Cliente.APELLIDO_2}" TextColor="#000"/>
-                        <Picker ItemsSource="{Binding Sexos}" SelectedItem="{Binding SexoSelected, Mode=TwoWay, UpdateSourceEventName=PropertyChanged}"/>
-                        <Grid ColumnDefinitions="Auto,*">
-                            <Label Text="*" IsVisible="{OnPlatform Android=true, iOS=false, UWP=true}" TextColor="{OnPlatform Android=Red,iOS=Gray,UWP=Red}"/>
-                            <Label Grid.Column="1" Text="Sexo" TextColor="Gray" FontSize="Small"/>
+                        <Grid ColumnDefinitions="Auto,*" RowDefinitions="Auto,Auto" HorizontalOptions="FillAndExpand">
+                            <Picker Grid.ColumnSpan="2" FontSize="Body" ItemsSource="{Binding Sexos}" SelectedItem="{Binding SexoSelected, Mode=TwoWay, UpdateSourceEventName=PropertyChanged}" HorizontalOptions="FillAndExpand"/>
+                            <Label Grid.Row="1" Text="*" IsVisible="{OnPlatform Android=true, iOS=false, UWP=true}" TextColor="{OnPlatform Android=Red,iOS=Gray,UWP=Red}"/>
+                            <Label Grid.Row="1" Grid.Column="1" Text="Sexo" TextColor="Gray" FontSize="Small"/>
                         </Grid>
                         <!--<Label IsVisible="{OnPlatform Android=false, iOS=true, UWP=false}" TextColor="Gray" Text="Por políticas de seguridad de Apple no es obligatorio que indiques este campo, para MPS Seguridad es importante darte esta información." FontSize="11"/>-->
                         <StackLayout Orientation="Vertical" IsVisible="{OnPlatform Android=false, iOS=true, UWP=false}">
@@ -46,30 +46,26 @@
                                 <Label Text="Deseo compartir mi fecha de nacimiento" TextColor="Gray" FontSize="Small" VerticalOptions="Center"/>
                             </StackLayout>
                             <StackLayout Orientation="Vertical" IsVisible="{Binding EnviarFechaDeNacimiento}">
-                                <DatePicker Date="{Binding Cliente.FECHA_NACIMIENTO, Mode=TwoWay}" />
+                                <DatePicker Date="{Binding Cliente.FECHA_NACIMIENTO, Mode=TwoWay}" FontSize="Body"/>
                                 <Label Text="Fecha de nacimiento" TextColor="Gray" FontSize="Small" />
                             </StackLayout>
                         </StackLayout>
-                        <StackLayout Orientation="Vertical" IsVisible="{OnPlatform Android=true, iOS=false, UWP=true}">
-                            <DatePicker Date="{Binding Cliente.FECHA_NACIMIENTO, Mode=TwoWay}"/>
-                            <Grid ColumnDefinitions="Auto,*">
-                                <Label Text="*" TextColor="{OnPlatform Android=Red,iOS=Gray,UWP=Red}"/>
-                                <Label Grid.Column="1" Text="Fecha de nacimiento" TextColor="Gray" FontSize="Small"/>
-                            </Grid>
-                        </StackLayout>
+                        <Grid ColumnDefinitions="Auto,*" RowDefinitions="Auto, Auto" IsVisible="{OnPlatform Android=true, iOS=false, UWP=true}">
+                            <DatePicker Grid.ColumnSpan="2" Date="{Binding Cliente.FECHA_NACIMIENTO, Mode=TwoWay}" FontSize="Body"/>
+                            <Label Grid.Row="1" Text="*" TextColor="{OnPlatform Android=Red,iOS=Gray,UWP=Red}"/>
+                            <Label Grid.Row="1" Grid.Column="1" Text="Fecha de nacimiento" TextColor="Gray" FontSize="Small"/>
+                        </Grid>
                         <cv:EntryView EtiquetaObligatorio="*" TextColorEtiquetaO="Red" Etiqueta="Alias" Text="{Binding Cliente.Alias}" TextColor="#000"/>
                         <cv:EntryView EtiquetaObligatorio="*" TextColorEtiquetaO="Red" Etiqueta="Correo electrónico" Text="{Binding Cliente.CORREO_ELECTRONICO}" TextColor="#000"/>
                         <cv:EntryView EtiquetaObligatorio="*" TextColorEtiquetaO="Red" Etiqueta="Contraseña" Text="{Binding Cliente.Password}" TextColor="#000" IsPassword="True"/>
                         <cv:EntryView EtiquetaObligatorio="*" TextColorEtiquetaO="{OnPlatform Android=Red,iOS=Gray,UWP=Red}" Etiqueta="Número de teléfono" Text="{Binding Cliente.TELEFONO}" TextColor="#000" Keyboard="Numeric"/>
                         <!--<Label IsVisible="{OnPlatform Android=true, iOS=true, UWP=false}" TextColor="Gray" Text="*por políticas de seguridad de Apple no es obligatorio que indiques estos campos, para MPS Seguridad es importante darte esta información." FontSize="11"/>-->
                     </StackLayout>
-                </ScrollView>
-                <ScrollView IsVisible="{Binding RegistroTarjeta}" Grid.Column="1" Grid.Row="4">
-                    <Grid RowDefinitions="Auto,Auto">
+                    <Grid IsVisible="{Binding RegistroTarjeta}" Grid.Column="1" Grid.Row="4" RowDefinitions="Auto,Auto">
                         <StackLayout Orientation="Vertical" IsVisible="{OnPlatform Android=false, iOS=true, UWP=false}">
                             <StackLayout Orientation="Horizontal">
                                 <CheckBox IsChecked="{Binding EnviarDatosVancarios, Mode=TwoWay}"/>
-                                <Label Text="Deseo compartir mi informacion vancaria" TextColor="Gray" FontSize="Small" VerticalOptions="Center"/>
+                                <Label Text="Deseo compartir mi información bancaria" TextColor="Gray" FontSize="Small" VerticalOptions="Center"/>
                             </StackLayout>
                             <StackLayout Orientation="Vertical" IsVisible="{Binding EnviarDatosVancarios}">
                                 <Entry Keyboard="Numeric" MaxLength="16" FontSize="Body" Text="{Binding Tarjeta.NoCuenta, Mode=TwoWay}"/>
@@ -145,32 +141,28 @@
                             </Grid>
                         </StackLayout>
                     </Grid>
-                </ScrollView>
-                <Button Grid.Column="1" Grid.Row="5" Text="Continuar" Command="{Binding RegistrarClienteCommand}" HorizontalOptions="End" Padding="30,0"/>
-            </Grid>
-            <Grid Grid.ColumnSpan="3" Grid.Row="1" VerticalOptions="End" ColumnDefinitions="0.2*,*" RowDefinitions="5.48*, 27.51*">
+                    <Button Grid.Column="1" Grid.Row="5" Text="Continuar" Command="{Binding RegistrarClienteCommand}" HorizontalOptions="End" Padding="30,0"/>
+                </Grid>
+            </ScrollView>           
+            <Grid Grid.Row="1" VerticalOptions="End" ColumnDefinitions="0.2*,*" RowDefinitions="5.48*, 27.51*">
                 <BoxView Background="Gray" Grid.Row="1" Grid.ColumnSpan="2"/>
                 <Image Source="listonesBase.png" Grid.RowSpan="2" Aspect="AspectFit" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand"/>
             </Grid>
             <!--Modal Informativo-->
-            <Frame Grid.ColumnSpan="3" BackgroundColor="Gray" Opacity="0.5" Grid.RowSpan="2" IsVisible="{Binding Modal}"/>
-            <Frame Grid.Column="1" Grid.RowSpan="2" VerticalOptions="Center" HorizontalOptions="FillAndExpand" IsVisible="{Binding Modal}" BackgroundColor="White" CornerRadius="20">
-                <Grid ColumnDefinitions=".05*, *,.05*" RowDefinitions="Auto, .7*">
-                    <Label Grid.Column="1" Text="{Binding Mensaje, Mode=TwoWay}" TextColor="Gray" FontSize="{OnPlatform Android=Body, iOS=Small}" VerticalTextAlignment="Center" VerticalOptions="Center" HorizontalTextAlignment="Center" HorizontalOptions="CenterAndExpand"/>
-                    <StackLayout  Grid.Row="1" Grid.Column="1">
-                        <Button CornerRadius="{OnPlatform Android='20', iOS='20', UWP='10'}" HorizontalOptions="CenterAndExpand" Padding="{OnPlatform Android='25,15', iOS='25,10',UWP='10,0'}" FontAttributes="None" Text="Aceptar" Command="{Binding OcultarModalCommand}" TextColor="White" FontSize="{OnPlatform Android=Body, iOS=Small}"/>
-                    </StackLayout>
+            <Frame BackgroundColor="Gray" Opacity="0.5"  Grid.RowSpan="2" IsVisible="{Binding Modal}"/>
+            <Frame Grid.RowSpan="2" VerticalOptions="Center" HorizontalOptions="FillAndExpand" IsVisible="{Binding Modal}" BackgroundColor="White" CornerRadius="20" Margin="{OnPlatform Android='20', iOS='20',UWP='100'}">
+                <Grid ColumnDefinitions=".05*, *,.05*" RowDefinitions="Auto, Auto">
+                    <Label Grid.Column="1" Text="{Binding Mensaje, Mode=TwoWay}"  TextColor="Gray" FontSize="{OnPlatform Android=Body, iOS=Small}" VerticalOptions="CenterAndExpand" HorizontalTextAlignment="Center" HorizontalOptions="CenterAndExpand" LineBreakMode="WordWrap"/>
+                    <Button Grid.Row="1" Grid.Column="1" CornerRadius="{OnPlatform Android='20', iOS='20', UWP='10'}" HorizontalOptions="CenterAndExpand" Padding="{OnPlatform Android='25,15', iOS='25,10',UWP='10,0'}" FontAttributes="None" Text="Aceptar" Command="{Binding OcultarModalCommand}" TextColor="White" FontSize="{OnPlatform Android=Body, iOS=Small}"/>
                 </Grid>
             </Frame>
             <!--Modal Registro Exitoso-->
-            <Frame Grid.ColumnSpan="3" BackgroundColor="Gray" Opacity="0.5" Grid.RowSpan="2" IsVisible="{Binding ModalRegistro}"/>
-            <Frame Grid.RowSpan="2" Grid.ColumnSpan="3" VerticalOptions="Center" HorizontalOptions="FillAndExpand" IsVisible="{Binding ModalRegistro}" BackgroundColor="White" CornerRadius="20" Margin="{OnPlatform Android='20', iOS='20',UWP='100'}">
-                <Grid ColumnDefinitions=".05*, *,.05*" RowDefinitions="Auto, Auto, .7*">
+            <Frame BackgroundColor="Gray" Opacity="0.5" Grid.RowSpan="2" IsVisible="{Binding ModalRegistro}"/>
+            <Frame Grid.RowSpan="2" VerticalOptions="Center" HorizontalOptions="FillAndExpand" IsVisible="{Binding ModalRegistro}" BackgroundColor="White" CornerRadius="20" Margin="{OnPlatform Android='20', iOS='20',UWP='100'}">
+                <Grid ColumnDefinitions=".05*, *,.05*" RowDefinitions="Auto, Auto, Auto">
                     <Image Grid.ColumnSpan="3" Source="logoRegistro.png" Aspect="AspectFit"/>
-                    <Label Grid.Column="1" Grid.Row="1" Text="¡Registro exitoso!" TextColor="Gray" FontSize="{OnPlatform Android=Body, iOS=Small}" VerticalTextAlignment="Center" VerticalOptions="Center" HorizontalTextAlignment="Center" HorizontalOptions="Center"/>
-                    <StackLayout  Grid.Row="2" Grid.Column="1">
-                        <Button CornerRadius="{OnPlatform Android='20', iOS='20', UWP='10'}" HorizontalOptions="CenterAndExpand" Padding="{OnPlatform Android='50,15', iOS='25,10', UWP='10,0'}" FontAttributes="None" Text="Aceptar" Command="{Binding NavegarLoginCommand}" TextColor="White" FontSize="{OnPlatform Android=Body, iOS=Small}"/>
-                    </StackLayout>
+                    <Label Grid.Column="1" Grid.Row="1" Text="¡Registro exitoso!"  TextColor="Gray" FontSize="{OnPlatform Android=Body, iOS=Small}" VerticalOptions="CenterAndExpand" HorizontalTextAlignment="Center" HorizontalOptions="CenterAndExpand" LineBreakMode="WordWrap"/>
+                    <Button Grid.Row="2" Grid.Column="1" CornerRadius="{OnPlatform Android='20', iOS='20', UWP='10'}" HorizontalOptions="CenterAndExpand" Padding="{OnPlatform Android='50,15', iOS='25,10', UWP='10,0'}" FontAttributes="None" Text="Aceptar" Command="{Binding NavegarLoginCommand}" TextColor="White" FontSize="{OnPlatform Android=Body, iOS=Small}"/>
                 </Grid>
             </Frame>
         </Grid>

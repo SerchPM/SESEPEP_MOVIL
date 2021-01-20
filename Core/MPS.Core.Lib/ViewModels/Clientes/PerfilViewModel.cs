@@ -40,10 +40,10 @@ namespace MPS.Core.Lib.ViewModels.Clientes
                 if (!string.IsNullOrEmpty(value))
                 {
                     var validar = LetrasYNumeros(value);
-                    if (validar && value.Length > 8)
+                    if (validar && value.Length > 6)
                         MensajePassword = string.Empty;
                     else
-                        MensajePassword = "La contraseña debe tener más de 8 caracteres";
+                        MensajePassword = "La contraseña debe tener más de 6 caracteres";
                 }
             }
         }
@@ -58,7 +58,7 @@ namespace MPS.Core.Lib.ViewModels.Clientes
                 if (!string.IsNullOrEmpty(value))
                 {
                     var validar = LetrasYNumeros(value);
-                    if (value.Equals(Password) && validar && value.Length > 8)
+                    if (value.Equals(Password) && validar && value.Length > 6)
                     {
                         MensajePasswordConfirm = string.Empty;
                         PasswordCorrect = true;

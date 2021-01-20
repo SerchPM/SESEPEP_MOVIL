@@ -5,12 +5,12 @@
              xmlns:vm="clr-namespace:MPS.Core.Lib.ViewModels"
              x:Class="MPS.AppCliente.Views.Views.Login">
     <ContentPage.Content>
-        <Grid RowDefinitions="*,Auto">
-            <Grid RowDefinitions="*,Auto,*">
-                <Image Source="logoMain.png"/>
-                <Label Text="Tu mejor opción en seguridad privada" HorizontalOptions="Center" Grid.Row="1"/>
-                <ScrollView Grid.Row="2">
-                    <Grid RowDefinitions="*,Auto" x:DataType="vm:LoginViewModel">
+        <Grid RowDefinitions="*, Auto">
+            <ScrollView VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand">
+                <Grid RowDefinitions="*,Auto,*">
+                    <Image Source="logoMain.png"/>
+                    <Label Text="Tu mejor opción en seguridad privada" HorizontalOptions="Center" Grid.Row="1"/>
+                    <Grid Grid.Row="2" RowDefinitions="*,Auto" x:DataType="vm:LoginViewModel">
                         <Grid.BindingContext>
                             <vm:LoginViewModel/>
                         </Grid.BindingContext>
@@ -35,9 +35,9 @@
                             </Label>
                         </StackLayout>
                     </Grid>
-                </ScrollView>
-            </Grid>
-            <cv:StatusBar Grid.Row="1"/>
+                </Grid>
+            </ScrollView>
+            <cv:StatusBar Grid.Row="1" VerticalOptions="End" HorizontalOptions="FillAndExpand"/>
         </Grid>
     </ContentPage.Content>
 </ContentPage>
