@@ -25,9 +25,9 @@ namespace MPS.SharedAPIModel.Seguridad
         public string Nombre { get; set; }
         public string Apellidos { get; set; }
         public string Email { get; set; }
-        public string Rol { get; set; }
-        public string Estatus { get; set; }
-        public string Fase { get; set; }
+        public int Rol { get; set; }
+        public int Estatus { get; set; }
+        public int Fase { get; set; }
         public double Ranking { get; set; }
     }
 

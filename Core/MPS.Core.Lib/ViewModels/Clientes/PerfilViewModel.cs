@@ -117,8 +117,10 @@ namespace MPS.Core.Lib.ViewModels.Clientes
                     if(Sexos.Count > 0)
                         SexoSelected = Sexos.Where(w => w.GUID.Equals(Cliente.GUID_SEXO)).FirstOrDefault();
                 }
-                if (Cliente.FECHA_NACIMIENTO.Equals(null))
-                    Cliente.FECHA_NACIMIENTO = DateTime.UtcNow;
+                if (string.IsNullOrEmpty(Cliente.FECHA_NACIMIENTO))
+                    Cliente.FechaNacimiento = DateTime.UtcNow;
+                else
+                    Cliente.FechaNacimiento = DateTime.Parse(Cliente.FECHA_NACIMIENTO);
             });
         }
 
@@ -153,6 +155,7 @@ namespace MPS.Core.Lib.ViewModels.Clientes
                 {
                     Cliente.GUID_SEXO = SexoSelected?.GUID;
                     if (!EnviarFechaDeNacimiento) Cliente.FECHA_NACIMIENTO = null;
+                    else Cliente.FECHA_NACIMIENTO = Cliente.FechaNacimiento.ToString("MM-dd-yyyy");
                     var (result, mensajeResult) = await bl.AtualziarClienteAsync(Guid.Parse(Settings.Current.LoginInfo.Usr.Id), Cliente);
                     if (result)
                     {
@@ -170,8 +173,10 @@ namespace MPS.Core.Lib.ViewModels.Clientes
                             if (Sexos.Count > 0)
                                 SexoSelected = Sexos.Where(w => w.GUID.Equals(Cliente.GUID_SEXO)).FirstOrDefault();
                         }
-                        if (Cliente.FECHA_NACIMIENTO.Equals(null))
-                            Cliente.FECHA_NACIMIENTO = DateTime.UtcNow;
+                        if (string.IsNullOrEmpty(Cliente.FECHA_NACIMIENTO))
+                            Cliente.FechaNacimiento = DateTime.UtcNow;
+                        else
+                            Cliente.FechaNacimiento = DateTime.Parse(Cliente.FECHA_NACIMIENTO);
                     }
                 }
                 else

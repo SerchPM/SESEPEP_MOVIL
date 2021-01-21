@@ -75,7 +75,7 @@ namespace MPS.Core.Lib.ApiClient
             {
                 res = await CallFormUrlEncoded<Respuesta>("ActualizaInfoCliente", HttpMethod.Post,
                              ("P_GUID_SOCIO", idCliente.ToString()),
-                             ("P_FECHA_NACIMIENTO", cliente.FECHA_NACIMIENTO.Value.ToString("MM-dd-yyyy")),
+                             ("P_FECHA_NACIMIENTO", cliente.FECHA_NACIMIENTO),
                              ("P_NOMBRE", cliente.NOMBRE),
                              ("P_APELLIDO_1", cliente.APELLIDO_1),
                              ("P_APELLIDO_2", cliente.APELLIDO_2),
@@ -95,7 +95,7 @@ namespace MPS.Core.Lib.ApiClient
             {
                 res = await CallFormUrlEncoded<Respuesta>("ActualizaInfoCliente", HttpMethod.Post,
                              ("P_GUID_SOCIO", idCliente.ToString()),
-                             ("P_FECHA_NACIMIENTO", cliente.FECHA_NACIMIENTO.Value.ToString("MM-dd-yyyy")),
+                             ("P_FECHA_NACIMIENTO", cliente.FECHA_NACIMIENTO),
                              ("P_NOMBRE", cliente.NOMBRE),
                              ("P_APELLIDO_1", cliente.APELLIDO_1),
                              ("P_APELLIDO_2", cliente.APELLIDO_2),
@@ -146,8 +146,8 @@ namespace MPS.Core.Lib.ApiClient
                 ("P_ALIAS", cliente.Alias),
                 ("P_VERSION_APP", cliente.VercionApp),
                 ("P_MODELO_CEL", cliente.ModeloDispositivo),
-                ("P_FECHA_NACIMIENTO", cliente.FECHA_NACIMIENTO.ToDateTimeFormat24H()),
-                ("P_GUID_SEXO", cliente.SEXO),
+                ("P_FECHA_NACIMIENTO", cliente.FECHA_NACIMIENTO?.ToString("MM-dd-yyyy")),
+                ("P_GUID_SEXO", !string.IsNullOrEmpty(cliente.SEXO) ? cliente.SEXO : null),
                 ("P_GUID_METODO_PAGO_PRED", cliente.IdMetodoPago.ToString()));
             return res;
         }
