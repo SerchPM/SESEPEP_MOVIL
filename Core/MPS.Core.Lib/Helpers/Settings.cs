@@ -89,5 +89,8 @@ namespace MPS.Core.Lib.Helpers
         
         private string paginaActual;
         public string PaginaActual { get => GetValue<string>(); set => SetValue(ref paginaActual, value); }
+
+        private string playerId;
+        public string PlayerId { get => GetValue<string>(); set => SetValue(ref playerId, value); }
     }
 }

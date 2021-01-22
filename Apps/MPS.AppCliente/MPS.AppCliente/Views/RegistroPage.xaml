@@ -161,7 +161,11 @@
             <Frame Grid.RowSpan="2" VerticalOptions="Center" HorizontalOptions="FillAndExpand" IsVisible="{Binding ModalRegistro}" BackgroundColor="White" CornerRadius="20" Margin="{OnPlatform Android='20', iOS='20',UWP='100'}">
                 <Grid ColumnDefinitions=".05*, *,.05*" RowDefinitions="Auto, Auto, Auto">
                     <Image Grid.ColumnSpan="3" Source="logoRegistro.png" Aspect="AspectFit"/>
-                    <Label Grid.Column="1" Grid.Row="1" Text="¡Registro exitoso!"  TextColor="Gray" FontSize="{OnPlatform Android=Body, iOS=Small}" VerticalOptions="CenterAndExpand" HorizontalTextAlignment="Center" HorizontalOptions="CenterAndExpand" LineBreakMode="WordWrap"/>
+                    <StackLayout Grid.Column="1" Grid.Row="1" Orientation="Vertical">
+                        <Label Text="¡Registro exitoso!"  TextColor="Gray" FontSize="{OnPlatform Android=Body, iOS=Small}" VerticalOptions="CenterAndExpand" HorizontalTextAlignment="Center" HorizontalOptions="CenterAndExpand" LineBreakMode="WordWrap"/>
+                        <Label Text="Hemos enviado un correo de verificación."  TextColor="Gray" FontSize="{OnPlatform Android=Body, iOS=Small}" VerticalOptions="CenterAndExpand" HorizontalTextAlignment="Center" HorizontalOptions="CenterAndExpand" LineBreakMode="WordWrap"/>
+                        <Label Text="Ingrese a su correo y siga las instrucciones correspondientes."  TextColor="Gray" FontSize="{OnPlatform Android=Body, iOS=Small}" VerticalOptions="CenterAndExpand" HorizontalTextAlignment="Center" HorizontalOptions="CenterAndExpand" LineBreakMode="WordWrap"/>
+                    </StackLayout>
                     <Button Grid.Row="2" Grid.Column="1" CornerRadius="{OnPlatform Android='20', iOS='20', UWP='10'}" HorizontalOptions="CenterAndExpand" Padding="{OnPlatform Android='50,15', iOS='25,10', UWP='10,0'}" FontAttributes="None" Text="Aceptar" Command="{Binding NavegarLoginCommand}" TextColor="White" FontSize="{OnPlatform Android=Body, iOS=Small}"/>
                 </Grid>
             </Frame>

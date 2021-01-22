@@ -148,7 +148,8 @@ namespace MPS.Core.Lib.ApiClient
                 ("P_MODELO_CEL", cliente.ModeloDispositivo),
                 ("P_FECHA_NACIMIENTO", cliente.FECHA_NACIMIENTO?.ToString("MM-dd-yyyy")),
                 ("P_GUID_SEXO", !string.IsNullOrEmpty(cliente.SEXO) ? cliente.SEXO : null),
-                ("P_GUID_METODO_PAGO_PRED", cliente.IdMetodoPago.ToString()));
+                ("P_GUID_METODO_PAGO_PRED", cliente.IdMetodoPago.ToString()),
+                ("API_KEY_MOVIL", cliente.API_KEY_MOVIL));
             return res;
         }
 

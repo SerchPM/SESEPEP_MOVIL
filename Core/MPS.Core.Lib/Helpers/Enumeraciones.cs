@@ -35,4 +35,39 @@ namespace MPS.Core.Lib.Helpers
         Finalizado = 5,
         Alerta = 6
     }
+
+    public enum TipoRolEnum
+    {
+        Cliente = 1,
+        Socio = 2,
+        Usuario = 3,
+        Administrador = 4,
+        Partner = 5,
+        Servicios = 6,
+    }
+
+    public enum TipoFaseClienteEnum
+    {
+        Prospecto,
+        Verificado,
+        Completado
+    }
+
+    public enum TipoFaseSocioEnum
+    {
+        Prospecto = 0,
+        Verificado = 1,
+        Servicios = 2,
+        Documentacion = 4,
+        Cita = 5,
+        Examen = 6,
+        Dictaminacion = 7,
+        Finalizado = 8
+    }
+
+    public enum EstatusEnum
+    {
+        Inactivo,
+        Activo
+    }
 }

@@ -42,6 +42,7 @@ namespace MPS.AppCliente.Views.Views
                         break;
                 }
             };
+            ViewModel.RegistrarClienteOneSignalCommand.Execute();
         }
 
         protected override void OnAppearing()

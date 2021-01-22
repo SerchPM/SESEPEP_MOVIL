@@ -8,11 +8,19 @@ using MPS.SharedAPIModel.Clientes;
 using Core.MVVM.Helpers;
 using Sysne.Core.OS;
 using MPS.Core.Lib.OS;
+using System.Threading.Tasks;
+using MPS.Core.Lib.BL;
+using MPS.Core.Lib.Helpers;
+using MPS.SharedAPIModel;
 
 namespace MPS.Core.Lib.ViewModels.Clientes
 {
     public class RegistroViewModel : ViewModelWithBL<BL.ClientesBL>
     {
+        #region Eventos
+        public static event EventHandler RegistroCliente;
+        #endregion
+
         #region Pripiedades
         private BL.OperacionesBL operacionesBL;
         public BL.OperacionesBL OperacionesBL => operacionesBL ??= operacionesBL = new BL.OperacionesBL();
@@ -191,6 +199,7 @@ namespace MPS.Core.Lib.ViewModels.Clientes
                     Cliente.SEXO = SexoSelected?.GUID.ToString();
                     if (!EnviarFechaDeNacimiento) Cliente.FECHA_NACIMIENTO = null;
                     Cliente.IdMetodoPago = Guid.Parse("4F717133-1F98-47CE-A874-DC902392E706");
+                    Cliente.API_KEY_MOVIL = Settings.Current.PlayerId;
                     var (result, (mensaje, idCliente)) = await bl.RegistrarClienteAsync(Cliente);
                     if (result && EnviarDatosVancarios)
                     {
@@ -225,6 +234,7 @@ namespace MPS.Core.Lib.ViewModels.Clientes
                 }
             });
         }
+
         private RelayCommand navegarLoginCommand = null;
         public RelayCommand NavegarLoginCommand
         {
@@ -241,6 +251,18 @@ namespace MPS.Core.Lib.ViewModels.Clientes
             {
                 Modal = false;
                 Mensaje = string.Empty;
+            });
+        }
+
+        private RelayCommand registrarClienteOneSignalCommand = null;
+        public RelayCommand RegistrarClienteOneSignalCommand
+        {
+            get => registrarClienteOneSignalCommand ??= new RelayCommand(async () =>
+            {
+                if (Xamarin.Forms.Device.RuntimePlatform != Xamarin.Forms.Device.UWP)
+                    RegistroCliente?.Invoke(this, new EventArgs());
+                else
+                    await RegistrarDispositivoUWPCliente();
             });
         }
         #endregion
@@ -263,6 +285,14 @@ namespace MPS.Core.Lib.ViewModels.Clientes
             }
 
             return Mensaje;
+        }
+
+        public async Task<bool> RegistrarDispositivoUWPCliente()
+        {
+            var (result, playerId) = await (new OperacionesBL()).RegistrarDispositivoUWPAsync(Settings.Current.AppId, Settings.Current.ChannelUriUWP, Settings.Current.ModeloDispositivo);
+            if (result)
+                Settings.Current.PlayerId = playerId;
+            return true;
         }
         #endregion
     }

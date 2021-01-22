@@ -22,7 +22,33 @@ namespace MPS.AppCliente.Views.OS
         public NotificationsWrapper()
         {
             operacionesBL = new OperacionesBL();
+            Core.Lib.ViewModels.Clientes.RegistroViewModel.RegistroCliente += (s, e) => InitRegistro();
             Core.Lib.BL.SeguridadBL.Autentificado += (s, e) => Init();
+        }
+
+        /// <summary>
+        /// Metodo para registro de un nuevo cliente
+        /// </summary>
+        public void InitRegistro()
+        {
+            OneSignal.Current.IdsAvailable((playerID, pushToken) =>
+            {
+                Settings.Current.PlayerId = playerID;
+            });
+
+            //Inicializa la subscripción
+            OneSignal.Current.StartInit(MPS.Core.Lib.Helpers.AppSettingsManager.Settings["PushNotificationAppID"])
+               .InFocusDisplaying(Com.OneSignal.Abstractions.OSInFocusDisplayOption.Notification)
+               .HandleNotificationReceived((notification) =>
+               {
+                 
+               }).HandleNotificationOpened((notification) =>
+               {
+                  
+               })
+               .HandleInAppMessageClicked((notification) =>
+               {
+               }).EndInit();
         }
 
         /// <summary>
