@@ -80,6 +80,6 @@ namespace MPS.AppCliente
         }
 
         private async void TapGestureRecognizer_Terminos(object sender, EventArgs e) =>
-            await Browser.OpenAsync("https://dev.mpsmovil.com/terminos-condiciones.html", BrowserLaunchMode.SystemPreferred);
+            await Browser.OpenAsync("https://mpsmovil.com/terminos-condiciones.html", BrowserLaunchMode.SystemPreferred);
     }
 }
