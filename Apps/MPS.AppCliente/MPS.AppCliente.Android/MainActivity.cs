@@ -23,6 +23,8 @@ namespace MPS.AppCliente.Droid
             CheckAppPermissions();
             DependencyService.Register<OS.OS, IOS>();
             OS.OS.Activity = this;
+            App.VersionName = Application.Context.PackageManager.GetPackageInfo(Application.Context.PackageName, 0).VersionName;
+            App.VersionCode = Application.Context.PackageManager.GetPackageInfo(Application.Context.PackageName, 0).VersionCode;
             Xamarin.Essentials.Platform.Init(this, savedInstanceState);
             global::Xamarin.Forms.Forms.Init(this, savedInstanceState);           
             Xamarin.FormsMaps.Init(this, savedInstanceState);

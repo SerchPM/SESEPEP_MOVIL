@@ -195,7 +195,7 @@ namespace MPS.Core.Lib.ViewModels.Clientes
                     
                     Cliente.ModeloDispositivo = Helpers.Settings.Current.ModeloDispositivo;
                     Cliente.Password = Crypto.EncodePassword(Cliente.Password);
-                    Cliente.VercionApp = "0";
+                    Cliente.VercionApp = !string.IsNullOrEmpty(Settings.Current.VersionApp) ? Settings.Current.VersionApp : "0";
                     Cliente.SEXO = SexoSelected?.GUID.ToString();
                     if (!EnviarFechaDeNacimiento) Cliente.FECHA_NACIMIENTO = null;
                     Cliente.IdMetodoPago = Guid.Parse("4F717133-1F98-47CE-A874-DC902392E706");

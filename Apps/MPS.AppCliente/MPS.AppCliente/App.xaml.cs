@@ -13,6 +13,15 @@ namespace MPS.AppCliente
     {
         public NotificationsWrapper NotificationsWrapper { get; private set; } = new NotificationsWrapper();
 
+        /// <summary>
+        /// Versionamiento de lanzamiento de la app 
+        /// </summary>
+        public static string VersionName { get; set; }
+        /// <summary>
+        /// Versionamiento del código.
+        /// </summary>
+        public static int VersionCode { get; set; }
+
         public App()
         {
             InitializeComponent();

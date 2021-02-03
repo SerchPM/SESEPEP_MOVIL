@@ -24,6 +24,8 @@ namespace MPS.AppSocio.Droid
 
             DependencyService.Register<OS.OS, IOS>();
             OS.OS.Activity = this;
+            App.VersionName = Application.Context.PackageManager.GetPackageInfo(Application.Context.PackageName, 0).VersionName;
+            App.VersionCode = Application.Context.PackageManager.GetPackageInfo(Application.Context.PackageName, 0).VersionCode;
             Xamarin.Forms.Forms.SetFlags("Expander_Experimental");
             Xamarin.Essentials.Platform.Init(this, savedInstanceState);
             global::Xamarin.Forms.Forms.Init(this, savedInstanceState);

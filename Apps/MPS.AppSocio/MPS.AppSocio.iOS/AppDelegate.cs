@@ -23,6 +23,8 @@ namespace MPS.AppSocio.iOS
         //
         public override bool FinishedLaunching(UIApplication app, NSDictionary options)
         {
+            App.VersionName = NSBundle.MainBundle.InfoDictionary.ValueForKey(new NSString("CFBundleShortVersionString")).ToString();
+            App.VersionCode = int.Parse(NSBundle.MainBundle.InfoDictionary.ValueForKey(new NSString("CFBundleVersion")).ToString());
             DependencyService.Register<OS.OS, IOS>();
             global::Xamarin.Forms.Forms.Init();
             Xamarin.FormsMaps.Init();

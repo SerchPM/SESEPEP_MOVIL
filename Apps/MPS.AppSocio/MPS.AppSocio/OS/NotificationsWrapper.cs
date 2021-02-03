@@ -44,7 +44,7 @@ namespace MPS.AppSocio.Views.OS
                     SO = Settings.Current.SO,
                     TipoDispositivo = Settings.Current.TipoDispositivo,
                     TipoUsuario = (int)TipoUsuarioEnum.Socio,
-                    VercionApp = "1.0.5",
+                    VercionApp = !string.IsNullOrEmpty(Settings.Current.VersionApp) ? Settings.Current.VersionApp : "0",
                     TimeZona = "-28800",
                     PlayerId = playerID
                 });

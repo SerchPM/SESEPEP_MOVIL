@@ -100,7 +100,7 @@ namespace MPS.Core.Lib.BL
                     SO = Settings.Current.SO,
                     TipoDispositivo = Settings.Current.TipoDispositivo,
                     TipoUsuario = (int)TipoUsuarioEnum.Socio,
-                    VercionApp = "0",
+                    VercionApp = !string.IsNullOrEmpty(Settings.Current.VersionApp) ? Settings.Current.VersionApp : "0",
                     TimeZona = "-28800",
                     PlayerId = playerId
                 });
@@ -121,7 +121,7 @@ namespace MPS.Core.Lib.BL
                     SO = Settings.Current.SO,
                     TipoDispositivo = Settings.Current.TipoDispositivo,
                     TipoUsuario = (int)TipoUsuarioEnum.Cliente,
-                    VercionApp = "0",
+                    VercionApp = !string.IsNullOrEmpty(Settings.Current.VersionApp) ? Settings.Current.VersionApp : "0",
                     TimeZona = "-28800",
                     PlayerId = playerId
                 });

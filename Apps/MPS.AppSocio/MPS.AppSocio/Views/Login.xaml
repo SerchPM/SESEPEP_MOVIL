@@ -4,6 +4,9 @@
              xmlns:vm="clr-namespace:MPS.Core.Lib.ViewModels"
              x:Class="MPS.AppSocio.Views.Views.Login"
              xmlns:cv="clr-namespace:MPS.AppSocio.Views.CV">
+    <ContentPage.BindingContext>
+        <vm:LoginViewModel x:Name="ViewModel"/>
+    </ContentPage.BindingContext>
     <ContentPage.Content>
         <Grid RowDefinitions="*, Auto">
             <ScrollView VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand">
@@ -11,9 +14,6 @@
                     <Image Source="logoMain.png"/>
                     <Label Text="Tu mejor opción en seguiridad privada" HorizontalOptions="Center" Grid.Row="1"/>
                     <Grid Grid.Row="2" RowDefinitions="*,Auto" x:DataType="vm:LoginViewModel">
-                        <Grid.BindingContext>
-                            <vm:LoginViewModel/>
-                        </Grid.BindingContext>
                         <StackLayout VerticalOptions="Center" Padding="50,0">
                             <Entry Text="{Binding Usuario}"/>
                             <Label Text="Usuario"/>
@@ -21,19 +21,22 @@
                             <Label Text="Contraseña"/>
                             <Button Command="{Binding LoginSocioCommand}" Text="Entrar" HorizontalOptions="End" Padding="30,0"/>
                         </StackLayout>
-                        <StackLayout Grid.Row="1" VerticalOptions="EndAndExpand" Padding="50,0">
-                            <Label Text="{Binding Mensaje}" TextColor="{StaticResource AccentColor}" HorizontalOptions="EndAndExpand"/>
-                            <Label Text="¿Olvidé mis datos?">
-                                <Label.GestureRecognizers>
-                                    <TapGestureRecognizer Tapped="TapGestureRecognizer_OlvideDatos"/>
-                                </Label.GestureRecognizers>
-                            </Label>
-                            <Label Text="Registrarme como socio">
-                                <Label.GestureRecognizers>
-                                    <TapGestureRecognizer Tapped="TapGestureRecognizer_CrearCuenta"/>
-                                </Label.GestureRecognizers>
-                            </Label>
-                        </StackLayout>
+                        <Grid Grid.Row="1" RowSpacing="0" ColumnDefinitions="*,Auto" RowDefinitions="*,Auto" VerticalOptions="EndAndExpand" Padding="50,0">
+                            <StackLayout Grid.ColumnSpan="2" HorizontalOptions="FillAndExpand">
+                                <Label Text="{Binding Mensaje}" TextColor="{StaticResource AccentColor}" HorizontalOptions="EndAndExpand"/>
+                                <Label Text="¿Olvidé mis datos?">
+                                    <Label.GestureRecognizers>
+                                        <TapGestureRecognizer Tapped="TapGestureRecognizer_OlvideDatos"/>
+                                    </Label.GestureRecognizers>
+                                </Label>
+                                <Label Text="Registrarme como socio">
+                                    <Label.GestureRecognizers>
+                                        <TapGestureRecognizer Tapped="TapGestureRecognizer_CrearCuenta"/>
+                                    </Label.GestureRecognizers>
+                                </Label>
+                            </StackLayout>
+                            <Label Grid.Column="1" Grid.Row="1" Text="{Binding VersionApp, Mode=TwoWay}"  TextColor="{StaticResource AlterColor}" FontSize="Small" VerticalOptions="End" HorizontalOptions="End"/>
+                        </Grid>
                     </Grid>
                 </Grid>
             </ScrollView>

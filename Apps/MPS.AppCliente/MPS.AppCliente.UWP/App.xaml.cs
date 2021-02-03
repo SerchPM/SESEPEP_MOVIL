@@ -1,4 +1,5 @@
-﻿using Sysne.Core.OS;
+﻿using Microsoft.Toolkit.Uwp.Helpers;
+using Sysne.Core.OS;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -47,7 +48,8 @@ namespace MPS.AppCliente.UWP
                 this.DebugSettings.EnableFrameRateCounter = true;
             }
 #endif
-
+            AppCliente.App.VersionCode = SystemInformation.ApplicationVersion.Major;
+            AppCliente.App.VersionName = $"{SystemInformation.ApplicationVersion.Minor}.{SystemInformation.ApplicationVersion.Build}";
             Frame rootFrame = Window.Current.Content as Frame;
 
             // Do not repeat app initialization when the Window already has content,

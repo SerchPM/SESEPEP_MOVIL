@@ -92,5 +92,8 @@ namespace MPS.Core.Lib.Helpers
 
         private string playerId;
         public string PlayerId { get => GetValue<string>(); set => SetValue(ref playerId, value); }
+
+        private string versionApp;
+        public string VersionApp { get => GetValue<string>(); set => SetValue(ref versionApp, value); }
     }
 }

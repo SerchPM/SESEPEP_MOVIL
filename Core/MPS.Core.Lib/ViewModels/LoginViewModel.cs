@@ -37,6 +37,9 @@ namespace MPS.Core.Lib.ViewModels
 
         private string mensaje;
         public string Mensaje { get => mensaje; set => Set(ref mensaje, value); }
+
+        private string versionApp;
+        public string VersionApp { get => versionApp; set => Set(ref versionApp, value); }
         #endregion
 
         #region Comandos
@@ -46,12 +49,15 @@ namespace MPS.Core.Lib.ViewModels
             get => loginSocioCommand ??= new RelayCommand(async () =>
             {
                 Mensaje = string.Empty;
-                var passwordCrypto = Crypto.EncodePassword(Contraseña);
-                var (Válido, mensaje) = await bl.IniciarSesiónSocio(Usuario, Contraseña, passwordCrypto);
-                if (Válido)
-                    await DependencyService.Get<INavigationService>().NavigateTo(PagesKeys.SolicitarServicio);
-                else
-                    Mensaje = mensaje;
+                if(!string.IsNullOrEmpty(Usuario) && !string.IsNullOrEmpty(Contraseña))
+                {
+                    var passwordCrypto = Crypto.EncodePassword(Contraseña);
+                    var (Válido, mensaje) = await bl.IniciarSesiónSocio(Usuario, Contraseña, passwordCrypto);
+                    if (Válido)
+                        await DependencyService.Get<INavigationService>().NavigateTo(PagesKeys.SolicitarServicio);
+                    else
+                        Mensaje = mensaje;
+                }
             }, () => Validate(this, false)
                 , dependencies: (this, new[] { nameof(Usuario), nameof(Contraseña) }));
         }
@@ -62,12 +68,15 @@ namespace MPS.Core.Lib.ViewModels
             get => loginClienteCommand ??= new RelayCommand(async () =>
             {
                 Mensaje = string.Empty;
-                var passwordCrypto = Crypto.EncodePassword(Contraseña);
-                var (Válido, mensaje) = await bl.IniciarSesiónCliente(Usuario, Contraseña, passwordCrypto);
-                if (Válido)
-                    await DependencyService.Get<INavigationService>().NavigateTo(PagesKeys.SolicitarServicio);
-                else
-                    Mensaje = mensaje;
+                if (!string.IsNullOrEmpty(Usuario) && !string.IsNullOrEmpty(Contraseña))
+                {
+                    var passwordCrypto = Crypto.EncodePassword(Contraseña);
+                    var (Válido, mensaje) = await bl.IniciarSesiónCliente(Usuario, Contraseña, passwordCrypto);
+                    if (Válido)
+                        await DependencyService.Get<INavigationService>().NavigateTo(PagesKeys.SolicitarServicio);
+                    else
+                        Mensaje = mensaje;
+                }
             }, () => Validate(this, false)
                 , dependencies: (this, new[] { nameof(Usuario), nameof(Contraseña) }));
         }
