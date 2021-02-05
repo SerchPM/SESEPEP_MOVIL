@@ -8,6 +8,9 @@ using Android.Widget;
 using Android.OS;
 using Sysne.Core.OS;
 using Android;
+using Microsoft.AppCenter;
+using Microsoft.AppCenter.Analytics;
+using Microsoft.AppCenter.Crashes;
 
 namespace MPS.AppSocio.Droid
 {
@@ -30,6 +33,8 @@ namespace MPS.AppSocio.Droid
             Xamarin.Essentials.Platform.Init(this, savedInstanceState);
             global::Xamarin.Forms.Forms.Init(this, savedInstanceState);
             Xamarin.FormsMaps.Init(this, savedInstanceState);
+            AppCenter.Start("7f3ef8a7-fda2-4420-8cbe-f5c4519cc13d",
+               typeof(Analytics), typeof(Crashes));
             LoadApplication(new App());
         }
         public override void OnRequestPermissionsResult(int requestCode, string[] permissions, [GeneratedEnum] Android.Content.PM.Permission[] grantResults)

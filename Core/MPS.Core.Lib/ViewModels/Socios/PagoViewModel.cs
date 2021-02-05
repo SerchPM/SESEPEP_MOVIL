@@ -44,6 +44,7 @@ namespace MPS.Core.Lib.ViewModels.Socios
                 {
                     Mensaje = "No se encontraron los datos bancarios";
                     Modal = true;
+                    DatosBancarios = new DatoBancario();
                 }
                 else
                     DatosBancarios = datosBancarios;

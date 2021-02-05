@@ -33,8 +33,8 @@
             </Grid>
             <cv:StatusBar Grid.Row="3" IsLinksVisible="False" Grid.ColumnSpan="3"/>
             <!--Modal Informativo-->
-            <Frame BackgroundColor="Gray" Opacity="0.5" Grid.RowSpan="3" IsVisible="{Binding Modal}"/>
-            <Frame Grid.RowSpan="3" VerticalOptions="Center" HorizontalOptions="FillAndExpand" Margin="15" IsVisible="{Binding Modal}" BackgroundColor="White" CornerRadius="20">
+            <Frame BackgroundColor="Gray" Opacity="0.5" Grid.RowSpan="4" Grid.ColumnSpan="3" IsVisible="{Binding Modal}"/>
+            <Frame Grid.RowSpan="4" Grid.ColumnSpan="3" VerticalOptions="Center" HorizontalOptions="FillAndExpand" Margin="15" IsVisible="{Binding Modal}" BackgroundColor="White" CornerRadius="20">
                 <Grid ColumnDefinitions=".05*, *,.05*" RowDefinitions="Auto, .6*">
                     <Label Grid.Column="1" Text="{Binding Mensaje, Mode=TwoWay}" TextColor="Gray" FontSize="{OnPlatform Android=Body, iOS=Small}" VerticalTextAlignment="Center" VerticalOptions="Center" HorizontalTextAlignment="Center" HorizontalOptions="CenterAndExpand" LineBreakMode="WordWrap"/>
                     <StackLayout  Grid.Row="1" Grid.Column="1">

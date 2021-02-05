@@ -3,6 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 
 using Foundation;
+using Microsoft.AppCenter;
+using Microsoft.AppCenter.Analytics;
+using Microsoft.AppCenter.Crashes;
 using Sysne.Core.OS;
 using UIKit;
 
@@ -29,7 +32,8 @@ namespace MPS.AppCliente.iOS
             global::Xamarin.Forms.Forms.Init();
             Xamarin.FormsMaps.Init();
             LoadApplication(new App());
-
+            AppCenter.Start("8219176a-5ddc-4d33-b0c1-19d14b9145b2",
+                           typeof(Analytics), typeof(Crashes));
             return base.FinishedLaunching(app, options);
         }
     }

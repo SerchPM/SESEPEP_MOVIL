@@ -8,6 +8,9 @@ using Android.Widget;
 using Android.OS;
 using Sysne.Core.OS;
 using Android;
+using Microsoft.AppCenter;
+using Microsoft.AppCenter.Analytics;
+using Microsoft.AppCenter.Crashes;
 
 namespace MPS.AppCliente.Droid
 {
@@ -28,6 +31,8 @@ namespace MPS.AppCliente.Droid
             Xamarin.Essentials.Platform.Init(this, savedInstanceState);
             global::Xamarin.Forms.Forms.Init(this, savedInstanceState);           
             Xamarin.FormsMaps.Init(this, savedInstanceState);
+            AppCenter.Start("c2b3df55-6a3f-4794-a855-cff174a622fa",
+                  typeof(Analytics), typeof(Crashes));
             LoadApplication(new App());
         }
         private void CheckAppPermissions()
