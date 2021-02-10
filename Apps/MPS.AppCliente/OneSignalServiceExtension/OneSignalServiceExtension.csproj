@@ -96,14 +96,14 @@
     <AppExtensionDebugBundleId />
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Com.OneSignal, Version=3.10.2.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\..\packages\Com.OneSignal.3.10.2\lib\Xamarin.iOS10\Com.OneSignal.dll</HintPath>
+    <Reference Include="Com.OneSignal, Version=3.10.4.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\..\packages\Com.OneSignal.3.10.4\lib\Xamarin.iOS10\Com.OneSignal.dll</HintPath>
     </Reference>
-    <Reference Include="Com.OneSignal.Abstractions, Version=3.10.2.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\..\packages\Com.OneSignal.3.10.2\lib\Xamarin.iOS10\Com.OneSignal.Abstractions.dll</HintPath>
+    <Reference Include="Com.OneSignal.Abstractions, Version=3.10.4.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\..\packages\Com.OneSignal.3.10.4\lib\Xamarin.iOS10\Com.OneSignal.Abstractions.dll</HintPath>
     </Reference>
-    <Reference Include="OneSignal.iOS.Binding, Version=3.10.2.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\..\packages\Com.OneSignal.3.10.2\lib\Xamarin.iOS10\OneSignal.iOS.Binding.dll</HintPath>
+    <Reference Include="OneSignal.iOS.Binding, Version=3.10.4.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\..\packages\Com.OneSignal.3.10.4\lib\Xamarin.iOS10\OneSignal.iOS.Binding.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Xml" />
