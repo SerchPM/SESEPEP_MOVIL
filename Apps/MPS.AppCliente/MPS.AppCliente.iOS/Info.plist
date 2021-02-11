@@ -41,7 +41,7 @@
 	<key>OneSignal_app_groups_key</key>
 	<string>group.mps.appcliente.OneSignalServiceExtension</string>
 	<key>CFBundleShortVersionString</key>
-	<string>1</string>
+	<string>14</string>
 	<key>CFBundleVersion</key>
 	<string>1.0</string>
 	<key>NSLocationWhenInUseUsageDescription</key>
