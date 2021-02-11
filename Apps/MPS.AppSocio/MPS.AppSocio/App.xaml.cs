@@ -6,6 +6,7 @@ using System;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 using Sysne.Core.OS;
+using Xamarin.Essentials;
 
 namespace MPS.AppSocio
 {
@@ -20,12 +21,14 @@ namespace MPS.AppSocio
         /// <summary>
         /// Versionamiento del código.
         /// </summary>
-        public static int VersionCode { get; set; }
+        public static string VersionCode { get; set; }
 
         public App()
         {
             InitializeComponent();
-
+            VersionTracking.Track();
+            VersionName = VersionTracking.CurrentVersion;
+            VersionCode = VersionTracking.CurrentBuild;
             OS.DependencyService.Register<NavigationService, INavigationService>(OS.DependencyService.ServiceLifetime.Singleton);
             OS.DependencyService.Register<SettingsStorage, ISettingsStorage>();
 

@@ -48,8 +48,6 @@ namespace MPS.AppSocio.UWP
                 this.DebugSettings.EnableFrameRateCounter = true;
             }
 #endif
-            AppSocio.App.VersionCode = SystemInformation.ApplicationVersion.Major;
-            AppSocio.App.VersionName = $"{SystemInformation.ApplicationVersion.Minor}.{SystemInformation.ApplicationVersion.Build}";
             Frame rootFrame = Window.Current.Content as Frame;
 
             // Do not repeat app initialization when the Window already has content,

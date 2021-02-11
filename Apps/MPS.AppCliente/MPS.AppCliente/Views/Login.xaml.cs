@@ -25,7 +25,7 @@ namespace MPS.AppCliente.Views.Views
                 Settings.Current.SO = DeviceInfo.VersionString;
 
             Settings.Current.TipoDispositivo = Device.RuntimePlatform == Device.iOS ? "0" : Device.RuntimePlatform == Device.Android ? "1" : Device.RuntimePlatform == Device.UWP ? "6" : "1";
-            Settings.Current.VersionApp = (Device.RuntimePlatform != Device.UWP) ? $"{App.VersionName}.{App.VersionCode}" : $"{App.VersionCode}.{App.VersionName}";
+            Settings.Current.VersionApp = (Device.RuntimePlatform != Device.UWP) ? $"{App.VersionName}.{App.VersionCode}" : App.VersionName;
             ViewModel.VersionApp = $"V {Settings.Current.VersionApp}";
         }
 
