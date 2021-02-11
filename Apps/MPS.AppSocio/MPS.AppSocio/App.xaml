@@ -5,6 +5,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:windows="clr-namespace:Xamarin.Forms.PlatformConfiguration.WindowsSpecific;assembly=Xamarin.Forms.Core"
              windows:Application.ImageDirectory="Assets"
+             UserAppTheme="Light"
              mc:Ignorable="d"
              x:Class="MPS.AppSocio.App">
     <Application.Resources>
