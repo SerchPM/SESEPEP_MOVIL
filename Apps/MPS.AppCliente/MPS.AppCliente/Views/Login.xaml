@@ -15,7 +15,7 @@
                     <Label Text="Tu mejor opción en seguridad privada" HorizontalOptions="Center" Grid.Row="1"/>
                     <Grid Grid.Row="2" RowDefinitions="*,Auto" x:DataType="vm:LoginViewModel">
                         <StackLayout VerticalOptions="Center" Padding="50,0">
-                            <Entry Text="{Binding Usuario}"/>
+                            <Entry Text="{Binding Usuario}" Keyboard="Email"/>
                             <Label Text="Usuario"/>
                             <Entry Text="{Binding Contraseña}" IsPassword="True"/>
                             <Label Text="Contraseña"/>

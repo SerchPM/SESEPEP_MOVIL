@@ -32,7 +32,7 @@ namespace MPS.Core.Lib.ViewModels.Clientes
 
         private string password;
         public string Password
-        { 
+        {
             get => password;
             set
             {
@@ -114,13 +114,14 @@ namespace MPS.Core.Lib.ViewModels.Clientes
                 NombreCopleto = $"{Cliente.NOMBRE} {Cliente.APELLIDO_1} {Cliente.APELLIDO_2}";
                 if (Cliente.GUID_SEXO != null && !Cliente.GUID_SEXO.Equals(Guid.Empty))
                 {
-                    if(Sexos.Count > 0)
+                    if (Sexos.Count > 0)
                         SexoSelected = Sexos.Where(w => w.GUID.Equals(Cliente.GUID_SEXO)).FirstOrDefault();
                 }
                 if (string.IsNullOrEmpty(Cliente.FECHA_NACIMIENTO))
                     Cliente.FechaNacimiento = DateTime.UtcNow;
                 else
-                    Cliente.FechaNacimiento = DateTime.Parse(Cliente.FECHA_NACIMIENTO);
+                    if (DateTime.TryParse(Cliente.FECHA_NACIMIENTO, out DateTime fechaNacimiento))
+                    Cliente.FechaNacimiento = fechaNacimiento;
             });
         }
 
@@ -180,7 +181,7 @@ namespace MPS.Core.Lib.ViewModels.Clientes
                     }
                 }
                 else
-                    Modal = true;               
+                    Modal = true;
             });
         }
 
