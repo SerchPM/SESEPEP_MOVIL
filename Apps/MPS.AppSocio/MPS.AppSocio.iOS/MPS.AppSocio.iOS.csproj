@@ -64,9 +64,9 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <MtouchArch>ARM64</MtouchArch>
-    <CodesignKey>iPhone Distribution</CodesignKey>
+    <CodesignKey>Apple Development: Benjamin Romero (5XE47RU975)</CodesignKey>
     <CodesignEntitlements>Entitlements.plist</CodesignEntitlements>
-    <CodesignProvision>ProfileMPSSocio</CodesignProvision>
+    <CodesignProvision>VS: mps.AppSocio Development</CodesignProvision>
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="CV\CustomMapRender.cs" />
