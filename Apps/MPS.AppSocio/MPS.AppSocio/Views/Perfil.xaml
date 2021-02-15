@@ -49,7 +49,7 @@
                                     <Label Text="Deseo compartir mi fecha de nacimiento" TextColor="Gray" FontSize="Small" VerticalOptions="Center"/>
                                 </StackLayout>
                                 <StackLayout Orientation="Vertical" IsVisible="{Binding EnviarFechaDeNacimiento}">
-                                    <DatePicker Date="{Binding DetallesSocio.FECHA_NACIMIENTO, Mode=TwoWay}" TextColor="{OnPlatform Android='White',iOS='White',UWP='#000'}"/>
+                                    <DatePicker Date="{Binding DetallesSocio.FECHA_NACIMIENTO, Mode=TwoWay}"/> <!--TextColor="{OnPlatform Android='White',iOS='White',UWP='#000'}"/>-->
                                     <Label Text="Fecha de nacimiento" TextColor="Gray" FontSize="Small" />
                                 </StackLayout>
                             </StackLayout>
