@@ -118,10 +118,14 @@ namespace MPS.Core.Lib.ViewModels.Clientes
                         SexoSelected = Sexos.Where(w => w.GUID.Equals(Cliente.GUID_SEXO)).FirstOrDefault();
                 }
                 if (string.IsNullOrEmpty(Cliente.FECHA_NACIMIENTO))
-                    Cliente.FechaNacimiento = DateTime.UtcNow;
+                    Cliente.FechaNacimiento = DateTime.Now;
                 else
+                {
                     if (DateTime.TryParse(Cliente.FECHA_NACIMIENTO, out DateTime fechaNacimiento))
-                    Cliente.FechaNacimiento = fechaNacimiento;
+                        Cliente.FechaNacimiento = fechaNacimiento;
+                    else
+                        Cliente.FechaNacimiento = DateTime.Now;
+                }
             });
         }
 
