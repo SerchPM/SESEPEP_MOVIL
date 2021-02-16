@@ -150,6 +150,7 @@
     <Content Include="Assets\lupa.png" />
     <Content Include="Assets\mercancias.png" />
     <Content Include="Assets\mercanciasSel.png" />
+    <Content Include="Assets\mostrarruta.png" />
     <Content Include="Assets\perfil.png" />
     <Content Include="Assets\personal.png" />
     <Content Include="Assets\personalSel.png" />

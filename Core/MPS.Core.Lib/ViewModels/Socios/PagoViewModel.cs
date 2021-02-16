@@ -71,7 +71,7 @@ namespace MPS.Core.Lib.ViewModels.Socios
                 }
                 if (DatosBancarios.CUENTA_BANCO.Length < 10)
                 {
-                    Mensaje = "El campo Banco no es valido";
+                    Mensaje = "El campo Cuenta CLABE no es valido";
                     Modal = true;
                     return;
                 }

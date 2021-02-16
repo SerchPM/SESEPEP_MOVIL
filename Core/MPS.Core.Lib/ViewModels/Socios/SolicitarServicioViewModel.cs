@@ -48,7 +48,7 @@ namespace MPS.Core.Lib.ViewModels.Socios
         private string nombreUbicacion;
         public string NombreUbicacion { get => nombreUbicacion; set => Set(ref nombreUbicacion, value); }
 
-        private SolicitudServicio solicitudDeServicio;
+        private SolicitudServicio solicitudDeServicio = new SolicitudServicio();
         public SolicitudServicio SolicitudDeServicio { get => solicitudDeServicio; set => Set(ref solicitudDeServicio, value); }
 
         private bool modalServicioAsignado;
@@ -60,7 +60,7 @@ namespace MPS.Core.Lib.ViewModels.Socios
         private bool personalizada;
         public bool Personalizada { get => personalizada; set => Set(ref personalizada, value); }
 
-        private SolicitudPendiente servicioAtencion;
+        private SolicitudPendiente servicioAtencion = new SolicitudPendiente();
         public SolicitudPendiente ServicioAtencion { get => servicioAtencion; set => Set(ref servicioAtencion, value); }
 
         private bool enAtencion;
@@ -86,6 +86,9 @@ namespace MPS.Core.Lib.ViewModels.Socios
 
         private string mensajeAlerta;
         public string MensajeAlerta { get => mensajeAlerta; set => Set(ref mensajeAlerta, value); }
+
+        private bool iconUbicacion;
+        public bool IconUbicacion { get => iconUbicacion; set => Set(ref iconUbicacion, value); }
         #endregion
 
         #region Commandos
@@ -107,6 +110,7 @@ namespace MPS.Core.Lib.ViewModels.Socios
                 var (estatus, result) = await bl.ServicioEnAtencionAysnc(Id);
                 if (estatus)
                 {
+                    IconUbicacion = result.ESTATUS_SOLICITUD.Equals((int)EstatusSolicitudEnum.EnCurso);
                     AlertaActiva = !result.ESTATUS_SOLICITUD.Equals((int)EstatusSolicitudEnum.EnCurso);
                     EstatusServicio = result.ESTATUS_SOLICITUD.Equals((int)EstatusSolicitudEnum.Alerta) ? "soson.png" : "sosoff.png";
                     Solicitud = result.ESTATUS_SOLICITUD.Equals((int)EstatusSolicitudEnum.EnCurso) ? "Iniciar" : "Finalizar";
@@ -178,6 +182,7 @@ namespace MPS.Core.Lib.ViewModels.Socios
                     ServicioAtencion.ESTATUS_SOLICITUD = (int)EstatusSolicitudEnum.Atendiendo;
                     Solicitud = ServicioAtencion.ESTATUS_SOLICITUD.Equals((int)EstatusSolicitudEnum.EnCurso) ? "Iniciar" : "Finalizar";
                     AlertaActiva = !ServicioAtencion.ESTATUS_SOLICITUD.Equals((int)EstatusSolicitudEnum.EnCurso);
+                    IconUbicacion = ServicioAtencion.ESTATUS_SOLICITUD.Equals((int)EstatusSolicitudEnum.EnCurso);
                 }
 
             });
@@ -209,6 +214,7 @@ namespace MPS.Core.Lib.ViewModels.Socios
                         {
                             EstatusServicio = result.ESTATUS_SOLICITUD.Equals((int)EstatusSolicitudEnum.Alerta) ? "soson.png" : "sosoff.png";
                             Solicitud = result.ESTATUS_SOLICITUD.Equals((int)EstatusSolicitudEnum.EnCurso) ? "Iniciar" : "Finalizar";
+                            IconUbicacion = result.ESTATUS_SOLICITUD.Equals((int)EstatusSolicitudEnum.EnCurso);
                             ServicioAtencion = result;
                             var (latitud, longitud) = Utilidades.LimpiarCadenaUbicacion(ServicioAtencion.UBICACION_SERVICIO);
                             ObtenerDireccionCommand.Execute((latitud, longitud));
@@ -246,13 +252,15 @@ namespace MPS.Core.Lib.ViewModels.Socios
         private RelayCommand<SolicitudServicio> mostrarModalSolicitudCommand = null;
         public RelayCommand<SolicitudServicio> MostrarModalSolicitudCommand
         {
-            get => mostrarModalSolicitudCommand ??= new RelayCommand<SolicitudServicio>((servicio) =>
+            get => mostrarModalSolicitudCommand ??= new RelayCommand<SolicitudServicio>(async(servicio) =>
             {
                 if (servicio.ClaveTipoServicio.Equals((int)TipoSolicitudEnum.Express))
                     Express = true;
                 else
                     Personalizada = true;
                 SolicitudDeServicio = servicio;
+                var (latitud, longitud) = Utilidades.LimpiarCadenaUbicacion(SolicitudDeServicio.Ubicacion);
+                NombreUbicacion = await MapaBL.ObtenerDireccion(latitud, longitud);
                 ModalServicioAsignado = true;
             });
         }
@@ -264,9 +272,9 @@ namespace MPS.Core.Lib.ViewModels.Socios
             {
                 if (Settings.Current.Solicitud != null && !string.IsNullOrEmpty(Settings.Current.Solicitud.FolioSolicitud))
                 {
-                    if (SolicitudDeServicio.TipoNotificacion.Equals((int)TipoNotificacionEnum.ClienteSolicita))
+                    if (Settings.Current.Solicitud.TipoNotificacion.Equals((int)TipoNotificacionEnum.ClienteSolicita))
                         MostrarModalSolicitudCommand.Execute(Settings.Current.Solicitud);
-                    else if (SolicitudDeServicio.TipoNotificacion.Equals((int)TipoNotificacionEnum.Alerta))
+                    else if (Settings.Current.Solicitud.TipoNotificacion.Equals((int)TipoNotificacionEnum.Alerta))
                         AbrirModalAlertaCommand.Execute(Settings.Current.Solicitud.Mensaje);
                 }
             });
@@ -329,6 +337,7 @@ namespace MPS.Core.Lib.ViewModels.Socios
                     }
                     EnAtencion = false;
                     AlertaActiva = false;
+                    IconUbicacion = false;
                     ServicioAtencion = new SolicitudPendiente();
                     NombreUbicacion = string.Empty;
                     ModalCalificar = false;
