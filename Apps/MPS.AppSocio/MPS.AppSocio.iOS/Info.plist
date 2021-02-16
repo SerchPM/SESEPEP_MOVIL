@@ -37,7 +37,7 @@
 		<string>remote-notification</string>
 	</array>
 	<key>CFBundleShortVersionString</key>
-	<string>17</string>
+	<string>18</string>
 	<key>OneSignal_app_groups_key</key>
 	<string>group.mps.AppSocio.OneSignalServiceExtensionSocio</string>
 	<key>NSLocationWhenInUseUsageDescription</key>
