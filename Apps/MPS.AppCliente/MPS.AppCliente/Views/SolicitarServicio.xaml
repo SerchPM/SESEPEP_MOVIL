@@ -152,9 +152,9 @@
         </Grid>
         <!--Modal Servicio Solicitado-->
         <Frame BackgroundColor="Gray" Opacity="0.5" Grid.RowSpan="3" IsVisible="{Binding ModalAgregarServicio}"/>
-        <Grid IsVisible="{Binding ModalAgregarServicio}" Grid.RowSpan="3" RowDefinitions=".3*,*,.3*" ColumnDefinitions=".05*,*,.05*" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
+        <Grid IsVisible="{Binding ModalAgregarServicio}" Grid.RowSpan="3" RowDefinitions=".3*,Auto,.3*" ColumnDefinitions=".05*,*,.05*" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
             <Frame BackgroundColor="White" Grid.Row="1" Grid.Column="1" IsClippedToBounds="True" Padding="15,20" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" CornerRadius="10">
-                <Grid RowDefinitions="Auto,*,Auto">
+                <Grid RowDefinitions="Auto,Auto,Auto">
                     <StackLayout Orientation="Horizontal">
                         <Image x:Name="iconApp" Source="logoHeader.png" HorizontalOptions="Center" VerticalOptions="Center"/>
                         <StackLayout HorizontalOptions="Start">
@@ -165,7 +165,7 @@
                         </StackLayout>
                     </StackLayout>
                     <ScrollView Grid.Row="1">
-                        <Grid>
+                        <Grid RowDefinitions="Auto">
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition x:Name="spacingIcon"/>
                                 <ColumnDefinition/>
@@ -173,22 +173,23 @@
                             <StackLayout Grid.Column="1" Margin="0,10">
                                 <StackLayout>
                                     <Label Text="Costo" TextColor="LightGray"/>
-                                    <Label Text="{Binding CosotoServicio}"/>
+                                    <Label Text="{Binding CosotoServicio}" FontSize="{OnPlatform Android=Body, iOS=Small}"/>
                                 </StackLayout>
-                                <!--<StackLayout Margin="0,10">
-                                    <Label Text="Tiempo aproximado de llegada" TextColor="LightGray"/>
-                                    <Label Text="{Binding SolicitudServicio.TiempoGenerarSolicitud, Mode=TwoWay}"/>
-                                </StackLayout>-->
                                 <StackLayout Margin="0,10" Orientation="Horizontal">
-                                    <CheckBox Color="Gray" IsChecked="{Binding Terminos, Mode=TwoWay}"/>
-                                    <StackLayout Orientation="Vertical">
-                                        <Label Text="He leído y estoy de acuerdo con los" LineBreakMode="WordWrap"/>
-                                        <Label Text="términos y condiciones" TextDecorations="Underline" TextColor="Blue" LineBreakMode="WordWrap">
-                                            <Label.GestureRecognizers>
-                                                <TapGestureRecognizer Tapped="TapGestureRecognizer_Terminos"/>
-                                            </Label.GestureRecognizers>
-                                        </Label>
-                                    </StackLayout>
+                                    <CheckBox Color="Gray" IsChecked="{Binding Terminos, Mode=TwoWay}" VerticalOptions="Center"/>
+                                    <Label LineBreakMode="WordWrap" HorizontalOptions="StartAndExpand" VerticalOptions="Center">
+                                        <Label.FormattedText>
+                                            <FormattedString>
+                                                <Span Text="He leído y acepto los " FontSize="Caption"/>
+                                                <Span Text="términos y condiciones " TextDecorations="Underline" FontSize="Caption" TextColor="Blue">
+                                                    <Span.GestureRecognizers>
+                                                        <TapGestureRecognizer Tapped="TapGestureRecognizer_Terminos"/>
+                                                    </Span.GestureRecognizers>
+                                                </Span>
+                                                <Span Text="de uso" FontSize="Caption"/>
+                                            </FormattedString>
+                                        </Label.FormattedText>
+                                    </Label>
                                 </StackLayout>
                             </StackLayout>
                         </Grid>
@@ -204,7 +205,7 @@
         <Frame BackgroundColor="Gray" Opacity="0.5" Grid.RowSpan="3" IsVisible="{Binding Modal}"/>
         <Frame Grid.RowSpan="3" VerticalOptions="Center" HorizontalOptions="FillAndExpand" Margin="15" IsVisible="{Binding Modal}" BackgroundColor="White" CornerRadius="20">
             <Grid ColumnDefinitions=".05*, *,.05*" RowDefinitions="Auto, Auto">
-                <Label Grid.Column="1" Text="{Binding Mensaje, Mode=TwoWay}" TextColor="Gray" FontSize="{OnPlatform Android=Body, iOS=Small}" VerticalTextAlignment="Center" VerticalOptions="Center" HorizontalTextAlignment="Center" HorizontalOptions="CenterAndExpand" LineBreakMode="WordWrap"/>
+                <Label Grid.Column="1" Text="{Binding Mensaje, Mode=TwoWay}" TextColor="Gray" FontSize="{OnPlatform Android=Body, iOS=Caption}" VerticalTextAlignment="Center" VerticalOptions="Center" HorizontalTextAlignment="Center" HorizontalOptions="CenterAndExpand" LineBreakMode="WordWrap"/>
                 <Button  Grid.Row="1" Grid.Column="1" Margin="0,5,0,0" CornerRadius="{OnPlatform Android='20', iOS='20', UWP='10'}" HorizontalOptions="CenterAndExpand" Padding="{OnPlatform Android='25,15', iOS='25,10',UWP='10,0'}" FontAttributes="None" Text="Aceptar" Command="{Binding OcultarModalCommand}" TextColor="White" FontSize="{OnPlatform Android=Body, iOS=Small}"/>
             </Grid>
         </Frame>
@@ -230,15 +231,15 @@
                         <StackLayout Grid.Column="1" Margin="0,10,0,0">
                             <StackLayout>
                                 <Label Text="Nombre del socio:" TextColor="LightGray"/>
-                                <Label Text="{Binding Servicio.NombreSocio, Mode=TwoWay}"/>
+                                <Label Text="{Binding Servicio.NombreSocio, Mode=TwoWay}" FontSize="{OnPlatform Android=Body, iOS=Caption}"/>
                             </StackLayout>
                             <StackLayout Margin="0,10">
                                 <Label Text="Folio de solicitud" TextColor="LightGray"/>
-                                <Label Text="{Binding Servicio.FolioSolicitud, Mode=TwoWay}"/>
+                                <Label Text="{Binding Servicio.FolioSolicitud, Mode=TwoWay}" FontSize="{OnPlatform Android=Body, iOS=Caption}"/>
                             </StackLayout>
                             <StackLayout Margin="0,10">
                                 <Label Text="Fecha de solicitud" TextColor="LightGray"/>
-                                <Label Text="{Binding Servicio.FechaSolicitud, Mode=TwoWay}"/>
+                                <Label Text="{Binding Servicio.FechaSolicitud, Mode=TwoWay}" FontSize="{OnPlatform Android=Body, iOS=Caption}"/>
                             </StackLayout>
                         </StackLayout>
                     </Grid>
