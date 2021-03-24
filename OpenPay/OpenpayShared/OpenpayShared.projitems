@@ -1,0 +1,67 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <MSBuildAllProjects Condition="'$(MSBuildVersion)' == '' Or '$(MSBuildVersion)' &lt; '16.0'">$(MSBuildAllProjects);$(MSBuildThisFileFullPath)</MSBuildAllProjects>
+    <HasSharedItems>true</HasSharedItems>
+    <SharedGUID>4f2ae5f2-6ebd-4d8a-9aba-815065cf114c</SharedGUID>
+  </PropertyGroup>
+  <PropertyGroup Label="Configuration">
+    <Import_RootNamespace>OpenpayShared</Import_RootNamespace>
+  </PropertyGroup>
+  <ItemGroup>
+    <Compile Include="$(MSBuildThisFileDirectory)BankAccountService.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)CardService.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)ChargeService.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)CustomerService.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Entities\Address.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Entities\Affiliation.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Entities\BankAccount.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Entities\Card.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Entities\CardPoints.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Entities\Customer.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Entities\DeferralPayments.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Entities\ExchangeRate.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Entities\Gateway.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Entities\Internationalization.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Entities\JsonObject.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Entities\Merchant.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Entities\OpenpayFeesSummary.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Entities\OpenpayResourceObject.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Entities\PaymentMethod.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Entities\PayoutSummary.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Entities\Plan.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Entities\PointsBalance.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Entities\PointsType.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Entities\Provider.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Entities\Request\CaptureRequest.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Entities\Request\ChargeRequest.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Entities\Request\FeeRequest.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Entities\Request\PaginationParams.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Entities\Request\PayoutReportDetailSearchParams.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Entities\Request\PayoutRequest.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Entities\Request\RefundRequest.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Entities\Request\SearchParams.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Entities\Request\TransferRequest.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Entities\Store.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Entities\Subscription.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Entities\Transaction.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Entities\TransactionStatus.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Entities\UseCardPointsType.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Entities\Webhook.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)FeeService.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)MerchantService.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)OpenpayAPI.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)OpenpayException.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)OpenpayFeesService.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)OpenpayGenericService.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)OpenpayHttpClient.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)OpenpayResourceService.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)PayoutReportService.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)PayoutService.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)PlanService.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)SubscriptionService.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)TransferService.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Utils\ParameterBuilder.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)WebhookService.cs" />
+  </ItemGroup>
+</Project>
