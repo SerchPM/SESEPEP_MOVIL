@@ -18,6 +18,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)Geoposicion.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Notificaciones\MensajeSocio.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Notificaciones\MensajeCliente.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Seguridad\InfoConstant.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Operaciones\OneSignalResponse.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Operaciones\Servicio.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Operaciones\Sexo.cs" />

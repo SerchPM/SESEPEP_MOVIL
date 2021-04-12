@@ -70,6 +70,9 @@ namespace MPS.Core.Lib.ApiClient
         /// <returns></returns>
         public async Task<(HttpStatusCode StatusCode, OneSignalResponse catalogo)> RegistrarDispositivoUWPAsync(string appId, string uriChannel, string modelo) =>
            await CallPostAsync<OneSignalResponse>("RegisterDeviceUWP", ("appId", appId), ("identificador", uriChannel), ("model", modelo));
+
+        public async Task<(HttpStatusCode StatusCode, InfoConstant Keys)> GetInfoConstant() =>
+            await CallPostAsync<InfoConstant>("InfoConstant");
         #endregion
     }
 }

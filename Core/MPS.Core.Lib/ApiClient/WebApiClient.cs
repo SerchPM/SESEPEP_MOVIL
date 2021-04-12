@@ -67,6 +67,8 @@ namespace Sysne.Core.ApiClient
                 using var res = await SendAsync(requestMessage);
                 if (res.IsSuccessStatusCode)
                 {
+                    var content = await res.Content.ReadAsStringAsync();
+                    Debug.WriteLine(content);
                     var response = await res.Content.ReadFromJsonAsync<TResponse>();
                     return (res.StatusCode, response);
                 }

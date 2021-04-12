@@ -36,7 +36,7 @@ namespace MPS.AppCliente
             (OS.DependencyService.Get<INavigationService>() as NavigationService).Navigation = Current.MainPage.Navigation;
 
             //MainPage.Appearing += (s, e) =>
-              OS.DependencyService.Get<IOS>().SetStatusBarColor(((Color)Resources["AlterColor"]).ToHex());
+            OS.DependencyService.Get<IOS>().SetStatusBarColor(((Color)Resources["AlterColor"]).ToHex());
         }
 
         protected override void OnStart()
