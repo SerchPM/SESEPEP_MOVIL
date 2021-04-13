@@ -66,6 +66,14 @@ namespace Openpay
             return this.httpClient.Post<R>(ep, obj);
         }
 
+        protected virtual R CreateCard(string customer_id, T obj)
+        {
+            if (obj == null)
+                throw new ArgumentNullException("The object to create is null");
+            string ep = GetEndPoint(customer_id);
+            return this.httpClient.PostCard<R>(ep, obj);
+        }
+
         protected R Update(string customer_id, R obj)
         {
             if (String.IsNullOrEmpty(obj.Id))

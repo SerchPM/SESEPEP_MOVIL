@@ -26,6 +26,8 @@ namespace MPS.SharedAPIModel.Clientes
         public string CVV { get; set; }
         public int Tipo { get; set; }
         public int Orden { get; set; }
+        public string IdTarjetaOpenpay { get; set; }
+        public string TokenIdOpenpay { get; set; }
     }
 
     public class TarjetaCliente

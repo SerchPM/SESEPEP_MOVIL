@@ -44,4 +44,34 @@ namespace Openpay
             }
         }
     }
+
+    [JsonObject(MemberSerialization.OptIn)]
+    public class OpenpayCardError
+    {
+        [JsonConstructor]
+        internal OpenpayCardError()
+        {
+        }
+
+        internal static OpenpayCardError GetFromJSON(HttpStatusCode code, string json)
+        {
+            OpenpayCardError result = JsonConvert.DeserializeObject<OpenpayCardError>(json);
+            result.StatusCode = code;
+            return result;
+        }
+
+        [JsonProperty(PropertyName = "description")]
+        public String Description { get; set; }
+
+        [JsonProperty(PropertyName = "category")]
+        public String Category { get; set; }
+
+        [JsonProperty(PropertyName = "request_id")]
+        public String RequestId { get; set; }
+
+        [JsonProperty(PropertyName = "error_code")]
+        public int ErrorCode { get; set; }
+
+        public HttpStatusCode StatusCode { get; internal set; }
+    }
 }

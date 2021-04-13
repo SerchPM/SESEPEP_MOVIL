@@ -41,7 +41,9 @@ namespace MPS.Core.Lib.ApiClient
                 ("P_MES", tarjeta.MesExpira.ToString()),
                 ("P_GUID_MARCA", tarjeta.IdMarca.ToString()),
                 ("P_CVV", tarjeta.CVV.ToString()),
-                ("P_TIPO", tarjeta.Tipo.ToString()));
+                ("P_TIPO", tarjeta.Tipo.ToString()),
+                ("KEY_CARD_PAY", tarjeta.IdTarjetaOpenpay),
+                ("P_KEY_CLIENTE", tarjeta.TokenIdOpenpay));
             return res;
         }
 

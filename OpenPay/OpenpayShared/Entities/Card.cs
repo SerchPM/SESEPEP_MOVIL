@@ -65,5 +65,11 @@ namespace Openpay.Entities
 
         [JsonProperty(PropertyName = "payment_options", NullValueHandling=NullValueHandling.Ignore)]
         public String PaymentOptions { set; get; }
+
+        [JsonProperty(PropertyName = "errorCode")]
+        public int ErrorCode { set; get; }
+
+        [JsonProperty(PropertyName = "description", NullValueHandling = NullValueHandling.Ignore)]
+        public String Description { set; get; }
     }
 }

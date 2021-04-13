@@ -80,7 +80,13 @@ namespace Openpay
             return JsonConvert.DeserializeObject<T>(json);
         }
 
-		public void Post<T>(string endpoint)
+        public T PostCard<T>(string endpoint, JsonObject obj)
+        {
+            var json = DoRequestCard(endpoint, HttpMethod.POST, obj.ToJson());
+            return JsonConvert.DeserializeObject<T>(json);
+        }
+
+        public void Post<T>(string endpoint)
 		{
 			DoRequest(endpoint, HttpMethod.POST, null);
 		}
@@ -154,6 +160,51 @@ namespace Openpay
             }
             return result;
         }
+
+        protected virtual string DoRequestCard(string path, HttpMethod method, string body)
+        {
+            string result = null;
+            string endpoint = APIEndpoint + MerchantId + path;
+            Console.WriteLine("Request to: " + endpoint);
+            ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls12;
+            WebRequest req = SetupRequest(method.ToString(), endpoint);
+            if (body != null)
+            {
+                byte[] bytes = encoding.GetBytes(body.ToString());
+                req.ContentLength = bytes.Length;
+                using (Stream st = req.GetRequestStream())
+                {
+                    st.Write(bytes, 0, bytes.Length);
+                }
+            }
+
+            try
+            {
+                using (WebResponse resp = (WebResponse)req.GetResponse())
+                {
+                    result = GetResponseAsString(resp);
+                }
+            }
+            catch (WebException wexc)
+            {
+                if (wexc.Response != null)
+                {
+                    string json_error = GetResponseAsString(wexc.Response);
+                    HttpStatusCode status_code = HttpStatusCode.BadRequest;
+                    HttpWebResponse resp = wexc.Response as HttpWebResponse;
+                    if (resp != null)
+                        status_code = resp.StatusCode;
+
+                    if ((int)status_code <= 500)
+                    {
+                        var error = OpenpayCardError.GetFromJSON(status_code, json_error);
+                        result = "{" + $"{'"'}description:{'"'}: {'"'}{error.Description}{'"'}, {'"'}errorCode{'"'}: {'"'}{error.ErrorCode}{'"'}" + "}";
+                    }
+                }
+            }
+            return result;
+        }
+
 
         public enum HttpMethod
         {

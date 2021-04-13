@@ -72,6 +72,20 @@ namespace MPS.Core.Lib.BL
             else
                 return (false, string.Empty);
         }
+
+        /// <summary>
+        /// Obtiene los key's de Openpay
+        /// </summary>
+        /// <returns></returns>
+        public async Task<InfoConstant> InfoConstantAsync()
+        {
+            var (statusCode, resultado) = await OperacionesApi.GetInfoConstant();
+            if (statusCode == HttpStatusCode.OK)
+                return resultado;
+            else
+                return new InfoConstant();
+        }
+
         #endregion
     }
 }

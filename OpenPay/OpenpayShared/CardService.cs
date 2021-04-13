@@ -24,7 +24,7 @@ namespace Openpay
 
         public Card Create(Card card)
         {
-            return base.Create(null, card);
+            return base.CreateCard(null, card);
         }
 
         public new Card Create(string customer_id, Card card)

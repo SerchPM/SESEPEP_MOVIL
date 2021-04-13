@@ -12,6 +12,8 @@ using System.Threading.Tasks;
 using MPS.Core.Lib.BL;
 using MPS.Core.Lib.Helpers;
 using MPS.SharedAPIModel;
+using Openpay;
+using Openpay.Entities;
 
 namespace MPS.Core.Lib.ViewModels.Clientes
 {
@@ -109,8 +111,8 @@ namespace MPS.Core.Lib.ViewModels.Clientes
                 var año = DateTime.Now.Year;
                 for (int i = año; i <= (año + 10); i++)
                     añosList.Add(i);
-                tiposTarjetaList.Add(new TipoTarjeta { Id = 1, Descripcion = "Débito" });
-                tiposTarjetaList.Add(new TipoTarjeta { Id = 2, Descripcion = "Crédito" });
+                tiposTarjetaList.Add(new TipoTarjeta { Id = 1, Descripcion = "DÉBITO" });
+                tiposTarjetaList.Add(new TipoTarjeta { Id = 2, Descripcion = "CRÉDITO" });
                 TiposTarjeta = new List<TipoTarjeta>(tiposTarjetaList);
                 Meses = new List<int>(mesesList);
                 Años = new List<int>(añosList);
@@ -165,7 +167,7 @@ namespace MPS.Core.Lib.ViewModels.Clientes
                             Modal = true;
                         }
                     }
-                   
+
                 }
                 else
                 {
@@ -192,7 +194,7 @@ namespace MPS.Core.Lib.ViewModels.Clientes
                             return;
                         }
                     }
-                    
+
                     Cliente.ModeloDispositivo = Helpers.Settings.Current.ModeloDispositivo;
                     Cliente.Password = Crypto.EncodePassword(Cliente.Password);
                     Cliente.VercionApp = !string.IsNullOrEmpty(Settings.Current.VersionApp) ? Settings.Current.VersionApp : "0";
@@ -200,23 +202,87 @@ namespace MPS.Core.Lib.ViewModels.Clientes
                     if (!EnviarFechaDeNacimiento) Cliente.FECHA_NACIMIENTO = null;
                     Cliente.IdMetodoPago = Guid.Parse("4F717133-1F98-47CE-A874-DC902392E706");
                     Cliente.API_KEY_MOVIL = Settings.Current.PlayerId;
-                    var (result, (mensaje, idCliente)) = await bl.RegistrarClienteAsync(Cliente);
-                    if (result && EnviarDatosVancarios)
+                    if (EnviarDatosVancarios)
                     {
-                        Tarjeta.MesExpira = MesSelected;
-                        Tarjeta.AñoExpira = AñoSelected;
-                        Tarjeta.IdMarca = Tarjetaselected.GUID;
-                        Tarjeta.Tipo = TipoTarjetaSelected.Id;
-                        Tarjeta.NoCuenta = Crypto.Encrypt(tarjeta.NoCuenta);
-                        Tarjeta.CVV = Crypto.Encrypt(tarjeta.CVV);
-                        Tarjeta.IdCliente = idCliente;
-                        var resultTarjeta = await bl.RegistrarTarjetaAsync(Tarjeta);
-                        ModalRegistro = true;
+                        var conf = await OperacionesBL.InfoConstantAsync();
+                        if (conf != null && !string.IsNullOrEmpty(conf.VAL1) && !string.IsNullOrEmpty(conf.VAL2))
+                        {
+                            var openpayAPI = new OpenpayAPI(conf.VAL1, conf.VAL2)
+                            {
+                                Production = false
+                            };
+                            var request = new Card
+                            {
+                                HolderName = $"{Cliente.NOMBRE} {Cliente.APELLIDO_1} {Cliente.APELLIDO_2}",
+                                CardNumber = Tarjeta.NoCuenta,
+                                Cvv2 = Tarjeta.CVV,
+                                ExpirationMonth = MesSelected.ToString(),
+                                ExpirationYear = AñoSelected.ToString().Substring((AñoSelected.ToString().Length - 2), 2),
+                            };
+
+                            var card = openpayAPI.CardService.Create(request);
+                            if (card != null)
+                            {
+                                var errorMensaje = Utilidades.ErrorRegistroOpenpay(card.ErrorCode);
+                                if (string.IsNullOrEmpty(errorMensaje))
+                                {
+                                    if (!string.IsNullOrEmpty(card.Id))
+                                    {
+                                        var (result, (mensaje, idCliente)) = await bl.RegistrarClienteAsync(Cliente);
+                                        if (result)
+                                        {
+                                            Tarjeta.MesExpira = MesSelected;
+                                            Tarjeta.AñoExpira = AñoSelected;
+                                            Tarjeta.IdMarca = Tarjetaselected.GUID;
+                                            Tarjeta.Tipo = TipoTarjetaSelected.Id;
+                                            Tarjeta.NoCuenta = Crypto.Encrypt(Tarjeta.NoCuenta);
+                                            Tarjeta.CVV = Crypto.Encrypt(Tarjeta.CVV);
+                                            Tarjeta.IdCliente = idCliente;
+                                            Tarjeta.IdTarjetaOpenpay = card.Id;
+                                            Tarjeta.TokenIdOpenpay = card.TokenId;
+                                            await bl.RegistrarTarjetaAsync(Tarjeta);
+                                            ModalRegistro = true;
+                                        }
+                                        else
+                                        {
+                                            Mensaje = mensaje;
+                                            Modal = true;
+                                        }
+                                    }
+                                    else
+                                    {
+                                        Mensaje = "Ocurrió un problema inesperado, intente más tarde";
+                                        Modal = true;
+                                    }                                   
+                                }
+                                else
+                                {
+                                    Mensaje = errorMensaje;
+                                    Modal = true;
+                                }
+                            }
+                            else
+                            {
+                                Mensaje = "Ocurrió un problema inesperado, intente más tarde";
+                                Modal = true;
+                            }
+                        }
+                        else
+                        {
+                            Mensaje = "Ocurrió un problema inesperado, intente más tarde";
+                            Modal = true;
+                        }
                     }
                     else
                     {
-                        Mensaje = mensaje;
-                        Modal = true;
+                        var (result, (mensaje, idCliente)) = await bl.RegistrarClienteAsync(Cliente);
+                        if (result)
+                            ModalRegistro = true;
+                        else
+                        {
+                            Mensaje = mensaje;
+                            Modal = true;
+                        }
                     }
                 }
             });
