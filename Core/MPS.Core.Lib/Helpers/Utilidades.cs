@@ -34,6 +34,45 @@ namespace MPS.Core.Lib.Helpers
                 case 1003:
                     errorMensaje = "La operación no se pudo completar por que el valor de uno o más de los campos no es correcto.";
                     break;
+                case 1004:
+                    errorMensaje = "Un servicio necesario para el procesamiento de la transacción no se encuentra disponible.";
+                    break;
+                case 1005:
+                    errorMensaje = "Uno de los recursos requeridos no existe.";
+                    break;
+                case 1006:
+                    errorMensaje = "Ya existe una transacción con el mismo ID de orden.";
+                    break;
+                case 1007:
+                    errorMensaje = "La transferencia de fondos entre una cuenta de banco o tarjeta y la cuenta de Openpay no fue aceptada.";
+                    break;
+                case 1008:
+                    errorMensaje = "Una de las cuentas requeridas en la petición se encuentra desactivada.";
+                    break;
+                case 1012:
+                    errorMensaje = "El monto transacción esta fuera de los limites permitidos.";
+                    break;
+                case 1013:
+                    errorMensaje = "La operación no esta permitida para el recurso.";
+                    break;
+                case 1014:
+                    errorMensaje = "La cuenta esta inactiva.";
+                    break;
+                case 1015:
+                    errorMensaje = "No se ha obtenido respuesta de la solicitud realizada al servicio.";
+                    break;
+                case 1016:
+                    errorMensaje = "El mail del comercio ya ha sido procesada.";
+                    break;
+                case 1017:
+                    errorMensaje = "El gateway no se encuentra disponible en ese momento.";
+                    break;
+                case 1018:
+                    errorMensaje = "El número de intentos de cargo es mayor al permitido.";
+                    break;
+                case 1020:
+                    errorMensaje = "El número de dígitos decimales es inválido para esta moneda.";
+                    break;
                 case 2001:
                 case 2003:
                     errorMensaje = "La cuenta de banco con esta CLABE ya se encuentra registrada.";

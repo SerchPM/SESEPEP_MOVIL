@@ -6,6 +6,7 @@ using MPS.SharedAPIModel.Solicitud;
 using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using System.Net;
 using System.Text;
 using System.Threading.Tasks;
@@ -174,13 +175,13 @@ namespace MPS.Core.Lib.BL
         /// </summary>
         /// <param name="socioAsignado">Objero con la informacion del socio y solicitud</param>
         /// <returns></returns>
-        public async Task<bool> AsignarSocioAsync(SocioAsignado socioAsignado)
+        public async Task<(bool, string)> AsignarSocioAsync(SocioAsignado socioAsignado)
         {
             var (statusCode, resultado) = await SolicitudApi.AsignarSocioAsync(socioAsignado);
             if (statusCode == HttpStatusCode.OK && resultado.Count > 0 && !string.IsNullOrEmpty(resultado[0].ESTATUS) && resultado[0].ESTATUS.Equals("OK"))
-                return true;
+                return (true, resultado.FirstOrDefault().DESCRIPCION);
             else
-                return false;
+                return (false, resultado.FirstOrDefault().DESCRIPCION);
         }
 
         /// <summary>

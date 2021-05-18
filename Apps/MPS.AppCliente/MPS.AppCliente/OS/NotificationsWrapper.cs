@@ -115,7 +115,44 @@ namespace MPS.AppCliente.Views.OS
                 var dtx = paginaActual.BindingContext as Core.Lib.ViewModels.Clientes.SolicitudDeServicioViewModel;
                 if (mensaje.TipoNotificacion.Equals((int)TipoNotificacionEnum.SocioAcepta))
                 {
-                    var solicitudAceptada = new ServicioSolicitado
+                    dtx.MostrarModalSolicitudCommand.Execute(new ServicioSolicitado
+                    {
+                        ActualLat = mensaje.ActualLat,
+                        CalificacionSocio = mensaje.CalificacionSocio,
+                        ClaveTipoServicio = mensaje.ClaveTipoServicio,
+                        FechaSolicitud = mensaje.FechaSolicitud,
+                        FolioSolicitud = mensaje.FolioSolicitud,
+                        IdSocio = mensaje.IdSocio,
+                        IdSolicitud = mensaje.IdSolicitud,
+                        IdTipoSolicitud = mensaje.IdTipoSolicitud,
+                        NombreServicio = mensaje.NombreServicio,
+                        NombreSocio = mensaje.NombreSocio,
+                        TipoServicio = mensaje.TipoServicio
+                    });
+                }
+                else if (mensaje.TipoNotificacion.Equals((int)TipoNotificacionEnum.Finalizado))
+                    dtx.AbrirModalCalificarCommand.Execute(mensaje.IdSolicitud);   
+                else if (mensaje.TipoNotificacion.Equals((int)TipoNotificacionEnum.EstatusPago))
+                {
+                    dtx.MostrarModalEstatusPagoCommand.Execute(new EstatusPago
+                    {
+                        Banco = mensaje.Banco,
+                        NoAutorizacion = mensaje.NoAutorizacion,
+                        NoTarjeta = mensaje.NoTarjeta,
+                        Monto = mensaje.Monto,
+                        Descripcion = mensaje.Descripcion,
+                        ClaveTipoServicio = mensaje.ClaveTipoServicio,
+                        NombreServicio = mensaje.NombreServicio,
+                        Codigo = mensaje.Codigo,
+                        Status = mensaje.Status
+                    });
+                }
+            }
+            else
+            {
+                if (mensaje.TipoNotificacion.Equals((int)TipoNotificacionEnum.SocioAcepta) || mensaje.TipoNotificacion.Equals((int)TipoNotificacionEnum.Finalizado))
+                {
+                    Settings.Current.ServicioSolicitado = new ServicioSolicitado
                     {
                         ActualLat = mensaje.ActualLat,
                         CalificacionSocio = mensaje.CalificacionSocio,
@@ -129,28 +166,22 @@ namespace MPS.AppCliente.Views.OS
                         NombreSocio = mensaje.NombreSocio,
                         TipoServicio = mensaje.TipoServicio
                     };
-                    dtx.MostrarModalSolicitudCommand.Execute(solicitudAceptada);
                 }
-                else if (mensaje.TipoNotificacion.Equals((int)TipoNotificacionEnum.Finalizado))
-                    dtx.AbrirModalCalificarCommand.Execute(mensaje.IdSolicitud);
-                
-            }
-            else
-            {
-                MPS.Core.Lib.Helpers.Settings.Current.ServicioSolicitado = new ServicioSolicitado
+                else if (mensaje.TipoNotificacion.Equals((int)TipoNotificacionEnum.EstatusPago))
                 {
-                    ActualLat = mensaje.ActualLat,
-                    CalificacionSocio = mensaje.CalificacionSocio,
-                    ClaveTipoServicio = mensaje.ClaveTipoServicio,
-                    FechaSolicitud = mensaje.FechaSolicitud,
-                    FolioSolicitud = mensaje.FolioSolicitud,
-                    IdSocio = mensaje.IdSocio,
-                    IdSolicitud = mensaje.IdSolicitud,
-                    IdTipoSolicitud = mensaje.IdTipoSolicitud,
-                    NombreServicio = mensaje.NombreServicio,
-                    NombreSocio = mensaje.NombreSocio,
-                    TipoServicio = mensaje.TipoServicio
-                };
+                    Settings.Current.EstatusPago = new EstatusPago
+                    {
+                        Banco = mensaje.Banco,
+                        NoAutorizacion = mensaje.NoAutorizacion,
+                        NoTarjeta = mensaje.NoTarjeta,
+                        Monto = mensaje.Monto,
+                        Descripcion = mensaje.Descripcion,
+                        ClaveTipoServicio = mensaje.ClaveTipoServicio,
+                        NombreServicio = mensaje.NombreServicio,
+                        Codigo = mensaje.Codigo,
+                        Status = mensaje.Status
+                    };
+                }
             }
         }
     }

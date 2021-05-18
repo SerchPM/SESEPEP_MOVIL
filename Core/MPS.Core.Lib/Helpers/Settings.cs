@@ -1,5 +1,6 @@
 ﻿using MPS.Core.Lib.OS;
 using MPS.SharedAPIModel.Clientes;
+using MPS.SharedAPIModel.Notificaciones;
 using MPS.SharedAPIModel.Seguridad;
 using MPS.SharedAPIModel.Socios;
 using Sysne.Core.MVVM;
@@ -80,6 +81,8 @@ namespace MPS.Core.Lib.Helpers
         public SolicitudServicio Solicitud { get; set; } = new SolicitudServicio();
 
         public ServicioSolicitado ServicioSolicitado { get; set; } = new ServicioSolicitado();
+
+        public EstatusPago EstatusPago { get; set; } = new EstatusPago();
 
         private string appId;
         /// <summary>

@@ -109,7 +109,7 @@ namespace MPS.Core.Lib.ViewModels.Clientes
                     Modal = true;
                     return;
                 }
-                if (Tarjeta.NoCuenta.Length < 10)
+                if (Tarjeta.NoCuenta.Length < 16)
                 {
                     Mensaje = "El campo No.Cuenta/Tarjeta no es valido";
                     Modal = true;

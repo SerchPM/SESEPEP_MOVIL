@@ -57,6 +57,13 @@ namespace MPS.AppCliente.UWP
                 dictionaryMessage.Add("NOMBRE_SOCIO", mensaje.custom.a.NombreSocio);
                 dictionaryMessage.Add("TIPO_SERVICIO", mensaje.custom.a.TipoServicio);
                 dictionaryMessage.Add("TIPO_NOTIFICACION", mensaje.custom.a.TipoNotificacion);
+                dictionaryMessage.Add("MONTO", mensaje.custom.a.Monto);
+                dictionaryMessage.Add("NO_AUTORIZACION", mensaje.custom.a.NoAutorizacion);
+                dictionaryMessage.Add("BANCO", mensaje.custom.a.Banco);
+                dictionaryMessage.Add("NO_TARJETA", mensaje.custom.a.NoTarjeta);
+                dictionaryMessage.Add("DESCRIPCION", mensaje.custom.a.Descripcion);
+                dictionaryMessage.Add("CODIGO_OPERACION", mensaje.custom.a.Codigo);
+                dictionaryMessage.Add("STATUS", mensaje.custom.a.Status);
                 Notificaciones.DelegarAccionDeNotificacion(new MensajeCliente(dictionaryMessage));
             };
         }

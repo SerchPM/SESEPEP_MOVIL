@@ -193,7 +193,7 @@ namespace MPS.Core.Lib.ViewModels.Socios
         {
             get => tomarSolicitudCommand ??= new RelayCommand(async () =>
             {
-                var resultado = await SolicitudBL.AsignarSocioAsync(new SocioAsignado
+                var (resultado, descripcion) = await SolicitudBL.AsignarSocioAsync(new SocioAsignado
                 {
                     IdSocio = Id,
                     IdSolicitud = SolicitudDeServicio.IdSolicitud,
@@ -230,7 +230,8 @@ namespace MPS.Core.Lib.ViewModels.Socios
                     ModalServicioAsignado = false;
                     SolicitudDeServicio = new SolicitudServicio();
                     Express = false;
-                    Personalizada = false; Mensaje = "Ya hay un socio asignado al servicio";
+                    Personalizada = false; 
+                    Mensaje = descripcion ?? "Ya hay un socio asignado al servicio";
                     Modal = true;
                 }
             });
@@ -285,10 +286,10 @@ namespace MPS.Core.Lib.ViewModels.Socios
         {
             get => alertaCommand ??= new RelayCommand(async () =>
             {
-                bool resultado = false;
+                var (resultado, descripcion) = (false, string.Empty);
                 if (!ServicioAtencion.ESTATUS_SOLICITUD.Equals((int)EstatusSolicitudEnum.Alerta) && !ServicioAtencion.ESTATUS_SOLICITUD.Equals((int)EstatusSolicitudEnum.EnCurso))
                 {
-                    resultado = await SolicitudBL.AsignarSocioAsync(new SocioAsignado
+                    (resultado, descripcion) = await SolicitudBL.AsignarSocioAsync(new SocioAsignado
                     {
                         IdSocio = Id,
                         IdSolicitud = ServicioAtencion.GUID_SOLICITUD,

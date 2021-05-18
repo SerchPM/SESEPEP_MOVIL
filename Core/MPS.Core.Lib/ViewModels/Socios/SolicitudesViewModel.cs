@@ -52,12 +52,12 @@ namespace MPS.Core.Lib.ViewModels.Socios
         {
             get => iniciarServicioCommand ??= new RelayCommand<SolicitudPendiente>(async (servicio) =>
             {
-                var result = await (new BL.SolicitudBL()).AsignarSocioAsync(new SharedAPIModel.Solicitud.SocioAsignado { IdSocio=Guid.Parse(Settings.Current.LoginInfo.Usr.Id), IdSolicitud = servicio.GUID_SOLICITUD, Estatus = (int)EstatusSolicitudEnum.EnCurso});
+                var (result, descripcion) = await (new BL.SolicitudBL()).AsignarSocioAsync(new SharedAPIModel.Solicitud.SocioAsignado { IdSocio=Guid.Parse(Settings.Current.LoginInfo.Usr.Id), IdSolicitud = servicio.GUID_SOLICITUD, Estatus = (int)EstatusSolicitudEnum.EnCurso});
                 if (result)
                     await DependencyService.Get<INavigationService>().NavigateTo(PagesKeys.SolicitarServicio);
                 else
                 {
-                    Mensaje = "Ya tienes un servicio en atencion";
+                    Mensaje = descripcion ?? "Ya tienes un servicio en atencion";
                     Modal = true;
                 }
             });

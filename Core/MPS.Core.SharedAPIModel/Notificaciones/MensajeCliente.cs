@@ -46,6 +46,27 @@ namespace MPS.SharedAPIModel.Notificaciones
 
             if (valores.ContainsKey("TIPO_NOTIFICACION"))
                 int.TryParse(valores["TIPO_NOTIFICACION"].ToString(), out tipoNotificacion);
+
+            if (valores.ContainsKey("MONTO"))
+                monto = valores["MONTO"].ToString();
+
+            if (valores.ContainsKey("NO_AUTORIZACION"))
+                noAutorizacion = valores["NO_AUTORIZACION"].ToString();
+
+            if (valores.ContainsKey("BANCO"))
+                banco = valores["BANCO"].ToString();
+
+            if (valores.ContainsKey("NO_TARJETA"))
+                noTarjeta = valores["NO_TARJETA"].ToString();
+
+            if (valores.ContainsKey("DESCRIPCION"))
+                descripcion = valores["DESCRIPCION"].ToString();
+
+            if (valores.ContainsKey("CODIGO_OPERACION"))
+                int.TryParse(valores["CODIGO_OPERACION"].ToString(), out codigo);
+
+            if (valores.ContainsKey("STATUS"))
+                status = valores["STATUS"].ToString();
         }
 
         string mensajePrincipal;
@@ -86,6 +107,27 @@ namespace MPS.SharedAPIModel.Notificaciones
 
         private int tipoNotificacion;
         public int TipoNotificacion { get => tipoNotificacion; set => tipoNotificacion = value; }
+
+        private string monto;
+        public string Monto { get => monto; set => monto = value; }
+
+        private string noAutorizacion;
+        public string NoAutorizacion { get => noAutorizacion; set => noAutorizacion = value; }
+
+        private string banco;
+        public string Banco { get => banco; set => banco = value; }
+
+        private string noTarjeta;
+        public string NoTarjeta { get => noTarjeta; set => noTarjeta = value; }
+
+        private string descripcion;
+        public string Descripcion { get => descripcion; set => descripcion = value; }
+
+        private string status;
+        public string Status { get => status; set => status = value; }
+
+        private int codigo;
+        public int Codigo { get => codigo; set => codigo = value; }
     }
 
     public class A
@@ -103,6 +145,13 @@ namespace MPS.SharedAPIModel.Notificaciones
         public string NombreServicio { get; set; }
         public string TipoServicio { get; set; }
         public int TipoNotificacion { get; set; }
+        public string Monto { get; set; }
+        public string NoAutorizacion { get; set; }
+        public string Banco { get; set; }
+        public string NoTarjeta { get; set; }
+        public string Descripcion { get; set; }
+        public string Status { get; set; }
+        public int Codigo { get; set; }
     }
 
     public class Custom

@@ -15840,64 +15840,67 @@ namespace MPS.AppCliente.Droid
 			public const int notify_panel_notification_icon_bg = 2131165385;
 			
 			// aapt resource value: 0x7F0700CA
-			public const int perfil = 2131165386;
+			public const int openpay = 2131165386;
 			
 			// aapt resource value: 0x7F0700CB
-			public const int personal = 2131165387;
+			public const int perfil = 2131165387;
 			
 			// aapt resource value: 0x7F0700CC
-			public const int personalSel = 2131165388;
+			public const int personal = 2131165388;
 			
 			// aapt resource value: 0x7F0700CD
-			public const int reloj = 2131165389;
+			public const int personalSel = 2131165389;
 			
 			// aapt resource value: 0x7F0700CE
-			public const int servicioExpressActivo = 2131165390;
+			public const int reloj = 2131165390;
 			
 			// aapt resource value: 0x7F0700CF
-			public const int servicioExpressInactivo = 2131165391;
+			public const int servicioExpressActivo = 2131165391;
 			
 			// aapt resource value: 0x7F0700D0
-			public const int servicioPersonalizadoActivo = 2131165392;
+			public const int servicioExpressInactivo = 2131165392;
 			
 			// aapt resource value: 0x7F0700D1
-			public const int servicioPersonalizadoInactivo = 2131165393;
+			public const int servicioPersonalizadoActivo = 2131165393;
 			
 			// aapt resource value: 0x7F0700D2
-			public const int solicitarServicio = 2131165394;
+			public const int servicioPersonalizadoInactivo = 2131165394;
 			
 			// aapt resource value: 0x7F0700D3
-			public const int solicitarServicioSel = 2131165395;
+			public const int solicitarServicio = 2131165395;
 			
 			// aapt resource value: 0x7F0700D4
-			public const int tarjeta = 2131165396;
+			public const int solicitarServicioSel = 2131165396;
 			
 			// aapt resource value: 0x7F0700D5
-			public const int test_custom_background = 2131165397;
+			public const int tarjeta = 2131165397;
 			
 			// aapt resource value: 0x7F0700D6
-			public const int tooltip_frame_dark = 2131165398;
+			public const int test_custom_background = 2131165398;
 			
 			// aapt resource value: 0x7F0700D7
-			public const int tooltip_frame_light = 2131165399;
+			public const int tooltip_frame_dark = 2131165399;
 			
 			// aapt resource value: 0x7F0700D8
-			public const int tres = 2131165400;
+			public const int tooltip_frame_light = 2131165400;
 			
 			// aapt resource value: 0x7F0700D9
-			public const int tresseleccionado = 2131165401;
+			public const int tres = 2131165401;
 			
 			// aapt resource value: 0x7F0700DA
-			public const int uno = 2131165402;
+			public const int tresseleccionado = 2131165402;
 			
 			// aapt resource value: 0x7F0700DB
-			public const int unoseleccionado = 2131165403;
+			public const int uno = 2131165403;
 			
 			// aapt resource value: 0x7F0700DC
-			public const int valores = 2131165404;
+			public const int unoseleccionado = 2131165404;
 			
 			// aapt resource value: 0x7F0700DD
-			public const int valoresSel = 2131165405;
+			public const int valores = 2131165405;
+			
+			// aapt resource value: 0x7F0700DE
+			public const int valoresSel = 2131165406;
 			
 			static Drawable()
 			{

@@ -16,6 +16,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)Clientes\Tarjeta.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Dispositivo.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Geoposicion.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Notificaciones\EstatusPago.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Notificaciones\MensajeSocio.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Notificaciones\MensajeCliente.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Seguridad\InfoConstant.cs" />

@@ -2,6 +2,7 @@
 using MPS.Core.Lib.Helpers;
 using MPS.SharedAPIModel;
 using MPS.SharedAPIModel.Clientes;
+using MPS.SharedAPIModel.Notificaciones;
 using MPS.SharedAPIModel.Operaciones;
 using MPS.SharedAPIModel.Socios;
 using MPS.SharedAPIModel.Solicitud;
@@ -150,10 +151,15 @@ namespace MPS.Core.Lib.ViewModels.Clientes
 
         private Guid idSolcitud;
         public Guid IdSolcitud { get => idSolcitud; set => Set(ref idSolcitud, value); }
+
+        private bool modalEstatusPago;
+        public bool ModalEstatusPago { get => modalEstatusPago; set { Set(ref modalEstatusPago, value); } }
+
+        private EstatusPago estatusPago;
+        public EstatusPago EstatusPago { get => estatusPago; set { Set(ref estatusPago, value); } }
         #endregion
 
         #region Commands
-
         RelayCommand<string> cambiarPrioridadCommand = null;
         public RelayCommand<string> CambiarPrioridadCommand
         {
@@ -545,6 +551,54 @@ namespace MPS.Core.Lib.ViewModels.Clientes
                 {
                     if (Settings.Current.ServicioSolicitado.TipoNotificacion.Equals((int)TipoNotificacionEnum.Finalizado))
                         AbrirModalCalificarCommand.Execute(Settings.Current.ServicioSolicitado.IdSolicitud);
+                }
+            });
+        }
+
+        private RelayCommand<EstatusPago> mostrarModalEstatusPagoCommand = null;
+        public RelayCommand<EstatusPago> MostrarModalEstatusPagoCommand
+        {
+            get => mostrarModalEstatusPagoCommand ??= new RelayCommand<EstatusPago>((e) =>
+            {
+                if (e.ClaveTipoServicio.Equals((int)TipoSolicitudEnum.Express))
+                    Express = true;
+                else
+                    Personalizada = true;
+                if (e.Codigo != 1)
+                    e.Descripcion = Utilidades.ErrorRegistroOpenpay(e.Codigo);
+                EstatusPago = e;
+                ModalEstatusPago = true;
+            });
+        }
+
+        private RelayCommand ocultarModalEstatusPagoCommand = null;
+        public RelayCommand OcultarModalEstatusPagoCommand
+        {
+            get => ocultarModalEstatusPagoCommand ??= new RelayCommand(() =>
+            {
+                ModalEstatusPago = false;
+                EstatusPago = new EstatusPago();
+                Settings.Current.EstatusPago = new EstatusPago();
+                Express = false;
+                Personalizada = false;
+            });
+        }
+
+        private RelayCommand verificarEstatusPagoCommand = null;
+        public RelayCommand VerificarEstatusPagoCommand
+        {
+            get => verificarEstatusPagoCommand ??= new RelayCommand(() =>
+            {
+                if (Settings.Current.EstatusPago != null && !string.IsNullOrEmpty(Settings.Current.EstatusPago.NombreServicio))
+                {
+                    EstatusPago = Settings.Current.EstatusPago;
+                    if (EstatusPago.ClaveTipoServicio.Equals((int)TipoSolicitudEnum.Express))
+                        Express = true;
+                    else
+                        Personalizada = true;
+                    if (EstatusPago.Codigo != 1)
+                        EstatusPago.Descripcion = Utilidades.ErrorRegistroOpenpay(Settings.Current.EstatusPago.Codigo);
+                    ModalEstatusPago = true;
                 }
             });
         }

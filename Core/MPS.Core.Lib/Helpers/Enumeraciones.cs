@@ -33,7 +33,8 @@ namespace MPS.Core.Lib.Helpers
         TiempoLlegada = 3,
         Atendiendo = 4,
         Finalizado = 5,
-        Alerta = 6
+        Alerta = 6,
+        EstatusPago = 7
     }
 
     public enum TipoRolEnum

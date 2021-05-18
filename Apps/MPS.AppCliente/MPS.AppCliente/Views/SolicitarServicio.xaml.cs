@@ -39,6 +39,10 @@ namespace MPS.AppCliente
             {
                 spacingIconSolicitud.Width = iconAppSolicitud.Width;
             };
+            iconAppPago.SizeChanged += (se, ee) =>
+            {
+                spacingIconPago.Width = iconAppPago.Width;
+            };
             ViewModel.PropertyChanged += (s, e) =>
             {
                 switch (e.PropertyName)
@@ -63,11 +67,13 @@ namespace MPS.AppCliente
             };
         }
 
-        protected override void OnAppearing()
+        protected override async void OnAppearing()
         {
             Map.MoveToRegion(MapSpan.FromCenterAndRadius(new Position(19.043455, -98.198686), Distance.FromMiles(0.2)));
+            await ViewModel.ObtenerComponentesCommand.ExecuteAsync();
+            ViewModel.VerificarCalificacionCommand.Execute();
+            ViewModel.VerificarEstatusPagoCommand.Execute();
             ViewModel.VerificarSolicitudCommand.Execute();
-            ViewModel.ObtenerComponentesCommand.Execute();            
         }
 
         private void SolicitarServicio_Tapped(object sender, EventArgs e) => IsVisibleListaServicios = !IsVisibleListaServicios;

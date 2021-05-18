@@ -58,7 +58,7 @@
                                     <Label Text="Marca" VerticalOptions="Start" FontSize="Small"/>
                                 </StackLayout>
                                 <Grid Grid.Row="5" RowDefinitions="Auto, Auto" ColumnDefinitions="*,*" VerticalOptions="Center">
-                                    <Entry Keyboard="Numeric" IsPassword="True" MaxLength="3" Text="{Binding Tarjeta.CVV, Mode=TwoWay}"/>
+                                    <Entry Keyboard="Numeric" IsPassword="True" MaxLength="4" Text="{Binding Tarjeta.CVV, Mode=TwoWay}"/>
                                     <StackLayout Grid.Row="1" Orientation="Horizontal">
                                         <Label Text="*" VerticalOptions="Start" FontSize="Small" TextColor="Red"/>
                                         <Label Text="CVV" VerticalOptions="Start" FontSize="Small"/>

@@ -753,6 +753,15 @@
   <ItemGroup>
     <BundleResource Include="Resources\estrellaoff%402x.png" />
   </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\openpay%403x.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\openpay.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\openpay%402x.png" />
+  </ItemGroup>
   <ProjectExtensions>
     <VisualStudio>
       <UserProperties TriggeredFromHotReload="False" />
