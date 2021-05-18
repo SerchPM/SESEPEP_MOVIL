@@ -83,21 +83,39 @@ namespace MPS.AppCliente.Views.OS
                }).HandleNotificationOpened((notification) =>
                {
                    var mensaje = new MensajeCliente(notification.notification.payload.additionalData);
-                   MPS.Core.Lib.Helpers.Settings.Current.ServicioSolicitado = new ServicioSolicitado
+                   if (mensaje.TipoNotificacion.Equals((int)TipoNotificacionEnum.SocioAcepta) || mensaje.TipoNotificacion.Equals((int)TipoNotificacionEnum.Finalizado))
                    {
-                       ActualLat = mensaje.ActualLat,
-                       CalificacionSocio = mensaje.CalificacionSocio,
-                       ClaveTipoServicio = mensaje.ClaveTipoServicio,
-                       FechaSolicitud = mensaje.FechaSolicitud,
-                       FolioSolicitud = mensaje.FolioSolicitud,
-                       IdSocio = mensaje.IdSocio,
-                       IdSolicitud = mensaje.IdSolicitud,
-                       IdTipoSolicitud = mensaje.IdTipoSolicitud,
-                       NombreServicio = mensaje.NombreServicio,
-                       NombreSocio = mensaje.NombreSocio,
-                       TipoServicio = mensaje.TipoServicio,
-                       TipoNotificacion = mensaje.TipoNotificacion
-                   };
+                       MPS.Core.Lib.Helpers.Settings.Current.ServicioSolicitado = new ServicioSolicitado
+                       {
+                           ActualLat = mensaje.ActualLat,
+                           CalificacionSocio = mensaje.CalificacionSocio,
+                           ClaveTipoServicio = mensaje.ClaveTipoServicio,
+                           FechaSolicitud = mensaje.FechaSolicitud,
+                           FolioSolicitud = mensaje.FolioSolicitud,
+                           IdSocio = mensaje.IdSocio,
+                           IdSolicitud = mensaje.IdSolicitud,
+                           IdTipoSolicitud = mensaje.IdTipoSolicitud,
+                           NombreServicio = mensaje.NombreServicio,
+                           NombreSocio = mensaje.NombreSocio,
+                           TipoServicio = mensaje.TipoServicio,
+                           TipoNotificacion = mensaje.TipoNotificacion
+                       };
+                   }
+                   else if (mensaje.TipoNotificacion.Equals((int)TipoNotificacionEnum.EstatusPago))
+                   {
+                       Settings.Current.EstatusPago = new EstatusPago
+                       {
+                           Banco = mensaje.Banco,
+                           NoAutorizacion = mensaje.NoAutorizacion,
+                           NoTarjeta = mensaje.NoTarjeta,
+                           Monto = mensaje.Monto,
+                           Descripcion = mensaje.Descripcion,
+                           ClaveTipoServicio = mensaje.ClaveTipoServicio,
+                           NombreServicio = mensaje.NombreServicio,
+                           Codigo = mensaje.Codigo,
+                           Status = mensaje.Status
+                       };
+                   }
                })
                .HandleInAppMessageClicked((notification) =>
                {
